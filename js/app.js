@@ -10,6 +10,7 @@ const state = {
   activeAccidentFilter: "ALL",    // 'ALL' | '전도' | '추락' | '끼임' | '충돌'
   activeCauseFilter: "ALL",       // 'ALL' | '이용자' | '작업자' | '관리주체' | '유지관리' | '기타'
   activePosterYearFilter: "ALL",  // 'ALL' | '2024' | '2023' | '2022'
+  activePartFilter: "ALL",        // 'ALL' | 'EL' | 'ES'
   searchQuery: "",
   currentCaseIndex: 0,
   filteredCases: [],
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   renderYearTabs();
   renderTrendSection();
+  renderPartsSection();
   updateDashboardAndKPIs();
   renderFilters();
   applyFilters();
@@ -758,6 +760,162 @@ function viewFloodImage(imgSrc, title, bookPage) {
   showModal();
 }
 
+/* ---------------- COMPONENT INSPECTION BRIEFING ---------------- */
+function setPartCategoryFilter(category) {
+  state.activePartFilter = category;
+
+  // Update tab button styles
+  ["ALL", "EL", "ES"].forEach(cat => {
+    const btn = document.getElementById(`partFilterBtn${cat}`);
+    if (btn) {
+      if (cat === category) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    }
+  });
+
+  renderPartsSection();
+}
+
+function renderPartsSection() {
+  const container = document.getElementById("partsGrid");
+  if (!container || typeof PARTS_DATA === "undefined") return;
+
+  const filteredParts = state.activePartFilter === "ALL"
+    ? PARTS_DATA
+    : PARTS_DATA.filter(p => p.category === state.activePartFilter);
+
+  container.innerHTML = filteredParts.map(part => {
+    const linkedCount = (part.linkedCaseIds && part.linkedCaseIds.length) || 0;
+    const firstDefect = (part.inspectionPoints && part.inspectionPoints[0]) || "";
+    return `
+      <article class="part-card" onclick="openPartBriefing('${part.id}')" tabindex="0" role="button" aria-label="${part.name} 안전검사 브리핑">
+        <div class="part-thumb-wrap">
+          <img class="part-thumb-img" src="${part.image}" alt="${part.name}" loading="lazy" />
+          <div class="part-overlay-tags">
+            <span class="part-cat-badge">${part.categoryLabel}</span>
+          </div>
+        </div>
+        <div class="part-body">
+          <div class="part-header-wrap">
+            <span class="part-icon">${part.icon}</span>
+            <div class="part-title-box">
+              <h3 class="part-name">${part.name}</h3>
+              <div class="part-eng-name">${part.englishName}</div>
+            </div>
+          </div>
+          <div class="part-location">📍 ${part.location}</div>
+          <p class="part-summary">${part.summary}</p>
+          <div class="part-defects-preview">
+            <div class="part-defects-title">⚠️ 대표 검사지적 항목</div>
+            <div class="part-defects-item" title="${firstDefect}">• ${firstDefect}</div>
+          </div>
+          <div class="part-footer">
+            <span class="part-cases-badge">🔥 실사고 연계 <strong>${linkedCount}건</strong></span>
+            <span class="part-btn-link">브리핑 보기 &rarr;</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function openPartBriefing(partId) {
+  if (typeof PARTS_DATA === "undefined") return;
+  const part = PARTS_DATA.find(p => p.id === partId);
+  if (!part) return;
+
+  const badgeEl = document.getElementById("briefingModalBadge");
+  if (badgeEl) {
+    badgeEl.innerHTML = `
+      <span class="part-cat-badge" style="background:var(--primary); padding:3px 8px; border-radius:4px; color:white;">${part.categoryLabel}</span>
+      <span style="color:var(--text-muted); font-size:0.8rem; margin-left:4px;">${part.englishName}</span>
+    `;
+  }
+
+  const titleEl = document.getElementById("briefingModalTitle");
+  if (titleEl) titleEl.innerHTML = `${part.icon} ${part.name}`;
+
+  const locEl = document.getElementById("briefingModalLocation");
+  if (locEl) locEl.innerHTML = `📍 설치 및 점검 위치: ${part.location}`;
+
+  const imgEl = document.getElementById("briefingModalImg");
+  if (imgEl) {
+    imgEl.src = part.image;
+    imgEl.alt = part.name;
+  }
+
+  const noteEl = document.getElementById("briefingModalImgNote");
+  if (noteEl) noteEl.innerText = part.diagramNote || "";
+
+  const sumEl = document.getElementById("briefingModalSummary");
+  if (sumEl) sumEl.innerText = part.summary;
+
+  const inspectListEl = document.getElementById("briefingModalInspectionPoints");
+  if (inspectListEl) {
+    inspectListEl.innerHTML = (part.inspectionPoints || []).map(pt => `<li>${pt}</li>`).join("");
+  }
+
+  const hazardEl = document.getElementById("briefingModalHazard");
+  if (hazardEl) hazardEl.innerText = part.failureHazard;
+
+  const actionEl = document.getElementById("briefingModalAction");
+  if (actionEl) actionEl.innerText = part.correctiveAction;
+
+  // Render linked cases
+  const caseListEl = document.getElementById("briefingModalCasesList");
+  const countEl = document.getElementById("briefingModalCaseCount");
+  const linkedIds = part.linkedCaseIds || [];
+
+  if (countEl) countEl.innerText = `총 ${linkedIds.length}건 연계`;
+
+  if (caseListEl) {
+    if (linkedIds.length === 0) {
+      caseListEl.innerHTML = `<div style="color:var(--text-muted); padding:1rem; text-align:center;">연계된 사고 사례가 없습니다.</div>`;
+    } else {
+      const linkedCases = linkedIds.map(id => CASES_DATA.find(c => c.id === id)).filter(Boolean);
+      caseListEl.innerHTML = linkedCases.map(c => `
+        <div class="briefing-case-item" onclick="viewCaseFromBriefing(${c.id})" tabindex="0" role="button" aria-label="${c.title} 상세 보기">
+          <img class="briefing-case-img" src="${c.image}" alt="${c.title}" loading="lazy" />
+          <div class="briefing-case-info">
+            <div class="briefing-case-top">
+              <span class="badge-year badge-year-${c.bookYear}" style="font-size:0.65rem; padding:2px 6px;">${c.bookYear}년 발간</span>
+              <span style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">#${c.id}</span>
+              <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">${c.elevatorType}</span>
+              <span class="badge-severity ${c.severity}" style="font-size:0.65rem; padding:2px 6px; margin-left:auto;">${c.severity}</span>
+            </div>
+            <div class="briefing-case-title">${c.title}</div>
+            <div class="briefing-case-desc">${(c.description && c.description[0]) || c.summary || ""}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+  }
+
+  const modal = document.getElementById("briefingModal");
+  if (modal) {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closePartBriefing() {
+  const modal = document.getElementById("briefingModal");
+  if (modal) {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+}
+
+function viewCaseFromBriefing(caseId) {
+  closePartBriefing();
+  setTimeout(() => {
+    openCaseModal(caseId);
+  }, 150);
+}
+
 /* ---------------- EVENT LISTENERS ---------------- */
 function setupEventListeners() {
   // Search Input
@@ -771,16 +929,22 @@ function setupEventListeners() {
 
   // Keyboard Navigation
   document.addEventListener("keydown", (e) => {
-    const modal = document.getElementById("caseModal");
-    const isModalOpen = modal && modal.classList.contains("open");
+    const caseModal = document.getElementById("caseModal");
+    const isCaseModalOpen = caseModal && caseModal.classList.contains("open");
+    const briefingModal = document.getElementById("briefingModal");
+    const isBriefingOpen = briefingModal && briefingModal.classList.contains("open");
 
-    if (e.key === "Escape" && isModalOpen) {
-      closeModal();
-    } else if (e.key === "ArrowLeft" && isModalOpen && state.currentModalType === "case") {
+    if (e.key === "Escape") {
+      if (isCaseModalOpen) {
+        closeModal();
+      } else if (isBriefingOpen) {
+        closePartBriefing();
+      }
+    } else if (e.key === "ArrowLeft" && isCaseModalOpen && state.currentModalType === "case") {
       prevCase();
-    } else if (e.key === "ArrowRight" && isModalOpen && state.currentModalType === "case") {
+    } else if (e.key === "ArrowRight" && isCaseModalOpen && state.currentModalType === "case") {
       nextCase();
-    } else if (e.key === "/" && !isModalOpen && document.activeElement !== searchInput) {
+    } else if (e.key === "/" && !isCaseModalOpen && !isBriefingOpen && document.activeElement !== searchInput) {
       e.preventDefault();
       if (searchInput) {
         searchInput.focus();
@@ -790,11 +954,20 @@ function setupEventListeners() {
   });
 
   // Modal Backdrop Click
-  const modalBackdrop = document.getElementById("caseModal");
-  if (modalBackdrop) {
-    modalBackdrop.addEventListener("click", (e) => {
-      if (e.target === modalBackdrop) {
+  const caseModalBackdrop = document.getElementById("caseModal");
+  if (caseModalBackdrop) {
+    caseModalBackdrop.addEventListener("click", (e) => {
+      if (e.target === caseModalBackdrop) {
         closeModal();
+      }
+    });
+  }
+
+  const briefingModalBackdrop = document.getElementById("briefingModal");
+  if (briefingModalBackdrop) {
+    briefingModalBackdrop.addEventListener("click", (e) => {
+      if (e.target === briefingModalBackdrop) {
+        closePartBriefing();
       }
     });
   }

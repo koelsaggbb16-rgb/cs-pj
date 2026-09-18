@@ -36,6 +36,7 @@
       </a>
 
       <ul class="nav-links">
+        <li><a href="#briefing" class="nav-link" style="color: #38bdf8; font-weight: 800;">검사보완 브리핑</a></li>
         <li><a href="#trends" class="nav-link">4개년 추이</a></li>
         <li><a href="#dashboard" class="nav-link">통계 분석</a></li>
         <li><a href="#cases" class="nav-link">사례 탐색 (183건)</a></li>
@@ -129,6 +130,40 @@
             <span class="trend-banner-pill">사망자 10명 → 6명 감소</span>
             <span class="trend-banner-pill">4개년 사례집 183건 수록</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Component Inspection Deficiency & Visual Briefing Section -->
+    <section id="briefing" class="briefing-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" style="background-color: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">
+            INSPECTION DEFICIENCY VISUAL BRIEFING
+          </span>
+          <h2 class="section-title">승강기 안전검사 보완사항 & 핵심 부품별 사고사례 비주얼 브리핑</h2>
+          <p class="section-desc">
+            법정 안전검사 지적·보완사항에 나오는 핵심 부품(승강장문 가이드슈, 비상통화장치, 도어 인터록, 브레이크 등) 결함 시 발생하는 
+            <strong>부품 구조 사진·도해도</strong>와 <strong>실제 발생한 중대한 사고사례</strong>를 실시간 연계 브리핑합니다.
+          </p>
+        </div>
+
+        <!-- Briefing Category Filter Tabs -->
+        <div class="briefing-tabs">
+          <button id="partFilterBtnALL" class="briefing-tab-btn active" onclick="setPartCategoryFilter('ALL')">
+            <span>전체 부품 13종</span>
+          </button>
+          <button id="partFilterBtnEL" class="briefing-tab-btn" onclick="setPartCategoryFilter('EL')">
+            <span>🛗 엘리베이터 핵심 부품 (8종)</span>
+          </button>
+          <button id="partFilterBtnES" class="briefing-tab-btn" onclick="setPartCategoryFilter('ES')">
+            <span>🪜 에스컬레이터 핵심 부품 (5종)</span>
+          </button>
+        </div>
+
+        <!-- Parts Cards Grid -->
+        <div id="partsGrid" class="parts-grid">
+          <!-- Dynamically populated via app.js renderPartsSection() -->
         </div>
       </div>
     </section>
@@ -513,12 +548,100 @@
     </div>
   </div>
 
+  <!-- Component Inspection Briefing Modal -->
+  <div id="briefingModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="briefing-modal-container">
+      <!-- Briefing Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-title-wrap">
+            <div id="briefingModalBadge" class="modal-category-badge"></div>
+            <h2 id="briefingModalTitle" class="modal-title">부품명</h2>
+            <div id="briefingModalLocation" style="font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-top: 3px;"></div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closePartBriefing()" aria-label="닫기">✕</button>
+      </div>
+
+      <!-- Briefing Modal Body (Grid 2 cols) -->
+      <div class="briefing-grid">
+        <!-- Left: Component Photo & Inspection Points -->
+        <div class="briefing-left">
+          <div class="briefing-img-box">
+            <img id="briefingModalImg" src="" alt="부품 구조도" />
+          </div>
+          <div id="briefingModalImgNote" style="font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: -0.5rem; font-weight: 600;"></div>
+
+          <!-- 부품 핵심 역할 -->
+          <div class="briefing-box">
+            <h4 class="briefing-box-title" style="color: var(--primary);">
+              <span>💡</span> 부품 주요 기능 및 역할
+            </h4>
+            <p id="briefingModalSummary" style="font-size: 0.85rem; color: var(--text-main); line-height: 1.5; margin: 0;"></p>
+          </div>
+
+          <!-- 주요 안전검사 보완사항 -->
+          <div class="briefing-box">
+            <h4 class="briefing-box-title red">
+              <span>⚠️</span> 주요 안전검사 지적·보완사항 (결함 유형)
+            </h4>
+            <ul id="briefingModalInspectionPoints" class="briefing-list"></ul>
+          </div>
+
+          <!-- 미보완 시 사고 위험 메커니즘 -->
+          <div class="briefing-box">
+            <h4 class="briefing-box-title orange">
+              <span>💥</span> 미보완 시 사고 위험 & 위험 메커니즘
+            </h4>
+            <p id="briefingModalHazard" style="font-size: 0.85rem; color: #ef4444; line-height: 1.5; margin: 0; font-weight: 600;"></p>
+          </div>
+
+          <!-- 정비 및 교체 권장기준 -->
+          <div class="briefing-box">
+            <h4 class="briefing-box-title green">
+              <span>🛠️</span> 표준 정비 및 재발방지 관리기준
+            </h4>
+            <p id="briefingModalAction" style="font-size: 0.85rem; color: var(--text-main); line-height: 1.5; margin: 0;"></p>
+          </div>
+        </div>
+
+        <!-- Right: Linked Accident Cases -->
+        <div class="briefing-right">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0;">
+              연계된 실제 중대사고사례
+            </h3>
+            <span id="briefingModalCaseCount" class="dash-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">총 0건 연계</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
+            해당 부품의 결함·마모·관리미흡으로 인해 실제 발생했던 공식 중대사고입니다. 카드를 클릭하면 상세 조사 보고서를 확인하실 수 있습니다.
+          </p>
+
+          <div id="briefingModalCasesList" class="briefing-cases-list">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Briefing Modal Footer -->
+      <div class="modal-footer" style="justify-content: flex-end;">
+        <button class="nav-case-btn" onclick="closePartBriefing()">
+          닫기 (ESC)
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Mobile Bottom Floating Navigation -->
   <nav class="mobile-bottom-nav">
     <div class="mobile-nav-items">
       <a href="#hero" class="m-nav-item active">
         <span class="m-nav-icon">🏠</span>
         <span>홈</span>
+      </a>
+      <a href="#briefing" class="m-nav-item">
+        <span class="m-nav-icon">🔍</span>
+        <span>검사브리핑</span>
       </a>
       <a href="#trends" class="m-nav-item">
         <span class="m-nav-icon">📈</span>
@@ -531,10 +654,6 @@
       <a href="#cases" class="m-nav-item">
         <span class="m-nav-icon">📁</span>
         <span>사례(183)</span>
-      </a>
-      <a href="#rules" class="m-nav-item">
-        <span class="m-nav-icon">🛡️</span>
-        <span>안전수칙</span>
       </a>
     </div>
   </nav>
@@ -564,6 +683,7 @@
 
   <!-- Scripts -->
   <script src="js/cases_data.js"></script>
+  <script src="js/parts_data.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
