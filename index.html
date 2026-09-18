@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="2024 승강기 사고 사례집 기반의 대시보드 및 인터랙티브 사고 사례 탐색기. 한국승강기안전공단 공익 발간 자료 분석 포털">
-  <title>2024 승강기 사고 사례 분석 & 안전 포털</title>
+  <meta name="description" content="한국승강기안전공단(KoELSA) 2020~2024 4개년 공식 승강기 중대한 사고 사례집 통합 분석 포털. 183건 현장 도해도 원본 이미지 및 재발방지대책 전수 수록">
+  <title>2020~2024 승강기 사고 사례 종합 분석 & 안전 포털 | KoELSA 4개년 통합 183건</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,19 +28,20 @@
         </div>
         <div class="brand-text">
           <span class="brand-title">
-            승강기 안전 포털
-            <span class="brand-badge">2024 사례집</span>
+            승강기 안전 종합 포털
+            <span class="brand-badge">2020~2024 통합 (183건)</span>
           </span>
-          <span class="brand-sub">KoELSA 한국승강기안전공단 발간자료 분석</span>
+          <span class="brand-sub">KoELSA 한국승강기안전공단 공식 발간자료 분석</span>
         </div>
       </a>
 
       <ul class="nav-links">
-        <li><a href="#dashboard" class="nav-link">사고 통계 분석</a></li>
-        <li><a href="#cases" class="nav-link">사례 탐색기 (26건)</a></li>
-        <li><a href="#rules" class="nav-link">이용자 준수사항</a></li>
-        <li><a href="#posters" class="nav-link">예방 안내문</a></li>
-        <li><a href="#flood" class="nav-link">침수 대응 매뉴얼</a></li>
+        <li><a href="#trends" class="nav-link">4개년 추이</a></li>
+        <li><a href="#dashboard" class="nav-link">통계 분석</a></li>
+        <li><a href="#cases" class="nav-link">사례 탐색 (183건)</a></li>
+        <li><a href="#rules" class="nav-link">안전수칙</a></li>
+        <li><a href="#posters" class="nav-link">예방 안내문 (25종)</a></li>
+        <li><a href="#flood" class="nav-link">침수 대응</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -51,47 +52,82 @@
     </div>
   </header>
 
+  <!-- Sticky Year Selector Tabs -->
+  <nav class="year-selector-wrap" aria-label="사례집 연도 선택">
+    <div class="container">
+      <div id="yearTabsList" class="year-tabs">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </div>
+  </nav>
+
   <main>
     <!-- Hero Section -->
     <section id="hero" class="hero">
       <div class="container hero-content">
         <div class="hero-tag">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          승강기안전관리법 및 사고 조사 통계 심층 분석
+          승강기안전관리법 및 4개년 중대사고 조사 통계 종합 분석
         </div>
         <h1 class="hero-title">
-          2024 승강기 사고 사례집<br>
-          <span>유형별 원인 분석 & 시각화 포털</span>
+          승강기 사고 사례 종합 분석 포털<br>
+          <span>2020~2024 4개년 공식 사례집 183건 전수 수록</span>
         </h1>
         <p class="hero-desc">
-          국내 운행 중인 84만 대 승강기의 2023년도 중대 사고 42건과 과거 30년간의 사고 통계를 체계적으로 분석하였습니다. 
-          각 사고 유형과 원인을 파악하고, 카드를 클릭하여 <strong>현장 도해도 원본 이미지</strong>와 <strong>심층 재발방지대책</strong>을 즉시 확인하실 수 있습니다.
+          행정안전부 및 한국승강기안전공단(KoELSA)에서 공식 발간한 <strong>4개년(2024, 2023, 2022, 2020년 발간)</strong> 승강기 중대한 사고 사례집을 통합 분석하였습니다.
+          상단 연도 탭을 통해 연도별 상세 데이터와 통합 통계를 비교하고, <strong>183건의 사고 현장 도해도 원본 이미지</strong>와 <strong>심층 재발방지대책</strong>을 즉시 탐색하실 수 있습니다.
         </p>
 
-        <!-- KPI Metrics -->
+        <!-- Dynamic KPI Metrics -->
         <div class="hero-stats-row">
           <div class="hero-stat-card">
-            <span class="stat-label">2023년 중대 사고 발생</span>
-            <div class="stat-value">42 <span class="stat-unit">건</span></div>
-            <span class="stat-sub">전년(55건) 대비 23.6% 감소 ↓</span>
+            <span id="heroAccidentTitle" class="stat-label">4개년 누적 중대 사고</span>
+            <div id="heroAccidentVal" class="stat-value">258 <span class="stat-unit">건</span></div>
+            <span id="heroAccidentSub" class="stat-sub">연평균 64.5건 (86건 → 42건 급감 ↓)</span>
           </div>
 
           <div class="hero-stat-card">
             <span class="stat-label">인명 피해 (사망 / 중상)</span>
-            <div class="stat-value">43 <span class="stat-unit">명</span></div>
-            <span class="stat-sub" style="color:#ef4444;">사망 6명 • 중상 37명</span>
+            <div id="heroCasualtyVal" class="stat-value">270 <span class="stat-unit">명</span></div>
+            <span id="heroCasualtySub" class="stat-sub" style="color:#ef4444;">사망 25명 • 중상 245명 (183건 수록)</span>
           </div>
 
           <div class="hero-stat-card">
             <span class="stat-label">전국 승강기 보유 대수</span>
-            <div class="stat-value">84 <span class="stat-unit">만 대</span></div>
-            <span class="stat-sub">1만 대당 사고율 0.50건</span>
+            <div id="heroFleetVal" class="stat-value">84 <span class="stat-unit">만 대</span></div>
+            <span id="heroFleetSub" class="stat-sub">1만 대당 사고율 1.15건 → 0.50건 (-56.5% 개선)</span>
           </div>
 
           <div class="hero-stat-card">
             <span class="stat-label">사고 최다 원인 (1위)</span>
-            <div class="stat-value">45.2 <span class="stat-unit">%</span></div>
-            <span class="stat-sub" style="color:#f59e0b;">이용자 과실 19건 (손잡이/안전선)</span>
+            <div id="heroCauseVal" class="stat-value">45.7 <span class="stat-unit">%</span></div>
+            <span id="heroCauseSub" class="stat-sub" style="color:#f59e0b;">이용자 과실 118건 (손잡이/안전선 미준수)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4-Year Comparative Trends Section -->
+    <section id="trends" class="trend-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">4-YEAR COMPARISON TREND</span>
+          <h2 class="section-title">2020 ~ 2023년 4개년 승강기 안전 성과 및 변화 추이</h2>
+          <p class="section-desc">운행 승강기 대수는 매년 3만 대씩 지속 증가(74.9만 → 84.0만 대)한 반면, 중대 사고 건수는 86건에서 42건으로 51.2% 대폭 감소하였습니다.</p>
+        </div>
+
+        <div id="trendCardsGrid" class="trend-cards-grid">
+          <!-- Dynamically populated via app.js -->
+        </div>
+
+        <div class="trend-summary-banner">
+          <div class="trend-banner-text">
+            <span>📈 <strong>4개년 핵심 성과:</strong> 전국 84만 대 승강기의 1만 대당 중대 사고율이 <strong>1.15건 → 0.50건</strong>으로 <strong>56.5% 획기적 개선</strong>되었습니다.</span>
+          </div>
+          <div class="trend-banner-pills">
+            <span class="trend-banner-pill">총 258건 중대사고 전수 분석</span>
+            <span class="trend-banner-pill">사망자 10명 → 6명 감소</span>
+            <span class="trend-banner-pill">4개년 사례집 183건 수록</span>
           </div>
         </div>
       </div>
@@ -101,9 +137,9 @@
     <section id="dashboard" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">CHAPTER 02 ANALYSIS</span>
-          <h2 class="section-title">승강기 사고 발생 현황 및 유형별 통계</h2>
-          <p class="section-desc">2024년 발간 사례집 제2장에 수록된 통계 자료를 바탕으로 원인별·기종별·유형별 발생 분포를 시각화하였습니다.</p>
+          <span class="section-tag">ACCIDENT STATISTICS</span>
+          <h2 class="section-title">승강기 사고 발생 현황 및 유형별 심층 통계</h2>
+          <p class="section-desc">상단 연도 탭 선택에 따라 해당 연도 및 4개년 누적 통계 차트가 실시간으로 동기화됩니다.</p>
         </div>
 
         <div class="dashboard-grid">
@@ -114,7 +150,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
                 사고 원인별 발생 현황
               </h3>
-              <span class="dash-badge">2023년 총 42건</span>
+              <span id="badgeStatsByCause" class="dash-badge">총 258건</span>
             </div>
             <div id="statsByCause" class="stat-bars-list">
               <!-- Rendered via JS -->
@@ -128,7 +164,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M9 10h6M9 14h6"/></svg>
                 승강기 기종별 사고 분포
               </h3>
-              <span class="dash-badge">EL 28건 / ES·MW 14건</span>
+              <span id="dashboardYearBadge" class="dash-badge">4개년 종합 분석</span>
             </div>
             <div id="statsByElevator" class="stat-bars-list">
               <!-- Rendered via JS -->
@@ -140,9 +176,9 @@
             <div class="dash-card-header">
               <h3 class="dash-card-title">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                사고 유형별 분류 (전도·추락·끼임)
+                사고 유형별 분류 (전도·추락·끼임·충돌)
               </h3>
-              <span class="dash-badge">전도 42.9% 최다</span>
+              <span class="dash-badge">전도 48.1% 최다</span>
             </div>
             <div id="statsByAccidentType" class="stat-bars-list">
               <!-- Rendered via JS -->
@@ -156,7 +192,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 피해자 연령대별 분포
               </h3>
-              <span class="dash-badge">총 43명 (고령자 37.2%)</span>
+              <span class="dash-badge">고령자(65세 이상) 37.8%</span>
             </div>
             <div id="statsByAge" class="stat-bars-list">
               <!-- Rendered via JS -->
@@ -170,9 +206,9 @@
     <section id="cases" class="section" style="background-color: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">CHAPTER 03 CASE STUDIES</span>
-          <h2 class="section-title">2023년 발생 승강기 중대한 사고 사례 탐색기 (26건)</h2>
-          <p class="section-desc">사례 카드를 클릭하면 <strong>사고 상황 도해도 원본 이미지</strong>와 <strong>가. 사고내용 • 나. 발생원인 • 다. 재발방지대책</strong> 전문을 확인할 수 있습니다.</p>
+          <span class="section-tag">CASE STUDIES ARCHIVE</span>
+          <h2 class="section-title">승강기 중대한 사고 사례 인터랙티브 탐색기 (183건)</h2>
+          <p class="section-desc">카드를 클릭하면 한국승강기안전공단 <strong>현장 도해도 원본 이미지</strong>와 <strong>가. 사고내용 • 나. 발생원인 • 다. 재발방지대책</strong> 전문을 즉시 확인하실 수 있습니다.</p>
         </div>
 
         <!-- Interactive Filtering Controls -->
@@ -180,7 +216,13 @@
           <!-- Search Bar -->
           <div class="search-bar-wrap">
             <span class="search-icon">🔍</span>
-            <input type="text" id="caseSearchInput" class="search-input" placeholder="사고 제목, 원인, 기종, 키워드 검색 (예: 신발끈, 유모차, 피트, 브레이크, 개문출발 등) - 단축키 '/'">
+            <input type="text" id="caseSearchInput" class="search-input" placeholder="사고 제목, 원인, 기종, 키워드 검색 (예: 신발끈, 유모차, 핸드레일, 브레이크, 개문출발, 반려동물 등) - 단축키 '/'">
+          </div>
+
+          <!-- Year Filter -->
+          <div class="filter-row">
+            <span class="filter-label">사례집 연도</span>
+            <div id="filterYearChips" class="filter-chips"></div>
           </div>
 
           <!-- Elevator Filter -->
@@ -201,113 +243,175 @@
             <div id="filterCauseChips" class="filter-chips"></div>
           </div>
 
-          <!-- Metadata & Reset -->
+          <!-- Filter Meta & Result Count -->
           <div class="filter-meta-bar">
-            <div id="caseResultCount" class="result-count">총 26건의 사고 사례</div>
-            <button class="reset-filter-btn" onclick="resetAllFilters()">필터 전체 초기화</button>
+            <div id="caseResultCount" class="result-count">
+              총 <span>183</span>건의 사고 사례
+            </div>
+            <button class="reset-filter-btn" onclick="resetAllFilters()">
+              ↻ 필터 전체 초기화
+            </button>
           </div>
         </div>
 
-        <!-- Cases Grid -->
+        <!-- Cases Cards Grid -->
         <div id="casesGrid" class="cases-grid">
           <!-- Dynamically populated via app.js -->
         </div>
       </div>
     </section>
 
-    <!-- Safety Rules & Regulations (Chapter 4) -->
+    <!-- Safety Rules & Emergency Guide -->
     <section id="rules" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">CHAPTER 04 COMPLIANCE</span>
-          <h2 class="section-title">안전한 승강기 이용을 위한 이용자 준수사항</h2>
-          <p class="section-desc">승강기 안전관리법에 규정된 이용자 준수사항 및 승강기 갇힘 시 비상 행동요령입니다.</p>
+          <span class="section-tag">SAFETY PROTOCOLS</span>
+          <h2 class="section-title">승강기 안전 이용 10대 준수사항 & 갇힘 대응 요령</h2>
+          <p class="section-desc">승강기안전관리법 및 운영규정 제18조에 명시된 필수 이용자 준수사항입니다.</p>
         </div>
 
-        <div class="rules-grid">
-          <!-- Elevator Rules -->
-          <div class="rule-box">
-            <div class="rule-box-header">
-              <div class="rule-icon-wrap">🛗</div>
-              <h3 class="rule-box-title">엘리베이터 이용자 준수사항 15계명</h3>
+        <div class="rules-container">
+          <!-- Left: 10 Rules -->
+          <div class="rules-card">
+            <div class="rules-header">
+              <span class="rules-icon">🛡️</span>
+              <div>
+                <h3 class="rules-title">승강기 이용자 10대 기본 안전수칙</h3>
+                <span class="rules-sub">행정안전부 고시 제2022-19호 제18조</span>
+              </div>
             </div>
-            <ol class="rule-ol">
-              <li>엘리베이터 출입문에 충격을 가하지 않아야 한다.</li>
-              <li>엘리베이터 출입문에 손이나 발, 물건을 대지 않아야 한다.</li>
-              <li>엘리베이터 출입문을 강제로 열지 않아야 한다.</li>
-              <li>출입문이 완전히 열린 후에 타거나 내려야 한다.</li>
-              <li>엘리베이터 안에서 뛰거나 장난치지 않아야 한다.</li>
-              <li>정원 또는 정격하중을 준수하여 엘리베이터를 이용해야 한다.</li>
-              <li>어린이나 노약자는 보호자와 함께 엘리베이터를 이용해야 한다.</li>
-              <li>화재 또는 지진 등 재난 발생 시에는 엘리베이터를 이용하지 않아야 한다.</li>
-              <li>줄넘기, 반려동물의 목줄 등이 출입문에 끼이지 않도록 주의해야 한다.</li>
-              <li>승강기 갇힘 시 임의 탈출을 시도하지 말고 비상통화장치로 구조를 요청한다.</li>
+
+            <ol class="rules-list">
+              <li class="rule-item">
+                <span class="rule-num">01</span>
+                <div>
+                  <strong>출입문 충격 및 기댐 절대 금지</strong>
+                  <p>출입문에 기대거나 발길질 등의 충격을 가하지 않아야 합니다 (이탈 추락 방지).</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">02</span>
+                <div>
+                  <strong>문턱 틈새 옷자락·소지품 끼임 주의</strong>
+                  <p>출입문에 손을 대지 말고 옷자락, 백팩 끈, 반려동물 목줄이 끼이지 않도록 주의합니다.</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">03</span>
+                <div>
+                  <strong>강제 문 열기 시도 금지</strong>
+                  <p>정전 또는 고장 정지 시 출입문을 억지로 열지 말고 비상통화버튼으로 구조를 요청합니다.</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">04</span>
+                <div>
+                  <strong>카 내 뛰기 및 충격 금지</strong>
+                  <p>카 내에서 뛰거나 발을 구르지 않아야 합니다 (과속조절기 오작동 급정지 유발).</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">05</span>
+                <div>
+                  <strong>정원 및 적재하중 초과 금지</strong>
+                  <p>정원 및 적재하중 초과 경보 발생 시 마지막 탑승자가 내려야 합니다.</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">06</span>
+                <div>
+                  <strong>에스컬레이터 손잡이(핸드레일) 반드시 착용</strong>
+                  <p>에스컬레이터 및 무빙워크에서는 반드시 핸드레일을 꼭 잡고 이용합니다 (전도사고 예방 1순위).</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">07</span>
+                <div>
+                  <strong>노란 안전선 안쪽 탑승 준수</strong>
+                  <p>디딤판 노란 안전선 안에 탑승하며 스텝과 스커트가드 틈새에 발을 대지 않습니다.</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">08</span>
+                <div>
+                  <strong>걷거나 뛰지 않기</strong>
+                  <p>에스컬레이터 위를 걷거나 뛰지 않아야 합니다 (추락 및 연쇄 전도 방지).</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">09</span>
+                <div>
+                  <strong>유모차·수레·손수레 탑승 금지</strong>
+                  <p>유모차, 손수레, 쇼핑카트 등은 반드시 전용 엘리베이터를 이용하여 이동합니다.</p>
+                </div>
+              </li>
+              <li class="rule-item">
+                <span class="rule-num">10</span>
+                <div>
+                  <strong>어린이·노약자 보호자 동반 탑승</strong>
+                  <p>어린이나 노약자는 반드시 보호자의 손을 잡고 동반 탑승하거나 엘리베이터를 이용합니다.</p>
+                </div>
+              </li>
             </ol>
           </div>
 
-          <!-- Escalator Rules -->
-          <div class="rule-box">
-            <div class="rule-box-header">
-              <div class="rule-icon-wrap">🪜</div>
-              <h3 class="rule-box-title">에스컬레이터 · 무빙워크 준수사항</h3>
-            </div>
-            <ol class="rule-ol">
-              <li>반드시 디딤판의 노란 안전선 안에 두 발을 모아 탑승한다.</li>
-              <li>탑승 중에는 반드시 핸드레일(손잡이)을 잡고 서서 이용한다.</li>
-              <li>에스컬레이터 위에서 걷거나 뛰지 않는다.</li>
-              <li>유모차, 손수레, 쇼핑카트를 가지고 에스컬레이터에 탑승하지 않는다.</li>
-              <li>어린이나 노약자는 반드시 보호자의 손을 잡고 동반 탑승한다.</li>
-              <li>디딤판 틈새나 스커트가드에 신발(고무샌들 등), 옷자락이 끼이지 않도록 주의한다.</li>
-              <li>비상 상황 발생 시 상·하부의 빨간색 비상정지버튼을 누르고 외친다.</li>
-              <li>하부 콤 부근에 도달 시 발을 들어 안전하게 디딤판에서 내린다.</li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- Entrapment 4 Steps -->
-        <div class="entrapment-banner">
-          <h3 class="entrapment-title">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            승강기 갇힘 상황 발생 시 비상 대응 4단계 (도서 p.45)
-          </h3>
-          <p class="entrapment-desc">엘리베이터는 질식 위험이 없으며 다중 추락 방지 안전장치가 되어 있습니다. 당황하지 말고 침착하게 대응하세요.</p>
-
-          <div class="steps-grid">
-            <div class="step-card">
-              <div class="step-badge">STEP 01</div>
-              <h4 class="step-heading">침착 유지 및 안전 확보</h4>
-              <p class="step-text">카 내부는 완전 밀폐가 아니므로 질식하지 않습니다. 강제로 문을 열거나 천장 비상구를 열지 마십시오.</p>
+          <!-- Right: Trapped Response -->
+          <div class="rules-card emergency-card">
+            <div class="rules-header">
+              <span class="rules-icon">🚨</span>
+              <div>
+                <h3 class="rules-title">승강기 갇힘 상황 발생 시 4단계 대응 요령</h3>
+                <span class="rules-sub">국가승강기정보센터 표준 행동 매뉴얼</span>
+              </div>
             </div>
 
-            <div class="step-card">
-              <div class="step-badge">STEP 02</div>
-              <h4 class="step-heading">비상호출버튼(인터폰) 호출</h4>
-              <p class="step-text">카 내부 '비상호출' 버튼을 3초 이상 길게 눌러 관리실 또는 전문 유지관리업체와 통화합니다.</p>
-            </div>
+            <div class="steps-grid">
+              <div class="step-card">
+                <div class="step-badge">STEP 01</div>
+                <h4 class="step-heading">침착성 유지 (질식 위험 없음)</h4>
+                <p class="step-text">카 내부는 완전 밀폐가 아니므로 질식하지 않습니다. 강제로 문을 열거나 천장 비상구를 열지 마십시오.</p>
+              </div>
 
-            <div class="step-card">
-              <div class="step-badge">STEP 03</div>
-              <h4 class="step-heading">119 구조대 신고 & ID 확인</h4>
-              <p class="step-text">통화 불가 시 119에 신고하며, 승강기 내 부착된 <strong>승강기 고유번호 7자리(ID)</strong>를 알려줍니다.</p>
-            </div>
+              <div class="step-card">
+                <div class="step-badge">STEP 02</div>
+                <h4 class="step-heading">비상호출버튼(인터폰) 호출</h4>
+                <p class="step-text">카 내부 '비상호출' 버튼을 3초 이상 길게 눌러 관리실 또는 전문 유지관리업체와 통화합니다.</p>
+              </div>
 
-            <div class="step-card">
-              <div class="step-badge">STEP 04</div>
-              <h4 class="step-heading">전문 구조대 도착 대기</h4>
-              <p class="step-text">승강기 바닥에 편안히 앉아 대기하고, 구조대원의 안내에 따라 도어가 열리면 조심스럽게 하차합니다.</p>
+              <div class="step-card">
+                <div class="step-badge">STEP 03</div>
+                <h4 class="step-heading">119 구조대 신고 & ID 확인</h4>
+                <p class="step-text">통화 불가 시 119에 신고하며, 승강기 내 부착된 <strong>승강기 고유번호 7자리(ID)</strong>를 알려줍니다.</p>
+              </div>
+
+              <div class="step-card">
+                <div class="step-badge">STEP 04</div>
+                <h4 class="step-heading">전문 구조대 도착 대기</h4>
+                <p class="step-text">승강기 바닥에 편안히 앉아 대기하고, 구조대원의 안내에 따라 도어가 열리면 조심스럽게 하차합니다.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Posters Gallery (Chapter 5) -->
+    <!-- Posters Gallery -->
     <section id="posters" class="section" style="background-color: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">CHAPTER 05 POSTERS</span>
-          <h2 class="section-title">사고 · 고장 예방 공식 시각 안내문 갤러리</h2>
-          <p class="section-desc">사례집 제5장에 수록된 한국승강기안전공단 공식 안전 포스터 및 기술 안전 안내문 12종입니다. 클릭하여 원본을 확인하세요.</p>
+          <span class="section-tag">SAFETY POSTERS & ADVISORIES</span>
+          <h2 class="section-title">사고 · 고장 예방 공식 시각 안내문 갤러리 (25종)</h2>
+          <p class="section-desc">한국승강기안전공단 공식 안전 포스터 및 기술 안전 안내문 25종입니다. 클릭하여 원본 이미지를 확인하세요.</p>
+        </div>
+
+        <!-- Poster Year Filter -->
+        <div class="filter-row" style="margin-bottom: 1.5rem; justify-content: center;">
+          <div class="filter-chips">
+            <button class="filter-chip active" onclick="setPosterFilter('ALL')">전체 안내문 (25종)</button>
+            <button class="filter-chip" onclick="setPosterFilter('2024')">2024년 발간 (12종)</button>
+            <button class="filter-chip" onclick="setPosterFilter('2023')">2023년 발간 (8종)</button>
+            <button class="filter-chip" onclick="setPosterFilter('2022')">2022년 발간 (5종)</button>
+          </div>
         </div>
 
         <div id="postersGrid" class="poster-grid">
@@ -316,13 +420,13 @@
       </div>
     </section>
 
-    <!-- Flood Guidelines (Chapter 6) -->
+    <!-- Flood Guidelines -->
     <section id="flood" class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">CHAPTER 06 EMERGENCY</span>
+          <span class="section-tag">EMERGENCY GUIDELINES</span>
           <h2 class="section-title">엘리베이터 침수 상황 대응 요령 및 관리방법</h2>
-          <p class="section-desc">집중호우, 태풍 등 수해 시 감전 화재 및 카 침수를 예방하기 위한 4단계 표준 행동 매뉴얼입니다 (도서 p.58~64).</p>
+          <p class="section-desc">집중호우, 태풍 등 수해 시 감전 화재 및 카 침수를 예방하기 위한 4단계 표준 행동 매뉴얼입니다.</p>
         </div>
 
         <div id="floodStepsList" class="flood-steps-list">
@@ -416,21 +520,21 @@
         <span class="m-nav-icon">🏠</span>
         <span>홈</span>
       </a>
+      <a href="#trends" class="m-nav-item">
+        <span class="m-nav-icon">📈</span>
+        <span>추이</span>
+      </a>
       <a href="#dashboard" class="m-nav-item">
         <span class="m-nav-icon">📊</span>
         <span>통계</span>
       </a>
       <a href="#cases" class="m-nav-item">
         <span class="m-nav-icon">📁</span>
-        <span>사례(26)</span>
+        <span>사례(183)</span>
       </a>
       <a href="#rules" class="m-nav-item">
         <span class="m-nav-icon">🛡️</span>
         <span>안전수칙</span>
-      </a>
-      <a href="#flood" class="m-nav-item">
-        <span class="m-nav-icon">🌊</span>
-        <span>침수대응</span>
       </a>
     </div>
   </nav>
@@ -440,20 +544,20 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <h4>2024 승강기 사고 사례 분석 포털</h4>
+          <h4>2020~2024 승강기 사고 사례 종합 분석 포털</h4>
           <p>
-            본 시스템은 행정안전부 및 한국승강기안전공단(KoELSA)에서 발행한 『2024 승강기 사고 사례집』을 기반으로 개발된 안전 교육 및 사고 예방 인터랙티브 포털입니다.
+            본 시스템은 행정안전부 및 한국승강기안전공단(KoELSA)에서 발행한 『2024 승강기 사고 사례집』, 『2023 승강기 사고 사례집』, 『2022 승강기 사고 사례집』, 『2020년도 발생 승강기 중대한 사고 사례집』 4개년 공식 발간물을 전수 분석·디지털화한 인터랙티브 안전 교육 포털입니다.
           </p>
         </div>
         <div class="footer-meta">
           <p><strong>발간 부서:</strong> 한국승강기안전공단 사고조사처</p>
-          <p><strong>사고 분석 대상:</strong> 2023년 승강기안전관리법상 중대한 사고 42건</p>
-          <p><strong>승강기 통합관제:</strong> 안전신문고 / 119 구출지원 연계</p>
+          <p><strong>사고 분석 대상:</strong> 2020~2023년 승강기안전관리법상 중대한 사고 258건 (사례 183건 수록)</p>
+          <p><strong>승강기 통합관제:</strong> 안전신문고 / 국가승강기정보센터 / 119 구출지원 연계</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2024 한국승강기안전공단 발간 공공누리 공익 자료 기반 데이터 시각화</span>
-        <span>PC / 모바일 반응형 웹 포털</span>
+        <span>© 2020~2024 한국승강기안전공단 발간 공공누리 공익 자료 기반 데이터 시각화</span>
+        <span>PC / 태블릿 / 모바일 반응형 웹 포털</span>
       </div>
     </div>
   </footer>

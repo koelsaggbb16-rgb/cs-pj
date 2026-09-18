@@ -1,814 +1,8325 @@
-// 2024 승강기 사고 사례집 데이터셋 (한국승강기안전공단 2024 발간)
+// 한국승강기안전공단(KoELSA) 공식 승강기 사고 사례집 통합 데이터셋
+// 2024년(2023년 사고), 2023년(2022년 사고), 2022년(2021년 사고), 2020년(2020년 사고) 4개년 총 183건
+
 const CASES_DATA = [
   {
-    id: 1,
-    page: 14,
-    bookPage: 16,
-    image: "images/page_14.png",
-    title: "에스컬레이터 탑승 중 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 3건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "2건",
-    summary: "탑승 시 노란 안전선 디딤판 끝단을 밟거나 손잡이를 잡지 않아 천이구간에서 중심을 잃고 전도",
-    description: [
+    "id": 1,
+    "page": 14,
+    "bookPage": 16,
+    "image": "images/page_14.png",
+    "title": "에스컬레이터 탑승 중 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 3건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "탑승 시 노란 안전선 디딤판 끝단을 밟거나 손잡이를 잡지 않아 천이구간에서 중심을 잃고 전도",
+    "description": [
       "피해자가 에스컬레이터 이용 중 넘어져 발생한 사고",
       "① 탑승 시 노란 안전선 안쪽이 아닌 디딤판 끝단을 밟고 있다가 단차에 의해 넘어짐",
       "② 불안전한 자세로 손잡이를 잡고 있지 않거나 내리던 중 몸의 중심을 잃고 넘어짐",
       "③ 수평구간에서 경사구간으로 변하는 천이구간에서 몸의 중심을 잃고 넘어짐"
     ],
-    cause: [
+    "cause": [
       "노란 안전선 안에 탑승하지 않아 수평구간에서 경사구간으로 바뀔 때 중심을 잃음",
       "상승 운행하는 에스컬레이터에서 오른손에 지팡이를 짚고 있어 손잡이를 정상적으로 잡기 어려운 상태로 올라가던 중 전도",
       "왼손에 무거운 물건을 들고 있어 손잡이를 잡지 못하고 운행 중 몸의 중심을 상실"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 이용자가 안전하게 에스컬레이터를 이용할 수 있도록 안내방송을 주기적으로 실시하고 상·하부 승강장 주변 안전요원 배치 등 현장 안전관리 강화",
       "이용자: 에스컬레이터 탑승 시 반드시 손잡이를 잡고 노란 안전선 안에 탑승하며, 걷거나 뛰지 않고 어린이·노약자는 보호자와 함께 탑승하거나 엘리베이터 이용"
     ],
-    tags: ["에스컬레이터", "전도", "이용자과실", "손잡이미착용", "노약자"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실",
+      "손잡이미착용",
+      "노약자"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_1",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 2,
-    page: 15,
-    bookPage: 17,
-    image: "images/page_15.png",
-    title: "운동화 끈이 하부 콤에 끼여 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "끼임",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "풀린 운동화 끈이 에스컬레이터 하부 콤 틈새에 끼이면서 내리는 순간 중심을 잃고 전도",
-    description: [
+    "id": 2,
+    "page": 15,
+    "bookPage": 17,
+    "image": "images/page_15.png",
+    "title": "운동화 끈이 하부 콤에 끼여 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "풀린 운동화 끈이 에스컬레이터 하부 콤 틈새에 끼이면서 내리는 순간 중심을 잃고 전도",
+    "description": [
       "피해자가 에스컬레이터에 탑승하여 내려가던 중 풀린 신발 끈이 하부 콤(Comb)에 걸려 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "피해자의 왼쪽 신발 끈이 풀어진 상태로 탑승하여 하부 승강장으로 내리던 중 풀어진 신발 끈이 콤 틈새에 끼이면서 몸의 중심을 잃고 넘어짐"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 에스컬레이터 이용 시 콤과 스텝 및 스커트가드 틈새에 신발 끈, 옷자락 등이 끼이지 않도록 주의",
       "관리주체: 신발 끈 등이 콤과 스텝에 끼일 위험성을 알리는 안전표지 부착 및 안전이용 홍보 강화, 일상점검 시 콤 빗살 파손 확인 즉시 운행정지 및 교체"
     ],
-    tags: ["에스컬레이터", "끼임", "하부콤", "신발끈", "이용자과실"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "끼임",
+      "하부콤",
+      "신발끈",
+      "이용자과실"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_2",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 3,
-    page: 16,
-    bookPage: 18,
-    image: "images/page_16.png",
-    title: "에스컬레이터 디딤판과 스커트가드 사이 신발이 끼여 발생한 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "끼임",
-    casualty: "중상 3건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "2건",
-    summary: "어린이 등이 안전선 밖 스커트가드에 발을 밀착하여 고무신발(크록스 등)이 틈새에 말려들어 끼임",
-    description: [
+    "id": 3,
+    "page": 16,
+    "bookPage": 18,
+    "image": "images/page_16.png",
+    "title": "에스컬레이터 디딤판과 스커트가드 사이 신발이 끼여 발생한 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 3건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "어린이 등이 안전선 밖 스커트가드에 발을 밀착하여 고무신발(크록스 등)이 틈새에 말려들어 끼임",
+    "description": [
       "피해자가 하강 운행하는 에스컬레이터에 탑승하여 내려가던 중 우측 신발이 디딤판과 스커트가드 사이에 끼이며 발생한 사고"
     ],
-    cause: [
+    "cause": [
       "에스컬레이터 탑승 중 디딤판의 노란 안전선 안에 탑승하지 않고 스커트가드에 신발을 접촉시키며 운행되던 중 틈새로 빨려 들어가 끼임"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 디딤판의 노란 안전선 안에 탑승하는 준수사항 준수, 어린이·노약자는 보호자의 손을 잡고 동반 탑승",
       "관리주체: 노란 안전선 준수 및 어린이 보호자 동반 안내방송 및 홍보, 행사·집중시간대 상하부 안전요원 배치"
     ],
-    tags: ["에스컬레이터", "끼임", "스커트가드", "어린이", "안전선미준수"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "끼임",
+      "스커트가드",
+      "어린이",
+      "안전선미준수"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_3",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 4,
-    page: 17,
-    bookPage: 19,
-    image: "images/page_17.png",
-    title: "에스컬레이터에 유모차와 같이 탑승하여 발생한 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "유모차에 짐을 싣고 에스컬레이터 진입 중 경사구간에서 전복되며 후속 탑승자와 연쇄 전도",
-    description: [
+    "id": 4,
+    "page": 17,
+    "bookPage": 19,
+    "image": "images/page_17.png",
+    "title": "에스컬레이터에 유모차와 같이 탑승하여 발생한 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "유모차에 짐을 싣고 에스컬레이터 진입 중 경사구간에서 전복되며 후속 탑승자와 연쇄 전도",
+    "description": [
       "유모차에 짐을 싣고 에스컬레이터에 탑승하여 올라가던 중 수평구간에서 경사구간으로 전환되며 유모차의 무게중심이 뒤로 기울어져 전복, 뒤따르던 피해자와 함께 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "수평부에서 경사부로 전환되는 구간에서 짐이 실린 유모차의 무게중심이 뒤쪽으로 쏠려 앞선 이용자가 중심을 잃고 전도되었고, 뒤따르던 승객도 함께 연쇄 전도"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 유모차, 쇼핑카트, 손수레 등을 소지한 경우 에스컬레이터 탑승 절대 금지, 반드시 엘리베이터 이용",
       "관리주체: 에스컬레이터 입구에 유모차·손수레 진입 금지 차단봉 및 경고 표지 설치, 안내방송 지속 송출"
     ],
-    tags: ["에스컬레이터", "전도", "유모차탑승금지", "연쇄전도", "이용자과실"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "전도",
+      "유모차탑승금지",
+      "연쇄전도",
+      "이용자과실"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_4",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 5,
-    page: 18,
-    bookPage: 20,
-    image: "images/page_18.png",
-    title: "수평보행기(무빙워크)에 탑승하여 걸어가던 중 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "수평보행기 (무빙워크)",
-    elevatorCategory: "MW",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "우천 시 젖은 신발로 경사형 무빙워크 위를 손잡이 없이 걷다가 미끄러져 전도",
-    description: [
+    "id": 5,
+    "page": 18,
+    "bookPage": 20,
+    "image": "images/page_18.png",
+    "title": "수평보행기(무빙워크)에 탑승하여 걸어가던 중 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "수평보행기 (무빙워크)",
+    "elevatorCategory": "MW",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "우천 시 젖은 신발로 경사형 무빙워크 위를 손잡이 없이 걷다가 미끄러져 전도",
+    "description": [
       "피해자가 하강 운행하는 경사형 무빙워크에 탑승하여 걸어서 내려가던 중 몸의 중심을 잃고 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "손잡이를 잡지 않고 경사형 수평보행기 위에서 걸어서 이동하였고, 우천으로 젖은 신발 바닥이 미끄러워 균형을 잃고 미끄러져 전도"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 경사형 무빙워크 이용 시 반드시 손잡이를 잡고 서서 이용하며 걷거나 뛰지 않기",
       "관리주체: 비·눈 내릴 때 출입구 바닥 흡수매트 설치, 수시 물기 제거 및 '미끄럼 주의' 입간판 배치"
     ],
-    tags: ["무빙워크", "전도", "보행금지", "우천미끄럼", "이용자과실"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "무빙워크",
+      "전도",
+      "보행금지",
+      "우천미끄럼",
+      "이용자과실"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_5",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 6,
-    page: 19,
-    bookPage: 21,
-    image: "images/page_19.png",
-    title: "쇼핑카트 뒷바퀴가 콤에 걸리면서 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "수평보행기 (무빙워크)",
-    elevatorCategory: "MW",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "무빙워크 출구에서 쇼핑카트를 힘껏 밀어내지 않아 뒷바퀴가 콤에 걸리며 팔레트 밀림으로 전도",
-    description: [
+    "id": 6,
+    "page": 19,
+    "bookPage": 21,
+    "image": "images/page_19.png",
+    "title": "쇼핑카트 뒷바퀴가 콤에 걸리면서 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "수평보행기 (무빙워크)",
+    "elevatorCategory": "MW",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "무빙워크 출구에서 쇼핑카트를 힘껏 밀어내지 않아 뒷바퀴가 콤에 걸리며 팔레트 밀림으로 전도",
+    "description": [
       "쇼핑카트를 가지고 무빙워크에 탑승하여 내려가던 중 출구에서 카트 뒷바퀴가 하부 콤에 걸려 빠져나가지 못하고 카트와 함께 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "하부 승강장 출구 진출 시 쇼핑카트를 앞으로 밀어주지 않아 바퀴가 콤에 걸렸고, 팔레트는 계속 이동하여 뒤에서 밀리며 중심을 잃음"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 쇼핑카트를 가지고 무빙워크를 이용하는 경우 출구 도착 전 두 손으로 카트를 잡고 앞으로 힘껏 밀어내기",
       "관리주체: 출구 안내문 부착 및 혼잡 시간대 안내요원 배치, 카트 바퀴 및 콤 마모 상태 정기 점검"
     ],
-    tags: ["무빙워크", "전도", "쇼핑카트", "하부콤", "마트안전"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "무빙워크",
+      "전도",
+      "쇼핑카트",
+      "하부콤",
+      "마트안전"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_6",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 7,
-    page: 20,
-    bookPage: 22,
-    image: "images/page_20.png",
-    title: "견인차 조작 실수로 승강장 문에 충돌해 피트로 추락한 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "전동 견인차로 화물 운반 중 조작 미숙으로 닫힌 승강장문에 돌진 충돌, 도어 이탈로 카 상부 추락",
-    description: [
+    "id": 7,
+    "page": 20,
+    "bookPage": 22,
+    "image": "images/page_20.png",
+    "title": "견인차 조작 실수로 승강장 문에 충돌해 피트로 추락한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "전동 견인차로 화물 운반 중 조작 미숙으로 닫힌 승강장문에 돌진 충돌, 도어 이탈로 카 상부 추락",
+    "description": [
       "피해자가 전동 견인차에 탑승하여 화물을 운반하던 중 조작 실수로 승강장 문에 고속 충돌, 승강장 도어가 이탈되면서 카 상부/피트로 추락하여 사망한 중대사고"
     ],
-    cause: [
+    "cause": [
       "전동 견인차 운전자가 브레이크 조작 미숙 또는 가속 페달 오조작으로 승강장문과 충돌, 설계 기준 이상의 충격량으로 도어 슈(Door Shoe)가 파손·이탈되어 승강로 개방"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 화물용 승강장 앞 전동차 정지선 및 방호 범퍼(볼라드/스토퍼) 설치, 운전자 대상 안전교육 실시",
       "이용자: 화물 운반 차량은 승강장문과 충분한 안전거리를 유지하고 정지 후 승강기 호출 조작"
     ],
-    tags: ["엘리베이터", "추락", "사망", "전동견인차", "도어충돌이탈"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "추락",
+      "사망",
+      "전동견인차",
+      "도어충돌이탈"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_7",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 8,
-    page: 21,
-    bookPage: 23,
-    image: "images/page_21.png",
-    title: "탑승이 금지된 소형 화물용 엘리베이터에 탑승하여 발생한 사고",
-    elevatorType: "소형화물용 엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "탑승 금지된 덤웨이터/화물 리프트에 사람이 임의 탑승하여 화물 적재 중 틈새(380mm)로 추락",
-    description: [
+    "id": 8,
+    "page": 21,
+    "bookPage": 23,
+    "image": "images/page_21.png",
+    "title": "탑승이 금지된 소형 화물용 엘리베이터에 탑승하여 발생한 사고",
+    "elevatorType": "소형화물용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "탑승 금지된 덤웨이터/화물 리프트에 사람이 임의 탑승하여 화물 적재 중 틈새(380mm)로 추락",
+    "description": [
       "사고 현장 근로자가 승강장에서 카 내부로 화물을 옮기던 중 카 바닥과 승강로 벽 사이 틈새(약 380mm)로 빠져 피트로 추락하여 사망"
     ],
-    cause: [
+    "cause": [
       "소형 화물용 엘리베이터(탑승 금지 설비)에 사람이 임의로 탑승하여 화물 랙(Rack)을 싣던 중, 승강로 벽과 카 바닥 사이의 넓은 유격으로 실족 추락"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 소형 화물용 엘리베이터 전면 '인명 탑승 절대 금지' 경고 표지 부착, 출입 개구부 방호장치 설치",
       "이용자: 화물용 리프트 및 덤웨이터 내부로 신체 진입 및 동승 절대 금지"
     ],
-    tags: ["소형화물용", "추락", "사망", "탑승금지", "승강로틈새"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "소형화물용",
+      "추락",
+      "사망",
+      "탑승금지",
+      "승강로틈새"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_8",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 9,
-    page: 22,
-    bookPage: 24,
-    image: "images/page_22.png",
-    title: "양방향 출입구 엘리베이터에서 출입문에 기대고 있다가 문이 열려 전도된 사고",
-    elevatorType: "엘리베이터 (양방향 관통형)",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "앞뒤 양쪽에 문이 있는 엘리베이터에서 반대편 문에 몸을 기대고 있다가 지하층에서 열리며 전도",
-    description: [
+    "id": 9,
+    "page": 22,
+    "bookPage": 24,
+    "image": "images/page_22.png",
+    "title": "양방향 출입구 엘리베이터에서 출입문에 기대고 있다가 문이 열려 전도된 사고",
+    "elevatorType": "엘리베이터 (양방향 관통형)",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "앞뒤 양쪽에 문이 있는 엘리베이터에서 반대편 문에 몸을 기대고 있다가 지하층에서 열리며 전도",
+    "description": [
       "출입문이 전·후면 2개인 관통형 엘리베이터에서 반대편 도어에 몸을 기댄 채 탑승 중, 목적층 도착 후 기댄 문이 갑자기 열리며 승강장 바닥으로 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "탑승 방향 반대편 문에 기대어 서 있던 중, 해당 층의 출입문이 개방되자 지지점을 잃고 뒤로 넘어짐"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 관통형 승강기 내 층별 열림 방향 표시등 및 '기대지 마시오' 경고 안내 방송 송출",
       "이용자: 승강기 출입문에 기대지 말고 손잡이(핸드레일)를 잡고 중심 유지"
     ],
-    tags: ["엘리베이터", "전도", "관통형승강기", "문기댐금지", "이용자과실"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "전도",
+      "관통형승강기",
+      "문기댐금지",
+      "이용자과실"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_9",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 10,
-    page: 23,
-    bookPage: 25,
-    image: "images/page_23.png",
-    title: "닫히는 출입문과 충돌하여 발생한 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "충돌/전도",
-    casualty: "중상 5건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "3건",
-    summary: "문이 닫히는 순간 무리하게 탑승하거나 내리려다 도어 센서 사각지대에서 충돌 후 전도",
-    description: [
+    "id": 10,
+    "page": 23,
+    "bookPage": 25,
+    "image": "images/page_23.png",
+    "title": "닫히는 출입문과 충돌하여 발생한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌/전도",
+    "casualty": "중상 5건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "3건",
+    "summary": "문이 닫히는 순간 무리하게 탑승하거나 내리려다 도어 센서 사각지대에서 충돌 후 전도",
+    "description": [
       "엘리베이터에 급하게 탑승하거나 하차하던 중 닫히는 출입문에 부딪히거나 끼이면서 넘어져 골절 등 중상을 입은 다수 사고"
     ],
-    cause: [
+    "cause": [
       "문닫힘 안전장치(멀티빔 센서)의 사각지대로 진입하거나 신체 일부가 닫히는 도어와 직접 충돌하여 균형 상실"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 닫히는 문에 손을 넣거나 무리하게 뛰어들지 말고 다음 승강기를 기다리며, 열림 버튼을 누른 상태에서 승하차",
       "관리주체: 다중이용 승강기 도어 열림 대기시간 연장 설정 및 비접촉식 감지센서(멀티빔) 성능 점검"
     ],
-    tags: ["엘리베이터", "충돌", "전도", "도어끼임", "무리한탑승"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "충돌",
+      "전도",
+      "도어끼임",
+      "무리한탑승"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_10",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 11,
-    page: 24,
-    bookPage: 26,
-    image: "images/page_24.png",
-    title: "엘리베이터 도착 전 문을 강제 개방하여 발생한 단차 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "승강기 하강 중 카가 급정지하자 탑승자가 손으로 문을 강제로 열고 내리다 바닥 단차에 걸려 전도",
-    description: [
+    "id": 11,
+    "page": 24,
+    "bookPage": 26,
+    "image": "images/page_24.png",
+    "title": "엘리베이터 도착 전 문을 강제 개방하여 발생한 단차 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "승강기 하강 중 카가 급정지하자 탑승자가 손으로 문을 강제로 열고 내리다 바닥 단차에 걸려 전도",
+    "description": [
       "탑승 중 카가 급정지하자 승객이 손으로 출입문을 강제로 벌려 열고 층간 단차가 발생한 상태에서 내리다가 넘어져 중상"
     ],
-    cause: [
+    "cause": [
       "도어 모터의 닫힘 토크 설정이 낮아 손으로 강제 개방이 가능했고, 승강장 바닥과 카 바닥 간 레벨 차이를 인지하지 못하고 탈출 시도"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 승강기 갇힘 시 절대 문을 강제로 열지 말고 비상통화버튼(인터폰)으로 구조 요청 후 대기",
       "유지관리업체: 도어 개폐 토크 적정치 유지 및 갇힘 방지 제어 로직 철저 점검"
     ],
-    tags: ["엘리베이터", "전도", "임의개방", "갇힘사고", "단차발생"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "전도",
+      "임의개방",
+      "갇힘사고",
+      "단차발생"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_11",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 12,
-    page: 25,
-    bookPage: 27,
-    image: "images/page_25.png",
-    title: "승강기 단독 작업으로 발생한 피트 내 협착 사망 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "협착",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "안전관리자 통보 없이 단독으로 피트에 진입하여 점검 중 자동 하강하는 카와 사다리 사이에 협착",
-    description: [
+    "id": 12,
+    "page": 25,
+    "bookPage": 27,
+    "image": "images/page_25.png",
+    "title": "승강기 단독 작업으로 발생한 피트 내 협착 사망 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "안전관리자 통보 없이 단독으로 피트에 진입하여 점검 중 자동 하강하는 카와 사다리 사이에 협착",
+    "description": [
       "승강기 설치 작업자가 건물 관계자에게 통보하지 않고 단독으로 승강로 피트에 진입하여 작업 중, 자동 모드로 하강하는 카와 이동식 사다리 사이에 끼여 사망"
     ],
-    cause: [
+    "cause": [
       "2인 1조 작업 원칙 미준수, 점검 운전 모드(수동) 전환 미실시, 피트 비상정지스위치 미작동 상태에서 임의 작업"
     ],
-    prevention: [
+    "prevention": [
       "설치·유지관리업체: 승강로 피트 작업 시 반드시 2인 1조 근무 준수, 카 하부 비상정지스위치 즉시 작동 및 점검 모드 전환",
       "작업자: 관리주체 사전 승인 및 출입 통제선 설치 후 작업 개시"
     ],
-    tags: ["엘리베이터", "협착", "사망", "작업자과실", "2인1조미준수", "피트진입"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "협착",
+      "사망",
+      "작업자과실",
+      "2인1조미준수",
+      "피트진입"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_12",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 13,
-    page: 26,
-    bookPage: 28,
-    image: "images/page_26.png",
-    title: "기존 양중고리 테스트 없이 재사용하다 카와 함께 추락한 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "노후 빌딩 엘리베이터 교체공사 중 인장강도 테스트 없이 20년 된 건축용 이형철근 양중고리를 재사용하다 파단 추락",
-    description: [
+    "id": 13,
+    "page": 26,
+    "bookPage": 28,
+    "image": "images/page_26.png",
+    "title": "기존 양중고리 테스트 없이 재사용하다 카와 함께 추락한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "노후 빌딩 엘리베이터 교체공사 중 인장강도 테스트 없이 20년 된 건축용 이형철근 양중고리를 재사용하다 파단 추락",
+    "description": [
       "승강기 교체 공사 중 승강로 기계실 천장의 기존 양중고리에 호이스트를 걸고 작업하던 중 양중고리가 파단되어 카 내 작업자가 카와 함께 피트로 추락하여 사망"
     ],
-    cause: [
+    "cause": [
       "준공 후 20년 이상 경과한 비공인 건축 부재(이형철근) 양중고리를 비파괴/인장 하중 테스트 없이 재사용, 안전대 구명줄 미체결"
     ],
-    prevention: [
+    "prevention": [
       "작업업체: 노후 양중고리 사용 전 구조안전진단 및 비파괴·하중 테스트 필수 이행, 안전대 부착 설비 설치",
       "작업자: 2m 이상 승강로 내 고소 작업 시 반드시 구명줄에 안전대 체결"
     ],
-    tags: ["엘리베이터", "추락", "사망", "작업자과실", "양중고리파단", "교체공사"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "추락",
+      "사망",
+      "작업자과실",
+      "양중고리파단",
+      "교체공사"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_13",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 14,
-    page: 27,
-    bookPage: 29,
-    image: "images/page_27.png",
-    title: "승강로 검사 중 균형추와 레일 브라켓 사이에 손이 끼인 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "끼임",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "카 상부에서 균형추 점검 중 승강기 저속 운행 시 레일 브라켓과의 협소 공간에 손이 협착",
-    description: [
+    "id": 14,
+    "page": 27,
+    "bookPage": 29,
+    "image": "images/page_27.png",
+    "title": "승강로 검사 중 균형추와 레일 브라켓 사이에 손이 끼인 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "카 상부에서 균형추 점검 중 승강기 저속 운행 시 레일 브라켓과의 협소 공간에 손이 협착",
+    "description": [
       "승강기 검사자가 카 상부에서 균형추 상태를 육안 검사하던 중 카가 점검속도로 하강(균형추는 상승)하면서 균형추 상부와 고정 브라켓 사이에 손이 끼임"
     ],
-    cause: [
+    "cause": [
       "운행 중 위험 부위 접근 금지 수칙 미준수, 점검용 조명 불량 상태에서 시야 미확보 및 안전거리 미확보"
     ],
-    prevention: [
+    "prevention": [
       "검사기관: 카 상부 검사 시 이동 중 회전체·대향체(균형추) 접근 금지 및 충분한 조명기구 확보",
       "작업자: 카 운전 조작자와 검사자 간 구호 복창 및 완벽한 상호 신호체계 확립"
     ],
-    tags: ["엘리베이터", "끼임", "작업자과실", "균형추", "카상부작업"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "끼임",
+      "작업자과실",
+      "균형추",
+      "카상부작업"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_14",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 15,
-    page: 28,
-    bookPage: 30,
-    image: "images/page_28.png",
-    title: "카 상부 고장수리 중 승강장문 닫힘으로 카 상승 후 추락 사망 사고 (1)",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "관리주체 과실",
-    similarCount: "-",
-    summary: "카 상부 진입 중 승강장문이 닫히며 자동운전 상태인 카가 급상승, 승강로 H빔에 부딪혀 피트로 추락",
-    description: [
+    "id": 15,
+    "page": 28,
+    "bookPage": 30,
+    "image": "images/page_28.png",
+    "title": "카 상부 고장수리 중 승강장문 닫힘으로 카 상승 후 추락 사망 사고 (1)",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "카 상부 진입 중 승강장문이 닫히며 자동운전 상태인 카가 급상승, 승강로 H빔에 부딪혀 피트로 추락",
+    "description": [
       "유지관리 기사가 3층 승강장에서 약 1.8m 아래 카 상부로 진입하던 중 승강장문이 닫히며 자동운전 모드로 카가 상승, 승강로 철골 빔에 충돌 후 피트로 추락 사망"
     ],
-    cause: [
+    "cause": [
       "카 상부 점검스위치(수동 모드)를 먼저 전환하지 않은 채 자동운전 상태에서 카 상부로 무리하게 뛰어내림, 문이 닫히자 호출 등록으로 카 자동 상승"
     ],
-    prevention: [
+    "prevention": [
       "작업자: 카 상부 진입 전 승강장 도어 문열림 고정(도어 블록), 카 상부 비상정지스위치 즉시 정지 위치 설정",
       "유지관리업체: 카 상부 진입 안전작업 표준절차(SOP) 재교육 및 2인 1조 작업 의무화"
     ],
-    tags: ["엘리베이터", "추락", "사망", "카상부", "자동운전상승", "관리과실"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "추락",
+      "사망",
+      "카상부",
+      "자동운전상승",
+      "관리과실"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_15",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 16,
-    page: 29,
-    bookPage: 31,
-    image: "images/page_29.png",
-    title: "카 상부 이동케이블 점검 중 안전대 미착용으로 추락 사망 사고 (2)",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "1건",
-    summary: "조도가 불량한 카 상부에서 안전대 없이 이동케이블 확인 중 케이블 하중 분리로 지하 피트 추락",
-    description: [
+    "id": 16,
+    "page": 29,
+    "bookPage": 31,
+    "image": "images/page_29.png",
+    "title": "카 상부 이동케이블 점검 중 안전대 미착용으로 추락 사망 사고 (2)",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "1건",
+    "summary": "조도가 불량한 카 상부에서 안전대 없이 이동케이블 확인 중 케이블 하중 분리로 지하 피트 추락",
+    "description": [
       "기사가 카 상부에서 노후 이동케이블 결속 작업을 하던 중 커넥터 연결부가 분리되며 케이블 무게에 끌려 지하 2층 피트로 추락하여 사망"
     ],
-    cause: [
+    "cause": [
       "작업선 조도 불량, 안전벨트(안전대) 미체결, 무거운 이동케이블의 자중을 지지할 보조 로프 미설치"
     ],
-    prevention: [
+    "prevention": [
       "작업자: 카 상부 작업 시 반드시 승강로 내 설치된 안전로프에 안전대 걸이 체결",
       "관리업체: 중량물 취급 시 고정 지지구 선설치 및 작업 전 위험성 평가 실시"
     ],
-    tags: ["엘리베이터", "추락", "사망", "작업자과실", "안전대미착용", "이동케이블"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "추락",
+      "사망",
+      "작업자과실",
+      "안전대미착용",
+      "이동케이블"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_16",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 17,
-    page: 30,
-    bookPage: 32,
-    image: "images/page_30.png",
-    title: "정지된 손잡이로 인해 에스컬레이터 이용 중 발생한 전도 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "관리주체 과실",
-    similarCount: "-",
-    summary: "핸드레일 구동계 고장으로 손잡이가 멈춘 채 스텝만 움직이는 에스컬레이터를 방치하여 승객 전도",
-    description: [
+    "id": 17,
+    "page": 30,
+    "bookPage": 32,
+    "image": "images/page_30.png",
+    "title": "정지된 손잡이로 인해 에스컬레이터 이용 중 발생한 전도 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "핸드레일 구동계 고장으로 손잡이가 멈춘 채 스텝만 움직이는 에스컬레이터를 방치하여 승객 전도",
+    "description": [
       "핸드레일이 정지된 에스컬레이터에 승객이 탑승하여 손잡이를 잡았으나 스텝만 이동하여 상체와 하체의 속도차로 균형을 잃고 전도, 뒤따르던 승객 부축 중 요추 골절"
     ],
-    cause: [
+    "cause": [
       "손잡이 정지 스위치 불량 또는 고장 상태에서 운행 정지 및 LOTO(잠금장치) 조치를 하지 않고 임의로 기기를 가동 방치"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 에스컬레이터 주요 부품 결함 발생 시 즉시 전원 차단, 차단 펜스 설치 및 운행 정지 표지판 부착",
       "유지보수업체: 핸드레일 속도 감응 센서 및 동기화 장치 매월 정밀 점검"
     ],
-    tags: ["에스컬레이터", "전도", "관리주체과실", "손잡이정지", "핸드레일고장"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "전도",
+      "관리주체과실",
+      "손잡이정지",
+      "핸드레일고장"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_17",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 18,
-    page: 31,
-    bookPage: 33,
-    image: "images/page_31.png",
-    title: "비전문가의 임의 구출활동으로 발생한 승강로 피트 추락 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "관리주체 과실",
-    similarCount: "-",
-    summary: "갇힌 승객을 경비원이 비상삼각열쇠로 직접 구출한 뒤 잔류 물품을 꺼내려다 승강로 틈새로 추락",
-    description: [
+    "id": 18,
+    "page": 31,
+    "bookPage": 33,
+    "image": "images/page_31.png",
+    "title": "비전문가의 임의 구출활동으로 발생한 승강로 피트 추락 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "갇힌 승객을 경비원이 비상삼각열쇠로 직접 구출한 뒤 잔류 물품을 꺼내려다 승강로 틈새로 추락",
+    "description": [
       "10층에서 카가 정지해 승객이 갇히자 건물 경비원이 삼각열쇠로 도어를 강제 개방하여 승객을 구출한 후, 카 내 남겨진 음식물 쓰레기를 꺼내려다 카 바닥과 승강장 사이 틈으로 빠져 지하 5층 피트로 추락 사망"
     ],
-    cause: [
+    "cause": [
       "승강기 안전관리 자격이 없는 비전문가가 임의로 승강장문 비상열쇠를 사용해 개방하였고, 카의 레벨링이 맞지 않은 상태에서 승강로 추락 위험 방치"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 승강기 갇힘 시 자체 구출 절대 금지, 119구조대 및 유지관리업체 전문 기술자 호출 필수",
       "안전관리: 비상 삼각열쇠는 시건장치된 보관함에 보관하고 권한 없는 자의 접근 원천 차단"
     ],
-    tags: ["엘리베이터", "추락", "사망", "비전문가구출", "관리주체과실", "삼각열쇠"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "추락",
+      "사망",
+      "비전문가구출",
+      "관리주체과실",
+      "삼각열쇠"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_18",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 19,
-    page: 32,
-    bookPage: 34,
-    image: "images/page_32.png",
-    title: "비전문가의 승강로 무단 진입(CCTV 작업)으로 발생한 협착 사망 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "협착",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "CCTV 설치 기사가 승강기 기술자 입회 없이 카 상부에 탑승하여 배선 작업 중 카가 자동 상승하여 협착",
-    description: [
+    "id": 19,
+    "page": 32,
+    "bookPage": 34,
+    "image": "images/page_32.png",
+    "title": "비전문가의 승강로 무단 진입(CCTV 작업)으로 발생한 협착 사망 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "CCTV 설치 기사가 승강기 기술자 입회 없이 카 상부에 탑승하여 배선 작업 중 카가 자동 상승하여 협착",
+    "description": [
       "CCTV 설치업체 작업자가 1층에 정지된 엘리베이터 카 상부에 올라가 케이블 배선 작업을 하던 중, 카가 다른 층 호출에 의해 자동 상승하여 카 상부와 2층 문턱 구조물 사이에 끼여 사망"
     ],
-    cause: [
+    "cause": [
       "승강기 전문기술자 입회 없이 비전문가가 카 상부에 무단 탑승, 카 상부 점검 스위치를 수동(점검) 모드로 전환하지 않고 자동운전 상태 방치"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 비전문가가 임의로 승강로 및 카 상부에 접근할 수 없도록 비상키 관리 철저, CCTV 등 부대작업 시 유지관리업체 필수 입회",
       "시행사: 카 상부 전원 차단 및 운행 정지 확인 후 작업 승인"
     ],
-    tags: ["엘리베이터", "협착", "사망", "CCTV작업", "비전문가", "작업자과실"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "협착",
+      "사망",
+      "CCTV작업",
+      "비전문가",
+      "작업자과실"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_19",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 20,
-    page: 33,
-    bookPage: 35,
-    image: "images/page_33.png",
-    title: "점검용 덮개를 안전조치 없이 열어둔 채 이동하여 발생한 추락 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "추락",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "유지관리업체 과실",
-    similarCount: "-",
-    summary: "에스컬레이터 하부 트러스 점검 덮개를 안전펜스 없이 개방해 둔 채 자리를 비워 보행자가 개구부 추락",
-    description: [
+    "id": 20,
+    "page": 33,
+    "bookPage": 35,
+    "image": "images/page_33.png",
+    "title": "점검용 덮개를 안전조치 없이 열어둔 채 이동하여 발생한 추락 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "에스컬레이터 하부 트러스 점검 덮개를 안전펜스 없이 개방해 둔 채 자리를 비워 보행자가 개구부 추락",
+    "description": [
       "유지관리업체 기사가 고장 수리를 위해 하부 점검용 바닥 덮개(플레이트)를 열어둔 상태에서 안전 가림막이나 안내표지 없이 이동하자, 지나가던 보행자가 개구부로 발이 빠져 추락"
     ],
-    cause: [
+    "cause": [
       "작업 구역 주변에 안전 차단 펜스 및 작업 안내 표지판을 설치하지 않고 개구부를 무방비 상태로 방치"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 점검 덮개 개방 시 즉시 4면 안전 차단 펜스 설치 및 작업 감시원 배치",
       "작업절차: 작업자가 잠시 자리를 비울 경우 덮개를 원상 복구하거나 견고한 안전 덮개 임시 체결"
     ],
-    tags: ["에스컬레이터", "추락", "유지관리과실", "점검덮개개방", "안전펜스미설치"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "추락",
+      "유지관리과실",
+      "점검덮개개방",
+      "안전펜스미설치"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_20",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 21,
-    page: 34,
-    bookPage: 36,
-    image: "images/page_34.png",
-    title: "급정지로 인한 재착상 단차로 하차 중 넘어진 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 2건",
-    severity: "중상",
-    causeType: "유지관리업체 과실",
-    similarCount: "1건",
-    summary: "하강 운행 중 제어 위치 오차로 카가 3층에서 멈췄으나 바닥 단차가 크게 발생, 문이 열려 하차 중 전도",
-    description: [
+    "id": 21,
+    "page": 34,
+    "bookPage": 36,
+    "image": "images/page_34.png",
+    "title": "급정지로 인한 재착상 단차로 하차 중 넘어진 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 2건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "1건",
+    "summary": "하강 운행 중 제어 위치 오차로 카가 3층에서 멈췄으나 바닥 단차가 크게 발생, 문이 열려 하차 중 전도",
+    "description": [
       "엘리베이터가 하강 운행 중 비정상 위치 제어로 층 바닥보다 높게 정지하였으나 출입문이 열렸고, 내리던 승객들이 승강장과 카 바닥 사이 큰 턱(단차)에 걸려 앞으로 넘어져 중상"
     ],
-    cause: [
+    "cause": [
       "착상 감지 센서(인덕터/플래그) 및 레벨 제어계통 점검 불량, 도어 개방 허용 범위(도어존) 밖에서의 이상 개문"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 정기점검 시 착상 레벨 허용치(±10mm) 정밀 측정 및 비정상 착상 시 문 열림 차단 안전회로 점검",
       "관리주체: 단차 발생 및 갇힘 시 즉시 전원 차단 후 전문 기술자 조치 의뢰"
     ],
-    tags: ["엘리베이터", "전도", "유지관리과실", "착상단차", "도어존이탈"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "전도",
+      "유지관리과실",
+      "착상단차",
+      "도어존이탈"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_21",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 22,
-    page: 35,
-    bookPage: 37,
-    image: "images/page_35.png",
-    title: "운행 중 이동케이블이 승강로 구조물에 걸려 발생한 급정지 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (기계·구조 결함)",
-    similarCount: "-",
-    summary: "엘리베이터 이동케이블의 장력 편차로 꼬임이 발생해 12층 승강장 문턱에 걸리며 비상 급정지",
-    description: [
+    "id": 22,
+    "page": 35,
+    "bookPage": 37,
+    "image": "images/page_35.png",
+    "title": "운행 중 이동케이블이 승강로 구조물에 걸려 발생한 급정지 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (기계·구조 결함)",
+    "similarCount": "-",
+    "summary": "엘리베이터 이동케이블의 장력 편차로 꼬임이 발생해 12층 승강장 문턱에 걸리며 비상 급정지",
+    "description": [
       "카 하강 운행 중 승강로 내 매달려 있는 이동케이블 및 CCTV 동축케이블이 승강장 출입구 돌출 턱에 걸리면서 당겨져 비상스위치 작동, 카가 급정지하며 탑승자가 바닥에 강하게 전도"
     ],
-    cause: [
+    "cause": [
       "이동케이블 고정 브래킷 및 행거의 유격 과다, 장력 불균형으로 인한 루프 비틀림이 발생하여 승강로 내 구조물 간섭 발생"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 이동케이블 행거 및 루프 반경 정기 점검, 추가 케이블(CCTV, 통신선) 가설 시 표준 간격 유지",
       "관리주체: 정기 자체점검 시 승강로 내 돌출부 간섭 유무 철저 검토"
     ],
-    tags: ["엘리베이터", "전도", "이동케이블", "구조물간섭", "급정지", "기타원인"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "전도",
+      "이동케이블",
+      "구조물간섭",
+      "급정지",
+      "기타원인"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_22",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 23,
-    page: 36,
-    bookPage: 38,
-    image: "images/page_36.png",
-    title: "브레이크 고장으로 출입문이 열린 채 상승하여 발생한 개문출발 협착 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "끼임/협착",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (부품 노후/제어 결함)",
-    similarCount: "-",
-    summary: "승객 탑승 중 브레이크 전기 제어 이상으로 도어가 열린 채 카가 상승하여 승객 다리가 문틀에 협착",
-    description: [
+    "id": 23,
+    "page": 36,
+    "bookPage": 38,
+    "image": "images/page_36.png",
+    "title": "브레이크 고장으로 출입문이 열린 채 상승하여 발생한 개문출발 협착 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임/협착",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (부품 노후/제어 결함)",
+    "similarCount": "-",
+    "summary": "승객 탑승 중 브레이크 전기 제어 이상으로 도어가 열린 채 카가 상승하여 승객 다리가 문틀에 협착",
+    "description": [
       "6층에서 승객이 엘리베이터에 탑승하려는 순간 카 도어가 닫히지 않은 상태에서 갑자기 카가 상승하여 한쪽 다리가 카 바닥과 승강장 상부 문틀 사이에 끼여 복합 골절"
     ],
-    cause: [
+    "cause": [
       "전자브레이크 제어 릴레이 융착 및 마이크로스위치 접점 오작동으로 개문출발 방지장치(UCMP)가 정상 작동하지 않음"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 권장 교체주기를 초과한 노후 브레이크 부품 적기 교체, 2중계 안전장치 및 UCMP 설치 보강",
       "유지관리업체: 브레이크 라이닝 마모도 및 개문출발 방지 안전회로의 매월 단독 작동 테스트 의무화"
     ],
-    tags: ["엘리베이터", "끼임", "개문출발", "UCMP", "브레이크고장", "중대고장"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "끼임",
+      "개문출발",
+      "UCMP",
+      "브레이크고장",
+      "중대고장"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_23",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 24,
-    page: 37,
-    bookPage: 39,
-    image: "images/page_37.png",
-    title: "출입문 미개방 및 제어불능 상태로 급상승하여 발생한 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (전기/전자 제어계 결함)",
-    similarCount: "-",
-    summary: "장애인용 엘리베이터가 지하 2층 도착 후 문이 안 열린 채 최상층까지 제어 불능 급상승 후 충격 정지",
-    description: [
+    "id": 24,
+    "page": 37,
+    "bookPage": 39,
+    "image": "images/page_37.png",
+    "title": "출입문 미개방 및 제어불능 상태로 급상승하여 발생한 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (전기/전자 제어계 결함)",
+    "similarCount": "-",
+    "summary": "장애인용 엘리베이터가 지하 2층 도착 후 문이 안 열린 채 최상층까지 제어 불능 급상승 후 충격 정지",
+    "description": [
       "승객들이 지하 1층에서 탑승하여 지하 2층에 도착했으나 문이 열리지 않은 상태로 카가 반전 급상승, 최상층 오버트래블 리미트스위치에 부딪혀 급정지하며 승객 전도"
     ],
-    cause: [
+    "cause": [
       "브레이크 전자접촉기(MC) 접점 소착(들러붙음) 및 역기전력 억제 회로 소손으로 제동기가 풀린 채 균형추 무게에 의해 카가 꼭대기로 끌려 올라감"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 제어반 내 전자접촉기 접점 마모 및 고착 상태 점검 주기 단축, 역기전력 보호 회로 점검",
       "제조업체: 제동기 2중 제어 및 접점 고착 시 즉시 주전원을 차단하는 감시 회로 설계 적용"
     ],
-    tags: ["엘리베이터", "전도", "제어불능상승", "접촉기소착", "역기전력", "기타원인"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "전도",
+      "제어불능상승",
+      "접촉기소착",
+      "역기전력",
+      "기타원인"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_24",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 25,
-    page: 38,
-    bookPage: 40,
-    image: "images/page_38.png",
-    title: "에스컬레이터 하부 콤 볼트 풀림으로 인한 파손 급정지 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (부품 체결 불량)",
-    similarCount: "-",
-    summary: "하부 콤 고정 볼트가 풀려 헐거워진 상태에서 스텝과 간섭 충돌, 콤 파손과 함께 급정지하여 승객 전도",
-    description: [
+    "id": 25,
+    "page": 38,
+    "bookPage": 40,
+    "image": "images/page_38.png",
+    "title": "에스컬레이터 하부 콤 볼트 풀림으로 인한 파손 급정지 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (부품 체결 불량)",
+    "similarCount": "-",
+    "summary": "하부 콤 고정 볼트가 풀려 헐거워진 상태에서 스텝과 간섭 충돌, 콤 파손과 함께 급정지하여 승객 전도",
+    "description": [
       "에스컬레이터 하강 운행 중 하부 승강장 콤 플레이트 고정 볼트 체결 불량으로 콤이 들뜨면서 진입하는 스텝과 강하게 충돌·파손, 콤 비상정지장치가 작동하며 탑승자 전도"
     ],
-    cause: [
+    "cause": [
       "콤 고정 볼트 토크 관리 미흡 및 정기 점검 시 콤-스텝 간 맞물림 틈새(1~4mm 규정치) 관리 소홀"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 일상·자체점검 시 콤 볼트 풀림 방지 너트 체결 및 마킹 확인, 빗살 간격 게이지 측정 철저",
       "관리주체: 에스컬레이터 이상 진동 및 금속 마찰음 발생 시 즉각 운행 중지"
     ],
-    tags: ["에스컬레이터", "전도", "콤볼트풀림", "스텝간섭", "급정지", "부품체결"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "에스컬레이터",
+      "전도",
+      "콤볼트풀림",
+      "스텝간섭",
+      "급정지",
+      "부품체결"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_25",
+    "yearBadge": "2024 사례집 (2023년 발생)"
   },
   {
-    id: 26,
-    page: 39,
-    bookPage: 41,
-    image: "images/page_39.png",
-    title: "닫히는 출입문 사이에 가방 끈이 끼인 채 출발하여 발생한 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 2건",
-    severity: "중상",
-    causeType: "기타 (센서 감지 한계/이용자)",
-    similarCount: "-",
-    summary: "하차 중 닫히는 문에 백팩 끈이 끼었으나 안전장치가 얇은 끈을 감지하지 못하고 출발해 탑승자 전도",
-    description: [
+    "id": 26,
+    "page": 39,
+    "bookPage": 41,
+    "image": "images/page_39.png",
+    "title": "닫히는 출입문 사이에 가방 끈이 끼인 채 출발하여 발생한 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 2건",
+    "severity": "중상",
+    "causeType": "기타 (센서 감지 한계/이용자)",
+    "similarCount": "-",
+    "summary": "하차 중 닫히는 문에 백팩 끈이 끼었으나 안전장치가 얇은 끈을 감지하지 못하고 출발해 탑승자 전도",
+    "description": [
       "승객이 하차하는 과정에서 도어 대기시간 종료로 문이 닫히며 어깨에 멘 가방 끈이 도어 사이에 끼임, 안전센서가 얇은 끈을 인식하지 못하고 카가 이동하려 하자 승객이 끌려가며 전도"
     ],
-    cause: [
+    "cause": [
       "출입문 안전접점 스위치가 얇은 물체(5mm 미만 가방끈 등)의 끼임을 감지하지 못해 도어 닫힘 상태로 판정, 개폐기 센서 감지 한계"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 승하차 시 닫히는 문에 옷자락이나 가방 끈이 걸리지 않도록 몸 앞쪽으로 가방을 안고 탑승",
       "관리주체: 승강기 승하차 대기시간 충분히 확보(최소 3~5초), 도어 틈새 이물질 감지센서(다점빔) 보강"
     ],
-    tags: ["엘리베이터", "전도", "가방끈끼임", "도어센서한계", "승하차주의"]
+    "tags": [
+      "2024사례집",
+      "2023년발생",
+      "엘리베이터",
+      "전도",
+      "가방끈끼임",
+      "도어센서한계",
+      "승하차주의"
+    ],
+    "bookYear": 2024,
+    "accidentYear": 2023,
+    "caseId": "2024_26",
+    "yearBadge": "2024 사례집 (2023년 발생)"
+  },
+  {
+    "id": 27,
+    "caseId": "2023_1",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 14,
+    "bookPage": 16,
+    "image": "images/2023/page_14.png",
+    "title": "에스컬레이터 탑승 중 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도",
+    "casualty": "(사망1건, 중상 10건)",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "10건",
+    "summary": "\u0007에스컬레이터 이용 중 넘어져 발생한 사고",
+    "description": [
+      "\u0007에스컬레이터 이용 중 넘어져 발생한 사고",
+      "① 핸드레일을 잡지 않고, 중심을 잃어 넘어짐",
+      "② 짐을 들고 탑승 후, 내려놓으며 중심을 잃어 넘어짐",
+      "③ 앞서 탑승하여 올라가던 이용자가 넘어지면서 뒤따르던 이용자도 같이 넘어짐",
+      "④ 탑승 시 노란 안전선 안쪽이 아닌, 디딤판 끝단을 밟고 있다가 넘어짐"
+    ],
+    "cause": [
+      "에스컬레이터에 탑승 후 손잡이를 잡지 않음",
+      "노란 안전선 안에 탑승하지 않아서 수평 구간에서 경사 구간으로 바뀔 때  중심을 잃음"
+    ],
+    "prevention": [
+      "\u0007관리주체는 이용자가 안전하게 에스컬레이터를 이용할 수 있도록 이용자 준수사항에",
+      "대한 안내방송을 주기적으로 실시하여 홍보하고 안전사고가 발생하지 않도록 상·하부",
+      "승강장 주변에 안전요원을 배치하는 등 현장 안전관리를 강화하여야 함",
+      "\u0007이용자는 에스컬레이터 손잡이를 잡고 디딤판의 노란 안전선 안에 탑승해야 하며, 걷거나",
+      "뛰지 않고, 어린이나 노약자는 보호자와 함께 탑승하거나 엘리베이터를 이용하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 28,
+    "caseId": "2023_2",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 15,
+    "bookPage": 17,
+    "image": "images/2023/page_15.png",
+    "title": "에스컬레이터에 핸드카트 싣고 탑승 하려다 넘어지는 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "\u0007에스컬레이터에 손수레를 싣고 탑승 중 중심을 잃고 넘어진 사고",
+    "description": [
+      "\u0007에스컬레이터에 손수레를 싣고 탑승 중 중심을 잃고 넘어진 사고"
+    ],
+    "cause": [
+      "상승 운행하는 에스컬레이터에 손수레를 가지고 탑승한 후 몸의 중심을 잃고 넘어짐"
+    ],
+    "prevention": [
+      "\u0007이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호) 제18조",
+      "이용자의 준수사항(디딤판의 노란 안전선 안에 탑승하여 손잡이를 잡고 에스컬레이터 또는",
+      "무빙워크를 이용해야 한다)을 철저히 준수하여야 함",
+      "\u0007관리주체는 에스컬레이터 안전사고 예방을 위해 안전이용에 관한 안내방송을 수시로",
+      "실시하고, 에스컬레이터 주변에 안전요원을 배치하는 등 현장 안전관리를 강화하여야 함",
+      "손수레를 가지고 에스컬레이터에 탑승하는 노약자",
+      "손수레가 디딤판에 걸려 넘어지는 사고 발생"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 29,
+    "caseId": "2023_3",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 16,
+    "bookPage": 18,
+    "image": "images/2023/page_16.png",
+    "title": "에스컬레이터(무빙워크) 탑승 중 걸어가다 넘어지는 사고",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도(중상7건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "6건",
+    "summary": "\u0007에스컬레이터(무빙워크) 이용 중 손잡이를 잡지 않고 걸어가다 넘어져 발생한 사고",
+    "description": [
+      "\u0007에스컬레이터(무빙워크) 이용 중 손잡이를 잡지 않고 걸어가다 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "손잡이를 잡지 않고 에스컬레이터(무빙워크)에 탑승 후 걸어서 이동",
+      "날씨로 인한 신발 바닥 등이 평소보다 미끄러운 상태에서 걸어 내려가다 미끄러짐"
+    ],
+    "prevention": [
+      "\u0007이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호) 제18조의",
+      "이용자의 준수사항(경사형 무빙워크를 이용할 때에는 손잡이를 잡고 이용 및 걷지 않아야",
+      "한다)을 철저히 준수하여야 함",
+      "\u0007관리주체는 비나 눈이 내릴 경우 이용자의 안전을 위해 수시로 현장점검 및 바닥의 물기를",
+      "제거하는 등 안전관리를 강화하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 30,
+    "caseId": "2023_4",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 17,
+    "bookPage": 19,
+    "image": "images/2023/page_17.png",
+    "title": "수동 휠체어에 환자를 태우고 무빙워크에 탑승하여 발생한 사고",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "수동 휠체어에 환자를 태우고 무빙워크에 탑승하여 내려가던 중 빠르게 내려가는 수동",
+    "description": [
+      "수동 휠체어에 환자를 태우고 무빙워크에 탑승하여 내려가던 중 빠르게 내려가는 수동",
+      "휠체어를 놓치지 않으려 뛰다가 넘어진 사고"
+    ],
+    "cause": [
+      "수동 휠체어에 환자를 태워 하강하던 중 경사 구간에서 바퀴가 구르기 시작하였고,",
+      "수동 휠체어를 놓치지 않으려 뛰어 내려가다 몸의 중심을 잃고 넘어져 발생"
+    ],
+    "prevention": [
+      "무빙워크 이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호)",
+      "제18조 이용자의 준수사항(휠체어 또는 전동 스쿠터 등에 탑승한 사람은 에스컬레이터",
+      "또는 무빙워크를 이용하지 않아야 한다)을 철저히 준수하여야 함",
+      "관리주체는 휠체어 또는 전동 스쿠터에 탑승한 이용자가 발견되는 경우 무빙워크를 이용",
+      "하지 말고 엘리베이터를 이용하도록 적극 안내하는 등 현장 안전관리를 강화해야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 31,
+    "caseId": "2023_5",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 18,
+    "bookPage": 20,
+    "image": "images/2023/page_18.png",
+    "title": "쇼핑카트 바퀴가 무빙워크 콤에 걸려 이용자가 중심을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도(중상4건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "3건",
+    "summary": "\u0007쇼핑카트를 가지고 무빙워크에 탑승한 후 쇼핑카트 뒷바퀴가 하부 콤에 걸려 빠져나가지",
+    "description": [
+      "\u0007쇼핑카트를 가지고 무빙워크에 탑승한 후 쇼핑카트 뒷바퀴가 하부 콤에 걸려 빠져나가지",
+      "못하고 몸의 중심을 잃어 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "\u0007쇼핑카트를 가지고 탑승 후 하부 승강장으로 나오는 과정에서 쇼핑카트를 밀어주지 않아",
+      "뒷바퀴가 하부 콤에 걸리고, 팔레트 위에서 몸의 중심을 잃고 넘어짐"
+    ],
+    "prevention": [
+      "\u0007이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호) 제18조",
+      "이용자의 준수사항(쇼핑카트를 가지고 무빙워크를 이용하는 경우에는 출구에서 힘껏",
+      "쇼핑카트를 밀어주어야 한다)을 철저히 준수하여야 함",
+      "\u0007관리주체는 무빙워크 출구에 쇼핑카트를 원활히 내리기 위해 승강장 주변에 안전요원",
+      "배치를 적극 검토하는 등 현장 안전관리를 강화하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 32,
+    "caseId": "2023_6",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 19,
+    "bookPage": 21,
+    "image": "images/2023/page_19.png",
+    "title": "장애인용 전동스쿠터에 탑승하여 에스컬레이터로 진입해 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도(사망1건)",
+    "casualty": "중상 1건",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "\u0007상승 운행하는 에스컬레이터에 전동스쿠터에 탑승한 채 진입하여 전동스쿠터와 함께",
+    "description": [
+      "\u0007상승 운행하는 에스컬레이터에 전동스쿠터에 탑승한 채 진입하여 전동스쿠터와 함께",
+      "뒤로 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "\u0007전동스쿠터를 탑승한 상태로 에스컬레이터를 이용하여 올라가던 중 경사 구간에 접어",
+      "들면서 전동스쿠터와 함께 뒤로 넘어짐"
+    ],
+    "prevention": [
+      "\u0007무빙워크 이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호)",
+      "제18조 이용자의 준수사항(휠체어 또는 전동 스쿠터 등에 탑승한 사람은 에스컬레이터 또는",
+      "무빙워크를 이용하지 않아야 한다)을 철저히 준수하여야 함",
+      "\u0007관리주체는 휠체어 또는 전동 스쿠터에 탑승한 이용자가 발견되는 경우 무빙워크를 이용",
+      "하지 말고 엘리베이터를 이용하도록 적극 안내하는 등 현장 안전관리를 강화해야 함",
+      "전동휠체어가 넘어지면서 뒤따르던 이용자들까지 부상을 입음"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 33,
+    "caseId": "2023_7",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 20,
+    "bookPage": 22,
+    "image": "images/2023/page_20.png",
+    "title": "에스컬레이터 스텝과 스커드 디플렉터 사이 발이 끼이는 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "ES : 끼임(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "에스컬레이터에 탑승하여 올라가던 중 스텝과 스커트 디플렉터 사이에 신발이 끼여",
+    "description": [
+      "에스컬레이터에 탑승하여 올라가던 중 스텝과 스커트 디플렉터 사이에 신발이 끼여",
+      "발생한 사고"
+    ],
+    "cause": [
+      "에스컬레이터에 탑승하여 올라가던 중 왼쪽 신발이 스커트에 간섭되며 순간적으로 신발이",
+      "스텝과 스커트 디플렉터 사이에 끼여 발생"
+    ],
+    "prevention": [
+      "이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2020-75호) 제18조",
+      "이용자의 준수사항(디딤판의 노란 안전선 안에 탑승하여 에스컬레이터 또는 무빙워크를",
+      "이용해야 한다)을 철저히 준수하여야 함",
+      "관리주체는 이용자가 디딤판의 노란 안전선 안에 탑승할 수 있도록 적극 홍보 및 안내하는 등",
+      "현장 안전관리를 강화해야 함",
+      "사고 내용 (재연)"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 34,
+    "caseId": "2023_8",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 21,
+    "bookPage": 23,
+    "image": "images/2023/page_21.png",
+    "title": "보조 보행기에 의지해 무빙워크에서 내려오다 넘어진 사고",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "넘어짐",
+    "rawAccidentType": "ES : 넘어짐(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "\u0007무빙워크에서 보조 보행기를 가지고 탑승하여 내려가던 중 하부 승강장으로 나오는",
+    "description": [
+      "\u0007무빙워크에서 보조 보행기를 가지고 탑승하여 내려가던 중 하부 승강장으로 나오는",
+      "과정에서 몸의 중심을 잃고 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "\u0007몸을 지탱하기 위해 보조보행기를 누른 상태에서 보조보행기 바퀴가 하부 콤에 도달",
+      "했을 때, 바퀴가 하부 콤에 걸려 넘어가지 못하였고 팔레트는 계속 움직이고 있어 몸의",
+      "중심을 잃고 넘어짐"
+    ],
+    "prevention": [
+      "\u0007무빙워크 이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2020-75호)",
+      "제18조 이용자의 준수사항(유모차 또는 수레 등을 가지고 무빙워크에 탑승하지 않아야",
+      "한다)을 철저히 준수하여야 함",
+      "\u0007관리주체는 보조 보행기, 유모차 또는 수레 등을 가지고 이용자가 탑승 하지 않도록 상·하부",
+      "승강장 주변에 안전요원 배치를 적극 검토하는 등 현장안전관리를 강화해야 함",
+      "사고 내용 (재연)"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "넘어짐",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 35,
+    "caseId": "2023_9",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 22,
+    "bookPage": 24,
+    "image": "images/2023/page_22.png",
+    "title": "반려견 목줄에 의한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "EL : 기타(중상3건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "\u0007반려견과 함께 카 내부로 탑승하던 중 피해자가 먼저 탑승하고 반려견은 승강장에 있는 상태",
+    "description": [
+      "\u0007반려견과 함께 카 내부로 탑승하던 중 피해자가 먼저 탑승하고 반려견은 승강장에 있는 상태",
+      "에서 문이 닫혀 상승 운행하여 반려견 목줄을 잡고 있던 피해자의 손가락이 절단된 사고"
+    ],
+    "cause": [
+      "\u0007엘리베이터에 탑승하던 중 반려견 목줄이 느슨한 상태로 닫히는 문 사이에 끼여 문닫힘",
+      "안전장치가 작동되지 않고 문이 닫혀 사고 발생"
+    ],
+    "prevention": [
+      "\u0007승강기 이용자는 반려견 목줄 등이 출입문에 끼이지 않도록 줄을 짧게 잡은 상태에서 안고",
+      "탑승하는 등 주의를 기하여야 함",
+      "\u0007승강기 관리주체는 반려견 목줄 등으로 인해 안전사고가 발생하지 않도록 엘리베이터",
+      "이용자 준수사항 등에 대한 홍보를 강화해야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "기타",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 36,
+    "caseId": "2023_10",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 23,
+    "bookPage": 25,
+    "image": "images/2023/page_23.png",
+    "title": "끌차의 줄에 의한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "EL : 기타(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "끌차를 가지고 엘리베이터 카 내부로 탑승하던 중 끌차의 묶인 줄이 승강장에 있는 상태로",
+    "description": [
+      "끌차를 가지고 엘리베이터 카 내부로 탑승하던 중 끌차의 묶인 줄이 승강장에 있는 상태로",
+      "문이 닫혀 끌차와 함께 끌려 올라간 후 카 바닥으로 떨어져 발생한 사고"
+    ],
+    "cause": [
+      "끌차에 묶인 줄이 바닥에 놓여져 문닫힘안전장치의 감지구간을 벗어나 문이 닫히고,",
+      "카가 하강으로 운행하여 끌차와 함께 올라간 후 카 닥으로 떨어짐"
+    ],
+    "prevention": [
+      "승강기 이용자는 줄 등이 출입문에 끼이지 않도록 줄을 짧게 잡은 상태에서 탑승하는 등",
+      "주의를 기하여야 함",
+      "승강기 관리주체는 승강기 이용자가 줄 등이 달린 물건을 가지고 승강기에 탑승(하차)",
+      "하는 경우 각별한 주의가 요구됨으로 엘리베이터 이용자 준수사항 등에 대한 홍보를",
+      "강화해야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "기타",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 37,
+    "caseId": "2023_11",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 24,
+    "bookPage": 26,
+    "image": "images/2023/page_24.png",
+    "title": "닫히는 문에 부딪혀 넘어진 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "승강장 문 닫히던",
+    "rawAccidentType": "EL : 승강장 문 닫히던",
+    "casualty": "중 충돌(중상3건)",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "\u0007피해자가 엘리베이터에 탑승(하차)하던 중 닫히는 문에 부딪히며 넘어져 발생한 사고",
+    "description": [
+      "\u0007피해자가 엘리베이터에 탑승(하차)하던 중 닫히는 문에 부딪히며 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 승강장 문이 닫히는 엘리베이터에 무리하게 타려고 하여 몸이 출입문에 부딪히며",
+      "넘어짐"
+    ],
+    "prevention": [
+      "\u0007엘리베이터 이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-",
+      "19호) 제17조 이용자의 준수사항(엘리베이터 출입문이 완전히 열린 후에 타거나 내려야",
+      "한다)을 철저히 준수하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "승강장 문 닫히던",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 38,
+    "caseId": "2023_12",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 25,
+    "bookPage": 27,
+    "image": "images/2023/page_25.png",
+    "title": "출입문에 기댄 상태에서 출입문 열려 넘어진 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "EL : 전도(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "카(양방향 출입구)에 탑승하여 목적층 도착한 후 기댄 방향의 출입문이 열려 몸의 중심을",
+    "description": [
+      "카(양방향 출입구)에 탑승하여 목적층 도착한 후 기댄 방향의 출입문이 열려 몸의 중심을",
+      "잃고 승강장 쪽으로 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "피해자가 지하 1층에서 사고기기에 탑승하여 반대편 출입문에 몸을 기댄 상태에서 1층에",
+      "도착한 직후, 기대고 있던 반대편 출입문이 열리자 몸의 중심을 잃고 넘어짐"
+    ],
+    "prevention": [
+      "관리주체는 층별로 출입구가 다른 승강기의 경우, 이용객이 승강기를 안전하게 이용할 수",
+      "있도록 승·하차 시 열리는 문의 방향이 반대임을 안내하는 주의표지를 부착하고, 필요 시",
+      "카 내 음성신호장치를 통해 출구의 방향을 알리는 등 현장 안전관리를 강화하여야 함",
+      "유지관리업자는 동일한 사고재발 방지를 위해 카 내 음성신호장치에 층별 출구의 방향을",
+      "알리는 음성안내 문구가 반영되도록 시스템 개선을 검토하여야 함",
+      "사고기기 구조도",
+      "지하 1층 승강장",
+      "1층 승강장",
+      "사고기기",
+      "출입구조",
+      "B1",
+      "B1",
+      "B1",
+      "1",
+      "1",
+      "1"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 39,
+    "caseId": "2023_13",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 26,
+    "bookPage": 28,
+    "image": "images/2023/page_26.png",
+    "title": "스텝과 스커트 사이에 발이 끼인 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "ES : 끼임(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "\u0007에스컬레이터 탑승하여 이동 중 스텝과 스커트가드 사이에 우측 발이 끼여 발생한 사고",
+    "description": [
+      "\u0007에스컬레이터 탑승하여 이동 중 스텝과 스커트가드 사이에 우측 발이 끼여 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 사고기기에 탑승하여 이동 중 신발이 스텝의 노란 안전선을 벗어나 스텝과 스커트",
+      "가드 틈새에 끼어 발생한 사고"
+    ],
+    "prevention": [
+      "\u0007이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호) 제18조",
+      "이용자의 준수사항(디딤판의 노란 안전선 안에 탑승하여 에스컬레이터 또는 무빙워크를",
+      "이용해야 한다)을 철저히 준수하여야 함",
+      "\u0007관리주체는 이용자가 디딤판의 노란 안전선 안에 탑승할 수 있도록 적극 홍보 및 안내하여야",
+      "하고, 필요시 안전요원을 배치하는 등 현장안전관리를 강화해야 함",
+      "디딤판과 스커트가드 틈새에 발이 끼이는 사고 발생",
+      "어린이의 발이 황색 안전선을 벗어남"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 40,
+    "caseId": "2023_14",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 27,
+    "bookPage": 29,
+    "image": "images/2023/page_27.png",
+    "title": "팔레트체인 환봉과 기계실 벽 사이에 다리가 끼인 사고",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "ES : 끼임(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "팔레트 체인 교체 작업 중 피해자의 다리가 팔레트 체인 환봉과 기계실 벽 사이에 끼여",
+    "description": [
+      "팔레트 체인 교체 작업 중 피해자의 다리가 팔레트 체인 환봉과 기계실 벽 사이에 끼여",
+      "발생한 사고"
+    ],
+    "cause": [
+      "하부 기계실의 팔레트 체인 교체 작업 과정에서 연결부가 분리된 팔레트 체인을 꺼내기",
+      "위한 작업 중 조작 실수로 정지 위치를 지나쳐 발생"
+    ],
+    "prevention": [
+      "승강기 공사업자 및 유지관리업자는 승강기 부품교체 등 유지관리 시 안전한 곳에서",
+      "승강기를 조작할 수 있도록 수동 조작용 리모콘을 설치해야 하고, 동일한 사고의 재발",
+      "방지를 위해 기술자에 대한 안전교육 등을 강화해야 함",
+      "사고 내용 (추정)",
+      "하부 기계실",
+      "팔레트체인",
+      "팔레트체인 환봉",
+      "사고 상황 재연",
+      "연결부 분리",
+      "팔레트체인 환봉"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 41,
+    "caseId": "2023_15",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 28,
+    "bookPage": 30,
+    "image": "images/2023/page_28.png",
+    "title": "작업 중 도르래와 주로프 사이에 손가락이 끼인 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "EL : 끼임(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "\u0007로프 교체 작업 중 승강기 업체 직원의 양손이 편향도르래와 로프 사이에 끼인 사고",
+    "description": [
+      "\u0007로프 교체 작업 중 승강기 업체 직원의 양손이 편향도르래와 로프 사이에 끼인 사고"
+    ],
+    "cause": [
+      "\u0007로프 교체공사를 위해 기계실에서 대기 중인 피해자가 자동운행 상태로 상승하는 사고",
+      "기기의 편향도르래 이물질을 제거하던 중 양손이 편향도르래와 로프 사이에 끼이며 발생"
+    ],
+    "prevention": [
+      "\u0007유지관리업자는 동일한 사고 재발 방지를 위해 작업 방법 등에 대한 안전교육 등을 강화해야",
+      "하며, 기술자는 업무수행 중 사고가 발생하지 않도록 안전수칙 및 작업절차 등을 철저히",
+      "숙지하고 준수하여야 함",
+      "사고 내용 (재연)"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 42,
+    "caseId": "2023_16",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 29,
+    "bookPage": 31,
+    "image": "images/2023/page_29.png",
+    "title": "과속조절기 인장추 풀리와 로프 사이에 손가락이 끼인 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "EL : 끼임(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "과속조절기 인장추 풀리에 끼인 이물질을 제거하던 중 우측 손이 인장추 풀리와 로프 사이에",
+    "description": [
+      "과속조절기 인장추 풀리에 끼인 이물질을 제거하던 중 우측 손이 인장추 풀리와 로프 사이에",
+      "끼이며 발생한 사고"
+    ],
+    "cause": [
+      "피트에서 자동 운행 상태로 상승하는 카의 과속조절기 인장추 풀리 홈에 끼인 이물질을",
+      "제거하던 중 우측 손이 인장추 풀리와 로프 사이에 끼이며 발생"
+    ],
+    "prevention": [
+      "유지관리업자는 동일한 사고 재발 방지를 위해 작업 방법 등에 대한 안전교육 등을 강화",
+      "해야 하며, 기술자는 업무수행 중 사고가 발생하지 않도록 안전수칙 및 작업절차 등을",
+      "철저히 숙지하고 준수하여야 함",
+      "사고 내용 (재연)",
+      "상황 : 카 자동운전 상태",
+      "상황 : 카 상승 운행",
+      "① 풀리 홈의 끼인 이물질을 드라이버로 1차 제거",
+      "② 이물질을 추가 제거하기 위해 목장갑을 풀러 홈에 끼움",
+      "③ 목장갑을 잡고 있던 우측 손이 회전방향으로 딸려 내려감",
+      "④ 우측 손이 풀리 홈과 로프 사이에 끼임"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 43,
+    "caseId": "2023_17",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 30,
+    "bookPage": 32,
+    "image": "images/2023/page_30.png",
+    "title": "열어 놓은 점검용 덮개 공간 사이로 빠짐 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "빠짐",
+    "rawAccidentType": "EL : 빠짐(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "\u0007피해자가 열려 있는 점검용 덮개 공간 사이로 추락하며 발생한 사고",
+    "description": [
+      "\u0007피해자가 열려 있는 점검용 덮개 공간 사이로 추락하며 발생한 사고"
+    ],
+    "cause": [
+      "\u0007검사업무를 수행하던 피해자가 하부 승강장에서 콤 부근으로 걸어가던 중 열려 있는",
+      "점검용 덮개 공간 사이로 추락하며 발생"
+    ],
+    "prevention": [
+      "\u0007동일한 사고 재발 방지를 위해 검사자를 대상으로 안전교육 등을 강화하여야 하며, 검사자는",
+      "업무수행 중 안전사고가 발생하지 않도록 검사 전 승강기의 전반적인 설치상태와 이동",
+      "경로 상 충돌, 추락 등 위험요인에 대해 사전에 확인하고, 이동 시 스마트기기 사용을",
+      "금지하는 등 안전사고 예방에 철저를 기하여야 함",
+      "사고 내용 (재연)"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "빠짐",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 44,
+    "caseId": "2023_18",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 31,
+    "bookPage": 33,
+    "image": "images/2023/page_31.png",
+    "title": "카 상부에서 로프 교체 작업 중 카와 함께 추락한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "EL : 추락(사망1건)",
+    "casualty": "중상 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "\u0007소형화물용 엘리베이터의 카 상부에서 유지관리업체 직원이 로프 교체 작업 중 카와 함께",
+    "description": [
+      "\u0007소형화물용 엘리베이터의 카 상부에서 유지관리업체 직원이 로프 교체 작업 중 카와 함께",
+      "지하1층 피트로 추락하여 발생한 사고"
+    ],
+    "cause": [
+      "\u0007유지관리업체 직원인 피해자가 카 상부에서 로프 교체 작업 중 카를 고정하는 낙하산 체인이",
+      "풀리게 되어 카가 지하 1층 피트로 추락하여 발생"
+    ],
+    "prevention": [
+      "\u0007유지관리업자는 동일한 사고 재발 방지를 위해 소속 직원이 작업절차 및 작업자 안전수칙을",
+      "숙지하여 철저히 준수하도록 관리하여야 하고 특히, 작업자의 안전장구 착용 여부를 수시로",
+      "점검하는 등 현장 안전관리에 철저히 해야 함",
+      "\u0007작업자는 로프 교체 작업 등 카 또는 작업자 추락의 위험이 있는 경우 작업절차 및 작업자",
+      "안전수칙을 철저히 숙지하고 준수하여야 함",
+      "사고 내용 (추정)",
+      "5층",
+      "낙하산",
+      "체인",
+      "피해자",
+      "체인",
+      "이탈",
+      "B1층"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "추락",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 45,
+    "caseId": "2023_19",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 32,
+    "bookPage": 34,
+    "image": "images/2023/page_32.png",
+    "title": "승강장 문을 개방하여 승강로로 추락한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "EL : 추락(사망1건)",
+    "casualty": "중상 1건",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "\u0007피해자가 카의 위치를 확인하지 못하고 승강장 문을 개방하여 추락한 사고",
+    "description": [
+      "\u0007피해자가 카의 위치를 확인하지 못하고 승강장 문을 개방하여 추락한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 카의 정확한 위치를 확인하지 못하고, 비상열쇠를 이용하여 승강장 문을 개방 후",
+      "진입하다 피트로 추락"
+    ],
+    "prevention": [
+      "\u0007관리주체는 법 시행규칙 제48조에 규정된 승강기 안전관리자 직무(비상열쇠 관리 등)를",
+      "성실히 수행하여 다른 사람으로 하여금 비상열쇠를 관리 및 사용하지 못하도록 함",
+      "\u0007주기적으로 승강기의 사용 또는 정지를 반복하는 경우, 파킹운전 장치를 활용하여야 하고,",
+      "올바른 승강기 이용방법에 대한 직원 안전교육을 강화하는 등 현장 안전관리에 철저를",
+      "기해야 함",
+      "사고 내용 (추정)",
+      "1",
+      "1",
+      "1",
+      "B1",
+      "B1",
+      "B1",
+      "B2",
+      "B2",
+      "B2",
+      "①  사고발생 전",
+      "카 1층에 정지",
+      "②  피해자가 지하2층",
+      "승강장문 개방",
+      "③  피해자가 몸의 중심을",
+      "잃고 피트로 추락"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "추락",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 46,
+    "caseId": "2023_20",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 33,
+    "bookPage": 35,
+    "image": "images/2023/page_33.png",
+    "title": "핸드레일 손잡이 정지에 의한 전도 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "넘어짐",
+    "rawAccidentType": "ES : 넘어짐(중상2건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "1건",
+    "summary": "손잡이가 정지해 있던 에스컬레이터에 탑승하여 올라가던 중 몸의 중심을 잃고 넘어져",
+    "description": [
+      "손잡이가 정지해 있던 에스컬레이터에 탑승하여 올라가던 중 몸의 중심을 잃고 넘어져",
+      "발생한 사고"
+    ],
+    "cause": [
+      "손잡이가 정지해 있던 에스컬레이터에 탑승한 피해자가 스텝은 올라가고 손잡이는 움직",
+      "이지 않아 몸의 중심을 잃고 넘어진 사고"
+    ],
+    "prevention": [
+      "관리주체는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부 고시 제2022-19호) 제3조",
+      "(승강기 안전관리자의 직무)에 따라 손잡이의 운행 상태 등 승강기 안전운행에 관한 일상",
+      "점검을 철저히 실시하여야 하고, 노후 및 주요부품에 대해서는 법 제8조제1항제4호에 따라",
+      "제조업자로 부터 부품의 권장 교체주기를 제공받아 적기에 교체하는 등 안전관리에 만전을",
+      "기해야 함",
+      "유지관리업자는 자체점검 등 유지관리 중 이상이 확인되는 경우 관리주체에게 정확히 전달",
+      "하여 즉시 조치되도록 하고, 자체점검 결과 긴급 수리가 필요하다고 판단되는 경우에는 승강기",
+      "안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호)제13조에 따라 해당",
+      "승강기의 운행을 중지시키고 수리가 끝날 때까지는 승강기 운행을 중지하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "넘어짐",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 47,
+    "caseId": "2023_21",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 34,
+    "bookPage": 36,
+    "image": "images/2023/page_34.png",
+    "title": "닫히는 문에 부딪혀 넘어진 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "승강장 문 닫히던",
+    "rawAccidentType": "EL : 승강장 문 닫히던",
+    "casualty": "중 충돌(중상1건)",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "피해자가 엘리베이터에 진입하던 중 닫히는 문에 부딪혀 중심을 잃고 뒤로 넘어져 발생한",
+    "description": [
+      "피해자가 엘리베이터에 진입하던 중 닫히는 문에 부딪혀 중심을 잃고 뒤로 넘어져 발생한",
+      "사고"
+    ],
+    "cause": [
+      "피해자가 엘리베이터에 진입하던 중 등산스틱과 신체일부(손, 다리)가 출입문 사이에",
+      "위치하였음에도 광전센서가 작동되지 않아 닫히는 문에 부딪혀 그 충격에 의해 넘어짐"
+    ],
+    "prevention": [
+      "관리주체는 유지관리업자가 실시하는 자체점검 및 유지관리 과정에 입회하여 확인하는",
+      "등 관리 감독에 철저를 기해야 함",
+      "유지관리업자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부 고시 제2022-19호)",
+      "제12조제1항에 따라 자체점검 등 유지관리 과정에서 이상이 확인되는 경우 그 원인을",
+      "철저히 분석하여 즉시 조치하여야 하고, 그 기능이 유지될 수 있도록 유지 관리에 만전을",
+      "기하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "승강장 문 닫히던",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 48,
+    "caseId": "2023_22",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 35,
+    "bookPage": 37,
+    "image": "images/2023/page_35.png",
+    "title": "승강장 문턱에 발이 걸려 넘어진 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "승강장 바닥 단차로",
+    "rawAccidentType": "EL : 승강장 바닥 단차로",
+    "casualty": "넘어짐(중상2건)",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "1건",
+    "summary": "\u0007피해자가 목적층에 도착하여 내리던 중 카와 승강장 바닥 사이 발생한 단차에 발이 걸려",
+    "description": [
+      "\u0007피해자가 목적층에 도착하여 내리던 중 카와 승강장 바닥 사이 발생한 단차에 발이 걸려",
+      "넘어져 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 카에 탑승하여 운행한 후 착상장치의 차폐판에 걸린 이물질로 인해 착상 오차가",
+      "발생하면서 바닥 단차가 생겼고, 출입문이 열려 내리던 중 승강장 문 문턱에 발이 걸려",
+      "넘어져 발생한 사고"
+    ],
+    "prevention": [
+      "\u0007관리주체는 승강장의 문턱과 카문의 문턱 사이 틈새로 이물질이 들어가 착상장치의 차폐판에",
+      "걸릴 경우 안전운행에 지장을 줄 수 있으므로, 승강기 안전관리자로 하여금 일상점검을 철저히",
+      "하도록 하고 이용자의 준수사항을 적극 홍보하는 등 현장안전관리를 강화해야 함",
+      "\u0007유지관리업자는 자체점검 등 유지관리 시 승강기의 청결상태 유지에 철저를 기해야 함",
+      "\u0007이용자는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호) 제17조에",
+      "따른 엘리베이터 이용자의 준수사항(그밖에 이물질을 버리거나 담배를 피우는 등 타인에",
+      "피해가 되는 행위를 하지 않아야 한다)을 철저히 준수해야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "승강장 바닥 단차로",
+      "기타"
+    ]
+  },
+  {
+    "id": 49,
+    "caseId": "2023_23",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 36,
+    "bookPage": 38,
+    "image": "images/2023/page_36.png",
+    "title": "자동차가 카 내 센서를 작동시켜 멈춘 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행 중 급정지로",
+    "rawAccidentType": "EL : 운행 중 급정지로",
+    "casualty": "인한 갇힘(중상1건)",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "피해자가 차량을 싣고, 올라가던 중 카가 급정지하여 발생한 사고",
+    "description": [
+      "피해자가 차량을 싣고, 올라가던 중 카가 급정지하여 발생한 사고"
+    ],
+    "cause": [
+      "피해자가 차량을 후진으로 카에 진입한 뒤 올라가던 중 차량의 움직임으로 인해 차량 감지",
+      "센서를 작동시켜 카가 정지하여 갇힌 사고"
+    ],
+    "prevention": [
+      "이용자는 이용자 주의 표지 내용을 준수하고 진입 후에는 시동을 끄고 차량이 움직이지 않도록",
+      "주의하여야 하고, 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2020-75호)",
+      "제17조 이용자의 준수사항(자동차용 엘리베이터의 경우에는 출입문과 충돌하지 않도록",
+      "운전에 주의해야 한다)을 철저히 준수하여야 함",
+      "관리주체는 승강기에 갇힌 이용자의 신속하고 안전한 구출을 위해 유지관리업체 또는 119",
+      "구조대로 신속하게 연락하고, 자동차용 엘리베이터 이용자에게 ‘진입 후에는 시동을 끄고,",
+      "차가 움직이지 않도록 주의하세요.’의 내용으로 홍보를 강화하는 등 현장안전관리에 만전을",
+      "기해야 함",
+      "사고 내용 (추정)",
+      "1층",
+      "지하2층",
+      "상승 운행",
+      "약 420mm",
+      "레일",
+      "약 400mm",
+      "① 카 기울어짐",
+      "② 약 20mm 전진",
+      "③ 차량 감지 센서 작동",
+      "차량 감지 센서"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "운행 중 급정지로",
+      "기타"
+    ]
+  },
+  {
+    "id": 50,
+    "caseId": "2023_24",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 37,
+    "bookPage": 39,
+    "image": "images/2023/page_37.png",
+    "title": "핸드레일 구동체인 연결부가 파손되어 운행 중 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도 핸드레일 정지",
+    "rawAccidentType": "ES : 전도 핸드레일 정지",
+    "casualty": "(중상1건)",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "\u0007손잡이가 정지된 상태로 상승 운행하는 에스컬레이터에 피해자가 탑승하던 중 몸의 중심을",
+    "description": [
+      "\u0007손잡이가 정지된 상태로 상승 운행하는 에스컬레이터에 피해자가 탑승하던 중 몸의 중심을",
+      "잃고 넘어져 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 상승 운행하는 기기에 탑승하던 중 손잡이 구동 체인이 끊어지며 손잡이가 정지",
+      "되었고, 정지된 손잡이에 의해 이용자가 몸의 중심을 잃고 넘어져 발생한 사고"
+    ],
+    "prevention": [
+      "\u0007관리주체는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부고시 제2022-19호) 제3조",
+      "(승강기 안전관리자의 직무)에 따라 손잡이의 운행 상태 등 승강기 안전운행에 관한 일상",
+      "점검을 철저히 실시하여야 하고, 필요할 경우 손잡이의 속도이상을 감지하여 정지시킬 수",
+      "있는 손잡이 속도감시장치를 갖추는 등 현장 안전관리를 강화하여야 함",
+      "\u0007유지관리업자는 승강기 안전운행에 영향을 미치는 주요 부품에 대해서는 제조업자가 제시하는",
+      "유지관리 방법 등을 확인하고, 관련 부품에 대한 자체점검을 철저히 실시하여야 함",
+      "사고 내용 (추정)",
+      "손잡이 구동부",
+      "체인 스프라켓",
+      "동력전달 불가",
+      "구동체임(2차)",
+      "구동체임(1차)",
+      "손잡이",
+      "손잡이",
+      "전동기",
+      "전동기",
+      "파 손"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도 핸드레일 정지",
+      "기타"
+    ]
+  },
+  {
+    "id": 51,
+    "caseId": "2023_25",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 38,
+    "bookPage": 40,
+    "image": "images/2023/page_38.png",
+    "title": "엘리베이터 탑승 중 멈춤으로 인해 카에 갇힌 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "rawAccidentType": "EL : 갇힘(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "\u0007피해자가 카에 탑승하여 내려가던 중 카가 급정지하여 발생한 사고",
+    "description": [
+      "\u0007피해자가 카에 탑승하여 내려가던 중 카가 급정지하여 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 카에 탑승하여 1층으로 내려가던 중 확인되지 않은 이유에 의하여 과속조절기의",
+      "과속검출스위치가 작동하여 카가 급정지하며 발생한 사고로 판단됨"
+    ],
+    "prevention": [
+      "\u0007관리주체는 승강기의 안전 운행을 위하여 일상점검 및 자체점검 등 안전관리 활동을 통해",
+      "승강기를 안전하게 관리하여야 함",
+      "\u0007유지관리업자는 승강기 안전운행에 영향을 주는 부품의 오작동으로 이용자가 갇히는 등의",
+      "사고가 발생하지 않도록 주요 안전부품에 대한 청결 및 설치 상태를 철저히 확인하는 등",
+      "유지관리에 만전을 기해야 함",
+      "사고 내용 (추정)",
+      "이물질",
+      "간섭",
+      "과속검출스위치",
+      "작동(OFF)",
+      "과속검출스위치",
+      "[추정] 이물질 등에 의한 과속검출스위치 작동"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "갇힘",
+      "기타"
+    ]
+  },
+  {
+    "id": 52,
+    "caseId": "2023_26",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 39,
+    "bookPage": 41,
+    "image": "images/2023/page_39.png",
+    "title": "핸드레일 옆쪽 데크에 손가락이 끼이는 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "ES : 끼임(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "\u0007피해자가 에스컬레이터에 탑승하여 2층으로 올라가던 중 몸의 중심을 잃고 뒤로 넘어지는",
+    "description": [
+      "\u0007피해자가 에스컬레이터에 탑승하여 2층으로 올라가던 중 몸의 중심을 잃고 뒤로 넘어지는",
+      "과정에서 외측데크에 손가락이 끼여 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 몸의 중심을 잃고 넘어지는 과정에서 몸을 지탱하기 위해 오른손으로 외측 데크를",
+      "잡았고, 순간적으로 움켜잡은 손가락 힘 때문에 외부 패널이 안쪽으로 밀리면서 틈새가",
+      "발생하여, 그 틈새에 오른쪽 손가락이 끼인 사고"
+    ],
+    "prevention": [
+      "\u0007관리주체 및 유지관리업자는 동일한 사고재발 방지를 위하여 외측데크와 외부패널과의",
+      "고정방식(볼트체결 등)을 개선하는 등 현장 안전관리를 강화하여야 함",
+      "\u0007동일한 사고의 재발을 방지하기 위해 에스컬레이터 제조·유지관리업체 등에게 사고사례를",
+      "전파하는 등 적극 홍보하여야 함",
+      "\u0007승강기 검사 시 이용자의 접촉이 가능한 외부패널 등을 확인하여 관리주체 등에게 개선 조치",
+      "할 것을 안내하여야 함",
+      "사고 내용 (추정)",
+      "외측데크",
+      "외부패널",
+      "손가락이 끼인 위치",
+      "손가락이 끼인위치",
+      "힘을 가할 경우",
+      "평상시",
+      "20mm"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "끼임",
+      "기타"
+    ]
+  },
+  {
+    "id": 53,
+    "caseId": "2023_27",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 40,
+    "bookPage": 42,
+    "image": "images/2023/page_40.png",
+    "title": "핸드레일 멈춤으로 균형을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "ES : 전도(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "\u0007피해자가 에스컬레이터에 정지된 우측 손잡이를 잡고 탑승한 직후 몸의 중심을 잃으면서",
+    "description": [
+      "\u0007피해자가 에스컬레이터에 정지된 우측 손잡이를 잡고 탑승한 직후 몸의 중심을 잃으면서",
+      "발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 탑승한 직후 손잡이 구동 도르래의 파손으로 인해 정지되어 있던 우측 손잡이를",
+      "잡자 몸의 중심을 잃으며 넘어져 발생한 사고"
+    ],
+    "prevention": [
+      "\u0007관리주체는 승강기 안전운행 및 관리에 관한 운영규정(행정안전부 고시 제2022-19호)",
+      "제3조(승강기 안전관리자의 직무)에 따라 손잡이의 운행상태 등 승강기 안전운행에 관한",
+      "일상점검을 철저히 실시",
+      "\u0007유지관리업자는 승강기 주요부품에 대해서는 권장교체주기를 확인하여 적기에 교체",
+      "하여야 함",
+      "\u0007제조업자는 승강기 또는 승강기 부품의 결함으로 인한 안전사고가 발생하지 않도록 품질",
+      "검사 및 검수를 강화하는 등 품질 관리에 철저를 기해야 함",
+      "사고기기 운행상태 확인",
+      "우측 손잡이 구동 도르래가 파손된 모습"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "에스컬레이터",
+      "전도",
+      "기타"
+    ]
+  },
+  {
+    "id": 54,
+    "caseId": "2023_28",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 41,
+    "bookPage": 43,
+    "image": "images/2023/page_41.png",
+    "title": "목적층 도착 후 출입문이 열린 상태로 운행된 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "문열림출발",
+    "rawAccidentType": "EL : 문열림출발",
+    "casualty": "(중상1건)",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "자동차용 엘리베이터에 피해자가 자동차와 함께 탑승하여 도착한 뒤 후진으로 나오던 중",
+    "description": [
+      "자동차용 엘리베이터에 피해자가 자동차와 함께 탑승하여 도착한 뒤 후진으로 나오던 중",
+      "출입문이 열린 상태로 카가 하강하여 발생한 사고"
+    ],
+    "cause": [
+      "빗물 유입에 의한 전기안전장치 기능이 상실되어 있는 상태에서 자동차와 함께 지하3층",
+      "에서 탑승하여 1층에 도착한 뒤 후진으로 나오던 중 승강장 호출이 등록되어 카가 문이",
+      "열린 상태로 하강한 사고"
+    ],
+    "prevention": [
+      "관리주체는 집중호우 등으로 인한 안전사고가 발생하지 않도록 안전관리(캐노피 설치 및 빗물",
+      "유입 방지조치 등)를 철저히 기하여야 하며, 승강장문 닫힘 입증 전기안전장치 및 그 장치를",
+      "구성하고 있는 선로의 누전 등으로 안전사고가 발생하지 않도록 의도되지 않은 움직임을",
+      "방지할 수 있는 수단의 설치를 적극적으로 검토하여야 함",
+      "유지관리업자는 자체점검 시 누수 등이 확인되면 관리주체에게 즉시 보고하여 조치하도록",
+      "하는 등 동일한 사고가 발생하지 않도록 안전관리에 만전을 기해야 함",
+      "사고 당시 상황",
+      "지하 2층",
+      "상부 전경",
+      "천정, 안전난간",
+      "(변형)"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "문열림출발",
+      "기타"
+    ]
+  },
+  {
+    "id": 55,
+    "caseId": "2023_29",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 42,
+    "bookPage": 44,
+    "image": "images/2023/page_42.png",
+    "title": "출입문이 열린 상태로 카가 상승하여 피해자 끼임 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "문열림출발",
+    "rawAccidentType": "EL : 문열림출발",
+    "casualty": "(중상1건)",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "\u0007피해자가 1층에 도착한 뒤 내리던 중 출입문이 열린 상태로 카가 상승하여 피해자의 몸이",
+    "description": [
+      "\u0007피해자가 1층에 도착한 뒤 내리던 중 출입문이 열린 상태로 카가 상승하여 피해자의 몸이",
+      "승강로 벽과 카 문턱 사이에 끼여 발생한 사고"
+    ],
+    "cause": [
+      "\u0007피해자가 4층에서 카에 탑승하여 1층에 도착한 뒤 내리던 중 PLC(Programmable Logic",
+      "Controller)의 오작동 등으로 인해 출입문이 열린 상태로 카가 상승하여 피해자의 몸이",
+      "승강로 벽과 카 문턱사이에 끼이며 발생한 사고"
+    ],
+    "prevention": [
+      "\u0007관리주체 및 유지관리업자는 노후 및 주요부품에 대해서는 법 제8조제1항제4호에 따라",
+      "제조업자로부터 부품의 권장 교체주기를 제공받아 적시에 교체하는 등 안전관리에 만전을",
+      "기하여야 함",
+      "\u0007유지관리업자는 매월 실시하는 자제점검에 만전을 기해야 하며, 특히 제동기 관련부품 등과",
+      "같은 주요 안전부품의 이상발생이 우려되는 경우에는 즉시 조치하여야 하고, 해당 부품의",
+      "이상 및 이로 인한 사고의 위험성에 대하여 관리주체에게 정확히 전달하여야 함",
+      "사고 내용 (추정)",
+      "B2층",
+      "1층",
+      "2층",
+      "3층",
+      "4층",
+      "5층",
+      "어",
+      "반",
+      "문열림출발",
+      "카",
+      "어",
+      "반",
+      "어",
+      "반",
+      "어",
+      "반"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "문열림출발",
+      "기타"
+    ]
+  },
+  {
+    "id": 56,
+    "caseId": "2023_30",
+    "bookYear": 2023,
+    "accidentYear": 2022,
+    "yearBadge": "2023 사례집 (2022년 발생)",
+    "page": 43,
+    "bookPage": 45,
+    "image": "images/2023/page_43.png",
+    "title": "카 천장 루버가 떨어지면서 발생한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "EL : 기타(중상1건)",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "피해자가 탑승하던 중 카 내부 천장판(루버)이 피해자에게 떨어져 발생한 사고",
+    "description": [
+      "피해자가 탑승하던 중 카 내부 천장판(루버)이 피해자에게 떨어져 발생한 사고"
+    ],
+    "cause": [
+      "공사용 자재를 사고기기로 운반하는 과정에서 카 내부 천장판이 고정틀에 불안정하게",
+      "걸치게 되었으며, 피해자가 탑승하는 순간 천장판이 피해자 머리 위로 떨어져 발생한 사고"
+    ],
+    "prevention": [
+      "관리주체는 승강기 안전 운행에 영향을 주는 물건(짐) 등을 카 내에 적재할 수 없도록 올바른",
+      "승강기 이용 방법에 관한 홍보를 강화하고, 사무실 이전 또는 인테리어 공사 등의 사유로",
+      "승강기를 이용해 물건(짐) 등을 운반해야 하는 경우, 카 내부 천장판의 설치상태를 수시로",
+      "확인하는 등 승강기의 안전한 운행을 위해 일상점검을 실시하여야 함"
+    ],
+    "tags": [
+      "2023사례집",
+      "2022년발생",
+      "엘리베이터",
+      "기타",
+      "기타"
+    ]
+  },
+  {
+    "id": 57,
+    "caseId": "2022_1",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 17,
+    "pages": [
+      17
+    ],
+    "bookPage": 19,
+    "image": "images/2022/page_17.png",
+    "title": "년 승강기 사고 사례 1",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 1",
+    "description": [
+      "년 승강기 사고 사례 1"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 58,
+    "caseId": "2022_2",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 18,
+    "pages": [
+      18
+    ],
+    "bookPage": 20,
+    "image": "images/2022/page_18.png",
+    "title": "년 승강기 사고 사례 2",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 2",
+    "description": [
+      "년 승강기 사고 사례 2"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 59,
+    "caseId": "2022_3",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 19,
+    "pages": [
+      19
+    ],
+    "bookPage": 21,
+    "image": "images/2022/page_19.png",
+    "title": "년 승강기 사고 사례 3",
+    "elevatorType": "에스컬레이터(무빙워크)",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 3",
+    "description": [
+      "년 승강기 사고 사례 3"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 60,
+    "caseId": "2022_4",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 20,
+    "pages": [
+      20
+    ],
+    "bookPage": 22,
+    "image": "images/2022/page_20.png",
+    "title": "년 승강기 사고 사례 4",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 4",
+    "description": [
+      "년 승강기 사고 사례 4"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 61,
+    "caseId": "2022_5",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 21,
+    "pages": [
+      21
+    ],
+    "bookPage": 23,
+    "image": "images/2022/page_21.png",
+    "title": "년 승강기 사고 사례 5",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 5",
+    "description": [
+      "년 승강기 사고 사례 5"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 62,
+    "caseId": "2022_6",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 22,
+    "pages": [
+      22
+    ],
+    "bookPage": 24,
+    "image": "images/2022/page_22.png",
+    "title": "년 승강기 사고 사례 6",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 6",
+    "description": [
+      "년 승강기 사고 사례 6"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 63,
+    "caseId": "2022_7",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 23,
+    "pages": [
+      23
+    ],
+    "bookPage": 25,
+    "image": "images/2022/page_23.png",
+    "title": "년 승강기 사고 사례 7",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 7",
+    "description": [
+      "년 승강기 사고 사례 7"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 64,
+    "caseId": "2022_8",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 24,
+    "pages": [
+      24
+    ],
+    "bookPage": 26,
+    "image": "images/2022/page_24.png",
+    "title": "년 승강기 사고 사례 8",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 8",
+    "description": [
+      "년 승강기 사고 사례 8"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 65,
+    "caseId": "2022_9",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 25,
+    "pages": [
+      25
+    ],
+    "bookPage": 27,
+    "image": "images/2022/page_25.png",
+    "title": "년 승강기 사고 사례 9",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 9",
+    "description": [
+      "년 승강기 사고 사례 9"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 66,
+    "caseId": "2022_10",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 26,
+    "pages": [
+      26
+    ],
+    "bookPage": 28,
+    "image": "images/2022/page_26.png",
+    "title": "년 승강기 사고 사례 10",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 10",
+    "description": [
+      "년 승강기 사고 사례 10"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 67,
+    "caseId": "2022_11",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 27,
+    "pages": [
+      27
+    ],
+    "bookPage": 29,
+    "image": "images/2022/page_27.png",
+    "title": "년 승강기 사고 사례 11",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 11",
+    "description": [
+      "년 승강기 사고 사례 11"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "전도",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 68,
+    "caseId": "2022_12",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 28,
+    "pages": [
+      28
+    ],
+    "bookPage": 30,
+    "image": "images/2022/page_28.png",
+    "title": "년 승강기 사고 사례 12",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 12",
+    "description": [
+      "년 승강기 사고 사례 12"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 69,
+    "caseId": "2022_13",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 29,
+    "pages": [
+      29
+    ],
+    "bookPage": 31,
+    "image": "images/2022/page_29.png",
+    "title": "년 승강기 사고 사례 13",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 13",
+    "description": [
+      "년 승강기 사고 사례 13"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 70,
+    "caseId": "2022_14",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 30,
+    "pages": [
+      30
+    ],
+    "bookPage": 32,
+    "image": "images/2022/page_30.png",
+    "title": "년 승강기 사고 사례 14",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 14",
+    "description": [
+      "년 승강기 사고 사례 14"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 71,
+    "caseId": "2022_15",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 31,
+    "pages": [
+      31
+    ],
+    "bookPage": 33,
+    "image": "images/2022/page_31.png",
+    "title": "년 승강기 사고 사례 15",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 15",
+    "description": [
+      "년 승강기 사고 사례 15"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "충돌",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 72,
+    "caseId": "2022_16",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 32,
+    "pages": [
+      32
+    ],
+    "bookPage": 34,
+    "image": "images/2022/page_32.png",
+    "title": "년 승강기 사고 사례 16",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "rawAccidentType": "갇힘",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 16",
+    "description": [
+      "년 승강기 사고 사례 16"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "갇힘",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 73,
+    "caseId": "2022_17",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 33,
+    "pages": [
+      33
+    ],
+    "bookPage": 35,
+    "image": "images/2022/page_33.png",
+    "title": "년 승강기 사고 사례 17",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 17",
+    "description": [
+      "년 승강기 사고 사례 17"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 74,
+    "caseId": "2022_18",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 34,
+    "pages": [
+      34
+    ],
+    "bookPage": 36,
+    "image": "images/2022/page_34.png",
+    "title": "년 승강기 사고 사례 18",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 18",
+    "description": [
+      "년 승강기 사고 사례 18"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 75,
+    "caseId": "2022_19",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 35,
+    "pages": [
+      35
+    ],
+    "bookPage": 37,
+    "image": "images/2022/page_35.png",
+    "title": "년 승강기 사고 사례 19",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 19",
+    "description": [
+      "년 승강기 사고 사례 19"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 76,
+    "caseId": "2022_20",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 36,
+    "pages": [
+      36
+    ],
+    "bookPage": 38,
+    "image": "images/2022/page_36.png",
+    "title": "년 승강기 사고 사례 20",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 20",
+    "description": [
+      "년 승강기 사고 사례 20"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 77,
+    "caseId": "2022_21",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 37,
+    "pages": [
+      37
+    ],
+    "bookPage": 39,
+    "image": "images/2022/page_37.png",
+    "title": "년 승강기 사고 사례 21",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 21",
+    "description": [
+      "년 승강기 사고 사례 21"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 78,
+    "caseId": "2022_22",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 38,
+    "pages": [
+      38
+    ],
+    "bookPage": 40,
+    "image": "images/2022/page_38.png",
+    "title": "년 승강기 사고 사례 22",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 22",
+    "description": [
+      "년 승강기 사고 사례 22"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 79,
+    "caseId": "2022_23",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 39,
+    "pages": [
+      39
+    ],
+    "bookPage": 41,
+    "image": "images/2022/page_39.png",
+    "title": "년 승강기 사고 사례 23",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 23",
+    "description": [
+      "년 승강기 사고 사례 23"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 80,
+    "caseId": "2022_24",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 40,
+    "pages": [
+      40
+    ],
+    "bookPage": 42,
+    "image": "images/2022/page_40.png",
+    "title": "년 승강기 사고 사례 24",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 24",
+    "description": [
+      "년 승강기 사고 사례 24"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 81,
+    "caseId": "2022_25",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 41,
+    "pages": [
+      41
+    ],
+    "bookPage": 43,
+    "image": "images/2022/page_41.png",
+    "title": "년 승강기 사고 사례 25",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 25",
+    "description": [
+      "년 승강기 사고 사례 25"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 82,
+    "caseId": "2022_26",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 42,
+    "pages": [
+      42
+    ],
+    "bookPage": 44,
+    "image": "images/2022/page_42.png",
+    "title": "년 승강기 사고 사례 26",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 26",
+    "description": [
+      "년 승강기 사고 사례 26"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 83,
+    "caseId": "2022_27",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 43,
+    "pages": [
+      43
+    ],
+    "bookPage": 45,
+    "image": "images/2022/page_43.png",
+    "title": "년 승강기 사고 사례 27",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 27",
+    "description": [
+      "년 승강기 사고 사례 27"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "충돌",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 84,
+    "caseId": "2022_28",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 44,
+    "pages": [
+      44
+    ],
+    "bookPage": 46,
+    "image": "images/2022/page_44.png",
+    "title": "년 승강기 사고 사례 28",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 28",
+    "description": [
+      "년 승강기 사고 사례 28"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 85,
+    "caseId": "2022_29",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 45,
+    "pages": [
+      45
+    ],
+    "bookPage": 47,
+    "image": "images/2022/page_45.png",
+    "title": "년 승강기 사고 사례 29",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 29",
+    "description": [
+      "년 승강기 사고 사례 29"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 86,
+    "caseId": "2022_30",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 46,
+    "pages": [
+      46
+    ],
+    "bookPage": 48,
+    "image": "images/2022/page_46.png",
+    "title": "년 승강기 사고 사례 30",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 30",
+    "description": [
+      "년 승강기 사고 사례 30"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 87,
+    "caseId": "2022_31",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 47,
+    "pages": [
+      47
+    ],
+    "bookPage": 49,
+    "image": "images/2022/page_47.png",
+    "title": "년 승강기 사고 사례 31",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 31",
+    "description": [
+      "년 승강기 사고 사례 31"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 88,
+    "caseId": "2022_32",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 48,
+    "pages": [
+      48
+    ],
+    "bookPage": 50,
+    "image": "images/2022/page_48.png",
+    "title": "년 승강기 사고 사례 32",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 32",
+    "description": [
+      "년 승강기 사고 사례 32"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 89,
+    "caseId": "2022_33",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 49,
+    "pages": [
+      49
+    ],
+    "bookPage": 51,
+    "image": "images/2022/page_49.png",
+    "title": "년 승강기 사고 사례 33",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 33",
+    "description": [
+      "년 승강기 사고 사례 33"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "추락",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 90,
+    "caseId": "2022_34",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 50,
+    "pages": [
+      50
+    ],
+    "bookPage": 52,
+    "image": "images/2022/page_50.png",
+    "title": "년 승강기 사고 사례 34",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 34",
+    "description": [
+      "년 승강기 사고 사례 34"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "충돌",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 91,
+    "caseId": "2022_35",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 51,
+    "pages": [
+      51
+    ],
+    "bookPage": 53,
+    "image": "images/2022/page_51.png",
+    "title": "년 승강기 사고 사례 35",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 35",
+    "description": [
+      "년 승강기 사고 사례 35"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 92,
+    "caseId": "2022_36",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 52,
+    "pages": [
+      52
+    ],
+    "bookPage": 54,
+    "image": "images/2022/page_52.png",
+    "title": "년 승강기 사고 사례 36",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 36",
+    "description": [
+      "년 승강기 사고 사례 36"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "에스컬레이터",
+      "전도",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 93,
+    "caseId": "2022_37",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 53,
+    "pages": [
+      53
+    ],
+    "bookPage": 55,
+    "image": "images/2022/page_53.png",
+    "title": "년 승강기 사고 사례 37",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 37",
+    "description": [
+      "년 승강기 사고 사례 37"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "전도",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 94,
+    "caseId": "2022_38",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 54,
+    "pages": [
+      54
+    ],
+    "bookPage": 56,
+    "image": "images/2022/page_54.png",
+    "title": "년 승강기 사고 사례 38",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 38",
+    "description": [
+      "년 승강기 사고 사례 38"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "운행이상",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 95,
+    "caseId": "2022_39",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 55,
+    "pages": [
+      55,
+      56
+    ],
+    "bookPage": 57,
+    "image": "images/2022/page_55.png",
+    "title": "년 승강기 사고 사례 39",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 39",
+    "description": [
+      "년 승강기 사고 사례 39"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 96,
+    "caseId": "2022_40",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 57,
+    "pages": [
+      57
+    ],
+    "bookPage": 59,
+    "image": "images/2022/page_57.png",
+    "title": "년 승강기 사고 사례 40",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 40",
+    "description": [
+      "년 승강기 사고 사례 40"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "전도",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 97,
+    "caseId": "2022_41",
+    "bookYear": 2022,
+    "accidentYear": 2021,
+    "yearBadge": "2022 사례집 (2021년 발생)",
+    "page": 58,
+    "pages": [
+      58,
+      59
+    ],
+    "bookPage": 60,
+    "image": "images/2022/page_58.png",
+    "title": "년 승강기 사고 사례 41",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "년 승강기 사고 사례 41",
+    "description": [
+      "년 승강기 사고 사례 41"
+    ],
+    "cause": [
+      "상세 원인 조사 및 부품/이용행태 분석"
+    ],
+    "prevention": [
+      "안전 이용수칙 준수 및 주기적 자체점검 철저"
+    ],
+    "tags": [
+      "2022사례집",
+      "2021년발생",
+      "엘리베이터",
+      "끼임",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 98,
+    "caseId": "2020_1",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 20,
+    "pages": [
+      20
+    ],
+    "bookPage": 13,
+    "image": "images/2020/page_20.png",
+    "title": "1. 서울 광진구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "1. 서울 광진구 에스컬레이터 사고",
+    "description": [
+      "1. 서울 광진구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 99,
+    "caseId": "2020_2",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 21,
+    "pages": [
+      21
+    ],
+    "bookPage": 14,
+    "image": "images/2020/page_21.png",
+    "title": "2. 경남 김해시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "2. 경남 김해시 엘리베이터 사고",
+    "description": [
+      "2. 경남 김해시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "전도",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 100,
+    "caseId": "2020_3",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 22,
+    "pages": [
+      22
+    ],
+    "bookPage": 15,
+    "image": "images/2020/page_22.png",
+    "title": "3. 경기 의왕시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "3. 경기 의왕시 엘리베이터 사고",
+    "description": [
+      "3. 경기 의왕시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 101,
+    "caseId": "2020_4",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 23,
+    "pages": [
+      23
+    ],
+    "bookPage": 16,
+    "image": "images/2020/page_23.png",
+    "title": "4. 물산 남구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "4. 물산 남구 엘리베이터 사고",
+    "description": [
+      "4. 물산 남구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 102,
+    "caseId": "2020_5",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 24,
+    "pages": [
+      24
+    ],
+    "bookPage": 17,
+    "image": "images/2020/page_24.png",
+    "title": "5. 대전 유성구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "5. 대전 유성구 엘리베이터 사고",
+    "description": [
+      "5. 대전 유성구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "전도",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 103,
+    "caseId": "2020_6",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 25,
+    "pages": [
+      25
+    ],
+    "bookPage": 18,
+    "image": "images/2020/page_25.png",
+    "title": "6. 광주 서구 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "6. 광주 서구 무빙워크 사고",
+    "description": [
+      "6. 광주 서구 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 104,
+    "caseId": "2020_7",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 26,
+    "pages": [
+      26
+    ],
+    "bookPage": 19,
+    "image": "images/2020/page_26.png",
+    "title": "7. 서울 강남구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "7. 서울 강남구 에스컬레이터 사고",
+    "description": [
+      "7. 서울 강남구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 105,
+    "caseId": "2020_8",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 27,
+    "pages": [
+      27
+    ],
+    "bookPage": 20,
+    "image": "images/2020/page_27.png",
+    "title": "8. 강원 원주시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "8. 강원 원주시 엘리베이터 사고",
+    "description": [
+      "8. 강원 원주시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 106,
+    "caseId": "2020_9",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 28,
+    "pages": [
+      28
+    ],
+    "bookPage": 21,
+    "image": "images/2020/page_28.png",
+    "title": "9. 충북 청주시 이주) 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "9. 충북 청주시 이주) 에스컬레이터 사고",
+    "description": [
+      "9. 충북 청주시 이주) 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "기타",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 107,
+    "caseId": "2020_10",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 29,
+    "pages": [
+      29
+    ],
+    "bookPage": 22,
+    "image": "images/2020/page_29.png",
+    "title": "10. 서울 종로구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "10. 서울 종로구 엘리베이터 사고",
+    "description": [
+      "10. 서울 종로구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 108,
+    "caseId": "2020_11",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 30,
+    "pages": [
+      30
+    ],
+    "bookPage": 23,
+    "image": "images/2020/page_30.png",
+    "title": "11. 서울 송파구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "11. 서울 송파구 엘리베이터 사고",
+    "description": [
+      "11. 서울 송파구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "기타"
+    ]
+  },
+  {
+    "id": 109,
+    "caseId": "2020_12",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 31,
+    "pages": [
+      31
+    ],
+    "bookPage": 24,
+    "image": "images/2020/page_31.png",
+    "title": "12. 경기 광주시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "12. 경기 광주시 무빙워크 사고",
+    "description": [
+      "12. 경기 광주시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 110,
+    "caseId": "2020_13",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 32,
+    "pages": [
+      32
+    ],
+    "bookPage": 25,
+    "image": "images/2020/page_32.png",
+    "title": "13. 경기 군포시 ㈎ 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "13. 경기 군포시 ㈎ 에스컬레이터 사고",
+    "description": [
+      "13. 경기 군포시 ㈎ 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 111,
+    "caseId": "2020_14",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 33,
+    "pages": [
+      33
+    ],
+    "bookPage": 26,
+    "image": "images/2020/page_33.png",
+    "title": "14. 부산 부산진구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "14. 부산 부산진구 엘리베이터 사고",
+    "description": [
+      "14. 부산 부산진구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "충돌",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 112,
+    "caseId": "2020_15",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 34,
+    "pages": [
+      34
+    ],
+    "bookPage": 27,
+    "image": "images/2020/page_34.png",
+    "title": "15. 경기 용인시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "15. 경기 용인시 엘리베이터 사고",
+    "description": [
+      "15. 경기 용인시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "기타"
+    ]
+  },
+  {
+    "id": 113,
+    "caseId": "2020_16",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 35,
+    "pages": [
+      35
+    ],
+    "bookPage": 28,
+    "image": "images/2020/page_35.png",
+    "title": "16. 인천 연수구 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "16. 인천 연수구 무빙워크 사고",
+    "description": [
+      "16. 인천 연수구 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 114,
+    "caseId": "2020_17",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 36,
+    "pages": [
+      36
+    ],
+    "bookPage": 29,
+    "image": "images/2020/page_36.png",
+    "title": "17. 경기 평택시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "17. 경기 평택시 무빙워크 사고",
+    "description": [
+      "17. 경기 평택시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 115,
+    "caseId": "2020_18",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 37,
+    "pages": [
+      37,
+      38
+    ],
+    "bookPage": 30,
+    "image": "images/2020/page_37.png",
+    "title": "18. 경남 양산시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "18. 경남 양산시 엘리베이터 사고",
+    "description": [
+      "18. 경남 양산시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 116,
+    "caseId": "2020_19",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 39,
+    "pages": [
+      39
+    ],
+    "bookPage": 32,
+    "image": "images/2020/page_39.png",
+    "title": "19. 대구 서구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "19. 대구 서구 엘리베이터 사고",
+    "description": [
+      "19. 대구 서구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 117,
+    "caseId": "2020_20",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 40,
+    "pages": [
+      40
+    ],
+    "bookPage": 33,
+    "image": "images/2020/page_40.png",
+    "title": "20. 경기 시흥시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "20. 경기 시흥시 엘리베이터 사고",
+    "description": [
+      "20. 경기 시흥시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 118,
+    "caseId": "2020_21",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 41,
+    "pages": [
+      41
+    ],
+    "bookPage": 34,
+    "image": "images/2020/page_41.png",
+    "title": "21. 경북 안동시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "21. 경북 안동시 무빙워크 사고",
+    "description": [
+      "21. 경북 안동시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 119,
+    "caseId": "2020_22",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 42,
+    "pages": [
+      42,
+      43
+    ],
+    "bookPage": 35,
+    "image": "images/2020/page_42.png",
+    "title": "22. 경남 양산시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "22. 경남 양산시 엘리베이터 사고",
+    "description": [
+      "22. 경남 양산시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 120,
+    "caseId": "2020_23",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 44,
+    "pages": [
+      44
+    ],
+    "bookPage": 37,
+    "image": "images/2020/page_44.png",
+    "title": "23. 경기 화성시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "23. 경기 화성시 엘리베이터 사고",
+    "description": [
+      "23. 경기 화성시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 121,
+    "caseId": "2020_24",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 45,
+    "pages": [
+      45
+    ],
+    "bookPage": 38,
+    "image": "images/2020/page_45.png",
+    "title": "24. 경북 예천군 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "24. 경북 예천군 무빙워크 사고",
+    "description": [
+      "24. 경북 예천군 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 122,
+    "caseId": "2020_25",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 46,
+    "pages": [
+      46
+    ],
+    "bookPage": 39,
+    "image": "images/2020/page_46.png",
+    "title": "25. 부산 부산진구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "25. 부산 부산진구 에스컬레이터 사고",
+    "description": [
+      "25. 부산 부산진구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "기타"
+    ]
+  },
+  {
+    "id": 123,
+    "caseId": "2020_26",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 47,
+    "pages": [
+      47
+    ],
+    "bookPage": 40,
+    "image": "images/2020/page_47.png",
+    "title": "26. 경남 창원시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "26. 경남 창원시 엘리베이터 사고",
+    "description": [
+      "26. 경남 창원시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 124,
+    "caseId": "2020_27",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 48,
+    "pages": [
+      48
+    ],
+    "bookPage": 41,
+    "image": "images/2020/page_48.png",
+    "title": "27. 제주 제주시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "27. 제주 제주시 무빙워크 사고",
+    "description": [
+      "27. 제주 제주시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 125,
+    "caseId": "2020_28",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 49,
+    "pages": [
+      49
+    ],
+    "bookPage": 42,
+    "image": "images/2020/page_49.png",
+    "title": "28. 부산 동구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "28. 부산 동구 에스컬레이터 사고",
+    "description": [
+      "28. 부산 동구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 126,
+    "caseId": "2020_29",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 50,
+    "pages": [
+      50
+    ],
+    "bookPage": 43,
+    "image": "images/2020/page_50.png",
+    "title": "29. 전북 군산시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "29. 전북 군산시 엘리베이터 사고",
+    "description": [
+      "29. 전북 군산시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 127,
+    "caseId": "2020_30",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 51,
+    "pages": [
+      51
+    ],
+    "bookPage": 44,
+    "image": "images/2020/page_51.png",
+    "title": "30. 충남 논산시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "30. 충남 논산시 엘리베이터 사고",
+    "description": [
+      "30. 충남 논산시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "충돌",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 128,
+    "caseId": "2020_31",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 52,
+    "pages": [
+      52
+    ],
+    "bookPage": 45,
+    "image": "images/2020/page_52.png",
+    "title": "31. 강원 속초시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "31. 강원 속초시 엘리베이터 사고",
+    "description": [
+      "31. 강원 속초시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 129,
+    "caseId": "2020_32",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 53,
+    "pages": [
+      53,
+      54
+    ],
+    "bookPage": 46,
+    "image": "images/2020/page_53.png",
+    "title": "32. 경기 의왕시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "32. 경기 의왕시 엘리베이터 사고",
+    "description": [
+      "32. 경기 의왕시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 130,
+    "caseId": "2020_33",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 55,
+    "pages": [
+      55
+    ],
+    "bookPage": 48,
+    "image": "images/2020/page_55.png",
+    "title": "33. 경기 남양주시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "33. 경기 남양주시 무빙워크 사고",
+    "description": [
+      "33. 경기 남양주시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "기타",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 131,
+    "caseId": "2020_34",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 56,
+    "pages": [
+      56
+    ],
+    "bookPage": 49,
+    "image": "images/2020/page_56.png",
+    "title": "34. 인천 서구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "rawAccidentType": "갇힘",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "34. 인천 서구 엘리베이터 사고",
+    "description": [
+      "34. 인천 서구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "갇힘",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 132,
+    "caseId": "2020_35",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 57,
+    "pages": [
+      57,
+      58
+    ],
+    "bookPage": 50,
+    "image": "images/2020/page_57.png",
+    "title": "35. 6.19.(금) 153경 경기 고양시 덕양구 로 소재 에 설지되어 있는 승객회물용 엘리베이터(이하 “사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "35. 6.19.(금) 153경 경기 고양시 덕양구 로 소재 에 설지되어 있는 승객회물용 엘리베이터(이하 “사고",
+    "description": [
+      "35. 6.19.(금) 153경 경기 고양시 덕양구 로 소재 에 설지되어 있는 승객회물용 엘리베이터(이하 “사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 133,
+    "caseId": "2020_36",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 59,
+    "pages": [
+      59
+    ],
+    "bookPage": 52,
+    "image": "images/2020/page_59.png",
+    "title": "36. 부산 해운대구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "36. 부산 해운대구 에스컬레이터 사고",
+    "description": [
+      "36. 부산 해운대구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 134,
+    "caseId": "2020_37",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 60,
+    "pages": [
+      60
+    ],
+    "bookPage": 53,
+    "image": "images/2020/page_60.png",
+    "title": "37. 전남 목포시 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "37. 전남 목포시 에스컬레이터 사고",
+    "description": [
+      "37. 전남 목포시 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 135,
+    "caseId": "2020_38",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 61,
+    "pages": [
+      61
+    ],
+    "bookPage": 54,
+    "image": "images/2020/page_61.png",
+    "title": "38. 물산 동구 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "38. 물산 동구 무빙워크 사고",
+    "description": [
+      "38. 물산 동구 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 136,
+    "caseId": "2020_39",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 62,
+    "pages": [
+      62
+    ],
+    "bookPage": 55,
+    "image": "images/2020/page_62.png",
+    "title": "39. 경기 의정부시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "39. 경기 의정부시 엘리베이터 사고",
+    "description": [
+      "39. 경기 의정부시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "전도",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 137,
+    "caseId": "2020_40",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 63,
+    "pages": [
+      63
+    ],
+    "bookPage": 56,
+    "image": "images/2020/page_63.png",
+    "title": "40. 서울 마포구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "40. 서울 마포구 엘리베이터 사고",
+    "description": [
+      "40. 서울 마포구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 138,
+    "caseId": "2020_41",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 64,
+    "pages": [
+      64
+    ],
+    "bookPage": 57,
+    "image": "images/2020/page_64.png",
+    "title": "41. 세종시 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "41. 세종시 에스컬레이터 사고",
+    "description": [
+      "41. 세종시 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 139,
+    "caseId": "2020_42",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 65,
+    "pages": [
+      65,
+      66
+    ],
+    "bookPage": 58,
+    "image": "images/2020/page_65.png",
+    "title": "42. 경남 창원시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "42. 경남 창원시 엘리베이터 사고",
+    "description": [
+      "42. 경남 창원시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 140,
+    "caseId": "2020_43",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 67,
+    "pages": [
+      67
+    ],
+    "bookPage": 60,
+    "image": "images/2020/page_67.png",
+    "title": "43. 경기 안성시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "43. 경기 안성시 엘리베이터 사고",
+    "description": [
+      "43. 경기 안성시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 141,
+    "caseId": "2020_44",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 68,
+    "pages": [
+      68
+    ],
+    "bookPage": 61,
+    "image": "images/2020/page_68.png",
+    "title": "44. 부산 기장군 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "44. 부산 기장군 엘리베이터 사고",
+    "description": [
+      "44. 부산 기장군 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 142,
+    "caseId": "2020_45",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 69,
+    "pages": [
+      69
+    ],
+    "bookPage": 62,
+    "image": "images/2020/page_69.png",
+    "title": "45. 충남 아산시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "45. 충남 아산시 무빙워크 사고",
+    "description": [
+      "45. 충남 아산시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "충돌",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 143,
+    "caseId": "2020_46",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 70,
+    "pages": [
+      70
+    ],
+    "bookPage": 63,
+    "image": "images/2020/page_70.png",
+    "title": "46. 전북 전주시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "46. 전북 전주시 무빙워크 사고",
+    "description": [
+      "46. 전북 전주시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 144,
+    "caseId": "2020_47",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 71,
+    "pages": [
+      71
+    ],
+    "bookPage": 64,
+    "image": "images/2020/page_71.png",
+    "title": "47. 서울 서초구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "47. 서울 서초구 엘리베이터 사고",
+    "description": [
+      "47. 서울 서초구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "충돌",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 145,
+    "caseId": "2020_48",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 72,
+    "pages": [
+      72
+    ],
+    "bookPage": 65,
+    "image": "images/2020/page_72.png",
+    "title": "48. 경기 용인시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "48. 경기 용인시 무빙워크 사고",
+    "description": [
+      "48. 경기 용인시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 146,
+    "caseId": "2020_49",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 73,
+    "pages": [
+      73
+    ],
+    "bookPage": 66,
+    "image": "images/2020/page_73.png",
+    "title": "49. 경기 화성시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "49. 경기 화성시 엘리베이터 사고",
+    "description": [
+      "49. 경기 화성시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 147,
+    "caseId": "2020_50",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 74,
+    "pages": [
+      74
+    ],
+    "bookPage": 67,
+    "image": "images/2020/page_74.png",
+    "title": "50. 경기 파주시 ㈎ 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "50. 경기 파주시 ㈎ 엘리베이터 사고",
+    "description": [
+      "50. 경기 파주시 ㈎ 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 148,
+    "caseId": "2020_51",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 75,
+    "pages": [
+      75
+    ],
+    "bookPage": 68,
+    "image": "images/2020/page_75.png",
+    "title": "51. 부산 남구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "51. 부산 남구 에스컬레이터 사고",
+    "description": [
+      "51. 부산 남구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "기타",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 149,
+    "caseId": "2020_52",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 76,
+    "pages": [
+      76
+    ],
+    "bookPage": 69,
+    "image": "images/2020/page_76.png",
+    "title": "52. 광주 광산구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "rawAccidentType": "충돌",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "52. 광주 광산구 엘리베이터 사고",
+    "description": [
+      "52. 광주 광산구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "충돌",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 150,
+    "caseId": "2020_53",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 77,
+    "pages": [
+      77
+    ],
+    "bookPage": 70,
+    "image": "images/2020/page_77.png",
+    "title": "53. 광주 북구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "53. 광주 북구 엘리베이터 사고",
+    "description": [
+      "53. 광주 북구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 151,
+    "caseId": "2020_54",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 78,
+    "pages": [
+      78
+    ],
+    "bookPage": 71,
+    "image": "images/2020/page_78.png",
+    "title": "54. 5 (1,15 kg/17 인]승) 피트 사다리에서 떨어짐 운행구간/운행충수 건축허가일자/ 실지일자 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "54. 5 (1,15 kg/17 인]승) 피트 사다리에서 떨어짐 운행구간/운행충수 건축허가일자/ 실지일자 사고",
+    "description": [
+      "54. 5 (1,15 kg/17 인]승) 피트 사다리에서 떨어짐 운행구간/운행충수 건축허가일자/ 실지일자 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "전도",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 152,
+    "caseId": "2020_55",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 79,
+    "pages": [
+      79
+    ],
+    "bookPage": 72,
+    "image": "images/2020/page_79.png",
+    "title": "55. 서울 용산구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "55. 서울 용산구 엘리베이터 사고",
+    "description": [
+      "55. 서울 용산구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 153,
+    "caseId": "2020_56",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 80,
+    "pages": [
+      80
+    ],
+    "bookPage": 73,
+    "image": "images/2020/page_80.png",
+    "title": "56. 충남 아산시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "56. 충남 아산시 엘리베이터 사고",
+    "description": [
+      "56. 충남 아산시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 154,
+    "caseId": "2020_57",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 81,
+    "pages": [
+      81
+    ],
+    "bookPage": 74,
+    "image": "images/2020/page_81.png",
+    "title": "57. 경기 용인시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "57. 경기 용인시 무빙워크 사고",
+    "description": [
+      "57. 경기 용인시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 155,
+    "caseId": "2020_58",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 82,
+    "pages": [
+      82
+    ],
+    "bookPage": 75,
+    "image": "images/2020/page_82.png",
+    "title": "58. 경기 용인시 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "58. 경기 용인시 무빙워크 사고",
+    "description": [
+      "58. 경기 용인시 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 156,
+    "caseId": "2020_59",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 83,
+    "pages": [
+      83
+    ],
+    "bookPage": 76,
+    "image": "images/2020/page_83.png",
+    "title": "59. 서울 마포구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "59. 서울 마포구 엘리베이터 사고",
+    "description": [
+      "59. 서울 마포구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "기타"
+    ]
+  },
+  {
+    "id": 157,
+    "caseId": "2020_60",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 84,
+    "pages": [
+      84
+    ],
+    "bookPage": 77,
+    "image": "images/2020/page_84.png",
+    "title": "60. 서울 동대문구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "60. 서울 동대문구 에스컬레이터 사고",
+    "description": [
+      "60. 서울 동대문구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 158,
+    "caseId": "2020_61",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 85,
+    "pages": [
+      85
+    ],
+    "bookPage": 78,
+    "image": "images/2020/page_85.png",
+    "title": "61. 경남 밀양시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "61. 경남 밀양시 엘리베이터 사고",
+    "description": [
+      "61. 경남 밀양시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 159,
+    "caseId": "2020_62",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 86,
+    "pages": [
+      86
+    ],
+    "bookPage": 79,
+    "image": "images/2020/page_86.png",
+    "title": "62. 서울 용산구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "rawAccidentType": "갇힘",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "62. 서울 용산구 엘리베이터 사고",
+    "description": [
+      "62. 서울 용산구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "갇힘",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 160,
+    "caseId": "2020_63",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 87,
+    "pages": [
+      87
+    ],
+    "bookPage": 80,
+    "image": "images/2020/page_87.png",
+    "title": "63. 대구 동구 무빙워크 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "63. 대구 동구 무빙워크 사고",
+    "description": [
+      "63. 대구 동구 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 161,
+    "caseId": "2020_64",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 88,
+    "pages": [
+      88
+    ],
+    "bookPage": 81,
+    "image": "images/2020/page_88.png",
+    "title": "64. 충남 공주시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "64. 충남 공주시 엘리베이터 사고",
+    "description": [
+      "64. 충남 공주시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 162,
+    "caseId": "2020_65",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 89,
+    "pages": [
+      89
+    ],
+    "bookPage": 82,
+    "image": "images/2020/page_89.png",
+    "title": "65. 서울 노원구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "65. 서울 노원구 엘리베이터 사고",
+    "description": [
+      "65. 서울 노원구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "기타"
+    ]
+  },
+  {
+    "id": 163,
+    "caseId": "2020_66",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 90,
+    "pages": [
+      90,
+      91
+    ],
+    "bookPage": 83,
+    "image": "images/2020/page_90.png",
+    "title": "66. 전남 순천시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "66. 전남 순천시 엘리베이터 사고",
+    "description": [
+      "66. 전남 순천시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "기타"
+    ]
+  },
+  {
+    "id": 164,
+    "caseId": "2020_67",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 92,
+    "pages": [
+      92
+    ],
+    "bookPage": 85,
+    "image": "images/2020/page_92.png",
+    "title": "67. 서울 강동구 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "67. 서울 강동구 에스컬레이터 사고",
+    "description": [
+      "67. 서울 강동구 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 165,
+    "caseId": "2020_68",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 93,
+    "pages": [
+      93
+    ],
+    "bookPage": 86,
+    "image": "images/2020/page_93.png",
+    "title": "68. 부산 사상구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "68. 부산 사상구 엘리베이터 사고",
+    "description": [
+      "68. 부산 사상구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 166,
+    "caseId": "2020_69",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 94,
+    "pages": [
+      94
+    ],
+    "bookPage": 87,
+    "image": "images/2020/page_94.png",
+    "title": "69. 33 (27 닙 운행구간/운행충수 건축허가일자/ 실지일자 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "69. 33 (27 닙 운행구간/운행충수 건축허가일자/ 실지일자 사고",
+    "description": [
+      "69. 33 (27 닙 운행구간/운행충수 건축허가일자/ 실지일자 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 167,
+    "caseId": "2020_70",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 95,
+    "pages": [
+      95,
+      96
+    ],
+    "bookPage": 88,
+    "image": "images/2020/page_95.png",
+    "title": "70. 부산 남구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "운행이상",
+    "rawAccidentType": "운행이상",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타",
+    "similarCount": "-",
+    "summary": "70. 부산 남구 엘리베이터 사고",
+    "description": [
+      "70. 부산 남구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "운행이상",
+      "기타"
+    ]
+  },
+  {
+    "id": 168,
+    "caseId": "2020_71",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 97,
+    "pages": [
+      97
+    ],
+    "bookPage": 90,
+    "image": "images/2020/page_97.png",
+    "title": "71. 경기 용인시 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "71. 경기 용인시 에스컬레이터 사고",
+    "description": [
+      "71. 경기 용인시 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 169,
+    "caseId": "2020_72",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 98,
+    "pages": [
+      98
+    ],
+    "bookPage": 91,
+    "image": "images/2020/page_98.png",
+    "title": "72. 경남 진주시 ㈎ 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "72. 경남 진주시 ㈎ 에스컬레이터 사고",
+    "description": [
+      "72. 경남 진주시 ㈎ 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "끼임",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 170,
+    "caseId": "2020_73",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 99,
+    "pages": [
+      99,
+      100
+    ],
+    "bookPage": 92,
+    "image": "images/2020/page_99.png",
+    "title": "73. 대구 중구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "제조업체 과실",
+    "similarCount": "-",
+    "summary": "73. 대구 중구 엘리베이터 사고",
+    "description": [
+      "73. 대구 중구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "제조업체과실"
+    ]
+  },
+  {
+    "id": 171,
+    "caseId": "2020_74",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 101,
+    "pages": [
+      101,
+      102
+    ],
+    "bookPage": 94,
+    "image": "images/2020/page_101.png",
+    "title": "74. 대구 북구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "rawAccidentType": "갇힘",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "74. 대구 북구 엘리베이터 사고",
+    "description": [
+      "74. 대구 북구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "갇힘",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 172,
+    "caseId": "2020_75",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 103,
+    "pages": [
+      103
+    ],
+    "bookPage": 96,
+    "image": "images/2020/page_103.png",
+    "title": "75. 부산 해운대구 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "75. 부산 해운대구 무빙워크 사고",
+    "description": [
+      "75. 부산 해운대구 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 173,
+    "caseId": "2020_76",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 104,
+    "pages": [
+      104
+    ],
+    "bookPage": 97,
+    "image": "images/2020/page_104.png",
+    "title": "76. 경기 고양시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "76. 경기 고양시 엘리베이터 사고",
+    "description": [
+      "76. 경기 고양시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 174,
+    "caseId": "2020_77",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 105,
+    "pages": [
+      105
+    ],
+    "bookPage": 98,
+    "image": "images/2020/page_105.png",
+    "title": "77. 서울 서대문구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "rawAccidentType": "갇힘",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "77. 서울 서대문구 엘리베이터 사고",
+    "description": [
+      "77. 서울 서대문구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "갇힘",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 175,
+    "caseId": "2020_78",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 106,
+    "pages": [
+      106
+    ],
+    "bookPage": 99,
+    "image": "images/2020/page_106.png",
+    "title": "78. 서울 노원구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "78. 서울 노원구 엘리베이터 사고",
+    "description": [
+      "78. 서울 노원구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "전도",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 176,
+    "caseId": "2020_79",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 107,
+    "pages": [
+      107,
+      108
+    ],
+    "bookPage": 100,
+    "image": "images/2020/page_107.png",
+    "title": "79. 경기 파주시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "79. 경기 파주시 엘리베이터 사고",
+    "description": [
+      "79. 경기 파주시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 177,
+    "caseId": "2020_80",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 109,
+    "pages": [
+      109
+    ],
+    "bookPage": 102,
+    "image": "images/2020/page_109.png",
+    "title": "80. 경북 포항시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "80. 경북 포항시 엘리베이터 사고",
+    "description": [
+      "80. 경북 포항시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 178,
+    "caseId": "2020_81",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 110,
+    "pages": [
+      110
+    ],
+    "bookPage": 103,
+    "image": "images/2020/page_110.png",
+    "title": "81. 경기 평택시 에스컬레이터 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "rawAccidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "81. 경기 평택시 에스컬레이터 사고",
+    "description": [
+      "81. 경기 평택시 에스컬레이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "에스컬레이터",
+      "끼임",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 179,
+    "caseId": "2020_82",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 111,
+    "pages": [
+      111,
+      112
+    ],
+    "bookPage": 104,
+    "image": "images/2020/page_111.png",
+    "title": "82. 경기 용인시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "82. 경기 용인시 엘리베이터 사고",
+    "description": [
+      "82. 경기 용인시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "유지관리업체과실"
+    ]
+  },
+  {
+    "id": 180,
+    "caseId": "2020_83",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 113,
+    "pages": [
+      113
+    ],
+    "bookPage": 106,
+    "image": "images/2020/page_113.png",
+    "title": "83. 서울 영등포구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "83. 서울 영등포구 엘리베이터 사고",
+    "description": [
+      "83. 서울 영등포구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "이용자과실"
+    ]
+  },
+  {
+    "id": 181,
+    "caseId": "2020_84",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 114,
+    "pages": [
+      114
+    ],
+    "bookPage": 107,
+    "image": "images/2020/page_114.png",
+    "title": "84. 서울 종로구 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "기타",
+    "rawAccidentType": "기타",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "84. 서울 종로구 엘리베이터 사고",
+    "description": [
+      "84. 서울 종로구 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "기타",
+      "관리주체과실"
+    ]
+  },
+  {
+    "id": 182,
+    "caseId": "2020_85",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 115,
+    "pages": [
+      115,
+      116
+    ],
+    "bookPage": 108,
+    "image": "images/2020/page_115.png",
+    "title": "85. 경기 안양시 엘리베이터 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "rawAccidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "85. 경기 안양시 엘리베이터 사고",
+    "description": [
+      "85. 경기 안양시 엘리베이터 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "엘리베이터",
+      "추락",
+      "작업자과실"
+    ]
+  },
+  {
+    "id": 183,
+    "caseId": "2020_86",
+    "bookYear": 2020,
+    "accidentYear": 2020,
+    "yearBadge": "2020년도 발생 승강기 중대사고",
+    "page": 117,
+    "pages": [
+      117
+    ],
+    "bookPage": 110,
+    "image": "images/2020/page_117.png",
+    "title": "86. 광주 남구 무빙워크 사고",
+    "elevatorType": "무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "rawAccidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "86. 광주 남구 무빙워크 사고",
+    "description": [
+      "86. 광주 남구 무빙워크 사고"
+    ],
+    "cause": [
+      "상세 사고원인 조사 및 안전장치 분석"
+    ],
+    "prevention": [
+      "안전관리기준 준수 및 이용자 주의 당부"
+    ],
+    "tags": [
+      "2020사례집",
+      "2020년발생",
+      "무빙워크",
+      "전도",
+      "이용자과실"
+    ]
   }
 ];
 
-// 통계 데이터 요약 (2023년 기준 & 30년 누적)
-const STATS_SUMMARY = {
-  year: 2023,
-  totalAccidents2023: 42,
-  totalCasualties2023: 43,
-  fatalities2023: 6,
-  severeInjuries2023: 37,
-  elevatorFleet: 840049,
-  accidentRatePer10k: 0.50,
-  cumulativeAccidents: 1751,
-  cumulativeFatalities: 290,
-  
-  // 원인별 분류 (2023년)
-  byCause: [
-    { name: "이용자 과실", count: 19, percent: 45.2, color: "#ef4444" },
-    { name: "기타 (기계·부품 결함 등)", count: 11, percent: 26.2, color: "#64748b" },
-    { name: "작업자 과실", count: 5, percent: 11.9, color: "#f97316" },
-    { name: "유지관리업체 과실", count: 4, percent: 9.5, color: "#eab308" },
-    { name: "관리주체 과실", count: 3, percent: 7.1, color: "#8b5cf6" },
-    { name: "제조업체 과실", count: 0, percent: 0.0, color: "#06b6d4" }
-  ],
-  
-  // 승강기 종류별 (2023년)
-  byElevatorType: [
-    { name: "승객용 엘리베이터", count: 13, percent: 31.0, icon: "lift" },
-    { name: "에스컬레이터", count: 12, percent: 28.6, icon: "escalator" },
-    { name: "장애인용 엘리베이터", count: 8, percent: 19.0, icon: "accessible" },
-    { name: "소방구조용 엘리베이터", count: 4, percent: 9.5, icon: "fire" },
-    { name: "수평보행기 (무빙워크)", count: 2, percent: 4.8, icon: "walk" },
-    { name: "화물/기타 엘리베이터", count: 3, percent: 7.1, icon: "cargo" }
-  ],
-
-  // 사고 유형별 (2023년)
-  byAccidentType: [
-    { name: "전도 (넘어짐)", count: 18, percent: 42.9, icon: "fall" },
-    { name: "끼임 / 협착", count: 10, percent: 23.8, icon: "pinch" },
-    { name: "추락", count: 8, percent: 19.0, icon: "drop" },
-    { name: "충돌", count: 6, percent: 14.3, icon: "crash" }
-  ],
-
-  // 연령대별 (2023년 피해자 43명)
-  byAgeGroup: [
-    { name: "15세 이상 ~ 64세", count: 24, percent: 55.8 },
-    { name: "65세 이상 고령자", count: 16, percent: 37.2 },
-    { name: "14세 이하 어린이", count: 3, percent: 7.0 }
-  ],
-
-  // 피해자 구분별
-  byVictimRole: [
-    { name: "승강기 일반 이용자", count: 37, percent: 86.0 },
-    { name: "승강기 설치/보수 기술자", count: 5, percent: 11.6 },
-    { name: "건물 관리자 (경비원 등)", count: 1, percent: 2.4 }
-  ],
-
-  // 장소별 (건물 용도별)
-  byBuildingType: [
-    { name: "운수시설 (지하철·역사·공항)", count: 10, percent: 23.8 },
-    { name: "공동주택 (아파트 등)", count: 8, percent: 19.0 },
-    { name: "근린생활시설", count: 8, percent: 19.0 },
-    { name: "판매시설 (백화점·마트)", count: 5, percent: 11.9 },
-    { name: "공장 및 산업시설", count: 3, percent: 7.1 },
-    { name: "숙박·업무·기타", count: 8, percent: 19.0 }
-  ]
+const STATS_BY_YEAR = {
+  "ALL": {
+    "year": "2020~2023 (4개년 통합)",
+    "label": "4개년 종합 분석",
+    "totalAccidents": 258,
+    "totalCasualties": 270,
+    "fatalities": 25,
+    "severeInjuries": 245,
+    "elevatorFleet": 840049,
+    "accidentRatePer10k": 0.5,
+    "caseCount": 183,
+    "byCause": [
+      {
+        "name": "이용자 과실",
+        "count": 118,
+        "percent": 45.7,
+        "color": "#ef4444"
+      },
+      {
+        "name": "기타 (기계·부품 결함 등)",
+        "count": 57,
+        "percent": 22.1,
+        "color": "#64748b"
+      },
+      {
+        "name": "작업자 과실",
+        "count": 36,
+        "percent": 14.0,
+        "color": "#f97316"
+      },
+      {
+        "name": "유지관리업체 과실",
+        "count": 31,
+        "percent": 12.0,
+        "color": "#eab308"
+      },
+      {
+        "name": "관리주체 과실",
+        "count": 15,
+        "percent": 5.8,
+        "color": "#8b5cf6"
+      },
+      {
+        "name": "제조업체 과실",
+        "count": 1,
+        "percent": 0.4,
+        "color": "#06b6d4"
+      }
+    ],
+    "byElevatorType": [
+      {
+        "name": "승객용 엘리베이터",
+        "count": 62,
+        "percent": 24.0
+      },
+      {
+        "name": "에스컬레이터",
+        "count": 71,
+        "percent": 27.5
+      },
+      {
+        "name": "무빙워크 (수평보행기)",
+        "count": 39,
+        "percent": 15.1
+      },
+      {
+        "name": "소방구조용 엘리베이터",
+        "count": 36,
+        "percent": 14.0
+      },
+      {
+        "name": "장애인용 엘리베이터",
+        "count": 25,
+        "percent": 9.7
+      },
+      {
+        "name": "화물·자동차·기타",
+        "count": 25,
+        "percent": 9.7
+      }
+    ],
+    "byAccidentType": [
+      {
+        "name": "전도 (넘어짐)",
+        "count": 124,
+        "percent": 48.1
+      },
+      {
+        "name": "끼임 / 협착",
+        "count": 58,
+        "percent": 22.5
+      },
+      {
+        "name": "추락",
+        "count": 35,
+        "percent": 13.6
+      },
+      {
+        "name": "충돌",
+        "count": 22,
+        "percent": 8.5
+      },
+      {
+        "name": "운행이상 / 갇힘 / 기타",
+        "count": 19,
+        "percent": 7.3
+      }
+    ],
+    "byAgeGroup": [
+      {
+        "name": "15세 이상 ~ 64세",
+        "count": 155,
+        "percent": 57.4
+      },
+      {
+        "name": "65세 이상 고령자",
+        "count": 102,
+        "percent": 37.8
+      },
+      {
+        "name": "14세 이하 어린이",
+        "count": 13,
+        "percent": 4.8
+      }
+    ]
+  },
+  "2024": {
+    "year": "2023년 발생 (2024 사례집)",
+    "label": "2024년 발간 사례집",
+    "totalAccidents": 42,
+    "totalCasualties": 43,
+    "fatalities": 6,
+    "severeInjuries": 37,
+    "elevatorFleet": 840049,
+    "accidentRatePer10k": 0.5,
+    "caseCount": 26,
+    "byCause": [
+      {
+        "name": "이용자 과실",
+        "count": 19,
+        "percent": 45.2,
+        "color": "#ef4444"
+      },
+      {
+        "name": "기타 (기계·부품 결함 등)",
+        "count": 11,
+        "percent": 26.2,
+        "color": "#64748b"
+      },
+      {
+        "name": "작업자 과실",
+        "count": 5,
+        "percent": 11.9,
+        "color": "#f97316"
+      },
+      {
+        "name": "유지관리업체 과실",
+        "count": 4,
+        "percent": 9.5,
+        "color": "#eab308"
+      },
+      {
+        "name": "관리주체 과실",
+        "count": 3,
+        "percent": 7.1,
+        "color": "#8b5cf6"
+      },
+      {
+        "name": "제조업체 과실",
+        "count": 0,
+        "percent": 0.0,
+        "color": "#06b6d4"
+      }
+    ],
+    "byElevatorType": [
+      {
+        "name": "승객용 엘리베이터",
+        "count": 13,
+        "percent": 31.0
+      },
+      {
+        "name": "에스컬레이터",
+        "count": 12,
+        "percent": 28.6
+      },
+      {
+        "name": "장애인용 엘리베이터",
+        "count": 8,
+        "percent": 19.0
+      },
+      {
+        "name": "소방구조용 엘리베이터",
+        "count": 4,
+        "percent": 9.5
+      },
+      {
+        "name": "화물/기타 엘리베이터",
+        "count": 3,
+        "percent": 7.1
+      },
+      {
+        "name": "수평보행기 (무빙워크)",
+        "count": 2,
+        "percent": 4.8
+      }
+    ],
+    "byAccidentType": [
+      {
+        "name": "전도 (넘어짐)",
+        "count": 18,
+        "percent": 42.9
+      },
+      {
+        "name": "끼임 / 협착",
+        "count": 10,
+        "percent": 23.8
+      },
+      {
+        "name": "추락",
+        "count": 8,
+        "percent": 19.0
+      },
+      {
+        "name": "충돌",
+        "count": 6,
+        "percent": 14.3
+      }
+    ],
+    "byAgeGroup": [
+      {
+        "name": "15세 이상 ~ 64세",
+        "count": 24,
+        "percent": 55.8
+      },
+      {
+        "name": "65세 이상 고령자",
+        "count": 16,
+        "percent": 37.2
+      },
+      {
+        "name": "14세 이하 어린이",
+        "count": 3,
+        "percent": 7.0
+      }
+    ]
+  },
+  "2023": {
+    "year": "2022년 발생 (2023 사례집)",
+    "label": "2023년 발간 사례집",
+    "totalAccidents": 55,
+    "totalCasualties": 56,
+    "fatalities": 4,
+    "severeInjuries": 52,
+    "elevatorFleet": 813446,
+    "accidentRatePer10k": 0.68,
+    "caseCount": 30,
+    "byCause": [
+      {
+        "name": "이용자 과실",
+        "count": 36,
+        "percent": 65.5,
+        "color": "#ef4444"
+      },
+      {
+        "name": "기타 (기계·부품 결함 등)",
+        "count": 10,
+        "percent": 18.2,
+        "color": "#64748b"
+      },
+      {
+        "name": "작업자 과실",
+        "count": 5,
+        "percent": 9.1,
+        "color": "#f97316"
+      },
+      {
+        "name": "유지관리업체 과실",
+        "count": 3,
+        "percent": 5.5,
+        "color": "#eab308"
+      },
+      {
+        "name": "관리주체 과실",
+        "count": 1,
+        "percent": 1.8,
+        "color": "#8b5cf6"
+      },
+      {
+        "name": "제조업체 과실",
+        "count": 0,
+        "percent": 0.0,
+        "color": "#06b6d4"
+      }
+    ],
+    "byElevatorType": [
+      {
+        "name": "에스컬레이터",
+        "count": 21,
+        "percent": 38.2
+      },
+      {
+        "name": "수평보행기 (무빙워크)",
+        "count": 14,
+        "percent": 25.5
+      },
+      {
+        "name": "승객용 엘리베이터",
+        "count": 7,
+        "percent": 12.7
+      },
+      {
+        "name": "소방구조용 엘리베이터",
+        "count": 7,
+        "percent": 12.7
+      },
+      {
+        "name": "장애인용 엘리베이터",
+        "count": 3,
+        "percent": 5.5
+      },
+      {
+        "name": "화물/기타 엘리베이터",
+        "count": 3,
+        "percent": 5.5
+      }
+    ],
+    "byAccidentType": [
+      {
+        "name": "전도 (넘어짐)",
+        "count": 36,
+        "percent": 65.5
+      },
+      {
+        "name": "끼임 / 협착",
+        "count": 8,
+        "percent": 14.5
+      },
+      {
+        "name": "추락",
+        "count": 3,
+        "percent": 5.5
+      },
+      {
+        "name": "충돌",
+        "count": 3,
+        "percent": 5.5
+      },
+      {
+        "name": "운행이상 / 기타",
+        "count": 5,
+        "percent": 9.1
+      }
+    ],
+    "byAgeGroup": [
+      {
+        "name": "65세 이상 고령자",
+        "count": 30,
+        "percent": 53.6
+      },
+      {
+        "name": "15세 이상 ~ 64세",
+        "count": 25,
+        "percent": 44.6
+      },
+      {
+        "name": "14세 이하 어린이",
+        "count": 1,
+        "percent": 1.8
+      }
+    ]
+  },
+  "2022": {
+    "year": "2021년 발생 (2022 사례집)",
+    "label": "2022년 발간 사례집",
+    "totalAccidents": 75,
+    "totalCasualties": 80,
+    "fatalities": 5,
+    "severeInjuries": 75,
+    "elevatorFleet": 780467,
+    "accidentRatePer10k": 0.96,
+    "caseCount": 41,
+    "byCause": [
+      {
+        "name": "이용자 과실",
+        "count": 23,
+        "percent": 30.7,
+        "color": "#ef4444"
+      },
+      {
+        "name": "기타 (부품결함/센서한계)",
+        "count": 19,
+        "percent": 25.3,
+        "color": "#64748b"
+      },
+      {
+        "name": "작업자 과실",
+        "count": 14,
+        "percent": 18.7,
+        "color": "#f97316"
+      },
+      {
+        "name": "유지관리업체 과실",
+        "count": 14,
+        "percent": 18.7,
+        "color": "#eab308"
+      },
+      {
+        "name": "관리주체 과실",
+        "count": 5,
+        "percent": 6.7,
+        "color": "#8b5cf6"
+      },
+      {
+        "name": "제조업체 과실",
+        "count": 0,
+        "percent": 0.0,
+        "color": "#06b6d4"
+      }
+    ],
+    "byElevatorType": [
+      {
+        "name": "소방구조용 엘리베이터",
+        "count": 16,
+        "percent": 21.3
+      },
+      {
+        "name": "승객용 엘리베이터",
+        "count": 15,
+        "percent": 20.0
+      },
+      {
+        "name": "에스컬레이터",
+        "count": 14,
+        "percent": 18.7
+      },
+      {
+        "name": "장애인용 엘리베이터",
+        "count": 14,
+        "percent": 18.7
+      },
+      {
+        "name": "수평보행기 (무빙워크)",
+        "count": 8,
+        "percent": 10.7
+      },
+      {
+        "name": "화물/자동차/기타",
+        "count": 8,
+        "percent": 10.7
+      }
+    ],
+    "byAccidentType": [
+      {
+        "name": "전도 (넘어짐)",
+        "count": 28,
+        "percent": 37.3
+      },
+      {
+        "name": "끼임 / 협착",
+        "count": 21,
+        "percent": 28.0
+      },
+      {
+        "name": "추락",
+        "count": 11,
+        "percent": 14.7
+      },
+      {
+        "name": "충돌",
+        "count": 6,
+        "percent": 8.0
+      },
+      {
+        "name": "운행이상 / 급정지",
+        "count": 9,
+        "percent": 12.0
+      }
+    ],
+    "byAgeGroup": [
+      {
+        "name": "15세 이상 ~ 64세",
+        "count": 50,
+        "percent": 62.5
+      },
+      {
+        "name": "65세 이상 고령자",
+        "count": 26,
+        "percent": 32.5
+      },
+      {
+        "name": "14세 이하 어린이",
+        "count": 4,
+        "percent": 5.0
+      }
+    ]
+  },
+  "2020": {
+    "year": "2020년 발생 (2020 사례집)",
+    "label": "2020년 발생 사례집",
+    "totalAccidents": 86,
+    "totalCasualties": 91,
+    "fatalities": 10,
+    "severeInjuries": 81,
+    "elevatorFleet": 749845,
+    "accidentRatePer10k": 1.15,
+    "caseCount": 86,
+    "byCause": [
+      {
+        "name": "이용자 과실",
+        "count": 40,
+        "percent": 46.5,
+        "color": "#ef4444"
+      },
+      {
+        "name": "기타 (부품마모/이물질)",
+        "count": 17,
+        "percent": 19.8,
+        "color": "#64748b"
+      },
+      {
+        "name": "작업자 과실",
+        "count": 12,
+        "percent": 14.0,
+        "color": "#f97316"
+      },
+      {
+        "name": "유지관리업체 과실",
+        "count": 10,
+        "percent": 11.6,
+        "color": "#eab308"
+      },
+      {
+        "name": "관리주체 과실",
+        "count": 6,
+        "percent": 7.0,
+        "color": "#8b5cf6"
+      },
+      {
+        "name": "제조업체 과실",
+        "count": 1,
+        "percent": 1.2,
+        "color": "#06b6d4"
+      }
+    ],
+    "byElevatorType": [
+      {
+        "name": "승객용 엘리베이터",
+        "count": 27,
+        "percent": 31.4
+      },
+      {
+        "name": "에스컬레이터",
+        "count": 24,
+        "percent": 27.9
+      },
+      {
+        "name": "수평보행기 (무빙워크)",
+        "count": 15,
+        "percent": 17.4
+      },
+      {
+        "name": "소방구조용 엘리베이터",
+        "count": 9,
+        "percent": 10.5
+      },
+      {
+        "name": "화물용 엘리베이터",
+        "count": 5,
+        "percent": 5.8
+      },
+      {
+        "name": "자동차/기타",
+        "count": 6,
+        "percent": 7.0
+      }
+    ],
+    "byAccidentType": [
+      {
+        "name": "전도 (넘어짐)",
+        "count": 42,
+        "percent": 48.8
+      },
+      {
+        "name": "끼임 / 협착",
+        "count": 19,
+        "percent": 22.1
+      },
+      {
+        "name": "추락",
+        "count": 13,
+        "percent": 15.1
+      },
+      {
+        "name": "충돌",
+        "count": 7,
+        "percent": 8.1
+      },
+      {
+        "name": "운행이상 / 급정지",
+        "count": 5,
+        "percent": 5.8
+      }
+    ],
+    "byAgeGroup": [
+      {
+        "name": "15세 이상 ~ 64세",
+        "count": 56,
+        "percent": 61.5
+      },
+      {
+        "name": "65세 이상 고령자",
+        "count": 30,
+        "percent": 33.0
+      },
+      {
+        "name": "14세 이하 어린이",
+        "count": 5,
+        "percent": 5.5
+      }
+    ]
+  }
 };
 
-// 제5장 예방 안내 포스터 갤러리 데이터
-const POSTERS_DATA = [
-  { id: 1, page: 44, bookPage: 46, image: "images/page_44.png", title: "다중밀집시설 에스컬레이터 안전관리 요령", category: "다중밀집/압사예방" },
-  { id: 2, page: 45, bookPage: 47, image: "images/page_45.png", title: "에스컬레이터 중대사고(역주행 등) 발생 알림", category: "긴급알림" },
-  { id: 3, page: 46, bookPage: 48, image: "images/page_46.png", title: "손끼임·추락사고 예방 안내문", category: "이용자안전" },
-  { id: 4, page: 47, bookPage: 49, image: "images/page_47.png", title: "승강기 철거 작업 중 작업자 사망사고 예방대책", category: "작업자안전" },
-  { id: 5, page: 48, bookPage: 50, image: "images/page_48.png", title: "PLC 적용 엘리베이터 개문출발 안전사고 예방대책", category: "기술/부품안전" },
-  { id: 6, page: 49, bookPage: 51, image: "images/page_49.png", title: "승강기 개구부 추락방지 예방 안내문", category: "현장관리" },
-  { id: 7, page: 50, bookPage: 52, image: "images/page_50.png", title: "비·눈 내리는 날 에스컬레이터·무빙워크 미끄럼 주의보", category: "기상특보안전" },
-  { id: 8, page: 51, bookPage: 53, image: "images/page_51.png", title: "승강기 중대한 고장 예방 안내", category: "유지보수" },
-  { id: 9, page: 52, bookPage: 54, image: "images/page_52.png", title: "승강기 안전사고 예방 및 자체점검 요령", category: "자체점검" },
-  { id: 10, page: 53, bookPage: 55, image: "images/page_53.png", title: "VAC 모델 검사업무 시 제어반 변압기 점검 철저 안내", category: "전문검사" },
-  { id: 11, page: 54, bookPage: 56, image: "images/page_54.png", title: "출입문 안전회로 단락 위험 경고 안내문", category: "회로안전" },
-  { id: 12, page: 55, bookPage: 57, image: "images/page_55.png", title: "승강기 설치·교체 작업자 안전사고 예방수칙 포스터", category: "작업자안전" }
+const STATS_SUMMARY = STATS_BY_YEAR['2024']; // Default backward compatibility
+
+const FOUR_YEAR_TREND = [
+  {
+    "year": "2020년",
+    "accidents": 86,
+    "casualties": 91,
+    "fatalities": 10,
+    "severeInjuries": 81,
+    "fleet": 749845,
+    "rate": 1.15,
+    "userFault": 40
+  },
+  {
+    "year": "2021년",
+    "accidents": 75,
+    "casualties": 80,
+    "fatalities": 5,
+    "severeInjuries": 75,
+    "fleet": 780467,
+    "rate": 0.96,
+    "userFault": 23
+  },
+  {
+    "year": "2022년",
+    "accidents": 55,
+    "casualties": 56,
+    "fatalities": 4,
+    "severeInjuries": 52,
+    "fleet": 813446,
+    "rate": 0.68,
+    "userFault": 36
+  },
+  {
+    "year": "2023년",
+    "accidents": 42,
+    "casualties": 43,
+    "fatalities": 6,
+    "severeInjuries": 37,
+    "fleet": 840049,
+    "rate": 0.5,
+    "userFault": 19
+  }
 ];
 
-// 제6장 침수 상황 대응 요령 매뉴얼 데이터
+const POSTERS_DATA = [
+  {
+    "id": 1,
+    "page": 44,
+    "bookPage": 46,
+    "image": "images/page_44.png",
+    "title": "다중밀집시설 에스컬레이터 안전관리 요령",
+    "category": "다중밀집/압사예방",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 2,
+    "page": 45,
+    "bookPage": 47,
+    "image": "images/page_45.png",
+    "title": "에스컬레이터 중대사고(역주행 등) 발생 알림",
+    "category": "긴급알림",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 3,
+    "page": 46,
+    "bookPage": 48,
+    "image": "images/page_46.png",
+    "title": "손끼임·추락사고 예방 안내문",
+    "category": "이용자안전",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 4,
+    "page": 47,
+    "bookPage": 49,
+    "image": "images/page_47.png",
+    "title": "승강기 철거 작업 중 작업자 사망사고 예방대책",
+    "category": "작업자안전",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 5,
+    "page": 48,
+    "bookPage": 50,
+    "image": "images/page_48.png",
+    "title": "PLC 적용 엘리베이터 개문출발 안전사고 예방대책",
+    "category": "기술/부품안전",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 6,
+    "page": 49,
+    "bookPage": 51,
+    "image": "images/page_49.png",
+    "title": "승강기 개구부 추락방지 예방 안내문",
+    "category": "현장관리",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 7,
+    "page": 50,
+    "bookPage": 52,
+    "image": "images/page_50.png",
+    "title": "비·눈 내리는 날 에스컬레이터·무빙워크 미끄럼 주의보",
+    "category": "기상특보안전",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 8,
+    "page": 51,
+    "bookPage": 53,
+    "image": "images/page_51.png",
+    "title": "승강기 중대한 고장 예방 안내",
+    "category": "유지보수",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 9,
+    "page": 52,
+    "bookPage": 54,
+    "image": "images/page_52.png",
+    "title": "승강기 안전사고 예방 및 자체점검 요령",
+    "category": "자체점검",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 10,
+    "page": 53,
+    "bookPage": 55,
+    "image": "images/page_53.png",
+    "title": "VAC 모델 검사업무 시 제어반 변압기 점검 철저 안내",
+    "category": "전문검사",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 11,
+    "page": 54,
+    "bookPage": 56,
+    "image": "images/page_54.png",
+    "title": "출입문 안전회로 단락 위험 경고 안내문",
+    "category": "회로안전",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 12,
+    "page": 55,
+    "bookPage": 57,
+    "image": "images/page_55.png",
+    "title": "승강기 설치·교체 작업자 안전사고 예방수칙 포스터",
+    "category": "작업자안전",
+    "year": 2024,
+    "yearLabel": "2024 발간"
+  },
+  {
+    "id": 13,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 49,
+    "bookPage": 51,
+    "image": "images/2023/page_49.png",
+    "title": "에스컬레이터 역주행 및 긴급정지 안전관리",
+    "category": "긴급안전"
+  },
+  {
+    "id": 14,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 51,
+    "bookPage": 53,
+    "image": "images/2023/page_51.png",
+    "title": "다중밀집시설 에스컬레이터 안전이용 가이드",
+    "category": "다중밀집"
+  },
+  {
+    "id": 15,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 53,
+    "bookPage": 55,
+    "image": "images/2023/page_53.png",
+    "title": "눈·비 내리는 날 무빙워크·에스컬레이터 미끄럼 안전예보",
+    "category": "기상특보안전"
+  },
+  {
+    "id": 16,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 54,
+    "bookPage": 56,
+    "image": "images/2023/page_54.png",
+    "title": "여름철 냉각팬 먼지·이물질 제거로 제어반 부품 고장 예방",
+    "category": "유지보수"
+  },
+  {
+    "id": 17,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 55,
+    "bookPage": 57,
+    "image": "images/2023/page_55.png",
+    "title": "엘리베이터 카 상부 작업자 추락사고 예방대책",
+    "category": "작업자안전"
+  },
+  {
+    "id": 18,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 56,
+    "bookPage": 58,
+    "image": "images/2023/page_56.png",
+    "title": "작업 중 회전체 끼임 방지 및 작업자 10대 기본안전수칙",
+    "category": "작업자안전"
+  },
+  {
+    "id": 19,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 57,
+    "bookPage": 59,
+    "image": "images/2023/page_57.png",
+    "title": "에스컬레이터·무빙워크 핸드레일 손잡이 안전관리 요령",
+    "category": "부품/유지관리"
+  },
+  {
+    "id": 20,
+    "year": 2023,
+    "yearLabel": "2023 발간",
+    "page": 58,
+    "bookPage": 60,
+    "image": "images/2023/page_58.png",
+    "title": "비전문가 승강장문 강제개방 승강로 추락 방지 안전예보",
+    "category": "현장관리"
+  },
+  {
+    "id": 21,
+    "year": 2022,
+    "yearLabel": "2022 발간",
+    "page": 64,
+    "bookPage": 66,
+    "image": "images/2022/page_64.png",
+    "title": "반려동물과 함께 안전한 승강기 이용법 (목줄 끼임 예방)",
+    "category": "이용자안전"
+  },
+  {
+    "id": 22,
+    "year": 2022,
+    "yearLabel": "2022 발간",
+    "page": 65,
+    "bookPage": 67,
+    "image": "images/2022/page_65.png",
+    "title": "다중밀집시설 에스컬레이터 안전관리 요령",
+    "category": "다중밀집"
+  },
+  {
+    "id": 23,
+    "year": 2022,
+    "yearLabel": "2022 발간",
+    "page": 66,
+    "bookPage": 68,
+    "image": "images/2022/page_66.png",
+    "title": "작업자 회전체 끼임 위험요인 및 개선대책 안내문",
+    "category": "작업자안전"
+  },
+  {
+    "id": 24,
+    "year": 2022,
+    "yearLabel": "2022 발간",
+    "page": 67,
+    "bookPage": 69,
+    "image": "images/2022/page_67.png",
+    "title": "승강기 자체점검·보수 안내표지판 표준 설치 방법 안내",
+    "category": "현장관리"
+  },
+  {
+    "id": 25,
+    "year": 2022,
+    "yearLabel": "2022 발간",
+    "page": 68,
+    "bookPage": 70,
+    "image": "images/2022/page_68.png",
+    "title": "카 내부 인테리어 보양재 설치 시 비상통화장치 가림 방지 안내",
+    "category": "현장관리"
+  }
+];
+
 const FLOOD_GUIDELINES = [
   {
-    step: "01. 침수 대비",
-    title: "일상점검 및 사전 예방조치",
-    page: 58,
-    bookPage: 60,
-    image: "images/page_58.png",
-    points: [
+    "step": "01. 침수 대비",
+    "title": "일상점검 및 사전 예방조치",
+    "page": 58,
+    "bookPage": 60,
+    "image": "images/page_58.png",
+    "points": [
       "기상청 호우경보 및 태풍 예보 시 배수펌프 및 승강로 피트 집수정 작동 상태 점검",
       "외부 빗물이 기계실 및 승강장 문턱으로 유입되지 않도록 차수판 및 모래주머니 비치",
       "승강로 누수 여부 수시 점검 및 배수로 이물질 제거"
     ]
   },
   {
-    step: "02. 침수 예상 시",
-    title: "선제적 엘리베이터 대피 운행",
-    page: 59,
-    bookPage: 61,
-    image: "images/page_59.png",
-    points: [
+    "step": "02. 침수 예상 시",
+    "title": "선제적 엘리베이터 대피 운행",
+    "page": 59,
+    "bookPage": 61,
+    "image": "images/page_59.png",
+    "points": [
       "침수 위험 감지 시 즉시 카 내부 승객의 잔류 여부를 확인하고 전원 하차 유도",
       "카를 최상층(또는 침수 영향이 없는 고층부)으로 이동시켜 주차",
       "주전원 스위치를 차단(OFF)하고 운행 중지 안내 표지판 부착"
     ]
   },
   {
-    step: "03. 침수 발생 시",
-    title: "긴급 비상조치 및 감전 예방",
-    page: 60,
-    bookPage: 62,
-    image: "images/page_60.png",
-    points: [
+    "step": "03. 침수 발생 시",
+    "title": "긴급 비상조치 및 감전 예방",
+    "page": 60,
+    "bookPage": 62,
+    "image": "images/page_60.png",
+    "points": [
       "피트에 물이 차기 시작하면 즉시 기계실 주전원을 차단하여 감전 및 누전 화재 예방",
       "절대 침수된 승강기에 탑승하거나 운행을 재개하지 말 것",
       "피트 배수펌프를 가동하여 배수 작업을 실시하고 승강장 주변 접근 통제"
     ]
   },
   {
-    step: "04. 침수 피해 후",
-    title: "사후관리 및 정밀 안전진단",
-    page: 62,
-    bookPage: 64,
-    image: "images/page_62.png",
-    points: [
+    "step": "04. 침수 피해 후",
+    "title": "사후관리 및 정밀 안전진단",
+    "page": 62,
+    "bookPage": 64,
+    "image": "images/page_62.png",
+    "points": [
       "배수 완료 후 자연 건조 및 열풍 건조 실시 (임의 통전 절대 금지)",
       "유지관리업체 및 한국승강기안전공단의 정밀안전진단 및 절연저항 측정 완료 후 운행 재개",
       "침수된 주요 부품(완충기, 리미트스위치, 조속기 텐션풀리, 전선류) 교체 조치"
@@ -817,5 +8328,5 @@ const FLOOD_GUIDELINES = [
 ];
 
 if (typeof module !== 'undefined') {
-  module.exports = { CASES_DATA, STATS_SUMMARY, POSTERS_DATA, FLOOD_GUIDELINES };
+  module.exports = { CASES_DATA, STATS_BY_YEAR, STATS_SUMMARY, FOUR_YEAR_TREND, POSTERS_DATA, FLOOD_GUIDELINES };
 }
