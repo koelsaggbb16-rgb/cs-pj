@@ -16,12 +16,19 @@ const state = {
   filteredCases: [],
   zoomLevel: 1.0,
   currentModalType: "case", // 'case' | 'poster' | 'flood'
-  theme: localStorage.getItem("theme") || "light"
+  theme: localStorage.getItem("theme") || "light",
+  currentBriefingPartId: null,
+  currentMoveCaseId: null,
+  currentMoveSourcePartId: null,
+  addCaseSearchQuery: ""
 };
 
 // Initialize DOM elements
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
+  initPartMappings();
+  initCustomTitles();
+  await initCustomImages();
   renderYearTabs();
   renderTrendSection();
   renderPartsSection();
@@ -31,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPosters();
   renderFloodManual();
   setupEventListeners();
+  setupImageDragAndDrop();
 });
 
 /* ---------------- THEME TOGGLE ---------------- */
@@ -456,14 +464,18 @@ function renderCasesGrid() {
   container.innerHTML = state.filteredCases.map((c, index) => {
     const isFatal = c.severity === "사망";
     const yearBadgeClass = `badge-year-${c.bookYear}`;
+    const customImgBadge = c.customImage 
+      ? `<span class="badge-severity" style="background:#059669; color:white; border-color:#10b981;" title="사용자 등록 실제 사진">📷 실사</span>` 
+      : "";
     return `
       <article class="case-card" onclick="openCaseModal(${c.id})">
         <div class="case-thumb-wrap">
-          <img class="case-thumb-img" src="${c.image}" alt="${c.title}" loading="lazy" />
+          <img class="case-thumb-img" src="${c.customImage || c.image}" alt="${c.title}" loading="lazy" />
           <div class="thumb-tag-top">
             <span class="badge-year ${yearBadgeClass}">${c.bookYear} 사례집</span>
             <span class="badge-case-id">#${String(c.caseId || c.id)}</span>
             <span class="badge-severity ${c.severity}">${c.severity}</span>
+            ${customImgBadge}
           </div>
           <div class="thumb-overlay">
             <span class="thumb-page-num">${c.yearBadge || (c.bookYear + '년')} • p.${c.bookPage || c.page}</span>
@@ -481,7 +493,7 @@ function renderCasesGrid() {
             <span class="pill pill-cause">${c.causeType}</span>
           </div>
 
-          <h3 class="case-title">${c.title}</h3>
+          <h3 class="case-title">${c.customTitle || c.title}</h3>
           <p class="case-summary-text">${c.summary}</p>
 
           <div class="case-footer">
@@ -514,6 +526,7 @@ function openCaseModal(caseId) {
 }
 
 function renderCaseModalContent(c) {
+  state.currentViewingCaseId = c.id;
   // Title & Header
   document.getElementById("modalCategoryBadge").innerHTML = `
     <span class="badge-year badge-year-${c.bookYear}">${c.bookYear}년 발간</span>
@@ -521,16 +534,41 @@ function renderCaseModalContent(c) {
     <span>${c.elevatorType}</span> • 
     <span class="badge-severity ${c.severity}">${c.severity}</span>
   `;
-  document.getElementById("modalTitle").innerText = c.title;
+  document.getElementById("modalTitle").innerText = c.customTitle || c.title;
+  const btnResetCaseTitle = document.getElementById("btnResetCaseTitle");
+  if (btnResetCaseTitle) btnResetCaseTitle.style.display = c.customTitle ? "inline-flex" : "none";
 
   // Image side
   const imgEl = document.getElementById("modalDetailImg");
-  imgEl.src = c.image;
+  imgEl.src = c.customImage || c.image;
   imgEl.alt = c.title;
   imgEl.style.transform = `scale(1)`;
-  document.getElementById("modalPageIndicator").innerText = `${c.yearBadge || (c.bookYear + '년 사례집')} 원문 p.${c.bookPage || c.page}`;
+
+  const badgeCustom = document.getElementById("modalCustomImgBadge");
+  const btnReset = document.getElementById("btnResetCaseImg");
+  if (c.customImage) {
+    if (badgeCustom) badgeCustom.style.display = "flex";
+    if (btnReset) btnReset.style.display = "inline-flex";
+    document.getElementById("modalPageIndicator").innerText = `사용자 등록 실제 사진 (도서 원문 p.${c.bookPage || c.page})`;
+  } else {
+    if (badgeCustom) badgeCustom.style.display = "none";
+    if (btnReset) btnReset.style.display = "none";
+    document.getElementById("modalPageIndicator").innerText = `${c.yearBadge || (c.bookYear + '년 사례집')} 원문 p.${c.bookPage || c.page}`;
+  }
 
   // Info side: Table
+  const linkedParts = getLinkedPartsForCase(c.id);
+  let linkedPartHtml = "";
+  if (linkedParts.length > 0) {
+    linkedPartHtml = linkedParts.map(p => `
+      <span style="display:inline-flex; align-items:center; gap:0.25rem; background:rgba(37,99,235,0.12); color:#2563eb; padding:2px 8px; border-radius:4px; font-weight:700; font-size:0.8rem;">
+        ${p.icon} ${p.name}
+      </span>
+    `).join(" ");
+  } else {
+    linkedPartHtml = `<span style="color:var(--text-muted); font-size:0.8rem;">연계된 핵심 부품 없음</span>`;
+  }
+
   document.getElementById("modalInfoTable").innerHTML = `
     <div class="info-item">
       <span class="info-item-label">승강기 종류</span>
@@ -547,6 +585,15 @@ function renderCaseModalContent(c) {
     <div class="info-item">
       <span class="info-item-label">발간 및 발생 연도</span>
       <span class="info-item-value">${c.bookYear}년 발간 (${c.accidentYear}년 발생)</span>
+    </div>
+    <div class="info-item" style="grid-column: 1 / -1; background: rgba(37, 99, 235, 0.05); border: 1px dashed rgba(37, 99, 235, 0.3); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem;">
+      <span class="info-item-label" style="color: var(--primary); font-weight: 700;">연계 핵심 부품</span>
+      <div class="info-item-value" style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
+        <div>${linkedPartHtml}</div>
+        <button class="btn-change-part-badge" onclick="openMoveCaseFromDetailModal(${c.id})">
+          ⇄ 부품 변경/이동
+        </button>
+      </div>
     </div>
   `;
 
@@ -790,19 +837,23 @@ function renderPartsSection() {
   container.innerHTML = filteredParts.map(part => {
     const linkedCount = (part.linkedCaseIds && part.linkedCaseIds.length) || 0;
     const firstDefect = (part.inspectionPoints && part.inspectionPoints[0]) || "";
+    const customBadge = part.customImage 
+      ? `<span class="part-cat-badge" style="background:#059669; color:white; margin-left:auto;" title="사용자 등록 실제 부품 사진">📷 실사</span>`
+      : "";
     return `
       <article class="part-card" onclick="openPartBriefing('${part.id}')" tabindex="0" role="button" aria-label="${part.name} 안전검사 브리핑">
         <div class="part-thumb-wrap">
-          <img class="part-thumb-img" src="${part.image}" alt="${part.name}" loading="lazy" />
+          <img class="part-thumb-img" src="${part.customImage || part.image}" alt="${part.name}" loading="lazy" />
           <div class="part-overlay-tags">
             <span class="part-cat-badge">${part.categoryLabel}</span>
+            ${customBadge}
           </div>
         </div>
         <div class="part-body">
           <div class="part-header-wrap">
             <span class="part-icon">${part.icon}</span>
             <div class="part-title-box">
-              <h3 class="part-name">${part.name}</h3>
+              <h3 class="part-name">${part.customName || part.name}</h3>
               <div class="part-eng-name">${part.englishName}</div>
             </div>
           </div>
@@ -822,10 +873,52 @@ function renderPartsSection() {
   }).join("");
 }
 
+/* ---------------- COMPONENT INSPECTION BRIEFING & CASE MATCHING ---------------- */
+function initPartMappings() {
+  try {
+    const saved = localStorage.getItem("elevator_part_mappings");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (typeof PARTS_DATA !== "undefined" && Array.isArray(PARTS_DATA)) {
+        PARTS_DATA.forEach(part => {
+          if (Array.isArray(parsed[part.id])) {
+            part.linkedCaseIds = parsed[part.id];
+          } else if (typeof DEFAULT_PARTS_MAPPING !== "undefined" && DEFAULT_PARTS_MAPPING[part.id]) {
+            part.linkedCaseIds = [...DEFAULT_PARTS_MAPPING[part.id]];
+          }
+        });
+      }
+    }
+  } catch (e) {
+    console.error("Failed to load part mappings from localStorage", e);
+  }
+}
+
+function savePartMappings() {
+  try {
+    if (typeof PARTS_DATA === "undefined") return;
+    const mapping = {};
+    PARTS_DATA.forEach(p => {
+      mapping[p.id] = p.linkedCaseIds || [];
+    });
+    localStorage.setItem("elevator_part_mappings", JSON.stringify(mapping));
+    renderPartsSection();
+  } catch (e) {
+    console.error("Failed to save part mappings", e);
+  }
+}
+
+function getLinkedPartsForCase(caseId) {
+  if (typeof PARTS_DATA === "undefined") return [];
+  return PARTS_DATA.filter(p => p.linkedCaseIds && p.linkedCaseIds.includes(caseId));
+}
+
 function openPartBriefing(partId) {
   if (typeof PARTS_DATA === "undefined") return;
   const part = PARTS_DATA.find(p => p.id === partId);
   if (!part) return;
+
+  state.currentBriefingPartId = partId;
 
   const badgeEl = document.getElementById("briefingModalBadge");
   if (badgeEl) {
@@ -836,19 +929,32 @@ function openPartBriefing(partId) {
   }
 
   const titleEl = document.getElementById("briefingModalTitle");
-  if (titleEl) titleEl.innerHTML = `${part.icon} ${part.name}`;
+  if (titleEl) titleEl.innerHTML = `${part.icon} ${part.customName || part.name}`;
+
+  const btnResetBriefing = document.getElementById("btnResetBriefingTitle");
+  if (btnResetBriefing) btnResetBriefing.style.display = part.customName ? "inline-flex" : "none";
 
   const locEl = document.getElementById("briefingModalLocation");
   if (locEl) locEl.innerHTML = `📍 설치 및 점검 위치: ${part.location}`;
 
   const imgEl = document.getElementById("briefingModalImg");
   if (imgEl) {
-    imgEl.src = part.image;
+    imgEl.src = part.customImage || part.image;
     imgEl.alt = part.name;
   }
 
+  const badgeCustomPart = document.getElementById("briefingCustomImgBadge");
+  const btnResetPart = document.getElementById("btnResetPartImg");
+  if (part.customImage) {
+    if (badgeCustomPart) badgeCustomPart.style.display = "flex";
+    if (btnResetPart) btnResetPart.style.display = "inline-flex";
+  } else {
+    if (badgeCustomPart) badgeCustomPart.style.display = "none";
+    if (btnResetPart) btnResetPart.style.display = "none";
+  }
+
   const noteEl = document.getElementById("briefingModalImgNote");
-  if (noteEl) noteEl.innerText = part.diagramNote || "";
+  if (noteEl) noteEl.innerText = part.customImage ? "사용자 등록 부품 현장 사진" : (part.diagramNote || "");
 
   const sumEl = document.getElementById("briefingModalSummary");
   if (sumEl) sumEl.innerText = part.summary;
@@ -864,7 +970,17 @@ function openPartBriefing(partId) {
   const actionEl = document.getElementById("briefingModalAction");
   if (actionEl) actionEl.innerText = part.correctiveAction;
 
-  // Render linked cases
+  // Render linked cases list
+  renderBriefingLinkedCases(part);
+
+  const modal = document.getElementById("briefingModal");
+  if (modal) {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function renderBriefingLinkedCases(part) {
   const caseListEl = document.getElementById("briefingModalCasesList");
   const countEl = document.getElementById("briefingModalCaseCount");
   const linkedIds = part.linkedCaseIds || [];
@@ -873,31 +989,43 @@ function openPartBriefing(partId) {
 
   if (caseListEl) {
     if (linkedIds.length === 0) {
-      caseListEl.innerHTML = `<div style="color:var(--text-muted); padding:1rem; text-align:center;">연계된 사고 사례가 없습니다.</div>`;
+      caseListEl.innerHTML = `
+        <div style="background:var(--bg-card); border:1px dashed var(--border); border-radius:var(--radius-md); padding:2rem 1rem; text-align:center;">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">📂</div>
+          <div style="color:var(--text-main); font-weight:700; margin-bottom:0.25rem;">연계된 사고 사례가 없습니다</div>
+          <div style="color:var(--text-muted); font-size:0.8rem; margin-bottom:1rem;">상단의 [➕ 사례 추가] 버튼을 눌러 183건 사례 중 원하는 사고를 연계해 보세요.</div>
+          <button class="btn-briefing-tool primary" onclick="openAddCaseModal()">
+            ➕ 사고사례 연계 추가
+          </button>
+        </div>
+      `;
     } else {
       const linkedCases = linkedIds.map(id => CASES_DATA.find(c => c.id === id)).filter(Boolean);
       caseListEl.innerHTML = linkedCases.map(c => `
-        <div class="briefing-case-item" onclick="viewCaseFromBriefing(${c.id})" tabindex="0" role="button" aria-label="${c.title} 상세 보기">
-          <img class="briefing-case-img" src="${c.image}" alt="${c.title}" loading="lazy" />
-          <div class="briefing-case-info">
+        <div class="briefing-case-item">
+          <img class="briefing-case-img" src="${c.customImage || c.image}" alt="${c.title}" onclick="viewCaseFromBriefing(${c.id})" loading="lazy" />
+          <div class="briefing-case-content" onclick="viewCaseFromBriefing(${c.id})" tabindex="0" role="button" aria-label="${c.title} 상세 보기">
             <div class="briefing-case-top">
               <span class="badge-year badge-year-${c.bookYear}" style="font-size:0.65rem; padding:2px 6px;">${c.bookYear}년 발간</span>
               <span style="font-size:0.75rem; font-weight:700; color:var(--text-muted);">#${c.id}</span>
               <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">${c.elevatorType}</span>
               <span class="badge-severity ${c.severity}" style="font-size:0.65rem; padding:2px 6px; margin-left:auto;">${c.severity}</span>
+              ${c.customImage ? `<span class="badge-severity" style="background:#059669; color:white; font-size:0.6rem; padding:1px 5px;">📷 실사</span>` : ""}
             </div>
-            <div class="briefing-case-title">${c.title}</div>
+            <div class="briefing-case-title">${c.customTitle || c.title}</div>
             <div class="briefing-case-desc">${(c.description && c.description[0]) || c.summary || ""}</div>
+          </div>
+          <div class="briefing-case-actions">
+            <button class="btn-case-action" onclick="openMoveCaseModal(${c.id}, '${part.id}', event)" title="다른 핵심 부품으로 이동">
+              <span>⇄ 부품 이동</span>
+            </button>
+            <button class="btn-case-action unlink" onclick="unlinkCaseFromPart(${c.id}, '${part.id}', event)" title="이 부품에서 연계 해제">
+              <span>✕ 해제</span>
+            </button>
           </div>
         </div>
       `).join("");
     }
-  }
-
-  const modal = document.getElementById("briefingModal");
-  if (modal) {
-    modal.classList.add("open");
-    document.body.style.overflow = "hidden";
   }
 }
 
@@ -907,6 +1035,7 @@ function closePartBriefing() {
     modal.classList.remove("open");
     document.body.style.overflow = "";
   }
+  state.currentBriefingPartId = null;
 }
 
 function viewCaseFromBriefing(caseId) {
@@ -914,6 +1043,691 @@ function viewCaseFromBriefing(caseId) {
   setTimeout(() => {
     openCaseModal(caseId);
   }, 150);
+}
+
+/* ---------------- CASE MOVEMENT MODAL ---------------- */
+function openMoveCaseModal(caseId, sourcePartId, event) {
+  if (event) event.stopPropagation();
+  state.currentMoveCaseId = caseId;
+  state.currentMoveSourcePartId = sourcePartId || null;
+
+  const c = CASES_DATA.find(x => x.id === caseId);
+  if (!c) return;
+
+  const infoEl = document.getElementById("moveModalTargetInfo");
+  if (infoEl) {
+    infoEl.innerText = `사례 #${c.id} 「${c.customTitle || c.title}」 (${c.elevatorType} / ${c.accidentType})`;
+  }
+
+  // Render EL & ES parts
+  renderMovePartButtons("movePartListEL", "EL", sourcePartId, caseId);
+  renderMovePartButtons("movePartListES", "ES", sourcePartId, caseId);
+
+  const modal = document.getElementById("moveCaseModal");
+  if (modal) {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function renderMovePartButtons(containerId, category, currentPartId, caseId) {
+  const container = document.getElementById(containerId);
+  if (!container || typeof PARTS_DATA === "undefined") return;
+
+  const parts = PARTS_DATA.filter(p => p.category === category);
+  container.innerHTML = parts.map(p => {
+    const isCurrent = p.id === currentPartId;
+    const count = (p.linkedCaseIds && p.linkedCaseIds.length) || 0;
+    return `
+      <button class="move-part-btn ${isCurrent ? 'current' : ''}" 
+              onclick="${isCurrent ? '' : `moveCaseToPart(${caseId}, '${p.id}', '${currentPartId || ''}')`}">
+        <span style="font-size:1.15rem;">${p.icon}</span>
+        <div style="flex-grow:1; min-width:0;">
+          <div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.customName || p.name}</div>
+          <div style="font-size:0.7rem; color:var(--text-muted); font-weight:normal; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.englishName}</div>
+        </div>
+        <span class="move-part-badge">${isCurrent ? '현재 위치' : (count + '건')}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function closeMoveCaseModal() {
+  const modal = document.getElementById("moveCaseModal");
+  if (modal) {
+    modal.classList.remove("open");
+    // If briefing modal or case modal is still open, keep body overflow hidden
+    const briefingOpen = document.getElementById("briefingModal")?.classList.contains("open");
+    const caseOpen = document.getElementById("caseModal")?.classList.contains("open");
+    if (!briefingOpen && !caseOpen) {
+      document.body.style.overflow = "";
+    }
+  }
+  state.currentMoveCaseId = null;
+  state.currentMoveSourcePartId = null;
+}
+
+function openMoveCaseFromDetailModal(caseId) {
+  const linked = getLinkedPartsForCase(caseId);
+  const sourcePartId = linked.length > 0 ? linked[0].id : null;
+  openMoveCaseModal(caseId, sourcePartId);
+}
+
+function moveCaseToPart(caseId, targetPartId, sourcePartId) {
+  const targetPart = PARTS_DATA.find(p => p.id === targetPartId);
+  if (!targetPart) return;
+
+  // Remove from source part (or from all parts if re-assigning)
+  if (sourcePartId) {
+    const sourcePart = PARTS_DATA.find(p => p.id === sourcePartId);
+    if (sourcePart && sourcePart.linkedCaseIds) {
+      sourcePart.linkedCaseIds = sourcePart.linkedCaseIds.filter(id => id !== caseId);
+    }
+  } else {
+    // If source not specified, remove from any current part
+    PARTS_DATA.forEach(p => {
+      if (p.linkedCaseIds) {
+        p.linkedCaseIds = p.linkedCaseIds.filter(id => id !== caseId);
+      }
+    });
+  }
+
+  // Add to target part
+  if (!targetPart.linkedCaseIds) targetPart.linkedCaseIds = [];
+  if (!targetPart.linkedCaseIds.includes(caseId)) {
+    targetPart.linkedCaseIds.push(caseId);
+  }
+
+  // Save to localStorage and update main UI
+  savePartMappings();
+  closeMoveCaseModal();
+
+  // If briefing modal is open, refresh its linked list
+  if (state.currentBriefingPartId) {
+    const currentPart = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+    if (currentPart) renderBriefingLinkedCases(currentPart);
+  }
+
+  // If case detail modal is open, refresh its content
+  const caseModal = document.getElementById("caseModal");
+  if (caseModal && caseModal.classList.contains("open")) {
+    const caseObj = CASES_DATA.find(c => c.id === caseId);
+    if (caseObj) renderCaseModalContent(caseObj);
+  }
+
+  showToast(`✅ 사례 #${caseId}이(가) 「${targetPart.name}」 부품으로 이동되었습니다.`, 'success');
+}
+
+function unlinkCaseFromPart(caseId, partId, event) {
+  if (event) event.stopPropagation();
+  const part = PARTS_DATA.find(p => p.id === partId);
+  if (!part) return;
+
+  part.linkedCaseIds = (part.linkedCaseIds || []).filter(id => id !== caseId);
+  savePartMappings();
+  renderBriefingLinkedCases(part);
+
+  showToast(`🗑️ 사례 #${caseId}의 연계가 해제되었습니다.`, 'info');
+}
+
+/* ---------------- ADD CASE TO PART MODAL ---------------- */
+function openAddCaseModal() {
+  const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+  if (!part) return;
+
+  const infoEl = document.getElementById("addModalTargetPartInfo");
+  if (infoEl) {
+    infoEl.innerHTML = `${part.icon} 목표 부품: ${part.name} <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(${part.categoryLabel})</span>`;
+  }
+
+  const searchInput = document.getElementById("addCaseSearchInput");
+  if (searchInput) {
+    searchInput.value = "";
+    state.addCaseSearchQuery = "";
+  }
+
+  renderAddCaseCandidates(part);
+
+  const modal = document.getElementById("addCaseModal");
+  if (modal) {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeAddCaseModal() {
+  const modal = document.getElementById("addCaseModal");
+  if (modal) {
+    modal.classList.remove("open");
+    const briefingOpen = document.getElementById("briefingModal")?.classList.contains("open");
+    if (!briefingOpen) {
+      document.body.style.overflow = "";
+    }
+  }
+}
+
+function renderAddCaseCandidates(part) {
+  const container = document.getElementById("addCaseCandidatesList");
+  const countEl = document.getElementById("addCaseCandidatesCount");
+  if (!container) return;
+
+  const q = (state.addCaseSearchQuery || "").toLowerCase().trim();
+  const linkedIds = part.linkedCaseIds || [];
+
+  const candidates = CASES_DATA.filter(c => {
+    if (q === "") {
+      // Default: match elevator category first or show all
+      return true;
+    }
+    const matchTitle = (c.customTitle ? (c.customTitle.toLowerCase().includes(q) || c.title.toLowerCase().includes(q)) : c.title.toLowerCase().includes(q));
+    const matchSummary = (c.summary || "").toLowerCase().includes(q);
+    const matchElev = c.elevatorType.toLowerCase().includes(q);
+    const matchAcc = c.accidentType.toLowerCase().includes(q);
+    const matchTags = c.tags ? c.tags.some(t => t.toLowerCase().includes(q)) : false;
+    const matchYear = String(c.bookYear).includes(q) || String(c.accidentYear).includes(q);
+    const matchId = String(c.id) === q;
+
+    return matchTitle || matchSummary || matchElev || matchAcc || matchTags || matchYear || matchId;
+  });
+
+  if (countEl) {
+    countEl.innerText = `검색 결과: ${candidates.length}건 (현재 연계: ${linkedIds.length}건)`;
+  }
+
+  if (candidates.length === 0) {
+    container.innerHTML = `
+      <div style="color:var(--text-muted); text-align:center; padding:2rem 1rem;">
+        검색 결과와 일치하는 사고 사례가 없습니다.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = candidates.map(c => {
+    const isAlreadyLinked = linkedIds.includes(c.id);
+    const otherParts = getLinkedPartsForCase(c.id).filter(p => p.id !== part.id);
+    let otherPartBadge = "";
+    if (otherParts.length > 0) {
+      otherPartBadge = `<span style="font-size:0.68rem; color:#f59e0b; background:rgba(245,158,11,0.12); padding:1px 5px; border-radius:3px;">현재: ${otherParts[0].customName || otherParts[0].name}</span>`;
+    }
+
+    return `
+      <div class="add-candidate-item">
+        <img class="add-candidate-img" src="${c.customImage || c.image}" alt="${c.title}" loading="lazy" />
+        <div class="add-candidate-info">
+          <div class="add-candidate-top">
+            <span class="badge-year badge-year-${c.bookYear}" style="font-size:0.65rem; padding:1px 5px;">${c.bookYear}년</span>
+            <span style="font-weight:700; color:var(--text-muted);">#${c.id}</span>
+            <span style="color:var(--primary); font-weight:700;">${c.elevatorType}</span>
+            <span class="badge-severity ${c.severity}" style="font-size:0.65rem; padding:1px 5px;">${c.severity}</span>
+            ${otherPartBadge}
+          </div>
+          <div class="add-candidate-title" title="${c.customTitle || c.title}">${c.customTitle || c.title}</div>
+        </div>
+        <div class="add-candidate-action">
+          ${isAlreadyLinked ? `
+            <button class="btn-add-candidate already" disabled>✓ 연계됨</button>
+          ` : `
+            <button class="btn-add-candidate" onclick="addCaseToPart(${c.id}, '${part.id}')">
+              ➕ 연계 추가
+            </button>
+          `}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function addCaseToPart(caseId, partId) {
+  const part = PARTS_DATA.find(p => p.id === partId);
+  if (!part) return;
+
+  if (!part.linkedCaseIds) part.linkedCaseIds = [];
+  if (!part.linkedCaseIds.includes(caseId)) {
+    part.linkedCaseIds.push(caseId);
+  }
+
+  savePartMappings();
+  renderBriefingLinkedCases(part);
+  renderAddCaseCandidates(part);
+
+  showToast(`➕ 사례 #${caseId}이(가) 「${part.name}」에 연계 추가되었습니다.`, 'success');
+}
+
+/* ---------------- RESET & EXPORT MAPPINGS ---------------- */
+function resetCurrentPartMapping() {
+  const partId = state.currentBriefingPartId;
+  if (!partId) return;
+
+  if (typeof DEFAULT_PARTS_MAPPING === "undefined") return;
+  const part = PARTS_DATA.find(p => p.id === partId);
+  if (!part) return;
+
+  const defaultIds = DEFAULT_PARTS_MAPPING[partId] || [];
+  part.linkedCaseIds = [...defaultIds];
+
+  savePartMappings();
+  renderBriefingLinkedCases(part);
+
+  showToast(`⟲ 「${part.name}」의 사례 연계가 기본 설정으로 복원되었습니다.`, 'info');
+}
+
+function resetAllPartMappings() {
+  if (!confirm("모든 핵심 부품의 사고사례 매칭을 기본 설정값으로 초기화하시겠습니까?")) return;
+
+  localStorage.removeItem("elevator_part_mappings");
+  if (typeof DEFAULT_PARTS_MAPPING !== "undefined") {
+    PARTS_DATA.forEach(p => {
+      p.linkedCaseIds = [...(DEFAULT_PARTS_MAPPING[p.id] || [])];
+    });
+  }
+
+  savePartMappings();
+
+  if (state.currentBriefingPartId) {
+    const cp = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+    if (cp) renderBriefingLinkedCases(cp);
+  }
+
+  showToast("⟲ 모든 부품의 사고사례 매칭이 기본값으로 초기화되었습니다.", 'info');
+}
+
+function exportPartMappings() {
+  const mapping = {};
+  PARTS_DATA.forEach(p => {
+    mapping[p.id] = p.linkedCaseIds || [];
+  });
+  const jsonStr = JSON.stringify(mapping, null, 2);
+
+  const textarea = document.getElementById("exportJsonTextarea");
+  if (textarea) textarea.value = jsonStr;
+
+  const modal = document.getElementById("exportModal");
+  if (modal) {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeExportModal() {
+  const modal = document.getElementById("exportModal");
+  if (modal) {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+}
+
+function copyExportJson() {
+  const textarea = document.getElementById("exportJsonTextarea");
+  if (textarea) {
+    textarea.select();
+    navigator.clipboard.writeText(textarea.value).then(() => {
+      showToast("📋 매칭 JSON 데이터가 클립보드에 복사되었습니다.", 'success');
+    }).catch(() => {
+      document.execCommand("copy");
+      showToast("📋 클립보드에 복사되었습니다.", 'success');
+    });
+  }
+}
+
+function downloadExportJson() {
+  const textarea = document.getElementById("exportJsonTextarea");
+  if (!textarea) return;
+
+  const blob = new Blob([textarea.value], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `elevator_parts_case_mapping_${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast("⬇️ 매칭 JSON 파일이 다운로드되었습니다.", 'success');
+}
+
+/* ---------------- INDEXEDDB IMAGE STORAGE & UPLOAD SYSTEM ---------------- */
+const IMAGE_DB_NAME = "ElevatorCustomImageStore";
+const IMAGE_DB_VERSION = 1;
+const IMAGE_STORE_NAME = "custom_images";
+
+function openImageDB() {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined" || !window.indexedDB) {
+      resolve(null);
+      return;
+    }
+    const request = indexedDB.open(IMAGE_DB_NAME, IMAGE_DB_VERSION);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(IMAGE_STORE_NAME)) {
+        db.createObjectStore(IMAGE_STORE_NAME, { keyPath: "key" });
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveCustomImageDB(key, dataUrl, filename) {
+  try {
+    const db = await openImageDB();
+    if (!db) {
+      localStorage.setItem("custom_img_" + key, dataUrl);
+      return true;
+    }
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IMAGE_STORE_NAME, "readwrite");
+      const store = tx.objectStore(IMAGE_STORE_NAME);
+      store.put({ key, dataUrl, filename: filename || "image", updatedAt: new Date().toISOString() });
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => reject(tx.error);
+    });
+  } catch (err) {
+    console.warn("IndexedDB save failed, fallback to localStorage", err);
+    try {
+      localStorage.setItem("custom_img_" + key, dataUrl);
+    } catch(e) {}
+    return true;
+  }
+}
+
+async function removeCustomImageDB(key) {
+  try {
+    const db = await openImageDB();
+    if (!db) {
+      localStorage.removeItem("custom_img_" + key);
+      return true;
+    }
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IMAGE_STORE_NAME, "readwrite");
+      const store = tx.objectStore(IMAGE_STORE_NAME);
+      store.delete(key);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => reject(tx.error);
+    });
+  } catch (err) {
+    localStorage.removeItem("custom_img_" + key);
+    return true;
+  }
+}
+
+async function getAllCustomImagesDB() {
+  try {
+    const db = await openImageDB();
+    if (!db) {
+      const items = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith("custom_img_")) {
+          items.push({ key: k.replace("custom_img_", ""), dataUrl: localStorage.getItem(k) });
+        }
+      }
+      return items;
+    }
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IMAGE_STORE_NAME, "readonly");
+      const store = tx.objectStore(IMAGE_STORE_NAME);
+      const req = store.getAll();
+      req.onsuccess = () => resolve(req.result || []);
+      req.onerror = () => reject(req.error);
+    });
+  } catch (err) {
+    console.warn("Failed to get all custom images", err);
+    return [];
+  }
+}
+
+async function initCustomImages() {
+  try {
+    const all = await getAllCustomImagesDB();
+    if (!all || all.length === 0) return;
+
+    all.forEach(item => {
+      if (item.key.startsWith("case_")) {
+        const cid = parseInt(item.key.replace("case_", ""), 10);
+        const c = CASES_DATA.find(x => x.id === cid);
+        if (c) c.customImage = item.dataUrl;
+      } else if (item.key.startsWith("part_")) {
+        const pid = item.key.replace("part_", "");
+        const p = PARTS_DATA.find(x => x.id === pid);
+        if (p) p.customImage = item.dataUrl;
+      }
+    });
+  } catch (err) {
+    console.error("Failed to init custom images", err);
+  }
+}
+
+/* --- Case Image Upload & Reset --- */
+function triggerCaseImageUpload() {
+  const input = document.getElementById("caseImageFileInput");
+  if (input) {
+    input.value = "";
+    input.click();
+  }
+}
+
+function handleCaseImageUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  processCaseImageFile(file);
+}
+
+function processCaseImageFile(file) {
+  if (!file.type.startsWith("image/")) {
+    showToast("⚠️ 이미지 파일(PNG, JPG, WebP 등)만 업로드할 수 있습니다.", "warning");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const dataUrl = e.target.result;
+    const navList = state.filteredCases.length > 0 ? state.filteredCases : CASES_DATA;
+    const currentCase = navList[state.currentCaseIndex];
+    if (!currentCase) return;
+
+    currentCase.customImage = dataUrl;
+    await saveCustomImageDB("case_" + currentCase.id, dataUrl, file.name);
+
+    renderCaseModalContent(currentCase);
+    renderCasesGrid();
+
+    // If briefing modal is open, refresh linked cases
+    if (state.currentBriefingPartId) {
+      const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+      if (part) renderBriefingLinkedCases(part);
+    }
+
+    showToast(`📷 사례 #${currentCase.id}의 실제 사진이 성공적으로 업로드되었습니다.`, "success");
+  };
+  reader.readAsDataURL(file);
+}
+
+async function resetCaseImageToDefault() {
+  const navList = state.filteredCases.length > 0 ? state.filteredCases : CASES_DATA;
+  const currentCase = navList[state.currentCaseIndex];
+  if (!currentCase) return;
+
+  if (!confirm(`사례 #${currentCase.id}의 등록된 실제 사진을 삭제하고 공단 기본 도해도로 복원하시겠습니까?`)) {
+    return;
+  }
+
+  delete currentCase.customImage;
+  await removeCustomImageDB("case_" + currentCase.id);
+
+  renderCaseModalContent(currentCase);
+  renderCasesGrid();
+
+  if (state.currentBriefingPartId) {
+    const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+    if (part) renderBriefingLinkedCases(part);
+  }
+
+  showToast(`⟲ 사례 #${currentCase.id}의 이미지가 기본 도해도로 복원되었습니다.`, "info");
+}
+
+/* --- Part Image Upload & Reset --- */
+function triggerPartImageUpload() {
+  const input = document.getElementById("partImageFileInput");
+  if (input) {
+    input.value = "";
+    input.click();
+  }
+}
+
+function handlePartImageUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  processPartImageFile(file);
+}
+
+function processPartImageFile(file) {
+  if (!file.type.startsWith("image/")) {
+    showToast("⚠️ 이미지 파일(PNG, JPG, WebP 등)만 업로드할 수 있습니다.", "warning");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const dataUrl = e.target.result;
+    const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+    if (!part) return;
+
+    part.customImage = dataUrl;
+    await saveCustomImageDB("part_" + part.id, dataUrl, file.name);
+
+    // Refresh briefing modal image
+    const imgEl = document.getElementById("briefingModalImg");
+    if (imgEl) imgEl.src = dataUrl;
+
+    const badgeCustomPart = document.getElementById("briefingCustomImgBadge");
+    const btnResetPart = document.getElementById("btnResetPartImg");
+    if (badgeCustomPart) badgeCustomPart.style.display = "flex";
+    if (btnResetPart) btnResetPart.style.display = "inline-flex";
+
+    const noteEl = document.getElementById("briefingModalImgNote");
+    if (noteEl) noteEl.innerText = "사용자 등록 부품 현장 사진";
+
+    renderPartsSection();
+    showToast(`📷 「${part.name}」 부품 실제 사진이 성공적으로 업로드되었습니다.`, "success");
+  };
+  reader.readAsDataURL(file);
+}
+
+async function resetPartImageToDefault() {
+  const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+  if (!part) return;
+
+  if (!confirm(`「${part.name}」의 등록된 실제 사진을 삭제하고 공단 기본 구조도로 복원하시겠습니까?`)) {
+    return;
+  }
+
+  delete part.customImage;
+  await removeCustomImageDB("part_" + part.id);
+
+  const imgEl = document.getElementById("briefingModalImg");
+  if (imgEl) imgEl.src = part.image;
+
+  const badgeCustomPart = document.getElementById("briefingCustomImgBadge");
+  const btnResetPart = document.getElementById("btnResetPartImg");
+  if (badgeCustomPart) badgeCustomPart.style.display = "none";
+  if (btnResetPart) btnResetPart.style.display = "none";
+
+  const noteEl = document.getElementById("briefingModalImgNote");
+  if (noteEl) noteEl.innerText = part.diagramNote || "";
+
+  renderPartsSection();
+  showToast(`⟲ 「${part.name}」 이미지가 기본 구조도로 복원되었습니다.`, "info");
+}
+
+/* --- Drag & Drop Setup --- */
+function setupImageDragAndDrop() {
+  // Case Modal Dropzone
+  const caseDropArea = document.getElementById("modalImgContainer");
+  const caseDropOverlay = document.getElementById("modalDropOverlay");
+
+  if (caseDropArea && caseDropOverlay) {
+    ['dragenter', 'dragover'].forEach(name => {
+      caseDropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        caseDropOverlay.classList.add("active");
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      caseDropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        caseDropOverlay.classList.remove("active");
+      });
+    });
+
+    caseDropArea.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const file = dt && dt.files && dt.files[0];
+      if (file) {
+        processCaseImageFile(file);
+      }
+    });
+  }
+
+  // Part Modal Dropzone
+  const partDropArea = document.getElementById("briefingImgBox");
+  const partDropOverlay = document.getElementById("briefingDropOverlay");
+
+  if (partDropArea && partDropOverlay) {
+    ['dragenter', 'dragover'].forEach(name => {
+      partDropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        partDropOverlay.classList.add("active");
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      partDropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        partDropOverlay.classList.remove("active");
+      });
+    });
+
+    partDropArea.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const file = dt && dt.files && dt.files[0];
+      if (file) {
+        processPartImageFile(file);
+      }
+    });
+  }
+}
+
+/* ---------------- TOAST NOTIFICATION ---------------- */
+let toastTimeout = null;
+function showToast(message, type = 'success') {
+  const toast = document.getElementById("toastNotification");
+  const msgEl = document.getElementById("toastMessage");
+  const iconEl = document.getElementById("toastIcon");
+
+  if (!toast || !msgEl) return;
+
+  if (toastTimeout) clearTimeout(toastTimeout);
+
+  msgEl.innerText = message;
+  toast.className = `toast-notification show ${type}`;
+
+  if (iconEl) {
+    if (type === 'success') iconEl.innerText = "✅";
+    else if (type === 'info') iconEl.innerText = "ℹ️";
+    else if (type === 'warning') iconEl.innerText = "⚠️";
+  }
+
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3200);
 }
 
 /* ---------------- EVENT LISTENERS ---------------- */
@@ -927,24 +1741,52 @@ function setupEventListeners() {
     });
   }
 
+  // Add Case Candidate Search Input
+  const addCaseSearchInput = document.getElementById("addCaseSearchInput");
+  if (addCaseSearchInput) {
+    addCaseSearchInput.addEventListener("input", (e) => {
+      state.addCaseSearchQuery = e.target.value;
+      if (state.currentBriefingPartId) {
+        const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+        if (part) renderAddCaseCandidates(part);
+      }
+    });
+  }
+
   // Keyboard Navigation
   document.addEventListener("keydown", (e) => {
-    const caseModal = document.getElementById("caseModal");
-    const isCaseModalOpen = caseModal && caseModal.classList.contains("open");
+    const moveModal = document.getElementById("moveCaseModal");
+    const isMoveOpen = moveModal && moveModal.classList.contains("open");
+
+    const addModal = document.getElementById("addCaseModal");
+    const isAddOpen = addModal && addModal.classList.contains("open");
+
+    const exportModal = document.getElementById("exportModal");
+    const isExportOpen = exportModal && exportModal.classList.contains("open");
+
     const briefingModal = document.getElementById("briefingModal");
     const isBriefingOpen = briefingModal && briefingModal.classList.contains("open");
 
+    const caseModal = document.getElementById("caseModal");
+    const isCaseModalOpen = caseModal && caseModal.classList.contains("open");
+
     if (e.key === "Escape") {
-      if (isCaseModalOpen) {
+      if (isMoveOpen) {
+        closeMoveCaseModal();
+      } else if (isAddOpen) {
+        closeAddCaseModal();
+      } else if (isExportOpen) {
+        closeExportModal();
+      } else if (isCaseModalOpen) {
         closeModal();
       } else if (isBriefingOpen) {
         closePartBriefing();
       }
-    } else if (e.key === "ArrowLeft" && isCaseModalOpen && state.currentModalType === "case") {
+    } else if (e.key === "ArrowLeft" && isCaseModalOpen && state.currentModalType === "case" && !isMoveOpen) {
       prevCase();
-    } else if (e.key === "ArrowRight" && isCaseModalOpen && state.currentModalType === "case") {
+    } else if (e.key === "ArrowRight" && isCaseModalOpen && state.currentModalType === "case" && !isMoveOpen) {
       nextCase();
-    } else if (e.key === "/" && !isCaseModalOpen && !isBriefingOpen && document.activeElement !== searchInput) {
+    } else if (e.key === "/" && !isCaseModalOpen && !isBriefingOpen && !isMoveOpen && !isAddOpen && document.activeElement !== searchInput) {
       e.preventDefault();
       if (searchInput) {
         searchInput.focus();
@@ -953,22 +1795,181 @@ function setupEventListeners() {
     }
   });
 
-  // Modal Backdrop Click
+  // Modal Backdrop Clicks
   const caseModalBackdrop = document.getElementById("caseModal");
   if (caseModalBackdrop) {
     caseModalBackdrop.addEventListener("click", (e) => {
-      if (e.target === caseModalBackdrop) {
-        closeModal();
-      }
+      if (e.target === caseModalBackdrop) closeModal();
     });
   }
 
   const briefingModalBackdrop = document.getElementById("briefingModal");
   if (briefingModalBackdrop) {
     briefingModalBackdrop.addEventListener("click", (e) => {
-      if (e.target === briefingModalBackdrop) {
-        closePartBriefing();
-      }
+      if (e.target === briefingModalBackdrop) closePartBriefing();
+    });
+  }
+
+  const moveModalBackdrop = document.getElementById("moveCaseModal");
+  if (moveModalBackdrop) {
+    moveModalBackdrop.addEventListener("click", (e) => {
+      if (e.target === moveModalBackdrop) closeMoveCaseModal();
+    });
+  }
+
+  const addModalBackdrop = document.getElementById("addCaseModal");
+  if (addModalBackdrop) {
+    addModalBackdrop.addEventListener("click", (e) => {
+      if (e.target === addModalBackdrop) closeAddCaseModal();
+    });
+  }
+
+  const exportModalBackdrop = document.getElementById("exportModal");
+  if (exportModalBackdrop) {
+    exportModalBackdrop.addEventListener("click", (e) => {
+      if (e.target === exportModalBackdrop) closeExportModal();
     });
   }
 }
+
+/* ---------------- CUSTOM TITLES MANAGEMENT ---------------- */
+function initCustomTitles() {
+  try {
+    const saved = localStorage.getItem("elevator_custom_titles");
+    if (!saved) return;
+    const data = JSON.parse(saved);
+    if (data.cases && typeof CASES_DATA !== "undefined") {
+      Object.keys(data.cases).forEach(id => {
+        const c = CASES_DATA.find(x => x.id === parseInt(id, 10));
+        if (c) c.customTitle = data.cases[id];
+      });
+    }
+    if (data.parts && typeof PARTS_DATA !== "undefined") {
+      Object.keys(data.parts).forEach(id => {
+        const p = PARTS_DATA.find(x => x.id === id);
+        if (p) p.customName = data.parts[id];
+      });
+    }
+  } catch (e) {
+    console.error("Error loading custom titles:", e);
+  }
+}
+
+function saveCustomTitles() {
+  try {
+    const data = { cases: {}, parts: {} };
+    if (typeof CASES_DATA !== "undefined") {
+      CASES_DATA.forEach(c => {
+        if (c.customTitle) data.cases[c.id] = c.customTitle;
+      });
+    }
+    if (typeof PARTS_DATA !== "undefined") {
+      PARTS_DATA.forEach(p => {
+        if (p.customName) data.parts[p.id] = p.customName;
+      });
+    }
+    localStorage.setItem("elevator_custom_titles", JSON.stringify(data));
+  } catch (e) {
+    console.error("Error saving custom titles:", e);
+  }
+}
+
+function editBriefingTitle() {
+  if (typeof PARTS_DATA === "undefined") return;
+  const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+  if (!part) return;
+
+  const currentTitle = part.customName || part.name;
+  const newTitle = prompt("수정할 부품 브리핑 제목(부품명)을 입력하세요:", currentTitle);
+  if (newTitle !== null && newTitle.trim() !== "" && newTitle.trim() !== currentTitle) {
+    part.customName = newTitle.trim();
+    saveCustomTitles();
+
+    const titleEl = document.getElementById("briefingModalTitle");
+    if (titleEl) titleEl.innerHTML = `${part.icon} ${part.customName}`;
+
+    const btnReset = document.getElementById("btnResetBriefingTitle");
+    if (btnReset) btnReset.style.display = "inline-flex";
+
+    renderPartsSection();
+    showToast(`✏️ 부품 브리핑 제목이 「${part.customName}」(으)로 수정되었습니다.`, "success");
+  }
+}
+
+function resetBriefingTitle() {
+  if (typeof PARTS_DATA === "undefined") return;
+  const part = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+  if (!part) return;
+
+  if (!confirm(`「${part.customName}」 제목을 기본 부품명(「${part.name}」)으로 복원하시겠습니까?`)) {
+    return;
+  }
+
+  delete part.customName;
+  saveCustomTitles();
+
+  const titleEl = document.getElementById("briefingModalTitle");
+  if (titleEl) titleEl.innerHTML = `${part.icon} ${part.name}`;
+
+  const btnReset = document.getElementById("btnResetBriefingTitle");
+  if (btnReset) btnReset.style.display = "none";
+
+  renderPartsSection();
+  showToast(`⟲ 「${part.name}」 기본 제목으로 복원되었습니다.`, "info");
+}
+
+function editCaseTitle() {
+  if (typeof CASES_DATA === "undefined") return;
+  const currentCase = (state.currentViewingCaseId ? CASES_DATA.find(c => c.id === state.currentViewingCaseId) : null)
+    || (state.filteredCases.length > 0 ? state.filteredCases[state.currentCaseIndex] : CASES_DATA[state.currentCaseIndex]);
+  if (!currentCase) return;
+
+  const currentTitle = currentCase.customTitle || currentCase.title;
+  const newTitle = prompt("수정할 사고 브리핑 제목을 입력하세요:", currentTitle);
+  if (newTitle !== null && newTitle.trim() !== "" && newTitle.trim() !== currentTitle) {
+    currentCase.customTitle = newTitle.trim();
+    saveCustomTitles();
+
+    const titleEl = document.getElementById("modalTitle");
+    if (titleEl) titleEl.innerText = currentCase.customTitle;
+
+    const btnReset = document.getElementById("btnResetCaseTitle");
+    if (btnReset) btnReset.style.display = "inline-flex";
+
+    renderCasesGrid();
+    if (state.currentBriefingPartId) {
+      const cp = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+      if (cp) renderBriefingLinkedCases(cp);
+    }
+    showToast(`✏️ 사례 #${currentCase.id} 제목이 수정되었습니다.`, "success");
+  }
+}
+
+function resetCaseTitle() {
+  if (typeof CASES_DATA === "undefined") return;
+  const currentCase = (state.currentViewingCaseId ? CASES_DATA.find(c => c.id === state.currentViewingCaseId) : null)
+    || (state.filteredCases.length > 0 ? state.filteredCases[state.currentCaseIndex] : CASES_DATA[state.currentCaseIndex]);
+  if (!currentCase) return;
+
+  if (!confirm(`사례 #${currentCase.id}의 제목을 도서 기본 제목(「${currentCase.title}」)으로 복원하시겠습니까?`)) {
+    return;
+  }
+
+  delete currentCase.customTitle;
+  saveCustomTitles();
+
+  const titleEl = document.getElementById("modalTitle");
+  if (titleEl) titleEl.innerText = currentCase.title;
+
+  const btnReset = document.getElementById("btnResetCaseTitle");
+  if (btnReset) btnReset.style.display = "none";
+
+  renderCasesGrid();
+  if (state.currentBriefingPartId) {
+    const cp = PARTS_DATA.find(p => p.id === state.currentBriefingPartId);
+    if (cp) renderBriefingLinkedCases(cp);
+  }
+  showToast(`⟲ 도서 기본 사고 제목으로 복원되었습니다.`, "info");
+}
+
+

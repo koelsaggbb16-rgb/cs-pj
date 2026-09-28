@@ -148,17 +148,39 @@
           </p>
         </div>
 
-        <!-- Briefing Category Filter Tabs -->
-        <div class="briefing-tabs">
-          <button id="partFilterBtnALL" class="briefing-tab-btn active" onclick="setPartCategoryFilter('ALL')">
-            <span>전체 부품 13종</span>
-          </button>
-          <button id="partFilterBtnEL" class="briefing-tab-btn" onclick="setPartCategoryFilter('EL')">
-            <span>🛗 엘리베이터 핵심 부품 (8종)</span>
-          </button>
-          <button id="partFilterBtnES" class="briefing-tab-btn" onclick="setPartCategoryFilter('ES')">
-            <span>🪜 에스컬레이터 핵심 부품 (5종)</span>
-          </button>
+        <!-- Briefing Category Filter Tabs & Management Toolbar -->
+        <div class="briefing-toolbar-wrap">
+          <div class="briefing-tabs">
+            <button id="partFilterBtnALL" class="briefing-tab-btn active" onclick="setPartCategoryFilter('ALL')">
+              <span>전체 부품 14종</span>
+            </button>
+            <button id="partFilterBtnEL" class="briefing-tab-btn" onclick="setPartCategoryFilter('EL')">
+              <span>🛗 엘리베이터 핵심 부품 (10종)</span>
+            </button>
+            <button id="partFilterBtnES" class="briefing-tab-btn" onclick="setPartCategoryFilter('ES')">
+              <span>🪜 에스컬레이터 핵심 부품 (4종)</span>
+            </button>
+          </div>
+
+          <div class="briefing-manage-btns">
+            <button class="btn-briefing-tool secondary" onclick="resetAllPartMappings()" title="부품 매칭 데이터를 기본값으로 복원">
+              <span>⟲ 매칭 초기화</span>
+            </button>
+            <button class="btn-briefing-tool primary" onclick="exportPartMappings()" title="현재 부품 매칭 설정 내보내기/백업">
+              <span>💾 매칭 데이터 내보내기</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Management Guide Notice Banner -->
+        <div class="briefing-edit-notice">
+          <div class="notice-icon">💡</div>
+          <div class="notice-text">
+            <strong>사고사례 자유 이동 안내:</strong> 부품 카드를 클릭하면 열리는 상세 브리핑 창에서 
+            각 사고사례 카드의 <strong>[⇄ 부품 이동]</strong> 버튼을 눌러 다른 핵심 부품으로 즉시 재배치하거나, 
+            <strong>[➕ 사고사례 연계 추가]</strong> 버튼을 통해 183건 전체 사례 중에서 원하는 사고를 추가할 수 있습니다. 
+            <span class="notice-sub">(수정된 매칭은 브라우저에 자동 저장되어 유지됩니다)</span>
+          </div>
         </div>
 
         <!-- Parts Cards Grid -->
@@ -479,7 +501,11 @@
         <div class="modal-header-left">
           <div class="modal-title-wrap">
             <div id="modalCategoryBadge" class="modal-category-badge"></div>
-            <h2 id="modalTitle" class="modal-title">사고 제목</h2>
+            <div class="modal-title-edit-wrap">
+              <h2 id="modalTitle" class="modal-title">사고 제목</h2>
+              <button class="btn-edit-title" onclick="editCaseTitle()" title="사고 제목 직접 수정">✏️ 제목 수정</button>
+              <button id="btnResetCaseTitle" class="btn-reset-title" style="display:none;" onclick="resetCaseTitle()" title="기본 제목으로 복원">⟲ 복원</button>
+            </div>
           </div>
         </div>
         <button class="modal-close-btn" onclick="closeModal()" aria-label="닫기">✕</button>
@@ -491,6 +517,13 @@
         <div class="modal-image-side">
           <div class="modal-img-container" id="modalImgContainer">
             <img id="modalDetailImg" src="" alt="사고 상황도 원본" />
+            <div id="modalCustomImgBadge" class="custom-img-badge" style="display:none;">📷 사용자 업로드 실제 사진</div>
+            <div id="modalDropOverlay" class="drop-overlay">
+              <div class="drop-overlay-content">
+                <span style="font-size:2rem;">📥</span>
+                <span>여기에 실제 사진 파일을 끌어다 놓으세요</span>
+              </div>
+            </div>
           </div>
           
           <div class="img-toolbar">
@@ -499,6 +532,17 @@
             <button class="img-tool-btn" onclick="zoomOutModalImg()" title="축소">🔍 -</button>
             <button class="img-tool-btn" onclick="resetModalImgZoom()" title="기본 크기">1:1</button>
             <button class="img-tool-btn" onclick="openImgNewTab()" title="새 창에서 원본 보기">새 창 ↗</button>
+          </div>
+
+          <!-- Image Upload / Edit Toolbar -->
+          <div class="img-upload-panel">
+            <input type="file" id="caseImageFileInput" accept="image/*" style="display:none;" onchange="handleCaseImageUpload(event)">
+            <button class="btn-img-upload-action" onclick="triggerCaseImageUpload()" title="실제 현장 사진 파일로 교체 업로드">
+              <span>📷 실제 사진 업로드/수정</span>
+            </button>
+            <button id="btnResetCaseImg" class="btn-img-reset-action" style="display:none;" onclick="resetCaseImageToDefault()" title="공단 기본 도해도로 복원">
+              <span>⟲ 기본 도해도 복원</span>
+            </button>
           </div>
         </div>
 
@@ -556,7 +600,11 @@
         <div class="modal-header-left">
           <div class="modal-title-wrap">
             <div id="briefingModalBadge" class="modal-category-badge"></div>
-            <h2 id="briefingModalTitle" class="modal-title">부품명</h2>
+            <div class="modal-title-edit-wrap">
+              <h2 id="briefingModalTitle" class="modal-title">부품명</h2>
+              <button class="btn-edit-title" onclick="editBriefingTitle()" title="부품 브리핑 제목 직접 수정">✏️ 제목 수정</button>
+              <button id="btnResetBriefingTitle" class="btn-reset-title" style="display:none;" onclick="resetBriefingTitle()" title="기본 제목으로 복원">⟲ 복원</button>
+            </div>
             <div id="briefingModalLocation" style="font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-top: 3px;"></div>
           </div>
         </div>
@@ -567,10 +615,28 @@
       <div class="briefing-grid">
         <!-- Left: Component Photo & Inspection Points -->
         <div class="briefing-left">
-          <div class="briefing-img-box">
+          <div class="briefing-img-box" id="briefingImgBox">
             <img id="briefingModalImg" src="" alt="부품 구조도" />
+            <div id="briefingCustomImgBadge" class="custom-img-badge" style="display:none;">📷 사용자 업로드 부품 실사</div>
+            <div id="briefingDropOverlay" class="drop-overlay">
+              <div class="drop-overlay-content">
+                <span style="font-size:2rem;">📥</span>
+                <span>여기에 부품 실사 사진을 끌어다 놓으세요</span>
+              </div>
+            </div>
           </div>
           <div id="briefingModalImgNote" style="font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: -0.5rem; font-weight: 600;"></div>
+
+          <!-- Part Image Upload / Edit Toolbar -->
+          <div class="img-upload-panel">
+            <input type="file" id="partImageFileInput" accept="image/*" style="display:none;" onchange="handlePartImageUpload(event)">
+            <button class="btn-img-upload-action" onclick="triggerPartImageUpload()" title="실제 부품 현장 사진 파일로 교체 업로드">
+              <span>📷 부품 실사 사진 업로드/수정</span>
+            </button>
+            <button id="btnResetPartImg" class="btn-img-reset-action" style="display:none;" onclick="resetPartImageToDefault()" title="기본 구조도로 복원">
+              <span>⟲ 기본 구조도 복원</span>
+            </button>
+          </div>
 
           <!-- 부품 핵심 역할 -->
           <div class="briefing-box">
@@ -607,15 +673,27 @@
 
         <!-- Right: Linked Accident Cases -->
         <div class="briefing-right">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0;">
-              연계된 실제 중대사고사례
-            </h3>
-            <span id="briefingModalCaseCount" class="dash-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">총 0건 연계</span>
+          <div class="briefing-right-header">
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0;">
+                  연계된 실제 중대사고사례
+                </h3>
+                <span id="briefingModalCaseCount" class="dash-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">총 0건 연계</span>
+              </div>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.25rem 0 0 0;">
+                각 사례 카드의 <strong>[⇄ 부품 이동]</strong>을 눌러 다른 부품으로 보내거나 <strong>[✕]</strong>로 연계를 해제할 수 있습니다.
+              </p>
+            </div>
+            <div class="briefing-right-actions">
+              <button class="btn-briefing-tool primary" onclick="openAddCaseModal()" title="183건 전체 사례 중 검색하여 이 부품에 추가">
+                <span>➕ 사례 추가</span>
+              </button>
+              <button class="btn-briefing-tool secondary" onclick="resetCurrentPartMapping()" title="이 부품의 기본 연계 상태로 복원">
+                <span>⟲ 복원</span>
+              </button>
+            </div>
           </div>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">
-            해당 부품의 결함·마모·관리미흡으로 인해 실제 발생했던 공식 중대사고입니다. 카드를 클릭하면 상세 조사 보고서를 확인하실 수 있습니다.
-          </p>
 
           <div id="briefingModalCasesList" class="briefing-cases-list">
             <!-- Dynamically populated via JS -->
@@ -630,6 +708,99 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Move Case to Another Part Modal -->
+  <div id="moveCaseModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="move-modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 class="modal-title" style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>⇄</span> 사고사례 부품 이동
+          </h3>
+          <p id="moveModalTargetInfo" style="font-size: 0.82rem; color: var(--text-muted); margin: 0.25rem 0 0 0;"></p>
+        </div>
+        <button class="modal-close-btn" onclick="closeMoveCaseModal()" aria-label="닫기">✕</button>
+      </div>
+      <div class="move-modal-body">
+        <div class="move-modal-instruction">
+          이동할 <strong>목표 핵심 부품</strong>을 선택해 주세요. 클릭 즉시 이동되며 브라우저에 자동 저장됩니다:
+        </div>
+        
+        <div class="part-select-section-title">🛗 엘리베이터 핵심 부품 (10종)</div>
+        <div id="movePartListEL" class="move-parts-grid">
+          <!-- Dynamically populated via JS -->
+        </div>
+        
+        <div class="part-select-section-title" style="margin-top: 1.25rem;">🪜 에스컬레이터 핵심 부품 (4종)</div>
+        <div id="movePartListES" class="move-parts-grid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: flex-end;">
+        <button class="nav-case-btn" onclick="closeMoveCaseModal()">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Case to Current Part Modal -->
+  <div id="addCaseModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="add-case-modal-container">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 class="modal-title" style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>➕</span> 사고사례 연계 추가
+          </h3>
+          <p id="addModalTargetPartInfo" style="font-size: 0.85rem; color: var(--primary); font-weight: 700; margin: 0.25rem 0 0 0;"></p>
+        </div>
+        <button class="modal-close-btn" onclick="closeAddCaseModal()" aria-label="닫기">✕</button>
+      </div>
+      <div class="add-case-modal-body">
+        <div class="search-bar-wrap" style="margin-bottom: 0.75rem;">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="addCaseSearchInput" class="search-input" placeholder="사고 제목, 키워드 검색 (예: 손잡이, 브레이크, 문열림, 신발끈 등)...">
+        </div>
+        <div id="addCaseCandidatesCount" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;"></div>
+        <div id="addCaseCandidatesList" class="add-candidates-list">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <span style="font-size: 0.78rem; color: var(--text-muted);">183건 공식 사고사례 데이터베이스 전수 검색</span>
+        <button class="nav-case-btn" onclick="closeAddCaseModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export / Backup Modal -->
+  <div id="exportModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="move-modal-container" style="max-width: 650px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 class="modal-title" style="font-size: 1.15rem;">💾 부품-사고사례 매칭 데이터 내보내기 / 복원</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeExportModal()" aria-label="닫기">✕</button>
+      </div>
+      <div class="move-modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-main); margin-top: 0;">
+          현재 부품별 사고사례 매칭 설정(JSON)입니다. 복사하여 보관하거나 다른 기기에서 복원할 수 있습니다.
+        </p>
+        <textarea id="exportJsonTextarea" class="export-textarea" readonly></textarea>
+        <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+          <button class="btn-briefing-tool primary" onclick="copyExportJson()">📋 클립보드에 복사</button>
+          <button class="btn-briefing-tool secondary" onclick="downloadExportJson()">⬇️ JSON 파일 다운로드</button>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: flex-end;">
+        <button class="nav-case-btn" onclick="closeExportModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification" role="status" aria-live="polite">
+    <span id="toastIcon" class="toast-icon">✅</span>
+    <span id="toastMessage" class="toast-message">알림 메시지</span>
   </div>
 
   <!-- Mobile Bottom Floating Navigation -->

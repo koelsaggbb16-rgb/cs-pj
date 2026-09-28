@@ -3,6 +3,23 @@
  * 한국승강기안전공단(KoELSA) 검사 기준 및 공식 사고 사례집 연계
  */
 
+const DEFAULT_PARTS_MAPPING = {
+  guide_shoe: [7, 9, 38, 45],
+  interphone: [18, 51],
+  door_interlock: [15, 23, 54, 55],
+  brake: [23, 24, 94],
+  car_door_sensor: [10, 26, 35, 36, 37, 47],
+  governor: [42, 95],
+  safety_gear_buffer: [12, 180],
+  control_panel: [16, 22, 24, 54],
+  wire_rope: [13, 41, 44],
+  level_difference: [11, 21, 48],
+  comb: [2, 6, 25, 31],
+  skirt_guard: [3, 33, 39],
+  handrail: [1, 17, 27, 46, 50, 52, 53],
+  anti_reversal: [20, 40, 43, 50]
+};
+
 const PARTS_DATA = [
   {
     id: "guide_shoe",
@@ -23,7 +40,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "전동스쿠터, 손수레 또는 이용자가 출입문에 기댈 때 하부 가이드슈가 문턱 홈에서 이탈하여 문짝이 승강로 안쪽으로 밀려 열림. 개방된 승강로 개구부로 승객이 피트 바닥으로 추락하여 즉사하는 최악의 중대사고 발생.",
     correctiveAction: "마모된 가이드슈 즉각 신품 교체(권장 교체주기 2~3년), 이탈방지 핀 체결 토크 점검, 도어 하부 문턱 홈 일상 청소 및 이물질 제거 철저.",
-    linkedCaseIds: [13, 39, 44, 110, 169, 170]
+    linkedCaseIds: [7, 9, 38, 45]
   },
   {
     id: "interphone",
@@ -44,7 +61,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "승강기 멈춤 시 승객이 외부와 연락이 두절되어 극심한 패닉에 빠짐. 밀폐 공간 공포로 인해 문을 억지로 벌리고 무리하게 탈출하려다 카와 벽 틈새 승강로로 추락 사망.",
     correctiveAction: "비상통화 배터리 및 유무선 통신선로 월간 정기 점검, 카 내부 보양재 설치 시 버튼 및 마이크 위치 개방 유지, 119 및 유지관리업체 자동 발신 번호 최신화.",
-    linkedCaseIds: [51, 98, 127]
+    linkedCaseIds: [18, 51]
   },
   {
     id: "door_interlock",
@@ -65,7 +82,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "출입문이 열려 있는 상태에서 안전스위치가 닫힘으로 오인 판정되어 승강기가 급출발하는 '개문출발(문열림 출발)' 사고 발생. 승하차 중인 승객이 카 바닥과 승강장 문틀 사이에 끼여 신체 절단 및 압사.",
     correctiveAction: "도어 인터록 물림 깊이 및 접점 마모도 주기적 측정, 안전회로 임의 점퍼선 연결 절대 금지 및 검사 확인, 노후 인터록 스위치 적기 교체.",
-    linkedCaseIds: [15, 55, 101, 168]
+    linkedCaseIds: [15, 23, 54, 55]
   },
   {
     id: "brake",
@@ -86,7 +103,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "제동력 상실 시 카 내부 승객 무게와 균형추 무게의 불균형으로 인해 카가 제어되지 않고 최상층 천장이나 최하층 바닥으로 초고속 급상승/추락 충돌. 탑승자 척추 골절 및 뇌출혈.",
     correctiveAction: "권장 교체주기(라이닝 3~5년) 준수, 브레이크 라이닝 두께 및 틈새(0.2~0.4mm) 게이지 측정, 오일 오염 세척 및 브레이크 개방 감시장치 설치 의무화.",
-    linkedCaseIds: [17, 64, 94]
+    linkedCaseIds: [23, 24, 94]
   },
   {
     id: "car_door_sensor",
@@ -107,7 +124,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "닫히는 문에 승객이 부딪혀 넘어지거나, 가방끈·목줄이 문에 끼인 채 카가 출발하여 승객이 문에 끌려가며 심각한 골절 및 손가락 절단 사고 발생.",
     correctiveAction: "적외선 다점빔 렌즈 주기적 알코올 세척, 감지 사각지대 없는 3D 광전센서 보강, 승강기 도어 대기시간 충분히(최소 3~5초) 설정.",
-    linkedCaseIds: [26, 35, 45, 96, 114]
+    linkedCaseIds: [10, 26, 35, 36, 37, 47]
   },
   {
     id: "governor",
@@ -128,7 +145,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "카가 제어 불능으로 과속 추락할 때 비상정지장치를 작동시키지 못하여 카가 승강로 바닥에 직격 충돌하는 대형 참사 유발.",
     correctiveAction: "연 1회 조속기 트립 시험기 활용한 정밀 속도 측정, 회전축 베어링 급유 및 방청 처리, 인장추 풀리 평형 상태 및 스위치 정상 동작 확인.",
-    linkedCaseIds: [41, 95]
+    linkedCaseIds: [42, 95]
   },
   {
     id: "safety_gear_buffer",
@@ -149,7 +166,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "비상 상황 시 가이드레일 제동 쐐기가 미끄러져 제동에 실패하거나, 피트 침수로 완충기가 고착되어 충격을 완화하지 못하고 탑승객 중상 또는 사망.",
     correctiveAction: "비상정지장치 링크 기구부 주기적 작동 점검, 피트 집수정 배수펌프 관리로 침수 원천 방지, 오일완충기 유량 및 규격 오일 보충.",
-    linkedCaseIds: [138, 180]
+    linkedCaseIds: [12, 180]
   },
   {
     id: "control_panel",
@@ -170,7 +187,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "기판 노후화로 신호 오작동이 발생하여 정지 위치를 지나 급정지하거나, 문열림 상태에서 주행 신호가 인가되어 개문출발 등 복합 중대사고 초래.",
     correctiveAction: "여름철 전 냉각팬 청소 및 교체, 제어반 내부 필터 먼지 제거, 15년 이상 노후 제어반은 전면 리모델링 또는 기판 주기적 교체.",
-    linkedCaseIds: [25, 94]
+    linkedCaseIds: [16, 22, 24, 54]
   },
   {
     id: "wire_rope",
@@ -191,7 +208,28 @@ const PARTS_DATA = [
     ],
     failureHazard: "로프 마모로 인해 마찰력이 저하되면 도르래에서 로프가 헛도는 '슬립'이 발생하여 카 제어가 불가능해지며, 극단적인 경우 로프 파단으로 카 추락 사고 발생.",
     correctiveAction: "권장 교체주기(5~7년) 준수, 버니어캘리퍼스 측정, 로프 텐션 게이지로 장력 균등 조정, 쉬브 홈 재가공 또는 교체.",
-    linkedCaseIds: [40, 43, 122]
+    linkedCaseIds: [13, 41, 44]
+  },
+  {
+    id: "level_difference",
+    name: "승강기 단차 & 착상레벨 제어장치",
+    englishName: "Elevator Floor Leveling Sensor & Threshold Step Difference",
+    category: "EL",
+    categoryLabel: "엘리베이터",
+    location: "카 상·하부 착상센서(인덕터), 승강로 차광판(차폐판) 및 도어 실 문턱",
+    icon: "📐",
+    image: "images/2023/page_35.png",
+    diagramNote: "착상 차폐판 이물질 및 카 바닥 단차(턱) 발생 구조도 (사례집 도해도)",
+    summary: "카 바닥과 승강장 바닥의 수평 높이를 일치시켜 승하차 시 발걸림 및 넘어짐 사고를 원천 방지하는 착상 제어 시스템",
+    inspectionPoints: [
+      "카 바닥과 승강장 바닥 사이 착상 레벨 오차 규정치(±10mm 이하) 초과 및 단차 발생",
+      "착상감지기(포토센서/근접스위치) 렌즈 이물질 오염 및 감지 불량",
+      "승강로 내부 착상 차광판(베인/차폐판) 변형, 볼트 이완 및 이물질 끼임",
+      "인버터 감속 패턴 오차 및 브레이크 제동 시점 편차로 인한 재착상(Re-leveling) 실패"
+    ],
+    failureHazard: "승강기가 층 바닥보다 높거나 낮게 멈춰 5~30cm 이상의 바닥 단차가 발생한 상태로 문이 열리면, 승하차하는 승객(특히 고령자, 어린이, 휠체어 이용자)이 문턱 턱에 발이 걸려 앞으로 고꾸라지며 안면·고관절 충돌 중상(전도 사고) 발생.",
+    correctiveAction: "착상센서 렌즈 및 차광판 주변 주기적 이물질 제거 청소, 인버터 감속 거리 및 브레이크 타이밍 파라미터 정밀 튜닝, 재착상 안전회로 상시 점검, 문턱 단차 허용오차(±5mm 이내) 정밀 유지관리.",
+    linkedCaseIds: [11, 21, 48]
   },
   {
     id: "comb",
@@ -212,7 +250,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "풀린 신발끈, 고무 크록스, 옷자락이 파손된 콤 틈새에 말려들어가 발가락 협착 절단 사고 발생. 콤 볼트 풀림 시 디딤판과 충돌하여 스텝이 튀어 오르며 급정지해 승객 수십 명 연쇄 전도.",
     correctiveAction: "빗살 1개라도 파손 시 즉시 운행 중지 후 콤 세그먼트 교체, 콤 볼트 풀림방지 너트 체결 및 마킹 확인, 콤 안전스위치 작동 시험 실시.",
-    linkedCaseIds: [2, 18, 33, 61, 81]
+    linkedCaseIds: [2, 6, 25, 31]
   },
   {
     id: "skirt_guard",
@@ -233,7 +271,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "어린이들이 안전선 밖에 서서 신발을 스커트가드에 밀착할 경우, 마찰력에 의해 고무 신발이 틈새로 말려들어가 발가락 골절 및 살점 파열 중상 초래.",
     correctiveAction: "틈새 게이지 측정 및 스커트가드 조정, 안전솔(디플렉터) 솔 빠짐 즉시 교체, 노란색 디딤판 안전선 도색 선명도 유지.",
-    linkedCaseIds: [3, 20, 32, 38, 80]
+    linkedCaseIds: [3, 33, 39]
   },
   {
     id: "handrail",
@@ -254,7 +292,7 @@ const PARTS_DATA = [
     ],
     failureHazard: "손잡이가 디딤판보다 느리거나 갑자기 멈추면(속도 편차), 손잡이를 잡고 있던 승객의 상체가 뒤로 젖혀지며 균형을 잃고 넘어져 뒤따르던 승객 10여 명이 도미노처럼 연쇄 전도 골절.",
     correctiveAction: "핸드레일 속도 타코미터 측정, 텐션 롤러 장력 조정, 구동 체인 링크 마모 점검, 인입구 손끼임 방지 보호대 틈새 점검.",
-    linkedCaseIds: [1, 23, 49, 52, 56]
+    linkedCaseIds: [1, 17, 27, 46, 50, 52, 53]
   },
   {
     id: "anti_reversal",
@@ -275,10 +313,10 @@ const PARTS_DATA = [
     ],
     failureHazard: "출퇴근 시간 다중밀집 상태에서 상승하던 에스컬레이터가 구동체인 파손 등으로 갑자기 역주행하면, 수십 명의 탑승객이 아래로 쏟아져 떨어지며 압사 및 대형 인명피해 발생.",
     correctiveAction: "역주행 방지 보조제동기 주기적 하중 작동 시험, 구동체인 링크 연신율 측정 및 텐셔너 점검, 다중밀집 역사 우선 교체 및 보강.",
-    linkedCaseIds: [2, 14, 25]
+    linkedCaseIds: [20, 40, 43, 50]
   }
 ];
 
 if (typeof module !== 'undefined') {
-  module.exports = { PARTS_DATA };
+  module.exports = { PARTS_DATA, DEFAULT_PARTS_MAPPING };
 }
