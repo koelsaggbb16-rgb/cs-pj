@@ -7375,8 +7375,8 @@ const CATEGORIES_CONFIG = [
       {
         "id": "hoistway-door",
         "num": 1,
-        "name": "도어시스템",
-        "desc": "승강장 도어 관리, 구출 작업 중 도어 개방 추락 등 도어 일반 사고",
+        "name": "도어컨트롤러",
+        "desc": "도어 개폐 제어장치, 승강장·카 도어 제어 및 도어 일반 사고",
         "caseIds": [
           18
         ]
