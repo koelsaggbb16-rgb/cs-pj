@@ -50,7 +50,7 @@ function updateThemeIcon() {
   }
 }
 
-const CURRENT_DATA_VERSION = "2024_all_5_books_v11";
+const CURRENT_DATA_VERSION = "2024_all_5_books_v12";
 const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v3",
   "2024_all_5_books_v4",
@@ -60,7 +60,8 @@ const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v8",
   "2024_all_5_books_v9",
   "2024_all_5_books_v10",
-  "2024_all_5_books_v11"
+  "2024_all_5_books_v11",
+  "2024_all_5_books_v12"
 ];
 
 function mergeCategoriesConfig(baseConfig, savedConfig) {
@@ -85,6 +86,7 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
       merged.splice(Math.min(catIdx, merged.length), 0, JSON.parse(JSON.stringify(baseCat)));
       return;
     }
+    targetCat.name = baseCat.name;
     targetCat.subtitle = baseCat.subtitle;
     baseCat.items.forEach((baseItem, itemIdx) => {
       const existingItem = targetCat.items.find(i => i.id === baseItem.id);
@@ -191,6 +193,30 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
   if (escCat && Array.isArray(escCat.items)) {
     escCat.items.forEach((item, idx) => {
       item.num = idx + 1;
+    });
+  }
+
+  // Ensure any case in CASES_DATA not assigned to any category is placed into 'uncategorized'
+  const assignedSet = new Set();
+  merged.forEach(cat => {
+    (cat.items || []).forEach(item => {
+      (item.caseIds || []).forEach(id => assignedSet.add(id));
+    });
+  });
+
+  const uncatCat = merged.find(c => c.id === "uncategorized");
+  const baseUncatCat = baseConfig.find(c => c.id === "uncategorized");
+  if (uncatCat && baseUncatCat) {
+    baseUncatCat.items.forEach(baseSub => {
+      const targetSub = uncatCat.items.find(i => i.id === baseSub.id);
+      if (targetSub) {
+        (baseSub.caseIds || []).forEach(cId => {
+          if (!assignedSet.has(cId)) {
+            targetSub.caseIds.push(cId);
+            assignedSet.add(cId);
+          }
+        });
+      }
     });
   }
 
