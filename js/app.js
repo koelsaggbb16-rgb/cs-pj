@@ -50,7 +50,7 @@ function updateThemeIcon() {
   }
 }
 
-const CURRENT_DATA_VERSION = "2024_all_5_books_v10";
+const CURRENT_DATA_VERSION = "2024_all_5_books_v11";
 const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v3",
   "2024_all_5_books_v4",
@@ -59,7 +59,8 @@ const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v7",
   "2024_all_5_books_v8",
   "2024_all_5_books_v9",
-  "2024_all_5_books_v10"
+  "2024_all_5_books_v10",
+  "2024_all_5_books_v11"
 ];
 
 function mergeCategoriesConfig(baseConfig, savedConfig) {
@@ -85,7 +86,7 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
       return;
     }
     targetCat.subtitle = baseCat.subtitle;
-    baseCat.items.forEach(baseItem => {
+    baseCat.items.forEach((baseItem, itemIdx) => {
       const existingItem = targetCat.items.find(i => i.id === baseItem.id);
       if (!existingItem) {
         if (baseItem.id === "car-doorgap") {
@@ -108,8 +109,45 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
             etcItem.caseIds = etcItem.caseIds.filter(id => id !== 39);
           }
         }
-        targetCat.items.push(JSON.parse(JSON.stringify(baseItem)));
+        if (baseItem.id === "hoistway-overload") {
+          const bufferItem = targetCat.items.find(i => i.id === "hoistway-buffer");
+          if (bufferItem && Array.isArray(bufferItem.caseIds)) {
+            bufferItem.caseIds = bufferItem.caseIds.filter(id => id !== 37);
+          }
+        }
+        if (baseItem.id === "hoistway-door-retention") {
+          const doorItem = targetCat.items.find(i => i.id === "hoistway-door");
+          if (doorItem && Array.isArray(doorItem.caseIds)) {
+            doorItem.caseIds = doorItem.caseIds.filter(id => ![7, 27, 28].includes(id));
+          }
+        }
+        if (baseItem.id === "hoistway-pit-ladder") {
+          const clearanceItem = targetCat.items.find(i => i.id === "hoistway-clearance");
+          if (clearanceItem && Array.isArray(clearanceItem.caseIds)) {
+            clearanceItem.caseIds = clearanceItem.caseIds.filter(id => ![31, 32].includes(id));
+          }
+        }
+        if (baseItem.id === "hoistway-interlock-hanger") {
+          const doorItem = targetCat.items.find(i => i.id === "hoistway-door");
+          if (doorItem && Array.isArray(doorItem.caseIds)) {
+            doorItem.caseIds = doorItem.caseIds.filter(id => ![15, 29, 30].includes(id));
+          }
+        }
+        // If 'hoistway-etc' exists in targetCat, insert before 'hoistway-etc'
+        const etcIdx = targetCat.items.findIndex(i => i.id === "hoistway-etc");
+        if (baseCat.id === "hoistway" && baseItem.id !== "hoistway-etc" && etcIdx !== -1) {
+          targetCat.items.splice(etcIdx, 0, JSON.parse(JSON.stringify(baseItem)));
+        } else {
+          targetCat.items.push(JSON.parse(JSON.stringify(baseItem)));
+        }
+      } else {
+        existingItem.name = baseItem.name;
+        existingItem.desc = baseItem.desc;
       }
+    });
+
+    targetCat.items.forEach((item, idx) => {
+      item.num = idx + 1;
     });
   });
 

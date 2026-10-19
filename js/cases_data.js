@@ -3002,7 +3002,7 @@ const CATEGORIES_CONFIG = [
   {
     "id": "hoistway",
     "name": "승강로",
-    "subtitle": "승강로 피트, 승강장 도어 및 승강로 내 구조 설비",
+    "subtitle": "승강로 피트, 승강장 도어, 과부하감지장치, 피트사다리 및 승강로 설비",
     "icon": "🏗️",
     "badge": "승강로",
     "color": "#0284c7",
@@ -3011,27 +3011,19 @@ const CATEGORIES_CONFIG = [
         "id": "hoistway-door",
         "num": 1,
         "name": "도어시스템",
-        "desc": "승강장 도어 충돌 이탈, 도어 인터록, 도어슈 파손, 문턱 이탈 등",
+        "desc": "승강장 도어 관리, 구출 작업 중 도어 개방 추락 등 도어 일반 사고",
         "caseIds": [
-          7,
-          15,
-          18,
-          27,
-          28,
-          29,
-          30
+          18
         ]
       },
       {
         "id": "hoistway-clearance",
         "num": 2,
         "name": "작업자안전거리",
-        "desc": "피트 내 카 하강 협착, 균형추 간격, 카 상부 점검, 사다리 추락 등",
+        "desc": "피트 내 카 하강 협착, 균형추 간격, 카 상부 점검 안전공간 확보",
         "caseIds": [
           12,
           14,
-          31,
-          32,
           34
         ]
       },
@@ -3039,18 +3031,58 @@ const CATEGORIES_CONFIG = [
         "id": "hoistway-buffer",
         "num": 3,
         "name": "완충기",
-        "desc": "피트 완충기 영역 추락 충격, 유압호스 파열, 하중초과 완충기 격돌",
+        "desc": "피트 완충기 영역 추락 충격, 유압호스 파열, 최하층 완충기 격돌",
         "caseIds": [
           13,
           24,
           35,
-          36,
+          36
+        ]
+      },
+      {
+        "id": "hoistway-overload",
+        "num": 4,
+        "name": "과부하감지장치",
+        "desc": "정원·적재하중 초과 시 과부하감지장치 미작동으로 인한 로프 슬립 및 추락",
+        "caseIds": [
           37
         ]
       },
       {
+        "id": "hoistway-door-retention",
+        "num": 5,
+        "name": "승강장문이탈방지장치",
+        "desc": "전동스쿠터·견인차 충돌 및 외력 충격 시 승강장문 하부 가이드슈·문턱 이탈 추락",
+        "caseIds": [
+          7,
+          27,
+          28
+        ]
+      },
+      {
+        "id": "hoistway-pit-ladder",
+        "num": 6,
+        "name": "피트사다리",
+        "desc": "피트 점검용 수직 사다리 용접부 파손 추락 및 승강로 사다리 이동 중 협착",
+        "caseIds": [
+          31,
+          32
+        ]
+      },
+      {
+        "id": "hoistway-interlock-hanger",
+        "num": 7,
+        "name": "도어인터록 및 행거",
+        "desc": "도어 인터록 잠금 불량 개방 추락, 스위치 접촉·연동로프 파단 및 행거 이탈",
+        "caseIds": [
+          15,
+          29,
+          30
+        ]
+      },
+      {
         "id": "hoistway-etc",
-        "num": 4,
+        "num": 8,
         "name": "기타",
         "desc": "승강로 벽체 시공 협착, 카 상부 접속함 덮개 간섭, 이동케이블 걸림",
         "caseIds": [
