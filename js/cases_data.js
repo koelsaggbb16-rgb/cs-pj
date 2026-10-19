@@ -1,814 +1,2995 @@
-// 2024 승강기 사고 사례집 데이터셋 (한국승강기안전공단 2024 발간)
+// 2024~2018 승강기 사고 사례집 종합 데이터셋 (한국승강기안전공단 KoELSA 발간)
 const CASES_DATA = [
   {
-    id: 1,
-    page: 14,
-    bookPage: 16,
-    image: "images/page_14.png",
-    title: "에스컬레이터 탑승 중 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 3건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "2건",
-    summary: "탑승 시 노란 안전선 디딤판 끝단을 밟거나 손잡이를 잡지 않아 천이구간에서 중심을 잃고 전도",
-    description: [
+    "id": 1,
+    "page": 14,
+    "bookPage": 16,
+    "image": "images/page_14.png",
+    "title": "에스컬레이터 탑승 중 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 3건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "탑승 시 노란 안전선 디딤판 끝단을 밟거나 손잡이를 잡지 않아 천이구간에서 중심을 잃고 전도",
+    "description": [
       "피해자가 에스컬레이터 이용 중 넘어져 발생한 사고",
       "① 탑승 시 노란 안전선 안쪽이 아닌 디딤판 끝단을 밟고 있다가 단차에 의해 넘어짐",
       "② 불안전한 자세로 손잡이를 잡고 있지 않거나 내리던 중 몸의 중심을 잃고 넘어짐",
       "③ 수평구간에서 경사구간으로 변하는 천이구간에서 몸의 중심을 잃고 넘어짐"
     ],
-    cause: [
+    "cause": [
       "노란 안전선 안에 탑승하지 않아 수평구간에서 경사구간으로 바뀔 때 중심을 잃음",
       "상승 운행하는 에스컬레이터에서 오른손에 지팡이를 짚고 있어 손잡이를 정상적으로 잡기 어려운 상태로 올라가던 중 전도",
       "왼손에 무거운 물건을 들고 있어 손잡이를 잡지 못하고 운행 중 몸의 중심을 상실"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 이용자가 안전하게 에스컬레이터를 이용할 수 있도록 안내방송을 주기적으로 실시하고 상·하부 승강장 주변 안전요원 배치 등 현장 안전관리 강화",
       "이용자: 에스컬레이터 탑승 시 반드시 손잡이를 잡고 노란 안전선 안에 탑승하며, 걷거나 뛰지 않고 어린이·노약자는 보호자와 함께 탑승하거나 엘리베이터 이용"
     ],
-    tags: ["에스컬레이터", "전도", "이용자과실", "손잡이미착용", "노약자"]
+    "tags": [
+      "에스컬레이터",
+      "전도",
+      "이용자과실",
+      "손잡이미착용",
+      "노약자"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 2,
-    page: 15,
-    bookPage: 17,
-    image: "images/page_15.png",
-    title: "운동화 끈이 하부 콤에 끼여 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "끼임",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "풀린 운동화 끈이 에스컬레이터 하부 콤 틈새에 끼이면서 내리는 순간 중심을 잃고 전도",
-    description: [
+    "id": 2,
+    "page": 15,
+    "bookPage": 17,
+    "image": "images/page_15.png",
+    "title": "운동화 끈이 하부 콤에 끼여 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "풀린 운동화 끈이 에스컬레이터 하부 콤 틈새에 끼이면서 내리는 순간 중심을 잃고 전도",
+    "description": [
       "피해자가 에스컬레이터에 탑승하여 내려가던 중 풀린 신발 끈이 하부 콤(Comb)에 걸려 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "피해자의 왼쪽 신발 끈이 풀어진 상태로 탑승하여 하부 승강장으로 내리던 중 풀어진 신발 끈이 콤 틈새에 끼이면서 몸의 중심을 잃고 넘어짐"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 에스컬레이터 이용 시 콤과 스텝 및 스커트가드 틈새에 신발 끈, 옷자락 등이 끼이지 않도록 주의",
       "관리주체: 신발 끈 등이 콤과 스텝에 끼일 위험성을 알리는 안전표지 부착 및 안전이용 홍보 강화, 일상점검 시 콤 빗살 파손 확인 즉시 운행정지 및 교체"
     ],
-    tags: ["에스컬레이터", "끼임", "하부콤", "신발끈", "이용자과실"]
+    "tags": [
+      "에스컬레이터",
+      "끼임",
+      "하부콤",
+      "신발끈",
+      "이용자과실"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 3,
-    page: 16,
-    bookPage: 18,
-    image: "images/page_16.png",
-    title: "에스컬레이터 디딤판과 스커트가드 사이 신발이 끼여 발생한 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "끼임",
-    casualty: "중상 3건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "2건",
-    summary: "어린이 등이 안전선 밖 스커트가드에 발을 밀착하여 고무신발(크록스 등)이 틈새에 말려들어 끼임",
-    description: [
+    "id": 3,
+    "page": 16,
+    "bookPage": 18,
+    "image": "images/page_16.png",
+    "title": "에스컬레이터 디딤판과 스커트가드 사이 신발이 끼여 발생한 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 3건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "어린이 등이 안전선 밖 스커트가드에 발을 밀착하여 고무신발(크록스 등)이 틈새에 말려들어 끼임",
+    "description": [
       "피해자가 하강 운행하는 에스컬레이터에 탑승하여 내려가던 중 우측 신발이 디딤판과 스커트가드 사이에 끼이며 발생한 사고"
     ],
-    cause: [
+    "cause": [
       "에스컬레이터 탑승 중 디딤판의 노란 안전선 안에 탑승하지 않고 스커트가드에 신발을 접촉시키며 운행되던 중 틈새로 빨려 들어가 끼임"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 디딤판의 노란 안전선 안에 탑승하는 준수사항 준수, 어린이·노약자는 보호자의 손을 잡고 동반 탑승",
       "관리주체: 노란 안전선 준수 및 어린이 보호자 동반 안내방송 및 홍보, 행사·집중시간대 상하부 안전요원 배치"
     ],
-    tags: ["에스컬레이터", "끼임", "스커트가드", "어린이", "안전선미준수"]
+    "tags": [
+      "에스컬레이터",
+      "끼임",
+      "스커트가드",
+      "어린이",
+      "안전선미준수"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 4,
-    page: 17,
-    bookPage: 19,
-    image: "images/page_17.png",
-    title: "에스컬레이터에 유모차와 같이 탑승하여 발생한 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "유모차에 짐을 싣고 에스컬레이터 진입 중 경사구간에서 전복되며 후속 탑승자와 연쇄 전도",
-    description: [
+    "id": 4,
+    "page": 17,
+    "bookPage": 19,
+    "image": "images/page_17.png",
+    "title": "에스컬레이터에 유모차와 같이 탑승하여 발생한 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "유모차에 짐을 싣고 에스컬레이터 진입 중 경사구간에서 전복되며 후속 탑승자와 연쇄 전도",
+    "description": [
       "유모차에 짐을 싣고 에스컬레이터에 탑승하여 올라가던 중 수평구간에서 경사구간으로 전환되며 유모차의 무게중심이 뒤로 기울어져 전복, 뒤따르던 피해자와 함께 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "수평부에서 경사부로 전환되는 구간에서 짐이 실린 유모차의 무게중심이 뒤쪽으로 쏠려 앞선 이용자가 중심을 잃고 전도되었고, 뒤따르던 승객도 함께 연쇄 전도"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 유모차, 쇼핑카트, 손수레 등을 소지한 경우 에스컬레이터 탑승 절대 금지, 반드시 엘리베이터 이용",
       "관리주체: 에스컬레이터 입구에 유모차·손수레 진입 금지 차단봉 및 경고 표지 설치, 안내방송 지속 송출"
     ],
-    tags: ["에스컬레이터", "전도", "유모차탑승금지", "연쇄전도", "이용자과실"]
+    "tags": [
+      "에스컬레이터",
+      "전도",
+      "유모차탑승금지",
+      "연쇄전도",
+      "이용자과실"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 5,
-    page: 18,
-    bookPage: 20,
-    image: "images/page_18.png",
-    title: "수평보행기(무빙워크)에 탑승하여 걸어가던 중 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "수평보행기 (무빙워크)",
-    elevatorCategory: "MW",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "우천 시 젖은 신발로 경사형 무빙워크 위를 손잡이 없이 걷다가 미끄러져 전도",
-    description: [
+    "id": 5,
+    "page": 18,
+    "bookPage": 20,
+    "image": "images/page_18.png",
+    "title": "수평보행기(무빙워크)에 탑승하여 걸어가던 중 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "수평보행기 (무빙워크)",
+    "elevatorCategory": "MW",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "우천 시 젖은 신발로 경사형 무빙워크 위를 손잡이 없이 걷다가 미끄러져 전도",
+    "description": [
       "피해자가 하강 운행하는 경사형 무빙워크에 탑승하여 걸어서 내려가던 중 몸의 중심을 잃고 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "손잡이를 잡지 않고 경사형 수평보행기 위에서 걸어서 이동하였고, 우천으로 젖은 신발 바닥이 미끄러워 균형을 잃고 미끄러져 전도"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 경사형 무빙워크 이용 시 반드시 손잡이를 잡고 서서 이용하며 걷거나 뛰지 않기",
       "관리주체: 비·눈 내릴 때 출입구 바닥 흡수매트 설치, 수시 물기 제거 및 '미끄럼 주의' 입간판 배치"
     ],
-    tags: ["무빙워크", "전도", "보행금지", "우천미끄럼", "이용자과실"]
+    "tags": [
+      "무빙워크",
+      "전도",
+      "보행금지",
+      "우천미끄럼",
+      "이용자과실"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 6,
-    page: 19,
-    bookPage: 21,
-    image: "images/page_19.png",
-    title: "쇼핑카트 뒷바퀴가 콤에 걸리면서 몸의 중심을 잃고 넘어진 사고",
-    elevatorType: "수평보행기 (무빙워크)",
-    elevatorCategory: "MW",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "무빙워크 출구에서 쇼핑카트를 힘껏 밀어내지 않아 뒷바퀴가 콤에 걸리며 팔레트 밀림으로 전도",
-    description: [
+    "id": 6,
+    "page": 19,
+    "bookPage": 21,
+    "image": "images/page_19.png",
+    "title": "쇼핑카트 뒷바퀴가 콤에 걸리면서 몸의 중심을 잃고 넘어진 사고",
+    "elevatorType": "수평보행기 (무빙워크)",
+    "elevatorCategory": "MW",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "무빙워크 출구에서 쇼핑카트를 힘껏 밀어내지 않아 뒷바퀴가 콤에 걸리며 팔레트 밀림으로 전도",
+    "description": [
       "쇼핑카트를 가지고 무빙워크에 탑승하여 내려가던 중 출구에서 카트 뒷바퀴가 하부 콤에 걸려 빠져나가지 못하고 카트와 함께 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "하부 승강장 출구 진출 시 쇼핑카트를 앞으로 밀어주지 않아 바퀴가 콤에 걸렸고, 팔레트는 계속 이동하여 뒤에서 밀리며 중심을 잃음"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 쇼핑카트를 가지고 무빙워크를 이용하는 경우 출구 도착 전 두 손으로 카트를 잡고 앞으로 힘껏 밀어내기",
       "관리주체: 출구 안내문 부착 및 혼잡 시간대 안내요원 배치, 카트 바퀴 및 콤 마모 상태 정기 점검"
     ],
-    tags: ["무빙워크", "전도", "쇼핑카트", "하부콤", "마트안전"]
+    "tags": [
+      "무빙워크",
+      "전도",
+      "쇼핑카트",
+      "하부콤",
+      "마트안전"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 7,
-    page: 20,
-    bookPage: 22,
-    image: "images/page_20.png",
-    title: "견인차 조작 실수로 승강장 문에 충돌해 피트로 추락한 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "전동 견인차로 화물 운반 중 조작 미숙으로 닫힌 승강장문에 돌진 충돌, 도어 이탈로 카 상부 추락",
-    description: [
+    "id": 7,
+    "page": 20,
+    "bookPage": 22,
+    "image": "images/page_20.png",
+    "title": "견인차 조작 실수로 승강장 문에 충돌해 피트로 추락한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "전동 견인차로 화물 운반 중 조작 미숙으로 닫힌 승강장문에 돌진 충돌, 도어 이탈로 카 상부 추락",
+    "description": [
       "피해자가 전동 견인차에 탑승하여 화물을 운반하던 중 조작 실수로 승강장 문에 고속 충돌, 승강장 도어가 이탈되면서 카 상부/피트로 추락하여 사망한 중대사고"
     ],
-    cause: [
+    "cause": [
       "전동 견인차 운전자가 브레이크 조작 미숙 또는 가속 페달 오조작으로 승강장문과 충돌, 설계 기준 이상의 충격량으로 도어 슈(Door Shoe)가 파손·이탈되어 승강로 개방"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 화물용 승강장 앞 전동차 정지선 및 방호 범퍼(볼라드/스토퍼) 설치, 운전자 대상 안전교육 실시",
       "이용자: 화물 운반 차량은 승강장문과 충분한 안전거리를 유지하고 정지 후 승강기 호출 조작"
     ],
-    tags: ["엘리베이터", "추락", "사망", "전동견인차", "도어충돌이탈"]
+    "tags": [
+      "엘리베이터",
+      "추락",
+      "사망",
+      "전동견인차",
+      "도어충돌이탈"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 8,
-    page: 21,
-    bookPage: 23,
-    image: "images/page_21.png",
-    title: "탑승이 금지된 소형 화물용 엘리베이터에 탑승하여 발생한 사고",
-    elevatorType: "소형화물용 엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "탑승 금지된 덤웨이터/화물 리프트에 사람이 임의 탑승하여 화물 적재 중 틈새(380mm)로 추락",
-    description: [
+    "id": 8,
+    "page": 21,
+    "bookPage": 23,
+    "image": "images/page_21.png",
+    "title": "탑승이 금지된 소형 화물용 엘리베이터에 탑승하여 발생한 사고",
+    "elevatorType": "소형화물용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "탑승 금지된 덤웨이터/화물 리프트에 사람이 임의 탑승하여 화물 적재 중 틈새(380mm)로 추락",
+    "description": [
       "사고 현장 근로자가 승강장에서 카 내부로 화물을 옮기던 중 카 바닥과 승강로 벽 사이 틈새(약 380mm)로 빠져 피트로 추락하여 사망"
     ],
-    cause: [
+    "cause": [
       "소형 화물용 엘리베이터(탑승 금지 설비)에 사람이 임의로 탑승하여 화물 랙(Rack)을 싣던 중, 승강로 벽과 카 바닥 사이의 넓은 유격으로 실족 추락"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 소형 화물용 엘리베이터 전면 '인명 탑승 절대 금지' 경고 표지 부착, 출입 개구부 방호장치 설치",
       "이용자: 화물용 리프트 및 덤웨이터 내부로 신체 진입 및 동승 절대 금지"
     ],
-    tags: ["소형화물용", "추락", "사망", "탑승금지", "승강로틈새"]
+    "tags": [
+      "소형화물용",
+      "추락",
+      "사망",
+      "탑승금지",
+      "승강로틈새"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 9,
-    page: 22,
-    bookPage: 24,
-    image: "images/page_22.png",
-    title: "양방향 출입구 엘리베이터에서 출입문에 기대고 있다가 문이 열려 전도된 사고",
-    elevatorType: "엘리베이터 (양방향 관통형)",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "앞뒤 양쪽에 문이 있는 엘리베이터에서 반대편 문에 몸을 기대고 있다가 지하층에서 열리며 전도",
-    description: [
+    "id": 9,
+    "page": 22,
+    "bookPage": 24,
+    "image": "images/page_22.png",
+    "title": "양방향 출입구 엘리베이터에서 출입문에 기대고 있다가 문이 열려 전도된 사고",
+    "elevatorType": "엘리베이터 (양방향 관통형)",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "앞뒤 양쪽에 문이 있는 엘리베이터에서 반대편 문에 몸을 기대고 있다가 지하층에서 열리며 전도",
+    "description": [
       "출입문이 전·후면 2개인 관통형 엘리베이터에서 반대편 도어에 몸을 기댄 채 탑승 중, 목적층 도착 후 기댄 문이 갑자기 열리며 승강장 바닥으로 넘어진 사고"
     ],
-    cause: [
+    "cause": [
       "탑승 방향 반대편 문에 기대어 서 있던 중, 해당 층의 출입문이 개방되자 지지점을 잃고 뒤로 넘어짐"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 관통형 승강기 내 층별 열림 방향 표시등 및 '기대지 마시오' 경고 안내 방송 송출",
       "이용자: 승강기 출입문에 기대지 말고 손잡이(핸드레일)를 잡고 중심 유지"
     ],
-    tags: ["엘리베이터", "전도", "관통형승강기", "문기댐금지", "이용자과실"]
+    "tags": [
+      "엘리베이터",
+      "전도",
+      "관통형승강기",
+      "문기댐금지",
+      "이용자과실"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 10,
-    page: 23,
-    bookPage: 25,
-    image: "images/page_23.png",
-    title: "닫히는 출입문과 충돌하여 발생한 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "충돌/전도",
-    casualty: "중상 5건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "3건",
-    summary: "문이 닫히는 순간 무리하게 탑승하거나 내리려다 도어 센서 사각지대에서 충돌 후 전도",
-    description: [
+    "id": 10,
+    "page": 23,
+    "bookPage": 25,
+    "image": "images/page_23.png",
+    "title": "닫히는 출입문과 충돌하여 발생한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌/전도",
+    "casualty": "중상 5건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "3건",
+    "summary": "문이 닫히는 순간 무리하게 탑승하거나 내리려다 도어 센서 사각지대에서 충돌 후 전도",
+    "description": [
       "엘리베이터에 급하게 탑승하거나 하차하던 중 닫히는 출입문에 부딪히거나 끼이면서 넘어져 골절 등 중상을 입은 다수 사고"
     ],
-    cause: [
+    "cause": [
       "문닫힘 안전장치(멀티빔 센서)의 사각지대로 진입하거나 신체 일부가 닫히는 도어와 직접 충돌하여 균형 상실"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 닫히는 문에 손을 넣거나 무리하게 뛰어들지 말고 다음 승강기를 기다리며, 열림 버튼을 누른 상태에서 승하차",
       "관리주체: 다중이용 승강기 도어 열림 대기시간 연장 설정 및 비접촉식 감지센서(멀티빔) 성능 점검"
     ],
-    tags: ["엘리베이터", "충돌", "전도", "도어끼임", "무리한탑승"]
+    "tags": [
+      "엘리베이터",
+      "충돌",
+      "전도",
+      "도어끼임",
+      "무리한탑승"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 11,
-    page: 24,
-    bookPage: 26,
-    image: "images/page_24.png",
-    title: "엘리베이터 도착 전 문을 강제 개방하여 발생한 단차 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "이용자 과실",
-    similarCount: "-",
-    summary: "승강기 하강 중 카가 급정지하자 탑승자가 손으로 문을 강제로 열고 내리다 바닥 단차에 걸려 전도",
-    description: [
+    "id": 11,
+    "page": 24,
+    "bookPage": 26,
+    "image": "images/page_24.png",
+    "title": "엘리베이터 도착 전 문을 강제 개방하여 발생한 단차 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "승강기 하강 중 카가 급정지하자 탑승자가 손으로 문을 강제로 열고 내리다 바닥 단차에 걸려 전도",
+    "description": [
       "탑승 중 카가 급정지하자 승객이 손으로 출입문을 강제로 벌려 열고 층간 단차가 발생한 상태에서 내리다가 넘어져 중상"
     ],
-    cause: [
+    "cause": [
       "도어 모터의 닫힘 토크 설정이 낮아 손으로 강제 개방이 가능했고, 승강장 바닥과 카 바닥 간 레벨 차이를 인지하지 못하고 탈출 시도"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 승강기 갇힘 시 절대 문을 강제로 열지 말고 비상통화버튼(인터폰)으로 구조 요청 후 대기",
       "유지관리업체: 도어 개폐 토크 적정치 유지 및 갇힘 방지 제어 로직 철저 점검"
     ],
-    tags: ["엘리베이터", "전도", "임의개방", "갇힘사고", "단차발생"]
+    "tags": [
+      "엘리베이터",
+      "전도",
+      "임의개방",
+      "갇힘사고",
+      "단차발생"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 12,
-    page: 25,
-    bookPage: 27,
-    image: "images/page_25.png",
-    title: "승강기 단독 작업으로 발생한 피트 내 협착 사망 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "협착",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "안전관리자 통보 없이 단독으로 피트에 진입하여 점검 중 자동 하강하는 카와 사다리 사이에 협착",
-    description: [
+    "id": 12,
+    "page": 25,
+    "bookPage": 27,
+    "image": "images/page_25.png",
+    "title": "승강기 단독 작업으로 발생한 피트 내 협착 사망 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "안전관리자 통보 없이 단독으로 피트에 진입하여 점검 중 자동 하강하는 카와 사다리 사이에 협착",
+    "description": [
       "승강기 설치 작업자가 건물 관계자에게 통보하지 않고 단독으로 승강로 피트에 진입하여 작업 중, 자동 모드로 하강하는 카와 이동식 사다리 사이에 끼여 사망"
     ],
-    cause: [
+    "cause": [
       "2인 1조 작업 원칙 미준수, 점검 운전 모드(수동) 전환 미실시, 피트 비상정지스위치 미작동 상태에서 임의 작업"
     ],
-    prevention: [
+    "prevention": [
       "설치·유지관리업체: 승강로 피트 작업 시 반드시 2인 1조 근무 준수, 카 하부 비상정지스위치 즉시 작동 및 점검 모드 전환",
       "작업자: 관리주체 사전 승인 및 출입 통제선 설치 후 작업 개시"
     ],
-    tags: ["엘리베이터", "협착", "사망", "작업자과실", "2인1조미준수", "피트진입"]
+    "tags": [
+      "엘리베이터",
+      "협착",
+      "사망",
+      "작업자과실",
+      "2인1조미준수",
+      "피트진입"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 13,
-    page: 26,
-    bookPage: 28,
-    image: "images/page_26.png",
-    title: "기존 양중고리 테스트 없이 재사용하다 카와 함께 추락한 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "노후 빌딩 엘리베이터 교체공사 중 인장강도 테스트 없이 20년 된 건축용 이형철근 양중고리를 재사용하다 파단 추락",
-    description: [
+    "id": 13,
+    "page": 26,
+    "bookPage": 28,
+    "image": "images/page_26.png",
+    "title": "기존 양중고리 테스트 없이 재사용하다 카와 함께 추락한 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "노후 빌딩 엘리베이터 교체공사 중 인장강도 테스트 없이 20년 된 건축용 이형철근 양중고리를 재사용하다 파단 추락",
+    "description": [
       "승강기 교체 공사 중 승강로 기계실 천장의 기존 양중고리에 호이스트를 걸고 작업하던 중 양중고리가 파단되어 카 내 작업자가 카와 함께 피트로 추락하여 사망"
     ],
-    cause: [
+    "cause": [
       "준공 후 20년 이상 경과한 비공인 건축 부재(이형철근) 양중고리를 비파괴/인장 하중 테스트 없이 재사용, 안전대 구명줄 미체결"
     ],
-    prevention: [
+    "prevention": [
       "작업업체: 노후 양중고리 사용 전 구조안전진단 및 비파괴·하중 테스트 필수 이행, 안전대 부착 설비 설치",
       "작업자: 2m 이상 승강로 내 고소 작업 시 반드시 구명줄에 안전대 체결"
     ],
-    tags: ["엘리베이터", "추락", "사망", "작업자과실", "양중고리파단", "교체공사"]
+    "tags": [
+      "엘리베이터",
+      "추락",
+      "사망",
+      "작업자과실",
+      "양중고리파단",
+      "교체공사"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 14,
-    page: 27,
-    bookPage: 29,
-    image: "images/page_27.png",
-    title: "승강로 검사 중 균형추와 레일 브라켓 사이에 손이 끼인 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "끼임",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "카 상부에서 균형추 점검 중 승강기 저속 운행 시 레일 브라켓과의 협소 공간에 손이 협착",
-    description: [
+    "id": 14,
+    "page": 27,
+    "bookPage": 29,
+    "image": "images/page_27.png",
+    "title": "승강로 검사 중 균형추와 레일 브라켓 사이에 손이 끼인 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "카 상부에서 균형추 점검 중 승강기 저속 운행 시 레일 브라켓과의 협소 공간에 손이 협착",
+    "description": [
       "승강기 검사자가 카 상부에서 균형추 상태를 육안 검사하던 중 카가 점검속도로 하강(균형추는 상승)하면서 균형추 상부와 고정 브라켓 사이에 손이 끼임"
     ],
-    cause: [
+    "cause": [
       "운행 중 위험 부위 접근 금지 수칙 미준수, 점검용 조명 불량 상태에서 시야 미확보 및 안전거리 미확보"
     ],
-    prevention: [
+    "prevention": [
       "검사기관: 카 상부 검사 시 이동 중 회전체·대향체(균형추) 접근 금지 및 충분한 조명기구 확보",
       "작업자: 카 운전 조작자와 검사자 간 구호 복창 및 완벽한 상호 신호체계 확립"
     ],
-    tags: ["엘리베이터", "끼임", "작업자과실", "균형추", "카상부작업"]
+    "tags": [
+      "엘리베이터",
+      "끼임",
+      "작업자과실",
+      "균형추",
+      "카상부작업"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 15,
-    page: 28,
-    bookPage: 30,
-    image: "images/page_28.png",
-    title: "카 상부 고장수리 중 승강장문 닫힘으로 카 상승 후 추락 사망 사고 (1)",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "관리주체 과실",
-    similarCount: "-",
-    summary: "카 상부 진입 중 승강장문이 닫히며 자동운전 상태인 카가 급상승, 승강로 H빔에 부딪혀 피트로 추락",
-    description: [
+    "id": 15,
+    "page": 28,
+    "bookPage": 30,
+    "image": "images/page_28.png",
+    "title": "카 상부 고장수리 중 승강장문 닫힘으로 카 상승 후 추락 사망 사고 (1)",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "카 상부 진입 중 승강장문이 닫히며 자동운전 상태인 카가 급상승, 승강로 H빔에 부딪혀 피트로 추락",
+    "description": [
       "유지관리 기사가 3층 승강장에서 약 1.8m 아래 카 상부로 진입하던 중 승강장문이 닫히며 자동운전 모드로 카가 상승, 승강로 철골 빔에 충돌 후 피트로 추락 사망"
     ],
-    cause: [
+    "cause": [
       "카 상부 점검스위치(수동 모드)를 먼저 전환하지 않은 채 자동운전 상태에서 카 상부로 무리하게 뛰어내림, 문이 닫히자 호출 등록으로 카 자동 상승"
     ],
-    prevention: [
+    "prevention": [
       "작업자: 카 상부 진입 전 승강장 도어 문열림 고정(도어 블록), 카 상부 비상정지스위치 즉시 정지 위치 설정",
       "유지관리업체: 카 상부 진입 안전작업 표준절차(SOP) 재교육 및 2인 1조 작업 의무화"
     ],
-    tags: ["엘리베이터", "추락", "사망", "카상부", "자동운전상승", "관리과실"]
+    "tags": [
+      "엘리베이터",
+      "추락",
+      "사망",
+      "카상부",
+      "자동운전상승",
+      "관리과실"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 16,
-    page: 29,
-    bookPage: 31,
-    image: "images/page_29.png",
-    title: "카 상부 이동케이블 점검 중 안전대 미착용으로 추락 사망 사고 (2)",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "1건",
-    summary: "조도가 불량한 카 상부에서 안전대 없이 이동케이블 확인 중 케이블 하중 분리로 지하 피트 추락",
-    description: [
+    "id": 16,
+    "page": 29,
+    "bookPage": 31,
+    "image": "images/page_29.png",
+    "title": "카 상부 이동케이블 점검 중 안전대 미착용으로 추락 사망 사고 (2)",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "1건",
+    "summary": "조도가 불량한 카 상부에서 안전대 없이 이동케이블 확인 중 케이블 하중 분리로 지하 피트 추락",
+    "description": [
       "기사가 카 상부에서 노후 이동케이블 결속 작업을 하던 중 커넥터 연결부가 분리되며 케이블 무게에 끌려 지하 2층 피트로 추락하여 사망"
     ],
-    cause: [
+    "cause": [
       "작업선 조도 불량, 안전벨트(안전대) 미체결, 무거운 이동케이블의 자중을 지지할 보조 로프 미설치"
     ],
-    prevention: [
+    "prevention": [
       "작업자: 카 상부 작업 시 반드시 승강로 내 설치된 안전로프에 안전대 걸이 체결",
       "관리업체: 중량물 취급 시 고정 지지구 선설치 및 작업 전 위험성 평가 실시"
     ],
-    tags: ["엘리베이터", "추락", "사망", "작업자과실", "안전대미착용", "이동케이블"]
+    "tags": [
+      "엘리베이터",
+      "추락",
+      "사망",
+      "작업자과실",
+      "안전대미착용",
+      "이동케이블"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 17,
-    page: 30,
-    bookPage: 32,
-    image: "images/page_30.png",
-    title: "정지된 손잡이로 인해 에스컬레이터 이용 중 발생한 전도 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "관리주체 과실",
-    similarCount: "-",
-    summary: "핸드레일 구동계 고장으로 손잡이가 멈춘 채 스텝만 움직이는 에스컬레이터를 방치하여 승객 전도",
-    description: [
+    "id": 17,
+    "page": 30,
+    "bookPage": 32,
+    "image": "images/page_30.png",
+    "title": "정지된 손잡이로 인해 에스컬레이터 이용 중 발생한 전도 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "핸드레일 구동계 고장으로 손잡이가 멈춘 채 스텝만 움직이는 에스컬레이터를 방치하여 승객 전도",
+    "description": [
       "핸드레일이 정지된 에스컬레이터에 승객이 탑승하여 손잡이를 잡았으나 스텝만 이동하여 상체와 하체의 속도차로 균형을 잃고 전도, 뒤따르던 승객 부축 중 요추 골절"
     ],
-    cause: [
+    "cause": [
       "손잡이 정지 스위치 불량 또는 고장 상태에서 운행 정지 및 LOTO(잠금장치) 조치를 하지 않고 임의로 기기를 가동 방치"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 에스컬레이터 주요 부품 결함 발생 시 즉시 전원 차단, 차단 펜스 설치 및 운행 정지 표지판 부착",
       "유지보수업체: 핸드레일 속도 감응 센서 및 동기화 장치 매월 정밀 점검"
     ],
-    tags: ["에스컬레이터", "전도", "관리주체과실", "손잡이정지", "핸드레일고장"]
+    "tags": [
+      "에스컬레이터",
+      "전도",
+      "관리주체과실",
+      "손잡이정지",
+      "핸드레일고장"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 18,
-    page: 31,
-    bookPage: 33,
-    image: "images/page_31.png",
-    title: "비전문가의 임의 구출활동으로 발생한 승강로 피트 추락 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "추락",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "관리주체 과실",
-    similarCount: "-",
-    summary: "갇힌 승객을 경비원이 비상삼각열쇠로 직접 구출한 뒤 잔류 물품을 꺼내려다 승강로 틈새로 추락",
-    description: [
+    "id": 18,
+    "page": 31,
+    "bookPage": 33,
+    "image": "images/page_31.png",
+    "title": "비전문가의 임의 구출활동으로 발생한 승강로 피트 추락 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "-",
+    "summary": "갇힌 승객을 경비원이 비상삼각열쇠로 직접 구출한 뒤 잔류 물품을 꺼내려다 승강로 틈새로 추락",
+    "description": [
       "10층에서 카가 정지해 승객이 갇히자 건물 경비원이 삼각열쇠로 도어를 강제 개방하여 승객을 구출한 후, 카 내 남겨진 음식물 쓰레기를 꺼내려다 카 바닥과 승강장 사이 틈으로 빠져 지하 5층 피트로 추락 사망"
     ],
-    cause: [
+    "cause": [
       "승강기 안전관리 자격이 없는 비전문가가 임의로 승강장문 비상열쇠를 사용해 개방하였고, 카의 레벨링이 맞지 않은 상태에서 승강로 추락 위험 방치"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 승강기 갇힘 시 자체 구출 절대 금지, 119구조대 및 유지관리업체 전문 기술자 호출 필수",
       "안전관리: 비상 삼각열쇠는 시건장치된 보관함에 보관하고 권한 없는 자의 접근 원천 차단"
     ],
-    tags: ["엘리베이터", "추락", "사망", "비전문가구출", "관리주체과실", "삼각열쇠"]
+    "tags": [
+      "엘리베이터",
+      "추락",
+      "사망",
+      "비전문가구출",
+      "관리주체과실",
+      "삼각열쇠"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 19,
-    page: 32,
-    bookPage: 34,
-    image: "images/page_32.png",
-    title: "비전문가의 승강로 무단 진입(CCTV 작업)으로 발생한 협착 사망 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "협착",
-    casualty: "사망 1건",
-    severity: "사망",
-    causeType: "작업자 과실",
-    similarCount: "-",
-    summary: "CCTV 설치 기사가 승강기 기술자 입회 없이 카 상부에 탑승하여 배선 작업 중 카가 자동 상승하여 협착",
-    description: [
+    "id": 19,
+    "page": 32,
+    "bookPage": 34,
+    "image": "images/page_32.png",
+    "title": "비전문가의 승강로 무단 진입(CCTV 작업)으로 발생한 협착 사망 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1건",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "CCTV 설치 기사가 승강기 기술자 입회 없이 카 상부에 탑승하여 배선 작업 중 카가 자동 상승하여 협착",
+    "description": [
       "CCTV 설치업체 작업자가 1층에 정지된 엘리베이터 카 상부에 올라가 케이블 배선 작업을 하던 중, 카가 다른 층 호출에 의해 자동 상승하여 카 상부와 2층 문턱 구조물 사이에 끼여 사망"
     ],
-    cause: [
+    "cause": [
       "승강기 전문기술자 입회 없이 비전문가가 카 상부에 무단 탑승, 카 상부 점검 스위치를 수동(점검) 모드로 전환하지 않고 자동운전 상태 방치"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 비전문가가 임의로 승강로 및 카 상부에 접근할 수 없도록 비상키 관리 철저, CCTV 등 부대작업 시 유지관리업체 필수 입회",
       "시행사: 카 상부 전원 차단 및 운행 정지 확인 후 작업 승인"
     ],
-    tags: ["엘리베이터", "협착", "사망", "CCTV작업", "비전문가", "작업자과실"]
+    "tags": [
+      "엘리베이터",
+      "협착",
+      "사망",
+      "CCTV작업",
+      "비전문가",
+      "작업자과실"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 20,
-    page: 33,
-    bookPage: 35,
-    image: "images/page_33.png",
-    title: "점검용 덮개를 안전조치 없이 열어둔 채 이동하여 발생한 추락 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "추락",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "유지관리업체 과실",
-    similarCount: "-",
-    summary: "에스컬레이터 하부 트러스 점검 덮개를 안전펜스 없이 개방해 둔 채 자리를 비워 보행자가 개구부 추락",
-    description: [
+    "id": 20,
+    "page": 33,
+    "bookPage": 35,
+    "image": "images/page_33.png",
+    "title": "점검용 덮개를 안전조치 없이 열어둔 채 이동하여 발생한 추락 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "추락",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "에스컬레이터 하부 트러스 점검 덮개를 안전펜스 없이 개방해 둔 채 자리를 비워 보행자가 개구부 추락",
+    "description": [
       "유지관리업체 기사가 고장 수리를 위해 하부 점검용 바닥 덮개(플레이트)를 열어둔 상태에서 안전 가림막이나 안내표지 없이 이동하자, 지나가던 보행자가 개구부로 발이 빠져 추락"
     ],
-    cause: [
+    "cause": [
       "작업 구역 주변에 안전 차단 펜스 및 작업 안내 표지판을 설치하지 않고 개구부를 무방비 상태로 방치"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 점검 덮개 개방 시 즉시 4면 안전 차단 펜스 설치 및 작업 감시원 배치",
       "작업절차: 작업자가 잠시 자리를 비울 경우 덮개를 원상 복구하거나 견고한 안전 덮개 임시 체결"
     ],
-    tags: ["에스컬레이터", "추락", "유지관리과실", "점검덮개개방", "안전펜스미설치"]
+    "tags": [
+      "에스컬레이터",
+      "추락",
+      "유지관리과실",
+      "점검덮개개방",
+      "안전펜스미설치"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 21,
-    page: 34,
-    bookPage: 36,
-    image: "images/page_34.png",
-    title: "급정지로 인한 재착상 단차로 하차 중 넘어진 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 2건",
-    severity: "중상",
-    causeType: "유지관리업체 과실",
-    similarCount: "1건",
-    summary: "하강 운행 중 제어 위치 오차로 카가 3층에서 멈췄으나 바닥 단차가 크게 발생, 문이 열려 하차 중 전도",
-    description: [
+    "id": 21,
+    "page": 34,
+    "bookPage": 36,
+    "image": "images/page_34.png",
+    "title": "급정지로 인한 재착상 단차로 하차 중 넘어진 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 2건",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "1건",
+    "summary": "하강 운행 중 제어 위치 오차로 카가 3층에서 멈췄으나 바닥 단차가 크게 발생, 문이 열려 하차 중 전도",
+    "description": [
       "엘리베이터가 하강 운행 중 비정상 위치 제어로 층 바닥보다 높게 정지하였으나 출입문이 열렸고, 내리던 승객들이 승강장과 카 바닥 사이 큰 턱(단차)에 걸려 앞으로 넘어져 중상"
     ],
-    cause: [
+    "cause": [
       "착상 감지 센서(인덕터/플래그) 및 레벨 제어계통 점검 불량, 도어 개방 허용 범위(도어존) 밖에서의 이상 개문"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 정기점검 시 착상 레벨 허용치(±10mm) 정밀 측정 및 비정상 착상 시 문 열림 차단 안전회로 점검",
       "관리주체: 단차 발생 및 갇힘 시 즉시 전원 차단 후 전문 기술자 조치 의뢰"
     ],
-    tags: ["엘리베이터", "전도", "유지관리과실", "착상단차", "도어존이탈"]
+    "tags": [
+      "엘리베이터",
+      "전도",
+      "유지관리과실",
+      "착상단차",
+      "도어존이탈"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 22,
-    page: 35,
-    bookPage: 37,
-    image: "images/page_35.png",
-    title: "운행 중 이동케이블이 승강로 구조물에 걸려 발생한 급정지 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (기계·구조 결함)",
-    similarCount: "-",
-    summary: "엘리베이터 이동케이블의 장력 편차로 꼬임이 발생해 12층 승강장 문턱에 걸리며 비상 급정지",
-    description: [
+    "id": 22,
+    "page": 35,
+    "bookPage": 37,
+    "image": "images/page_35.png",
+    "title": "운행 중 이동케이블이 승강로 구조물에 걸려 발생한 급정지 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (기계·구조 결함)",
+    "similarCount": "-",
+    "summary": "엘리베이터 이동케이블의 장력 편차로 꼬임이 발생해 12층 승강장 문턱에 걸리며 비상 급정지",
+    "description": [
       "카 하강 운행 중 승강로 내 매달려 있는 이동케이블 및 CCTV 동축케이블이 승강장 출입구 돌출 턱에 걸리면서 당겨져 비상스위치 작동, 카가 급정지하며 탑승자가 바닥에 강하게 전도"
     ],
-    cause: [
+    "cause": [
       "이동케이블 고정 브래킷 및 행거의 유격 과다, 장력 불균형으로 인한 루프 비틀림이 발생하여 승강로 내 구조물 간섭 발생"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 이동케이블 행거 및 루프 반경 정기 점검, 추가 케이블(CCTV, 통신선) 가설 시 표준 간격 유지",
       "관리주체: 정기 자체점검 시 승강로 내 돌출부 간섭 유무 철저 검토"
     ],
-    tags: ["엘리베이터", "전도", "이동케이블", "구조물간섭", "급정지", "기타원인"]
+    "tags": [
+      "엘리베이터",
+      "전도",
+      "이동케이블",
+      "구조물간섭",
+      "급정지",
+      "기타원인"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 23,
-    page: 36,
-    bookPage: 38,
-    image: "images/page_36.png",
-    title: "브레이크 고장으로 출입문이 열린 채 상승하여 발생한 개문출발 협착 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "끼임/협착",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (부품 노후/제어 결함)",
-    similarCount: "-",
-    summary: "승객 탑승 중 브레이크 전기 제어 이상으로 도어가 열린 채 카가 상승하여 승객 다리가 문틀에 협착",
-    description: [
+    "id": 23,
+    "page": 36,
+    "bookPage": 38,
+    "image": "images/page_36.png",
+    "title": "브레이크 고장으로 출입문이 열린 채 상승하여 발생한 개문출발 협착 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임/협착",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (부품 노후/제어 결함)",
+    "similarCount": "-",
+    "summary": "승객 탑승 중 브레이크 전기 제어 이상으로 도어가 열린 채 카가 상승하여 승객 다리가 문틀에 협착",
+    "description": [
       "6층에서 승객이 엘리베이터에 탑승하려는 순간 카 도어가 닫히지 않은 상태에서 갑자기 카가 상승하여 한쪽 다리가 카 바닥과 승강장 상부 문틀 사이에 끼여 복합 골절"
     ],
-    cause: [
+    "cause": [
       "전자브레이크 제어 릴레이 융착 및 마이크로스위치 접점 오작동으로 개문출발 방지장치(UCMP)가 정상 작동하지 않음"
     ],
-    prevention: [
+    "prevention": [
       "관리주체: 권장 교체주기를 초과한 노후 브레이크 부품 적기 교체, 2중계 안전장치 및 UCMP 설치 보강",
       "유지관리업체: 브레이크 라이닝 마모도 및 개문출발 방지 안전회로의 매월 단독 작동 테스트 의무화"
     ],
-    tags: ["엘리베이터", "끼임", "개문출발", "UCMP", "브레이크고장", "중대고장"]
+    "tags": [
+      "엘리베이터",
+      "끼임",
+      "개문출발",
+      "UCMP",
+      "브레이크고장",
+      "중대고장"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 24,
-    page: 37,
-    bookPage: 39,
-    image: "images/page_37.png",
-    title: "출입문 미개방 및 제어불능 상태로 급상승하여 발생한 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (전기/전자 제어계 결함)",
-    similarCount: "-",
-    summary: "장애인용 엘리베이터가 지하 2층 도착 후 문이 안 열린 채 최상층까지 제어 불능 급상승 후 충격 정지",
-    description: [
+    "id": 24,
+    "page": 37,
+    "bookPage": 39,
+    "image": "images/page_37.png",
+    "title": "출입문 미개방 및 제어불능 상태로 급상승하여 발생한 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (전기/전자 제어계 결함)",
+    "similarCount": "-",
+    "summary": "장애인용 엘리베이터가 지하 2층 도착 후 문이 안 열린 채 최상층까지 제어 불능 급상승 후 충격 정지",
+    "description": [
       "승객들이 지하 1층에서 탑승하여 지하 2층에 도착했으나 문이 열리지 않은 상태로 카가 반전 급상승, 최상층 오버트래블 리미트스위치에 부딪혀 급정지하며 승객 전도"
     ],
-    cause: [
+    "cause": [
       "브레이크 전자접촉기(MC) 접점 소착(들러붙음) 및 역기전력 억제 회로 소손으로 제동기가 풀린 채 균형추 무게에 의해 카가 꼭대기로 끌려 올라감"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 제어반 내 전자접촉기 접점 마모 및 고착 상태 점검 주기 단축, 역기전력 보호 회로 점검",
       "제조업체: 제동기 2중 제어 및 접점 고착 시 즉시 주전원을 차단하는 감시 회로 설계 적용"
     ],
-    tags: ["엘리베이터", "전도", "제어불능상승", "접촉기소착", "역기전력", "기타원인"]
+    "tags": [
+      "엘리베이터",
+      "전도",
+      "제어불능상승",
+      "접촉기소착",
+      "역기전력",
+      "기타원인"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 25,
-    page: 38,
-    bookPage: 40,
-    image: "images/page_38.png",
-    title: "에스컬레이터 하부 콤 볼트 풀림으로 인한 파손 급정지 사고",
-    elevatorType: "에스컬레이터",
-    elevatorCategory: "ES",
-    accidentType: "전도",
-    casualty: "중상 1건",
-    severity: "중상",
-    causeType: "기타 (부품 체결 불량)",
-    similarCount: "-",
-    summary: "하부 콤 고정 볼트가 풀려 헐거워진 상태에서 스텝과 간섭 충돌, 콤 파손과 함께 급정지하여 승객 전도",
-    description: [
+    "id": 25,
+    "page": 38,
+    "bookPage": 40,
+    "image": "images/page_38.png",
+    "title": "에스컬레이터 하부 콤 볼트 풀림으로 인한 파손 급정지 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1건",
+    "severity": "중상",
+    "causeType": "기타 (부품 체결 불량)",
+    "similarCount": "-",
+    "summary": "하부 콤 고정 볼트가 풀려 헐거워진 상태에서 스텝과 간섭 충돌, 콤 파손과 함께 급정지하여 승객 전도",
+    "description": [
       "에스컬레이터 하강 운행 중 하부 승강장 콤 플레이트 고정 볼트 체결 불량으로 콤이 들뜨면서 진입하는 스텝과 강하게 충돌·파손, 콤 비상정지장치가 작동하며 탑승자 전도"
     ],
-    cause: [
+    "cause": [
       "콤 고정 볼트 토크 관리 미흡 및 정기 점검 시 콤-스텝 간 맞물림 틈새(1~4mm 규정치) 관리 소홀"
     ],
-    prevention: [
+    "prevention": [
       "유지관리업체: 일상·자체점검 시 콤 볼트 풀림 방지 너트 체결 및 마킹 확인, 빗살 간격 게이지 측정 철저",
       "관리주체: 에스컬레이터 이상 진동 및 금속 마찰음 발생 시 즉각 운행 중지"
     ],
-    tags: ["에스컬레이터", "전도", "콤볼트풀림", "스텝간섭", "급정지", "부품체결"]
+    "tags": [
+      "에스컬레이터",
+      "전도",
+      "콤볼트풀림",
+      "스텝간섭",
+      "급정지",
+      "부품체결"
+    ],
+    "source": "2024년 승강기 사고 사례집"
   },
   {
-    id: 26,
-    page: 39,
-    bookPage: 41,
-    image: "images/page_39.png",
-    title: "닫히는 출입문 사이에 가방 끈이 끼인 채 출발하여 발생한 전도 사고",
-    elevatorType: "엘리베이터",
-    elevatorCategory: "EL",
-    accidentType: "전도",
-    casualty: "중상 2건",
-    severity: "중상",
-    causeType: "기타 (센서 감지 한계/이용자)",
-    similarCount: "-",
-    summary: "하차 중 닫히는 문에 백팩 끈이 끼었으나 안전장치가 얇은 끈을 감지하지 못하고 출발해 탑승자 전도",
-    description: [
+    "id": 26,
+    "page": 39,
+    "bookPage": 41,
+    "image": "images/page_39.png",
+    "title": "닫히는 출입문 사이에 가방 끈이 끼인 채 출발하여 발생한 전도 사고",
+    "elevatorType": "엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 2건",
+    "severity": "중상",
+    "causeType": "기타 (센서 감지 한계/이용자)",
+    "similarCount": "-",
+    "summary": "하차 중 닫히는 문에 백팩 끈이 끼었으나 안전장치가 얇은 끈을 감지하지 못하고 출발해 탑승자 전도",
+    "description": [
       "승객이 하차하는 과정에서 도어 대기시간 종료로 문이 닫히며 어깨에 멘 가방 끈이 도어 사이에 끼임, 안전센서가 얇은 끈을 인식하지 못하고 카가 이동하려 하자 승객이 끌려가며 전도"
     ],
-    cause: [
+    "cause": [
       "출입문 안전접점 스위치가 얇은 물체(5mm 미만 가방끈 등)의 끼임을 감지하지 못해 도어 닫힘 상태로 판정, 개폐기 센서 감지 한계"
     ],
-    prevention: [
+    "prevention": [
       "이용자: 승하차 시 닫히는 문에 옷자락이나 가방 끈이 걸리지 않도록 몸 앞쪽으로 가방을 안고 탑승",
       "관리주체: 승강기 승하차 대기시간 충분히 확보(최소 3~5초), 도어 틈새 이물질 감지센서(다점빔) 보강"
     ],
-    tags: ["엘리베이터", "전도", "가방끈끼임", "도어센서한계", "승하차주의"]
+    "tags": [
+      "엘리베이터",
+      "전도",
+      "가방끈끼임",
+      "도어센서한계",
+      "승하차주의"
+    ],
+    "source": "2024년 승강기 사고 사례집"
+  },
+  {
+    "id": 27,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 96,
+    "image": "images/case_27.png",
+    "title": "전동스쿠터 충돌 시 승강장문 문턱(Sill) 체결 불량으로 문턱 통째 이탈 추락",
+    "elevatorType": "장애인용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "제조업체·설치 과실",
+    "similarCount": "2건",
+    "summary": "전동스쿠터가 승강장문에 충돌했을 때 문턱 고정 브래킷 U홈 가공 및 볼트 미체결로 문턱이 이탈되며 피트 추락",
+    "description": [
+      "지하 3층 승강장에서 전동스쿠터에 탑승한 피해자가 승강기 호출 후 접근 중 조작 미숙으로 닫힌 승강장문에 충돌",
+      "설계도면과 달리 승강장 문틀과 문턱을 결속하는 볼트·너트가 누락되어 있었고, 문턱 고정 브래킷이 U자형으로 임의 절단 가공되어 충격을 견디지 못하고 문턱 전체가 피트로 탈락",
+      "문턱과 도어가 함께 승강로 안으로 밀려 떨어지면서 피해자가 전동스쿠터와 함께 피트 바닥으로 추락하여 사망"
+    ],
+    "cause": [
+      "승강장문 도어 안전성 평가서 규격과 다르게 시공: 문틀과 문턱 결합 볼트 미설치",
+      "문턱 고정 브래킷을 원형 홀이 아닌 U홈 형태로 임의 절단(컷팅) 가공하여 외부 충격 시 쉽게 빠지는 구조적 결함"
+    ],
+    "prevention": [
+      "제조·설치사: 승강기안전인증서에 명시된 공인 도면 및 기준 준수 철저, 현장 임의 부품 가공 금지",
+      "관리주체: 전동스쿠터·휠체어 이용자가 많은 역사 및 다중시설 승강장 앞 충돌 방지 완충 턱 및 방호 범퍼 설치"
+    ],
+    "tags": [
+      "승강로",
+      "도어시스템",
+      "문턱이탈",
+      "전동스쿠터",
+      "사망사고",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 28,
+    "source": "승강기사고사례집 (관리주체용)",
+    "bookPage": 14,
+    "image": "images/case_28.png",
+    "title": "음주 상태 이용자의 발길질 충격으로 도어 가이드슈 이탈 피트 추락",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "12건",
+    "summary": "음주 상태에서 닫힌 승강장문을 발로 강하게 차서 하부 가이드 슈가 홈에서 빠지며 승강로 피트로 추락",
+    "description": [
+      "음주 상태의 이용자가 승강기가 늦게 도착한다는 이유로 승강장 도어 중앙부를 발로 수회 강하게 걷어참",
+      "문짝 하부를 지지하는 플라스틱 도어 가이드 슈(Guide Shoe)가 파손·이탈되며 승강장 문짝이 승강로 내부로 꺾여 열림",
+      "몸의 균형을 잃고 개방된 승강로 공간으로 굴러 떨어져 지하 피트 바닥으로 추락 사망"
+    ],
+    "cause": [
+      "승강장문에 기준치 이상의 강한 인위적 충격(발길질)을 가함",
+      "노후 승강장문 하부 가이드슈의 마모 및 도어 이탈방지장치 미설치 상태"
+    ],
+    "prevention": [
+      "이용자: 승강장 문에 절대 기대거나 발길질, 물리적 충격을 가하지 말 것",
+      "관리주체: 구형 승강기에 대해 승강장문 도어 이탈방지장치(기준 충격 450J 이상 지탱) 의무 소급 설치 및 점검"
+    ],
+    "tags": [
+      "승강로",
+      "도어시스템",
+      "가이드슈이탈",
+      "발길질충격",
+      "추락사망",
+      "대표빈발사례"
+    ]
+  },
+  {
+    "id": 29,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 37,
+    "image": "images/case_29.png",
+    "title": "카가 없는 층에서 열쇠 잠금 불량 승강장문을 열고 화물 싣다 피트 추락",
+    "elevatorType": "소형화물용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1명 (유사 2건)",
+    "severity": "사망",
+    "causeType": "유지관리업체·관리주체 과실",
+    "similarCount": "2건",
+    "summary": "도어 인터록 잠금장치 훅 걸림량 부족으로 카가 다른 층에 있음에도 승강장문이 손으로 열려 추락",
+    "description": [
+      "식당 및 마트 직원이 화물을 운반하기 위해 승강장 문을 당겼으나, 카가 도착하지 않은 상태에서 인터록 훅이 풀려 문이 쉽게 개방됨",
+      "카가 정지해 있는 것으로 착각하고 화물 카트를 밀며 들어가다가 허공으로 실족하여 지하 피트로 추락"
+    ],
+    "cause": [
+      "승강장문 기계식 인터록 장치의 훅 걸림 깊이(규정 7mm 이상) 마모 및 스프링 장력 불량으로 카 없이도 개폐 가능",
+      "작업자가 카 내부 바닥 유무를 육안으로 확인하지 않고 관성적으로 진입"
+    ],
+    "prevention": [
+      "유지관리업체: 자체점검 시 승강장문 인터록 훅 걸림량 및 스프링 반발력 정밀 측정 의무화",
+      "관리주체: 카가 도착하여 도어존에 정지했을 때만 승강장문이 열리도록 인터록 전기·기계 회로 이중화 점검"
+    ],
+    "tags": [
+      "승강로",
+      "도어시스템",
+      "인터록불량",
+      "카없는층개방",
+      "화물용추락",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 30,
+    "source": "승강기사고사례집 (관리주체용)",
+    "bookPage": 28,
+    "image": "images/case_30.png",
+    "title": "덤웨이터 승강장 문 연동로프 파단으로 문짝 낙하 발등 골절",
+    "elevatorType": "덤웨이터 (소형화물용)",
+    "elevatorCategory": "EL",
+    "accidentType": "낙하 충돌",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "덤웨이터 승강장 상하 개폐 도어의 연동 와이어로프가 노후 부식으로 끊어지며 상부 문짝이 급낙하해 발등 강타",
+    "description": [
+      "조리실에서 덤웨이터에 음식물 트레이를 넣던 중 상부 승강장 문짝을 들어올린 채 작업",
+      "상하 도어를 연결해 주는 얇은 연동 와이어로프가 노후 피로 및 마모로 순간 파단",
+      "상부 도어가 중력으로 급낙하하여 작업자의 발등 및 손가락을 덮쳐 복합 골절"
+    ],
+    "cause": [
+      "도어 연동로프 1가닥 구조에 안전 낙하방지장치 부재",
+      "정기점검 시 도어 와이어로프의 소선 단락 및 부식 상태 점검 소홀"
+    ],
+    "prevention": [
+      "유지관리업체: 도어 연동로프 파단 대비 2가닥 와이어 설치 또는 도어 세이프티 캐치(Catch) 안전장치 장착",
+      "관리주체: 덤웨이터 도어 개폐 시 이상 걸림이나 쇠긁힘 소리 발생 즉시 운행 중지 후 로프 교체"
+    ],
+    "tags": [
+      "승강로",
+      "도어시스템",
+      "덤웨이터",
+      "연동로프파단",
+      "도어낙하",
+      "소형화물용"
+    ]
+  },
+  {
+    "id": 31,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 50,
+    "image": "images/case_31.png",
+    "title": "승강로 소방용사다리로 카 상부 이동 중 자동 상승하는 카와 승강로 벽 사이 협착",
+    "elevatorType": "소방구조용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "피해자가 2층 승강장문을 열고 승강로 사다리를 타고 카 상부로 내려가던 중 동료가 1층 카 내에서 자동 전환 후 상승시켜 협착",
+    "description": [
+      "2인 1조 점검 중 피해자가 카 상부 탑승을 위해 비상열쇠로 2층 승강장문을 열고 승강로 벽에 설치된 소방용사다리를 잡고 내려감",
+      "피트에서 나온 동료 직원이 피해자가 7층 제어반으로 간 줄 오인하고, 1층 카 내 조작반에서 정지 스위치를 자동으로 전환한 뒤 7층 버튼을 누름",
+      "자동으로 상승하는 카와 승강로 벽 사다리 사이에 내려오던 피해자가 끼여 사망"
+    ],
+    "cause": [
+      "2인 1조 작업자 간 현재 위치 및 운전 전환에 대한 상호 신호 확인 절차 미준수",
+      "카 상부 진입 시 지정된 점검 절차 대신 승강로 사다리를 이용해 이동 중 기기 자동 가동"
+    ],
+    "prevention": [
+      "작업자: 승강로 내부 진입 및 수동/자동 전환 시 반드시 동료 작업자의 위치와 안전 여부를 무전·육안으로 상호 확인",
+      "유지관리업체: 2인 1조 공동 작업 안전수칙 교육 및 점검 중 임의 자동운전 전환 금지 철저"
+    ],
+    "tags": [
+      "승강로",
+      "작업자안전거리",
+      "협착사망",
+      "카상부작업",
+      "신호미준수",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 32,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 31,
+    "image": "images/case_32.png",
+    "title": "피트 점검용 수직 사다리 상부 용접 접합부 파손으로 검사자 피트 바닥 추락",
+    "elevatorType": "전망용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "설치·제조업체 과실",
+    "similarCount": "-",
+    "summary": "승강기 검사 후 피트에서 사다리를 타고 올라오던 중 상부 앵커 용접 부위가 파단되며 피트 바닥으로 추락",
+    "description": [
+      "안전검사자가 피트 바닥 검사를 완료하고 승강장으로 복귀하기 위해 벽체에 고정된 수직 사다리를 잡고 올라오던 중",
+      "사다리 상부 고정 브래킷의 용접 비드 부위가 체중을 견디지 못하고 순간 뜯어지며 사다리가 뒤로 젖혀짐",
+      "검사자가 약 4m 아래 피트 콘크리트 바닥으로 거꾸로 추락하여 척추 및 두개골 중상"
+    ],
+    "cause": [
+      "사다리 상부 고정판 용접 시 쇠붙이 모재 불량 및 불완전 용접(비드 두께 미달)",
+      "설치 후 수년간 지속적인 하중으로 인한 피로 균열 발생 방치"
+    ],
+    "prevention": [
+      "설치사: 승강로 피트 사다리는 200kg 이상의 인장 하중을 견딜 수 있도록 앵커볼트 2중 체결 및 전둘레 용접",
+      "검사기관: 피트 사다리 승강 전 흔들림 및 브래킷 고정 상태 사전 육안 점검"
+    ],
+    "tags": [
+      "승강로",
+      "작업자안전거리",
+      "피트사다리",
+      "용접파단",
+      "추락중상",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 33,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 46,
+    "image": "images/case_33.png",
+    "title": "승강로 균형추 가이드롤러와 레일 사이 회전체에 손가락 끼임",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임/협착",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "카 상부 점검운전 중 균형추 가이드롤러 레일 주행 상태를 손으로 확인하다 롤러 틈새에 장갑이 말려들어가 절단",
+    "description": [
+      "기사가 카 상부에서 점검속도로 하강 운전(상대적으로 대향 균형추는 고속 상승)하면서 균형추 주행 상태를 육안 관찰",
+      "균형추 가이드롤러의 유격을 손으로 확인하려 손을 뻗는 순간 롤러와 레일 틈새로 목장갑이 말려들어 손가락 복합 골절 및 절단"
+    ],
+    "cause": [
+      "카 주행 중 회전체 및 대향체(균형추) 접근 금지 기본 안전수칙 불이행",
+      "회전체 취급 작업 시 면장갑(코팅장갑) 착용 금지 규정 위반"
+    ],
+    "prevention": [
+      "작업자: 승강로 내 이동 중인 회전 부품 및 균형추에 신체 접촉 절대 금지, 점검 정지 상태에서만 유격 측정",
+      "유지관리업체: 균형추 롤러 방호망 및 손끼임 방지 커버 설치 의무화"
+    ],
+    "tags": [
+      "승강로",
+      "작업자안전거리",
+      "균형추",
+      "가이드롤러",
+      "손가락끼임",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 34,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 48,
+    "image": "images/case_34.png",
+    "title": "피트 내 집수정 배수펌프 점검 중 어두운 피트 바닥 구멍에 실족 골절",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도/실족",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자·관리주체 과실",
+    "similarCount": "-",
+    "summary": "피트 바닥 집수정 덮개가 열려 있는 상태에서 조명이 어두워 발이 집수정에 빠져 무릎 인대 파열",
+    "description": [
+      "검사자가 카 최하층 정지 상태에서 피트 내부 청결 상태 및 완충기 확인을 위해 이동 중",
+      "피트 바닥에 600×680mm 크기로 파여 있는 배수펌프 집수정(물이 고이는 웅덩이) 덮개가 개방되어 있는 것을 보지 못함",
+      "한쪽 다리가 웅덩이에 완전히 빠지며 몸이 비틀려 넘어져 십자인대 파열 및 발목 골절"
+    ],
+    "cause": [
+      "피트 내 작업등 조도 부족(기준 50 Lux 이상 미달)",
+      "집수정 개구부에 그레이팅(철망 덮개) 미설치 방치"
+    ],
+    "prevention": [
+      "관리주체: 피트 바닥 모든 개구부(집수정 등)에 견고한 하중 지지형 안전망 및 덮개 필수 설치",
+      "작업자: 피트 진입 시 이동식 고조도 충전식 작업등 필수 지참"
+    ],
+    "tags": [
+      "승강로",
+      "작업자안전거리",
+      "피트집수정",
+      "개구부실족",
+      "조도불량",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 35,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 108,
+    "image": "images/case_35.png",
+    "title": "유압식 엘리베이터 분동 하중시험 중 유압호스 파열로 완충기 격돌 추락",
+    "elevatorType": "자동차용 유압식 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락/충돌",
+    "casualty": "중상 2명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "정격하중 110% 분동을 싣고 속도시험 중 노후 유압고무호스가 터져 카가 급하강, 피트 완충기와 격돌하여 검사자 중상",
+    "description": [
+      "정밀안전검사 중 카 내부에 2톤 분동을 적재하고 정격속도 측정 중 1층에서 지하 2층으로 하강",
+      "노후된 고압 유압고무호스가 파열되며 작동유가 급격히 분출, 카가 정격속도의 8.5배(2.82m/s)로 자유낙하",
+      "과속조절기 인상봉 연결 쐐기가 헛돌며 비상정지장치가 잡히지 않아 카가 피트 스프링 완충기에 강하게 충돌",
+      "피트에 대기 중이던 검사자와 카 내 탑승 검사자 2명이 복합 골절 및 뇌진탕 중상"
+    ],
+    "cause": [
+      "권장 교체주기(5년)를 훌쩍 초과한 27년 된 노후 유압호스 방치 및 녹 발생 파열",
+      "과속조절기 로프 체결부 헛돌림으로 추락방지안전장치(세이프티 기어) 미작동"
+    ],
+    "prevention": [
+      "유지관리업체: 유압식 승강기 고압호스는 법정 교체주기 엄수 및 비파괴 압력테스트 실시",
+      "검사기관: 하중 시험 시 피트 내 작업자 동시 대기 절대 금지, 럽처밸브(급격유출방지밸브) 성능 점검"
+    ],
+    "tags": [
+      "승강로",
+      "완충기",
+      "유압호스파열",
+      "자유낙하",
+      "완충기격돌",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 36,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 33,
+    "image": "images/case_36.png",
+    "title": "제어기판 접촉 불량으로 목적층 지나 최하층 피트 완충기 충돌",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "1건",
+    "summary": "하강 운행 중 제어반 접촉 불량 및 제동거리 초과로 감속 없이 최하층을 지나 피트 오일완충기에 충돌",
+    "description": [
+      "승객 3명을 태우고 5층에서 1층으로 하강하던 엘리베이터가 1층에서 감속 정지하지 않고 계속 하강",
+      "피트 파이널 리미트스위치를 치고 넘어가 피트 바닥 완충기에 강하게 격돌 후 정지",
+      "탑승 승객들이 충격으로 천장에 튀어올랐다 바닥에 떨어지며 척추 골절 및 인대 파열"
+    ],
+    "cause": [
+      "제어반 내 제어기판 접촉 불량 및 카와 균형추의 불균형한 무게비로 브레이크 제동력 저하",
+      "최하층 강제감속스위치 작동 지연"
+    ],
+    "prevention": [
+      "유지관리업체: 제어반 전자접점 및 강제감속스위치 감응거리 정기 점검, 브레이크 제동거리 분기별 실측",
+      "관리주체: 권장 수명 초과 제동장치 및 완충기 오일 레벨 점검 철저"
+    ],
+    "tags": [
+      "승강로",
+      "완충기",
+      "최하층통과",
+      "완충기충돌",
+      "급하강충격",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 37,
+    "source": "승강기사고 사례집 (1993~2018)",
+    "bookPage": 15,
+    "image": "images/case_37.png",
+    "title": "정원 초과 만원 상태 주로프 슬립으로 피트 완충기 충돌 사고",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌",
+    "casualty": "중상 3명, 경상 8명",
+    "severity": "중상",
+    "causeType": "관리주체·이용자 과실",
+    "similarCount": "3건",
+    "summary": "과부하감지장치 작동 불량으로 정원(11명)을 초과한 18명이 탑승, 권상기 주로프 슬립으로 완충기 격돌",
+    "description": [
+      "출근 시간대 아파트 엘리베이터에 정격인원을 초과하여 18명이 무리하게 탑승하였으나 경보음이 울리지 않음",
+      "하강 중 권상도르래와 로프 간 마찰력 부족으로 로프가 미끄러지며(Slip) 통제력을 잃고 하강 가속",
+      "지하 1층 피트 완충기에 충돌하며 카 내 승객들이 연쇄 전도되어 다수 중경상"
+    ],
+    "cause": [
+      "카 하부 과부하감지스위치(Overload Switch) 접점 고착 및 관리 부실로 정원 초과 미감지",
+      "주로프 및 권상도르래 마모로 인한 견인력(Traction) 저하"
+    ],
+    "prevention": [
+      "관리주체: 자체점검 시 과부하감지장치 및 부저 작동 정밀 테스트 필수",
+      "이용자: 승강기 만원 시 무리하게 끼어 타지 말고 다음 승강기 대기"
+    ],
+    "tags": [
+      "승강로",
+      "완충기",
+      "과부하",
+      "로프슬립",
+      "완충기격돌",
+      "만원추락"
+    ]
+  },
+  {
+    "id": 38,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 80,
+    "image": "images/case_38.png",
+    "title": "승강로 벽체 마감 공사 중 하강하는 균형추와 건축 H빔 사이 협착 사망",
+    "elevatorType": "장애인/전망용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "기타 (관리·시공 결함)",
+    "similarCount": "-",
+    "summary": "승강기 교체 현장에서 사다리를 놓고 벽체 마감 중 자동 운행 중이던 카의 균형추에 몸이 끼여 사망",
+    "description": [
+      "건설업체 근로자가 3층 승강장 바닥에 사다리를 놓고 승강로 벽 마감 공사를 진행",
+      "승강기를 운행 정지시키지 않은 상태에서 카가 상층으로 자동 이동하자, 반대편에서 하강하던 균형추와 승강로 건축 빔 구조물 사이에 작업자 몸이 끼임",
+      "현장에서 늑골 및 흉부 압박으로 즉사"
+    ],
+    "cause": [
+      "승강로 내부 위험 공사 시 승강기 주전원 차단 및 운행 정지 LOTO 절차 미이행",
+      "승강기 관리주체와 건축 공사 업체 간 작업 통제 협의 전무"
+    ],
+    "prevention": [
+      "관리주체: 승강로 벽 철거 및 마감 등 위험 작업 시 반드시 승강기 운행을 전면 중단하고 전원 스위치 시건",
+      "시공사: 승강기 기술자 입회 및 안전감시원 배치 후 작업 승인"
+    ],
+    "tags": [
+      "승강로",
+      "기타",
+      "균형추협착",
+      "사망사고",
+      "승강로공사",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 39,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 85,
+    "image": "images/case_39.png",
+    "title": "과속조절기 인장풀리 이물질 끼임으로 스위치 탈락 및 비상 급정지",
+    "elevatorType": "소방구조용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "급정지/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "기타 (부품·이물질 결함)",
+    "similarCount": "-",
+    "summary": "피트 과속조절기 인장풀리와 로프 사이에 모래·이물질이 끼어 안전스위치가 브래킷 간섭으로 떨어지며 급정지",
+    "description": [
+      "카가 12층에서 하강 중 피트 내 과속조절기 인장풀리 회전체에 건축 이물질이 끼임",
+      "인장풀리가 좌우로 흔들리면서 인장 전기안전장치가 브래킷에 부딪혀 강제로 떨어져 회로 단선",
+      "카가 전속 주행 중 비상 급정지하여 탑승 승객이 천장과 바닥으로 내동댕이쳐져 척추 중상"
+    ],
+    "cause": [
+      "인장장치와 전기안전스위치 간 이격 거리 설계 미흡",
+      "승강로 피트 청결 상태 불량으로 공사 이물질 유입"
+    ],
+    "prevention": [
+      "유지관리업체: 과속조절기 인장스위치 유격 확보 및 이물질 끼임 방지 보호대 점검",
+      "관리주체: 승강로 피트 내 먼지, 모래 등 낙하 이물질 청소 주기 강화"
+    ],
+    "tags": [
+      "승강로",
+      "기타",
+      "과속조절기",
+      "인장풀리",
+      "급정지",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 40,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 36,
+    "image": "images/case_40.png",
+    "title": "카 상부 접속함 덮개 고정 불량으로 승강장 문턱 간섭 비상 급정지",
+    "elevatorType": "장애인용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "급정지/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "카 상부 전기 접속함 덮개가 덜 닫혀 주행 중 2층 승강장 문턱에 걸려 도어스위치 파손 및 카 급정지",
+    "description": [
+      "4층에서 1층으로 승객 탑승 후 하강 운행 중 카 상부 전기 단자함 철재 덮개가 진동으로 젖혀짐",
+      "2층 승강장 문턱에 돌출된 덮개가 강하게 부딪히며 카문 전기안전장치를 파손 탈락시킴",
+      "주행 중 안전회로가 즉각 차단되며 카가 강하게 비상 정지하여 탑승자가 바닥에 강하게 전도 골절"
+    ],
+    "cause": [
+      "유지관리 기사가 자체점검 후 접속함 덮개 볼트 2개를 완전 체결하지 않고 방치",
+      "주행 진동으로 인해 덮개가 서서히 열려 승강로 내 구조물 간섭 발생"
+    ],
+    "prevention": [
+      "유지관리업체: 카 상부 모든 점검 덮개는 나비볼트 및 풀림방지 너트로 이중 체결 확인 의무화",
+      "관리주체: 점검 완료 보고서 확인 시 카 상부 정리정돈 상태 점검"
+    ],
+    "tags": [
+      "승강로",
+      "기타",
+      "접속함덮개",
+      "문턱간섭",
+      "급정지전도",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 41,
+    "source": "2020년도 발생 중대한 사고사례집 / 2022년 사례집",
+    "bookPage": 41,
+    "image": "images/case_41.png",
+    "title": "카문 닫힐 때 반려견 목줄이 끼인 채 카가 상승하여 손가락 절단",
+    "elevatorType": "소방구조/승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "절단/끼임",
+    "casualty": "중상 1명 (매년 다수 발생)",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "4건",
+    "summary": "반려견을 동반 탑승하던 중 문이 닫히며 얇은 목줄이 문 사이에 끼이고 카가 출발하여 목줄을 쥔 손가락 절단",
+    "description": [
+      "보호자가 카에 탑승한 직후 문이 닫히기 시작하자 따라오던 반려견이 밖으로 뛰어나감",
+      "두께 3mm의 얇은 나일론 목줄이 닫힌 도어 틈새에 끼었으나 도어 안전센서가 감지하지 못하고 출발",
+      "카가 상승하면서 목줄이 팽팽히 당겨져 손잡이를 놓치지 않으려던 보호자의 손가락 3개가 절단됨"
+    ],
+    "cause": [
+      "반려동물을 안지 않고 목줄만 잡은 채 안전거리 미확보 탑승",
+      "기존 광전관/안전바 센서는 5mm 미만의 얇은 줄이나 끈을 감지하지 못하는 기술적 한계"
+    ],
+    "prevention": [
+      "이용자: 반려동물 동반 승강기 이용 시 반드시 안고 타거나 품에 안아서 승하차",
+      "관리주체: 승강기 출입문에 반려견 줄끼임 경고 스티커 부착 및 다점빔(3D센서) 보강"
+    ],
+    "tags": [
+      "카내",
+      "문닫힘안전장치",
+      "반려견목줄",
+      "손가락절단",
+      "센서감지한계",
+      "대표빈발사례"
+    ]
+  },
+  {
+    "id": 42,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 28,
+    "image": "images/case_42.png",
+    "title": "하차 중 카문이 급히 닫히며 유모차 손잡이를 놓쳐 계단 전복 추락",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락/전도",
+    "casualty": "중상 1명 (영아)",
+    "severity": "중상",
+    "causeType": "이용자·관리 과실",
+    "similarCount": "-",
+    "summary": "1층 도착 후 유모차를 밀며 내리던 중 문열림 시간이 짧아 문이 급히 닫히자 놀라 손을 놓쳐 계단으로 전복",
+    "description": [
+      "보호자가 유모차를 앞세워 하차하던 중 설정된 문열림 시간(3초)이 만료되어 도어가 빠르게 닫힘",
+      "닫히는 문짝에 유모차 뒷바퀴가 걸리며 충격을 받자 보호자가 당황하여 손잡이를 놓침",
+      "유모차가 경사로를 지나 지하로 내려가는 승강장 앞 계단으로 굴러 떨어져 유아 중상"
+    ],
+    "cause": [
+      "다세대 주택 승강기 도어 열림 유지시간이 3초로 너무 짧게 설정됨",
+      "승하차 시 '열림' 버튼을 누르거나 배려해 주는 탑승자가 없었음"
+    ],
+    "prevention": [
+      "관리주체: 노약자 및 영유아 다수 거주 단지는 문열림 대기시간을 최소 5~7초로 연장",
+      "이용자: 유모차·휠체어 승하차 시에는 동승자가 열림 버튼을 계속 누르고 있거나 보호자가 문을 확보하며 하차"
+    ],
+    "tags": [
+      "카내",
+      "문닫힘안전장치",
+      "유모차",
+      "도어열림시간",
+      "계단전복",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 43,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 18,
+    "image": "images/case_43.png",
+    "title": "도어 엔코더 파손으로 문열림 대기시간 없이 문 급닫힘 충돌 전도",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "도어모터 회전 엔코더 고장으로 문이 열리자마자 대기시간 없이 0.5초 만에 강하게 닫혀 승객 강타",
+    "description": [
+      "1층 승강장에서 문이 열려 고령의 승객(83세)이 카 안으로 발을 들이는 순간",
+      "도어가 열림 상태를 유지하지 못하고 덜컹거리며 즉각 닫히는 동작을 반복",
+      "닫히는 문짝에 승객 어깨가 강하게 충돌하며 승강장 바닥으로 넘어져 고관절 골절"
+    ],
+    "cause": [
+      "도어개폐 모터 엔코더(회전수 계산 센서) 손상으로 문열림 유지 신호 에러 발생",
+      "정기점검 시 도어 에러 로그가 수개월간 누적되었음에도 부품 미교체 방치"
+    ],
+    "prevention": [
+      "유지관리업체: 도어 개폐 장치 에러 이력 발생 시 즉시 엔코더 및 모터 드라이브 전면 교체",
+      "관리주체: 도어 여닫힘 속도 및 문열림 유지시간 정상 작동 일상점검 확인"
+    ],
+    "tags": [
+      "카내",
+      "문닫힘안전장치",
+      "도어엔코더",
+      "급닫힘",
+      "노약자골절",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 44,
+    "source": "2020년도 발생 중대한 사고사례집 / 2022년 사례집",
+    "bookPage": 19,
+    "image": "images/case_44.png",
+    "title": "카문과 문틀 사이에 손을 짚고 있다가 문 열리며 손가락 틈새 협착",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "5건",
+    "summary": "어린이가 카문 표면에 손을 짚고 탑승해 있던 중 목적층에서 문이 열리며 도어 포켓 틈새로 손이 빨려 들어가 절단",
+    "description": [
+      "어린이(2세)가 보호자와 함께 탑승하여 카 출입문 스테인리스 패널에 양손을 짚고 서 있음",
+      "목적층에 도착하여 카문이 열림 방향으로 고속으로 밀려들어가면서 짚고 있던 손이 문짝과 문틀 사이 틈새로 말려들어감",
+      "문틀 안쪽 날카로운 절단면에 손가락이 협착되어 신경 및 인대 파열"
+    ],
+    "cause": [
+      "문 열림 시 도어 포켓과 문짝 사이 틈새 기준(5mm 이내) 초과 및 틈새 방지 고무 미부착",
+      "보호자가 어린이의 손짚기 행위를 통제하지 못함"
+    ],
+    "prevention": [
+      "이용자: '문 손대지 마세요' 준수, 어린이 동반 탑승 시 벽면이나 문에 기대지 않도록 지도",
+      "관리주체: 카문 유리 및 스테인리스 도어 포켓 틈새에 어린이 손끼임 방지 프로파일(고무 실링) 부착"
+    ],
+    "tags": [
+      "카내",
+      "문틀틈새",
+      "손끼임",
+      "도어포켓",
+      "어린이사고",
+      "대표빈발사례"
+    ]
+  },
+  {
+    "id": 45,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 99,
+    "image": "images/case_45.png",
+    "title": "카 내 보양재 부착으로 비상통화장치를 가려 갇힘 승객 구조 지연",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "casualty": "중상 1명 (탈진)",
+    "severity": "중상",
+    "causeType": "관리주체 과실",
+    "similarCount": "3건",
+    "summary": "아파트 입주 이사 기간 중 카 내부에 설치한 합판 보양재가 비상호출버튼과 고유번호를 덮어 갇힌 승객이 고립",
+    "description": [
+      "신축 아파트에서 카가 1층과 지하 1층 사이에서 급정지하여 승객(64세)이 갇힘",
+      "벽면에 덧댄 두꺼운 플라스틱 보양재로 인해 비상호출버튼의 위치를 찾지 못하고 통화 불가",
+      "승강기 고유번호(ID) 스티커마저 가려져 있어 119에 정확한 위치를 알려주지 못해 2시간 이상 밀폐 고립되며 탈진"
+    ],
+    "cause": [
+      "관리주체가 이사용 보양재를 설치하면서 법정 필수 부착물(비상통화장치, 승강기번호, 이용안내)을 완전 가림",
+      "비상통화장치 버튼 부위 타공 미실시"
+    ],
+    "prevention": [
+      "관리주체: 카 내부 보양재 설치 시 비상통화장치 및 고유번호 표지판 부분은 반드시 개방 타공하여 항시 노출",
+      "점검업체: 보양재 설치 승강기에 대해 비상통화 연결 및 음성 품질 현장 실측"
+    ],
+    "tags": [
+      "카내",
+      "비상통화장치",
+      "보양재가림",
+      "갇힘고립",
+      "승강기고유번호",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 46,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 53,
+    "image": "images/case_46.png",
+    "title": "통신선 단선으로 외부 자동통화장치 불통되어 갇힘 사고 악화",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "갇힘",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "카 통신선 접촉 불량으로 갇힘 발생 시 비상호출 버튼을 눌렀으나 관리실 및 유지보수업체로 연결되지 않아 공포에 질려 탈출 시도",
+    "description": [
+      "5층에서 카 문이 닫힌 후 시스템 에러로 멈춰 서 승객(67세)이 갇힘",
+      "카 내부 '비상호출' 버튼을 수차례 눌렀으나 제어반 외부자동통화장치 연결 잭이 빠져 있어 신호 전달 불가",
+      "비상통화가 불통되자 승객이 공포감에 카 문을 강제로 열려다 손가락 부상 및 탈진"
+    ],
+    "cause": [
+      "제어반 IOC-CNCC1 통신 커넥터 잭 접촉 불량 및 외부 자동통화 모듈 전원 오프",
+      "정기 자체점검 시 비상통화장치 원격 연결 테스트 미실시"
+    ],
+    "prevention": [
+      "유지관리업체: 비상통화장치 통화 연결 상태 매월 정기점검 시 실제 3자 통화(카-관리실-업체) 테스트 의무화",
+      "관리주체: 비상통화장치 고장 알림등 점등 시 즉각 수리 조치"
+    ],
+    "tags": [
+      "카내",
+      "비상통화장치",
+      "통신선단선",
+      "외부통화불통",
+      "갇힘사고",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 47,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 34,
+    "image": "images/case_47.png",
+    "title": "층고 데이터(EEPROM) 기록 오류로 감속 불량 80mm 바닥 단차 전도",
+    "elevatorType": "소방/장애인용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "기타 (제어 프로그램 결함)",
+    "similarCount": "-",
+    "summary": "제어반 메모리 오류로 1층 도착 시 감속되지 않아 승강장 바닥과 카 바닥 간 80mm 단차가 발생하며 승객 전도",
+    "description": [
+      "1층에 정지한 엘리베이터 문이 열려 피해자(51세)가 탑승하려는 순간",
+      "카 바닥이 승강장 바닥보다 약 80mm 높게 어긋나 있는 상태였으나 도어가 열림",
+      "높은 턱에 발끝이 걸리며 카 안쪽으로 강하게 넘어져 무릎 슬개골 골절"
+    ],
+    "cause": [
+      "제어반 EEPROM 메모리의 층고 데이터 오류로 감속 스위치가 정상 시점에 작동하지 않음",
+      "도어존(±10mm)을 크게 벗어났음에도 출입문이 열리도록 한 착상 안전회로 미비"
+    ],
+    "prevention": [
+      "유지관리업체: 제어반 층고 데이터 정기 백업 및 도어존 이탈 시 문 열림 차단 회로 철저 확인",
+      "관리주체: 평소 승강기 착상 시 바닥 단차가 1cm 이상 보이면 즉각 운행 정지 및 점검 요청"
+    ],
+    "tags": [
+      "카내",
+      "단차",
+      "착상단차",
+      "EEPROM오류",
+      "바닥턱걸림",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 48,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 86,
+    "image": "images/case_48.png",
+    "title": "카 문턱 홈(Sill)과 승강장 틈새에 발 앞코가 걸리며 단차 전도",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "기타 (이용자·구조)",
+    "similarCount": "-",
+    "summary": "경사진 승강장 바닥에서 카에 타던 중 도어 문턱 홈(Sill) 사이 틈새에 고령자의 신발이 끼이며 전도",
+    "description": [
+      "2층 승강장이 약간 경사진 구조인 상태에서 고령의 피해자(85세)가 카 내부로 진입",
+      "승강장 바닥과 카 바닥 실(Sill) 사이 유격 틈새에 슬리퍼 앞부분이 깊숙이 걸림",
+      "발을 빼지 못하고 앞으로 넘어지면서 카 내부 핸드레일에 얼굴을 강타당해 골절"
+    ],
+    "cause": [
+      "승강장 실과 카 실 사이 간격이 허용치 최대 한계에 근접",
+      "보행 보조기 없이 고령자가 바닥을 살피지 않고 탑승"
+    ],
+    "prevention": [
+      "관리주체: 승강장 실 간격(표준 25~30mm) 유지 및 시각 장애인/고령자용 안전 유도선 도색",
+      "이용자: 승하차 시 반드시 발밑의 문턱 틈새와 단차를 확인하고 탑승"
+    ],
+    "tags": [
+      "카내",
+      "단차",
+      "실틈새",
+      "문턱걸림",
+      "고령자전도",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 49,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 34,
+    "image": "images/case_49.png",
+    "title": "브레이크 개방 레버 솔레노이드 휨으로 제동력 상실 문 열린 채 운행",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "개문출발",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "-",
+    "summary": "고장 수리 중 교체한 브레이크 솔레노이드 핀이 휘어 제동기가 닫히지 않아 문이 열린 채 카가 급상승",
+    "description": [
+      "승객이 1층에서 탑승하려는 순간 도어가 열려 있는 상태에서 카가 갑자기 상층으로 출발",
+      "탑승하던 승객의 하체가 문틀에 끼일 뻔하였으나 가까스로 카 안으로 굴러 떨어짐",
+      "카는 브레이크가 전혀 잡히지 않은 상태로 꼭대기 층까지 급상승하여 상부 범퍼에 충돌"
+    ],
+    "cause": [
+      "기계실 브레이크 개방 레버와 솔레노이드 핀이 비정상 조립되어 작동 후 원위치 복귀 불가",
+      "브레이크 개방 감시스위치(개문출발방지장치 UCMP) 회로 결함"
+    ],
+    "prevention": [
+      "유지관리업체: 브레이크 솔레노이드 조립 시 전용 공구 사용 및 수동 개방 복귀 스프링 장력 실측",
+      "제조업체: 브레이크 2계통 독립 작동 감시 및 개문출발 시 즉각 모터 토크 차단 제어 구현"
+    ],
+    "tags": [
+      "기계실",
+      "브레이크시스템",
+      "솔레노이드고장",
+      "개문출발",
+      "UCMP",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 50,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 59,
+    "image": "images/case_50.png",
+    "title": "브레이크 접촉기 저항 증가로 불완전 개방 드럼 마찰 과열 제동력 상실",
+    "elevatorType": "소방구조용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "단차/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자·유지관리 과실",
+    "similarCount": "-",
+    "summary": "브레이크 전자접촉기 접점 노후로 코일 전압이 저하되어 라이닝이 드럼을 물고 주행, 마찰열로 페이딩 발생해 급정지 단차",
+    "description": [
+      "11층에서 하강 운행 중 제어반 브레이크 전자접촉기(MC) 접점 저항이 350Ω까지 치솟아 전압 강하 발생",
+      "브레이크 라이닝이 완전히 열리지 않고 드럼과 계속 비벼지며 고열 마찰 발생",
+      "라이닝 마찰재가 타버려 제동력이 급격히 상실되자 제어반 이상운전 감지로 급정지, 1층 문이 열렸으나 30cm 단차 발생하여 승객 골절"
+    ],
+    "cause": [
+      "제어반 브레이크 전자접촉기 접점 소손 및 산화 피막 미점검",
+      "브레이크 개방 갭(Gap 0.2~0.3mm) 관리 소홀"
+    ],
+    "prevention": [
+      "유지관리업체: 제어반 접촉기 접점 저항 정기 계측 및 브레이크 라이닝 두께·온도 점검",
+      "관리주체: 기계실 타는 냄새나 마찰 소음 발생 시 즉각 운행 정지"
+    ],
+    "tags": [
+      "기계실",
+      "브레이크시스템",
+      "접촉기노후",
+      "마찰과열",
+      "브레이크페이딩",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 51,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 92,
+    "image": "images/case_51.png",
+    "title": "브레이크 플런저 수동개방축 마모 고착으로 최상층 오버슈트 충돌",
+    "elevatorType": "소방구조용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "전도/충돌",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "기타 (부품 노후)",
+    "similarCount": "-",
+    "summary": "브레이크 마그네트 수동개방 레버 축이 마모되어 스프링 힘으로 닫히지 못해 카가 균형추 무게로 꼭대기까지 솟구침",
+    "description": [
+      "지하 1층에서 7층으로 승객 탑승 후 운행 종료 후 문이 열리지 않고 반전 급상승",
+      "브레이크 플런저가 나사산에 끼어 닫히지 않는 바람에 무거운 균형추가 카를 꼭대기로 끌어당김",
+      "최상층을 지나 파이널 리미트스위치 및 완충기에 충돌하며 탑승자 척추 골절"
+    ],
+    "cause": [
+      "브레이크 코일 내부 플런저 가동축의 마모 및 윤활 불량으로 기계적 고착",
+      "전기적으로 전원이 차단되어도 기계적으로 브레이크 슈가 드럼을 잡지 못함"
+    ],
+    "prevention": [
+      "유지관리업체: 브레이크 코어 분해 점검 시 플런저 내면 마모도 게이지 측정 및 세척 윤활",
+      "제조업체: 2중 브레이크(Dual Brake) 시스템 적용으로 1개 플런저 고착 시에도 100% 제동 가능 설계"
+    ],
+    "tags": [
+      "기계실",
+      "브레이크시스템",
+      "플런저고착",
+      "제어불능상승",
+      "균형추인양",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 52,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 87,
+    "image": "images/case_52.png",
+    "title": "전동윈치 로프 바닥 엉킴 및 킹크(Kink) 발생으로 권상로프 파단 카 추락",
+    "elevatorType": "장애인용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "노후 케이블 철거 중 윈치 로프가 바닥에서 엉키며 킹크가 발생, 강도가 80% 저하된 상태에서 하중을 받아 로프 파단 추락",
+    "description": [
+      "승강기 교체 현장에서 작업자가 임시 전동윈치 로프에 매단 카 조립체에 단독 탑승하여 하강 운전",
+      "기계실 바닥에 내려진 와이어로프가 꼬이면서 영구 변형(Kink, 꽈배기 꼬임)이 발생",
+      "하강 중 킹크 부위가 전동윈치 드럼 인입구에 걸리며 순간 장력 집중으로 로프가 두 동강 파단",
+      "카 조립체에 추락방지안전장치 과속조절기 로프를 미체결한 상태여서 지하 피트 바닥까지 자유낙하하여 사망"
+    ],
+    "cause": [
+      "와이어로프 킹크 발생 시 절단하중이 50~80% 급감함에도 손상된 로프를 그대로 사용",
+      "인명 탑승용이 아닌 윈치를 사용하고 비상 추락방지장치 미연결"
+    ],
+    "prevention": [
+      "설치공사업체: 교체 공사용 가설 권상기는 반드시 인명 탑승 인증 규격품 사용 및 와이어로프 매일 검사",
+      "작업자: 킹크, 소선 절단 등 손상 로프는 즉각 폐기 처분 및 안전대 구명줄 필수 착용"
+    ],
+    "tags": [
+      "기계실",
+      "주도르래로프",
+      "로프파단",
+      "킹크발생",
+      "추락사망",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 53,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 44,
+    "image": "images/case_53.png",
+    "title": "기계실 권상기 도르래와 주로프 사이 회전체에 점검 작업자 손가락 협착",
+    "elevatorType": "소방/장애인용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임/협착",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "2건",
+    "summary": "기계실에서 주로프 이상 소음 확인 중 회전하는 권상도르래 시브 홈과 로프 사이에 장갑 낀 손이 빨려 들어가 절단",
+    "description": [
+      "유지관리 기사가 권상기 구동 시 발생하는 금속성 마찰 소음의 원인을 찾기 위해 기계실 점검 실시",
+      "카를 점검속도로 하강시키며 주로프가 감겨 들어가는 도르래 홈 쪽에 왼손을 얹어 진동을 감지하려 함",
+      "로프 기름에 장갑이 달라붙으며 도르래와 주로프 맞물림 틈새로 손가락이 순간적으로 빨려 들어감",
+      "약지와 새끼손가락 개방성 분쇄 골절 및 신경 손상"
+    ],
+    "cause": [
+      "운전 중인 권상기 도르래 및 주로프 회전체 접촉 금지 수칙 위반",
+      "도르래 안전 방호덮개(Yellow Guard)를 탈거한 상태에서 기기 가동"
+    ],
+    "prevention": [
+      "작업자: 회전하는 기계실 시브 및 주로프에 절대 손을 대지 말고 청음봉 등 비접촉 진단도구 사용",
+      "유지관리업체: 기계실 권상기 주로프 인입구 전 둘레에 회전체 물림 방지 보호망 상시 장착"
+    ],
+    "tags": [
+      "기계실",
+      "주도르래로프",
+      "권상기도르래",
+      "주로프끼임",
+      "손가락골절",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 54,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 45,
+    "image": "images/case_54.png",
+    "title": "기계실에서 로프를 내리는 작업 중 매듭이 풀려 카 상부 작업자 낙하 충돌",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "충돌/낙하물",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "초고층 빌딩에서 노후 로프 철거 중 기계실에서 내리던 로프 뭉치(20kg)의 보조 로프 매듭이 풀려 37m 아래 카 상부 강타",
+    "description": [
+      "38층 기계실에서 카 상부(약 37m 아래)로 로프 소켓을 자일로프로 묶어 서서히 하강시키는 작업 진행",
+      "로프 자중을 견디지 못하고 매듭이 헐거워지며 순간적으로 풀려 약 20kg의 강철 소켓 뭉치가 자유낙하",
+      "카 상부에서 대기 중이던 보조 기사의 안전모를 강타하고 어깨와 쇄골에 직격하여 복합 골절"
+    ],
+    "cause": [
+      "중량 와이어로프 취급 시 공인 결속 클램프를 쓰지 않고 일반 자일로프 매듭으로 임의 결속",
+      "낙하 반경 직하부에 작업자가 대기하는 안전구역 미지정"
+    ],
+    "prevention": [
+      "작업자: 승강로 내 중량물 하강 시 윈치 및 샤클 전용 고정구 사용, 매듭 방식 절대 금지",
+      "유지관리업체: 승강로 직하부 작업자 전원 대피 확인 후 기계실 자재 투하 절차 준수"
+    ],
+    "tags": [
+      "기계실",
+      "주도르래로프",
+      "로프교체",
+      "낙하물충돌",
+      "쇄골골절",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 55,
+    "source": "2022년 승강기 사고사례집 / 2020년 사례집",
+    "bookPage": 54,
+    "image": "images/case_55.png",
+    "title": "손잡이를 잡지 않고 뒤돌아보다 넘어진 승객과 연쇄 전도",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 2명, 경상 5명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "7건",
+    "summary": "에스컬레이터 상승 중 손잡이를 잡지 않고 일행과 대화하려 뒤돌아서다 중심을 잃고 굴러 뒤따르던 승객들과 연쇄 전도",
+    "description": [
+      "지하철 역사 에스컬레이터에 탑승한 선행 승객이 핸드레일을 잡지 않고 몸을 돌려 뒤편 일행과 이야기함",
+      "천이구간(수평→경사) 단차가 생기자 중심을 잃고 뒤로 넘어지며 뒷사람을 덮침",
+      "도미노처럼 5~6명의 승객이 에스컬레이터 스텝 위로 연쇄 전도되며 계단 모서리에 부딪혀 다수 골절상"
+    ],
+    "cause": [
+      "에스컬레이터 주행 중 손잡이(핸드레일) 미착용 및 진행 반대 방향 주시",
+      "혼잡 시간대 승객 간 안전거리 미확보"
+    ],
+    "prevention": [
+      "이용자: 탑승 중 반드시 진행 방향을 향해 서서 두 발을 노란 안전선 안에 두고 핸드레일을 꼭 잡을 것",
+      "관리주체: 다중이용시설 안내방송 송출 및 비상정지버튼 위치 안내 표지 강화"
+    ],
+    "tags": [
+      "이용자부주의",
+      "에스컬레이터전도",
+      "연쇄전도",
+      "손잡이미착용",
+      "뒤돌아보기",
+      "대표빈발사례"
+    ]
+  },
+  {
+    "id": 56,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 17,
+    "image": "images/case_56.png",
+    "title": "지팡이를 짚고 손잡이를 잡지 않은 채 안전선 밖에 탑승해 단차에 넘어짐",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "3건",
+    "summary": "고령 이용자가 손잡이를 잡지 않고 스텝과 스텝 사이 경계선에 발을 걸친 채 올라가다 수평구간이 끝나는 단차에서 전도",
+    "description": [
+      "지하 1층에서 1층으로 올라가는 에스컬레이터에 피해자(남, 73세)가 지팡이를 짚고 손잡이를 잡지 않은 상태로 탑승",
+      "스텝과 스텝 사이 노란 안전선에 걸쳐 서 있다가 수평주행구간이 끝나고 계단 단차가 형성되는 지점에서 중심을 잃고 뒤로 넘어짐",
+      "두피 열상 및 골절 중상"
+    ],
+    "cause": [
+      "손잡이를 잡지 않고 디딤판과 디딤판 사이 경계선(노란 안전선)에 발을 디딘 채 탑승",
+      "지팡이 이용 노약자가 엘리베이터 대신 에스컬레이터를 이용"
+    ],
+    "prevention": [
+      "이용자: 디딤판의 노란 안전선 안에 두 발을 모아 서고 반드시 손잡이를 잡을 것(지팡이·보행보조기 이용자는 엘리베이터 이용)",
+      "관리주체: 에스컬레이터 안전이용 안내방송을 수시로 실시하고 노약자 엘리베이터 이용 유도"
+    ],
+    "tags": [
+      "이용자부주의",
+      "에스컬레이터전도",
+      "지팡이탑승",
+      "노약자",
+      "핸드레일미파지",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 57,
+    "source": "승강기사고 사례집 (1993~2018)",
+    "bookPage": 21,
+    "image": "images/case_57.png",
+    "title": "에스컬레이터 핸드레일에 매달려 장난치다 난간 밖으로 추락",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "추락",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "어린이가 움직이는 에스컬레이터 핸드레일 외측 난간에 배를 대고 엎드려 장난치며 올라가다 개구부 밖으로 추락",
+    "description": [
+      "백화점 에스컬레이터 2층 승강장에서 유아(6세)가 보호자가 쇼핑하는 틈에 핸드레일 외측에 매달림",
+      "상승하는 핸드레일의 마찰력에 이끌려 공중에 뜬 채로 3층 높이까지 끌려 올라감",
+      "더 이상 매달려 있지 못하고 손을 놓치며 1층 중앙 광장 바닥(약 7m 높이)으로 추락하여 다발성 골절"
+    ],
+    "cause": [
+      "에스컬레이터 난간 외측 매달리기 장난 및 보호자의 아동 방치",
+      "에스컬레이터 난간과 인접 기둥 사이 추락방지 안전그물망 또는 보호판 미설치"
+    ],
+    "prevention": [
+      "관리주체: 에스컬레이터 측면 개구부 및 보이드 공간에 낙하방지망 및 유리 난간 연장 방호벽 설치",
+      "보호자: 어린이와 승강기 이용 시 반드시 손을 잡고 동반 탑승"
+    ],
+    "tags": [
+      "이용자부주의",
+      "에스컬레이터추락",
+      "난간매달리기",
+      "어린이장난",
+      "낙하방지망"
+    ]
+  },
+  {
+    "id": 58,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 23,
+    "image": "images/case_58.png",
+    "title": "롱치마 자락이 에스컬레이터 스커트가드 틈새에 말려들어가 끼임",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "하강 운행 에스컬레이터에서 긴 치마 끝단이 스텝과 측면 스커트 패널 사이 틈새로 빨려 들어가며 신체 협착",
+    "description": [
+      "발목까지 내려오는 플리츠 롱치마를 입은 승객이 에스컬레이터 측면 스커트가드에 신체를 밀착하고 서 있음",
+      "스텝 라이저(수직면)와 스커트 패널 틈새(약 3mm)로 치맛자락이 빨려 들어가며 팽팽히 감김",
+      "치마가 콤 플레이트 직전까지 당겨지며 신체가 바닥으로 끌려가 다리 타박상 및 발목 인대 파열"
+    ],
+    "cause": [
+      "노란 안전선 안쪽에 서지 않고 측면 스커트가드에 옷자락을 접촉시킨 채 이용",
+      "스커트가드 안전스위치가 얇은 천의 물림을 즉각 감지하지 못함"
+    ],
+    "prevention": [
+      "이용자: 긴 옷자락, 치마, 머플러, 긴 코트 착용 시 옷자락을 손으로 잡고 디딤판 중앙에 탑승",
+      "관리주체: 스커트가드 전 구간에 털 브러시(디플렉터 브러시) 의무 설치로 신체 및 의류 접촉 사전 차단"
+    ],
+    "tags": [
+      "이용자부주의",
+      "틈새끼임",
+      "롱치마",
+      "스커트가드",
+      "의류끼임",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 59,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 23,
+    "image": "images/case_59.png",
+    "title": "유아가 디딤판에 앉아 가다 디딤판 사이 틈새 및 콤에 손가락이 끼인 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "3세 유아가 디딤판에 앉아 이동하던 중 손이 디딤판 사이 틈새에 끼인 채 상부 승강장 콤까지 이동하여 손가락 협착",
+    "description": [
+      "상행 에스컬레이터에서 유아(3세)가 움직이는 디딤판 위에 앉아 손을 디딤판 바닥에 짚고 이동",
+      "디딤판과 디딤판 사이 틈새에 손이 끼인 채 상부 승강장 콤 플레이트 빗살까지 끌려 들어가 손가락 부상",
+      "비상정지버튼을 누르기 전까지 손가락이 콤 틈새에 물리며 중상"
+    ],
+    "cause": [
+      "움직이는 디딤판 위에 앉거나 손을 짚는 불안전 행동",
+      "보호자가 유아의 손을 잡고 서서 탑승하도록 지도하지 못함"
+    ],
+    "prevention": [
+      "이용자: 유아 동반 시 반드시 손을 잡고 서서 탑승하거나 안고 탑승하며, 디딤판에 앉거나 손을 짚지 않도록 주의",
+      "관리주체: 콤 물림 감지 안전스위치의 민감도 정기 점검"
+    ],
+    "tags": [
+      "이용자부주의",
+      "틈새끼임",
+      "하부콤",
+      "물건줍기",
+      "어린이손끼임",
+      "2022년사례"
+    ]
+  },
+  {
+    "id": 60,
+    "source": "승강기사고 사례집 (1993~2018)",
+    "bookPage": 26,
+    "image": "images/case_60.png",
+    "title": "에스컬레이터 핸드레일 하부 인입구에 손을 대고 장난치다 손가락 협착",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "4건",
+    "summary": "승강장 바닥 부근에서 핸드레일이 기계 안으로 들어가는 인입구에 손을 넣고 장난치다 인입구 롤러에 손가락 협착",
+    "description": [
+      "하부 승강장 주변에서 놀던 어린이가 회전하며 기계실 내부로 빨려 들어가는 고무 핸드레일 표면에 손을 얹음",
+      "손이 손잡이와 함께 끌려가 인입구 고무 안전 가드 안쪽으로 빨려 들어가며 롤러 사이에 손가락이 끼임",
+      "인입구 안전스위치가 작동하여 정지했으나 손가락 골절 및 살점 열상"
+    ],
+    "cause": [
+      "핸드레일 인입구 주변 방호 가이드의 틈새 유격 과다",
+      "승강장 탑승구 주변에서 어린이가 단독으로 장난치는 것을 방치"
+    ],
+    "prevention": [
+      "관리주체: 핸드레일 인입구 브러시 및 삼중 안전보호 가드 설치, 안전스위치 작동 테스트 매월 실시",
+      "보호자: 에스컬레이터 승강장 주변에서 어린이가 절대 장난치지 못하도록 지도"
+    ],
+    "tags": [
+      "이용자부주의",
+      "틈새끼임",
+      "핸드레일인입구",
+      "손가락끼임",
+      "인입구안전스위치"
+    ]
+  },
+  {
+    "id": 61,
+    "source": "승강기사고 사례집 (1993~2018)",
+    "bookPage": 23,
+    "image": "images/case_61.png",
+    "title": "전동휠체어 이용자가 에스컬레이터에 진입해 넘어지며 발생한 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도/추락",
+    "casualty": "사망 1명, 중상 1명",
+    "severity": "사망",
+    "causeType": "이용자 과실",
+    "similarCount": "2건",
+    "summary": "전동휠체어 이용자가 엘리베이터 대신 에스컬레이터를 이용하던 중 중심을 잃고 전동휠체어가 뒤로 뒤집히며 추락",
+    "description": [
+      "전동휠체어를 탄 이용자가 엘리베이터를 이용하지 않고 에스컬레이터에 그대로 진입하여 탑승",
+      "에스컬레이터 디딤판이 계단 모양으로 변하며 경사구간으로 이동하자 휠체어가 중심을 잃고 뒤로 넘어짐",
+      "전동휠체어 이용자 및 뒤따르던 승객이 함께 아래로 굴러 떨어져 중대 인명 피해 발생"
+    ],
+    "cause": [
+      "휠체어 및 유모차는 에스컬레이터 탑승이 금지되어 있음에도 무리하게 진입",
+      "에스컬레이터 진입구 차단봉(볼라드) 미설치 또는 엘리베이터 위치 안내 부족"
+    ],
+    "prevention": [
+      "이용자: 전동휠체어·수동휠체어·유모차·손수레 이용 시 에스컬레이터 탑승을 절대 금하고 반드시 엘리베이터 이용",
+      "관리주체: 에스컬레이터 진입부에 휠체어·카트 진입 방지봉을 설치하고 엘리베이터 유도 안내표지 강화"
+    ],
+    "tags": [
+      "이용자부주의",
+      "무리한탑승",
+      "전동휠체어",
+      "전복추락",
+      "사망사고",
+      "진입금지"
+    ]
+  },
+  {
+    "id": 62,
+    "source": "승강기사고 사례집 (1993~2018)",
+    "bookPage": 22,
+    "image": "images/case_62.png",
+    "title": "손잡이 밖으로 머리를 내밀고 있다가 측면 기둥(구조물)에 부딪힌 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "충돌",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "-",
+    "summary": "에스컬레이터를 타고 올라가며 손잡이 밖으로 머리를 내밀어 아래를 내려다보다가 천장·측면 구조물(삼각부)에 부딪힘",
+    "description": [
+      "상행 에스컬레이터를 이용하던 승객이 난간 손잡이 바깥쪽으로 상체와 머리를 내밀고 아래층을 내려다봄",
+      "에스컬레이터가 상승하면서 인접한 건물 기둥 및 천장 모서리(삼각부) 구조물에 머리가 끼이거나 강하게 부딪혀 중상"
+    ],
+    "cause": [
+      "에스컬레이터 탑승 중 손잡이(핸드레일) 밖으로 머리나 팔 등 신체를 내미는 부주의",
+      "에스컬레이터 난간과 건축 구조물(기둥·천장 교차부) 사이 협착 방지 보호판 미흡"
+    ],
+    "prevention": [
+      "이용자: 에스컬레이터 이용 시 절대 손잡이 밖으로 머리나 팔, 상체를 내밀지 말 것",
+      "관리주체: 건물 천장 및 기둥 교차부(삼각부)에 신체 충돌 방지용 삼각 보호판 및 주의 표지판 설치"
+    ],
+    "tags": [
+      "이용자부주의",
+      "무리한탑승",
+      "삼각부충돌",
+      "신체돌출",
+      "두개골골절",
+      "기둥충돌"
+    ]
+  },
+  {
+    "id": 63,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 101,
+    "image": "images/case_63.png",
+    "title": "주전원 차단한 카가 1층에 있는 줄 착각하고 비상열쇠로 문 열고 피트 추락",
+    "elevatorType": "병원용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "추락",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "관리주체 과실",
+    "similarCount": "3건",
+    "summary": "주전원을 차단한 엘리베이터 카가 1층에 있는 것으로 착각하고 비상열쇠로 1층 승강장문을 열고 들어가 피트 바닥으로 추락",
+    "description": [
+      "관리주체 관계자가 운행 중지를 위해 주전원을 차단한 후 카가 1층에 정지해 있는 것으로 착각",
+      "비상열쇠를 사용하여 1층 승강장문을 강제로 개방한 뒤 카 유무를 확인하지 않고 발을 내디뎌 지하 피트 바닥으로 추락 사망"
+    ],
+    "cause": [
+      "비상열쇠로 승강장문을 개방할 때 카의 실제 위치를 확인하지 않고 진입",
+      "비상열쇠 관리 및 비상 개방 시 안전확인 수칙 미준수"
+    ],
+    "prevention": [
+      "관리주체: 비상열쇠는 지정된 안전관리자만 엄격히 보관·사용하고, 승강장문 개방 시 반드시 문을 조금만 열어 카 위치를 먼저 확인",
+      "작업자: 어두운 승강로 확인 시 손전등으로 카 바닥 유무를 육안 확인한 후 행동"
+    ],
+    "tags": [
+      "이용자부주의",
+      "무리한탑승",
+      "비상열쇠개방",
+      "피트추락사망",
+      "안전관리자",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 64,
+    "source": "승강기사고 사례집 (1993~2018)",
+    "bookPage": 12,
+    "image": "images/case_64.png",
+    "title": "엘리베이터 문에 손을 짚고 있다가 문이 열리면서 문과 문틀 사이 틈새에 손 끼임",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "이용자 과실",
+    "similarCount": "3건",
+    "summary": "피해자가 엘리베이터 문에 손을 짚고 있다가 문이 열리면서 문짝과 문틀 사이의 틈새로 손이 빨려 들어가 끼임",
+    "description": [
+      "탑승객(주로 어린이)이 엘리베이터 카 내부에서 출입문 표면에 손을 짚고 서 있음",
+      "목적층 도착 후 문이 열리는 순간 움직이는 문짝을 따라 문과 문틀(Jamb) 사이의 틈새로 손이 말려 들어가 끼이는 사고 발생"
+    ],
+    "cause": [
+      "엘리베이터 출입문에 손을 짚고 있다가 문이 열리는 순간 손이 함께 딸려 들어감",
+      "문과 문틀 사이 틈새에 대한 이용자(어린이·보호자) 주의 부족"
+    ],
+    "prevention": [
+      "이용자: 엘리베이터 탑승 중 출입문에 손을 대거나 기대지 말고, 어린이 손을 꼭 잡고 탑승",
+      "관리주체·유지관리업체: 문과 문틀 틈새를 승강기 안전기준(5mm 이하, 마모 시 6mm 이하)에 적합하도록 유지하고 손끼임 주의표지 부착"
+    ],
+    "tags": [
+      "카내",
+      "문틀틈새",
+      "문짝문틀",
+      "도어포켓",
+      "손끼임",
+      "어린이주의"
+    ]
+  },
+  {
+    "id": 65,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 30,
+    "image": "images/case_65.png",
+    "title": "문짝과 문틀 사이 틈새가 안전기준을 초과한 상태에서 카문이 열리며 손 끼임",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "끼임",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체·관리주체 과실",
+    "similarCount": "2건",
+    "summary": "카문과 문틀(설거지 기둥) 사이의 틈새가 안전기준을 초과한 상태에서 카문이 열릴 때 틈새로 이용자의 손이 끼임",
+    "description": [
+      "엘리베이터 카문이 열리는 과정에서 카문 표면에 닿아 있던 이용자의 손이 카문과 문틀 사이 틈새로 끌려 들어감",
+      "문짝과 문틀 사이 간격이 부품 마모 및 유격 불량으로 안전기준(5~6mm 이하)을 초과해 있어 손가락이 깊게 끼여 중상 발생"
+    ],
+    "cause": [
+      "문짝과 문틀 사이의 틈새가 엘리베이터 안전기준(문턱 위 1.6m까지 5mm 이하, 마모 시 6mm 이하)을 초과",
+      "도어 행거 롤러 및 하부 가이드슈 마모·유격 점검 미흡"
+    ],
+    "prevention": [
+      "유지관리업체: 자체점검 시 카문과 문틀 사이 틈새 간격을 측정하여 안전기준 이내로 조정하고 마모된 가이드슈·롤러 즉시 교체",
+      "관리주체: 카 출입문에 손끼임 방지 안전수단(고무 프로파일 등) 및 주의 안내문 설치"
+    ],
+    "tags": [
+      "카내",
+      "문틀틈새",
+      "유격과다",
+      "안전기준초과",
+      "손가락끼임",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 66,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 101,
+    "image": "images/case_66.png",
+    "title": "무빙워크·에스컬레이터 팔레트(디딤판)가 체인에서 이탈해 생긴 공간에 발이 빠진 사고",
+    "elevatorType": "에스컬레이터/무빙워크",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임/실족",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "2건",
+    "summary": "운행 중 팔레트(디딤판) 고정 볼트 풀림·파손으로 팔레트가 체인에서 이탈하며 생긴 빈 공간에 이용자의 발이 빠져 끼임",
+    "description": [
+      "운행 중인 무빙워크(에스컬레이터)에서 팔레트(디딤판)를 체인에 고정하는 체결 부품이 풀리거나 파손되어 팔레트가 제자리에서 이탈함",
+      "팔레트가 이탈하여 벌어진 하부 공간에 뒤따르던 이용자의 발이 빠지면서 인접 팔레트 및 구조물에 끼여 중상"
+    ],
+    "cause": [
+      "팔레트(디딤판)와 구동 체인을 연결하는 고정 볼트·축의 풀림, 마모 및 파손 상태 점검 소홀",
+      "디딤판(팔레트) 처짐·이탈 감지 전기안전장치 작동 불량"
+    ],
+    "prevention": [
+      "유지관리업체: 자체점검 시 스텝·팔레트 체인 연결 볼트 체결 상태 및 롤러 파손 여부, 처짐 안전스위치 작동 상태 철저 확인",
+      "관리주체: 운행 중 디딤판에서 이상 소음이나 흔들림·처짐 발견 시 즉시 운행 중지"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "디딤판",
+      "팔레트이탈",
+      "발빠짐",
+      "스텝처짐",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 67,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 97,
+    "image": "images/case_67.png",
+    "title": "파손된 상부 승강장 콤(Comb)을 교체하지 않아 내리던 승객 발이 끼인 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "관리주체·유지관리 과실",
+    "similarCount": "3건",
+    "summary": "파손된 상부 승강장 콤 플레이트를 즉시 교체하지 않고 방치하여 하차하던 이용자의 발이 파손 부위에 끼여 넘어짐",
+    "description": [
+      "에스컬레이터 상부 승강장의 콤(Comb) 빗살이 파손되어 빠져 있었으나 이를 즉시 교체하지 않고 그대로 운행",
+      "상부 승강장에 도착하여 내리던 이용자의 신발 및 발이 파손된 콤 틈새에 끼이면서 넘어져 부상"
+    ],
+    "cause": [
+      "파손된 콤 플레이트를 즉시 교체하지 않고 방치하여 스텝 홈과 콤 사이 맞물림 틈새가 크게 벌어짐",
+      "일상 육안점검 및 정기점검 시 콤 파손 상태 확인 미흡"
+    ],
+    "prevention": [
+      "관리주체·유지관리업체: 상·하부 승강장 콤의 빗살 파손 여부를 매일 확인하고, 파손 발견 시 즉시 운행을 중지하고 신품으로 교체",
+      "이용자: 에스컬레이터 승하차 시 콤 구간에서 발을 끌지 말고 걸어서 신속히 이동"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "콤플레이트",
+      "빗살파손",
+      "하차전도",
+      "발끼임",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 68,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 56,
+    "image": "images/case_68.png",
+    "title": "운행 중 손잡이(핸드레일) 가이드 이탈 및 구동 마찰력 저하로 손잡이 정지 전도",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체 과실",
+    "similarCount": "2건",
+    "summary": "상행 에스컬레이터에서 손잡이가 가이드를 이탈하고 구동풀리 마찰력이 저하되어 손잡이가 멈추면서 승객이 뒤로 넘어짐",
+    "description": [
+      "1층에서 2층으로 올라가는 에스컬레이터에 탑승한 피해자(여, 63세)가 우측 손잡이를 잡고 이동 중",
+      "우측 손잡이가 가이드 레일에서 이탈하고 구동풀리와의 마찰력이 저하되어 스텝은 올라가는데 손잡이만 정지함",
+      "손잡이를 잡고 있던 피해자가 몸의 중심을 잃고 뒤로 넘어져 중상"
+    ],
+    "cause": [
+      "손잡이(핸드레일) 장력 불량 및 가이드 이탈, 구동풀리 마찰력 저하로 스텝과 손잡이 동기 속도 유지 실패",
+      "자체점검 시 핸드레일 장력 및 가이드 마모 상태 점검 미흡"
+    ],
+    "prevention": [
+      "유지관리업체: 손잡이 구동벨트·가압롤러 장력 및 가이드 상태를 정기 점검하여 스텝과 손잡이가 동일 속도로 운행되도록 관리",
+      "관리주체: 운행 중 손잡이 멈춤이나 떨림 현상 발견 시 즉시 운행 중단 및 보수 조치"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "핸드레일",
+      "손잡이정지",
+      "구동풀리마찰저하",
+      "전도사고",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 69,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 100,
+    "image": "images/case_69.png",
+    "title": "스텝 구동체인이 끊어지고 역행방지장치가 미작동하여 에스컬레이터 역주행",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도/추락",
+    "casualty": "중경상 다수",
+    "severity": "사망",
+    "causeType": "유지관리업체·제조 과실",
+    "similarCount": "2건",
+    "summary": "상승 운행 중 구동기 체인이 끊어지면서 탑승객 하중에 의해 스텝이 아래로 급격히 역주행하여 승객들이 연쇄 전도",
+    "description": [
+      "상승 운행하던 에스컬레이터에서 구동기 동력을 전달하는 구동체인이 파단됨",
+      "구동체인 파단 시 작동해야 할 보조브레이크(역행방지장치)가 정상 작동하지 않아 승객들의 무게로 인해 디딤판이 아래쪽으로 급격히 역주행",
+      "탑승 중이던 다수의 이용자가 하부 승강장 쪽으로 한꺼번에 쏟아져 넘어지며 부상"
+    ],
+    "cause": [
+      "구동체인의 노후·마모 및 피로 누적으로 인한 파단",
+      "비상 시 역주행을 막아주는 보조브레이크(역행방지장치) 미작동 또는 점검 불량"
+    ],
+    "prevention": [
+      "유지관리업체: 구동체인의 늘어남(신장률)·균열·급유 상태를 정기 점검하고 보조브레이크(역행방지장치) 작동 시험 철저 실시",
+      "관리주체: 노후 구동체인의 적기 교체 및 역주행 방지 안전장치 성능 유지"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "구동체인파단",
+      "역주행",
+      "보조브레이크",
+      "연쇄전도",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 70,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 95,
+    "image": "images/case_70.png",
+    "title": "운행 중 하부 손잡이 인입구 청소 작업으로 안전스위치 작동 급정지 전도",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "관리주체·작업자 과실",
+    "similarCount": "-",
+    "summary": "내려가는 에스컬레이터 운행 중 미화원이 하부 손잡이 인입구를 청소하다 안전장치가 작동해 급정지하며 탑승객 전도",
+    "description": [
+      "2층에서 1층으로 내려가는 에스컬레이터에 피해자(여, 74세)가 탑승하여 이동 중",
+      "에스컬레이터를 정지시키지 않은 상태에서 하부 손잡이 인입구 부근을 청소하던 중 손잡이 인입구 안전장치가 건드려져 작동",
+      "운행 중이던 에스컬레이터가 갑자기 급정지하면서 탑승객이 중심을 잃고 앞으로 넘어져 중상"
+    ],
+    "cause": [
+      "에스컬레이터 운행을 정지하지 않은 상태에서 안전장치가 설치된 손잡이 인입구 등을 청소",
+      "운행 중 급정지로 인한 탑승객 전도 위험을 고려하지 않은 작업 부주의"
+    ],
+    "prevention": [
+      "관리주체: 에스컬레이터 청소 및 점검 작업 시에는 반드시 승객 탑승을 통제하고 에스컬레이터를 완전히 정지시킨 후 작업 실시",
+      "이용자: 급정지 등 불시의 상황에 대비하여 탑승 중에는 항상 손잡이를 꼭 잡고 이용할 것"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "브레이크",
+      "급정지전도",
+      "인입구안전장치",
+      "운행중청소",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 71,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 102,
+    "image": "images/case_71.png",
+    "title": "덮개를 열어놓은 상·하부 기계류 공간(트러스)에 진입하여 빠진 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "추락/협착",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자·유지관리 과실",
+    "similarCount": "2건",
+    "summary": "점검을 위해 에스컬레이터 승강장 점검 덮개를 열어놓고 안전펜스를 설치하지 않아 열린 기계류 공간으로 빠져 부상",
+    "description": [
+      "에스컬레이터 보수·점검을 위해 승강장 바닥 점검용 덮개(Floor Plate)를 개방하여 내부 기계류 공간이 노출됨",
+      "접근 차단용 안전펜스(차단막) 설치 및 감시자 배치를 소홀히 한 상태에서 열린 기계류 공간으로 발을 내디뎌 추락·끼임 발생"
+    ],
+    "cause": [
+      "점검 덮개 개방 시 출입 통제용 안전울타리(방호펜스) 미설치 및 안전조치 소홀",
+      "기계류 공간 개방 상태에서 주변 통제 및 주전원 차단 미흡"
+    ],
+    "prevention": [
+      "유지관리업체·작업자: 점검 덮개를 열 때는 반드시 사방에 견고한 안전펜스와 접근금지 표지판을 설치하고 2인 1조로 감시",
+      "관리주체: 보수 작업 완료 후 점검 덮개가 완전히 닫히고 고정되었는지 확인 후 운행 재개"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "트러스기계실",
+      "점검덮개개방",
+      "기계류공간",
+      "안전펜스미설치",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 72,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 98,
+    "image": "images/case_72.png",
+    "title": "에스컬레이터 스커트에서 돌출·파손된 부품에 발목이 걸려 다친 사고",
+    "elevatorType": "에스컬레이터",
+    "elevatorCategory": "ES",
+    "accidentType": "끼임/충돌",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "관리주체·유지관리 과실",
+    "similarCount": "2건",
+    "summary": "에스컬레이터 측면 스커트가드 및 디플렉터에서 파손·돌출된 부품에 탑승객의 발목이나 신발이 걸려 부상",
+    "description": [
+      "에스컬레이터를 타고 이동하던 중 측면 스커트(Skirt) 패널 또는 스커트 디플렉터(브러시 고정대)에서 파손되어 돌출된 날카로운 부품에 이용자의 발목이 걸림",
+      "스텝이 계속 이동하면서 돌출된 부위에 발목 및 다리가 긁히거나 끼여 열상·골절 부상 발생"
+    ],
+    "cause": [
+      "스커트 패널 및 스커트 디플렉터(끼임방지 브러시)의 파손·변형·돌출 상태를 점검하지 않고 방치",
+      "이용자가 노란 안전선 바깥쪽 스커트 측면에 발을 밀착하여 탑승"
+    ],
+    "prevention": [
+      "유지관리업체·관리주체: 스커트가드 패널 이음부 및 디플렉터 브러시의 파손·돌출 여부를 정기 점검하고 손상 부위 즉시 보수",
+      "이용자: 탑승 시 스커트 측면에 발이나 옷이 닿지 않도록 노란 안전선 안쪽 중앙에 서서 이용"
+    ],
+    "tags": [
+      "에스컬레이터",
+      "스커트가드",
+      "디플렉터브러시",
+      "돌출부품걸림",
+      "측면협착",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 73,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 54,
+    "image": "images/case_73.png",
+    "title": "승강장문 전기안전장치 임의 단락(점퍼) 후 작업 중 문이 열린 채 상승 협착",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "협착",
+    "casualty": "사망 1명",
+    "severity": "사망",
+    "causeType": "작업자 과실",
+    "similarCount": "3건",
+    "summary": "승강장문 전기안전장치를 점퍼선으로 임의 단락시킨 상태에서 작업하던 중 카가 문이 열린 채로 올라가 카 상부와 문틀 사이에 끼임",
+    "description": [
+      "유지관리 작업자가 점검 편의를 위해 승강장문 전기안전장치(인터록 스위치) 회로를 점퍼선으로 임의 단락(직결)시킴",
+      "승강장문이 열려 있는 상태에서 카 상부 진입·작업 중 카가 갑자기 상승하면서 카 상부와 승강장문 상부 문틀 사이에 작업자가 끼여 사망"
+    ],
+    "cause": [
+      "승강장문 전기안전장치(도어 스위치)를 점퍼선으로 임의 단락시켜 문이 열려도 카가 움직일 수 있는 위험 상태 초래",
+      "카 상부 작업 시 점검운전(수동) 전환 및 비상정지스위치 작동 수칙 미준수"
+    ],
+    "prevention": [
+      "작업자: 어떠한 경우에도 출입문 전기안전장치를 임의로 단락(점퍼)시키지 말고, 카 상부 진입 전 수동 전환 및 정지스위치 작동 철저",
+      "유지관리업체: 안전회로 임의 단락 금지 교육 및 작업 표준 안전수칙 준수 관리감독 강화"
+    ],
+    "tags": [
+      "이용자부주의",
+      "작업자부주의",
+      "점퍼선단락",
+      "안전회로직결",
+      "개문상승협착",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 74,
+    "source": "2020년도 발생 중대한 사고사례집",
+    "bookPage": 54,
+    "image": "images/case_74.png",
+    "title": "절연장갑 미착용 및 전원 미차단 상태에서 카 상부 조작반 스위치 작업 중 감전",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "감전",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "작업자 과실",
+    "similarCount": "-",
+    "summary": "전원을 차단하지 않고 절연장갑을 착용하지 않은 채 카 상부 점검운전 조작반 비상정지스위치 배선 작업 중 약 200V 활선에 감전",
+    "description": [
+      "작업자가 카 상부에서 점검운전 조작반의 비상정지스위치 연결선을 수리·점검하는 작업을 진행",
+      "주전원을 차단하지 않고 절연장갑 등 절연보호구를 착용하지 않은 맨손 상태에서 약 200V 전압이 흐르는 비상정지스위치 연결선에 접촉하여 감전 중상"
+    ],
+    "cause": [
+      "전기 배선 및 스위치 점검 작업 시 전원을 차단하지 않고 활선 상태에서 작업 실시",
+      "절연장갑 등 전기안전 개인보호구 미착용"
+    ],
+    "prevention": [
+      "작업자: 전기회로 및 스위치 배선 작업 전 반드시 주전원을 차단(LOTO)하고 검전기로 무전압 확인 후 절연장갑을 착용하여 작업",
+      "유지관리업체: 감전 사고 예방을 위한 절연보호구 지급 및 전원 차단 작업절차 교육 철저"
+    ],
+    "tags": [
+      "이용자부주의",
+      "작업자부주의",
+      "주전원미차단",
+      "활선작업감전",
+      "보호구미착용",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 75,
+    "source": "2020년 승강기사고 사례집",
+    "bookPage": 26,
+    "image": "images/case_75.png",
+    "title": "열어둔 기계실 창문으로 이물질이 유입되어 과속조절기가 작동한 급정지 사고",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "급정지/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "유지관리업체·관리주체 과실",
+    "similarCount": "-",
+    "summary": "열어둔 기계실 창문을 통해 날아든 비닐조각이 회전하는 과속조절기에 말려들어 캣치가 작동하며 하강 중 카 급정지",
+    "description": [
+      "기계실 환기를 위해 열어둔 창문을 통해 외부에서 비닐조각 등 이물질이 기계실 내부로 날아듦",
+      "날아든 비닐조각이 회전하고 있던 과속조절기(Governor) 회전체에 말려 들어가면서 과속조절기 캣치(Catch)가 기계적으로 작동",
+      "하강 운행 중이던 카의 추락방지안전장치가 연동 작동하여 급정지하면서 정지 충격으로 탑승객들이 바닥에 넘어져 부상"
+    ],
+    "cause": [
+      "열어둔 기계실 창문으로 외부 이물질이 유입되어 과속조절기 회전체에 끼임",
+      "기계실 바닥 청결상태 불량 및 과속조절기 주변 방호·청결 관리 미흡"
+    ],
+    "prevention": [
+      "관리주체: 기계실 창문에 루버(갤러리) 및 방충망 등을 설치하여 외부로부터 이물질이나 빗물이 유입되지 않도록 안전조치",
+      "유지관리업체: 기계실 바닥 청결 상태를 상시 유지하고 과속조절기 회전체 주변에 이물질이 끼이지 않도록 점검 철저"
+    ],
+    "tags": [
+      "기계실",
+      "과속조절기",
+      "이물질유입",
+      "캣치작동",
+      "비상정지장치",
+      "2020년사례"
+    ]
+  },
+  {
+    "id": 76,
+    "source": "2022년 승강기 사고사례집",
+    "bookPage": 58,
+    "image": "images/case_76.png",
+    "title": "노후 과속조절기 도르래 기울어짐 및 회전판 간섭으로 인한 오작동 급정지",
+    "elevatorType": "승객용 엘리베이터",
+    "elevatorCategory": "EL",
+    "accidentType": "급정지/전도",
+    "casualty": "중상 1명",
+    "severity": "중상",
+    "causeType": "기타 (부품 노후·이물질)",
+    "similarCount": "8건",
+    "summary": "노후된 과속조절기 도르래 축 마모로 기울기(약 0.4°) 및 상·하부 틈새 편차가 발생해 진자·회전판 간섭으로 운행 중 급정지",
+    "description": [
+      "장기간 사용하여 노후된 기계실 과속조절기의 도르래 축 및 베어링 마모로 도르래가 약 0.4° 기울어짐",
+      "도르래 상부 틈새(약 0.9mm)와 하부 틈새(약 0.15mm)의 불균형 및 이물질 끼임으로 진자 표면과 원형 회전판 표면이 주행 중 마찰·간섭을 일으킴",
+      "정상 속도 운행 중임에도 과속조절기가 오작동하여 엘리베이터가 급정지하며 탑승객 부상"
+    ],
+    "cause": [
+      "노후된 과속조절기 부품 마모(도르래 기울어짐, 상·하부 틈새 불량) 및 이물질 끼임에 의한 오작동",
+      "권장 교체주기가 경과한 주요 안전부품의 마모·유격 상태 점검 미흡"
+    ],
+    "prevention": [
+      "유지관리업체: 자체점검 시 과속조절기 도르래의 수직도·유격 및 진자·회전판 마모 상태를 정밀 확인하고 이물질 청소 철저",
+      "관리주체: 제조업자로부터 노후 과속조절기 등 주요 안전부품의 권장 교체주기를 제공받아 적기에 교체"
+    ],
+    "tags": [
+      "기계실",
+      "과속조절기",
+      "도르래기울기",
+      "노후부품오작동",
+      "급정지",
+      "2022년사례"
+    ]
   }
 ];
 
-// 통계 데이터 요약 (2023년 기준 & 30년 누적)
+// 통계 데이터 요약
 const STATS_SUMMARY = {
-  year: 2023,
-  totalAccidents2023: 42,
-  totalCasualties2023: 43,
-  fatalities2023: 6,
-  severeInjuries2023: 37,
-  elevatorFleet: 840049,
-  accidentRatePer10k: 0.50,
-  cumulativeAccidents: 1751,
-  cumulativeFatalities: 290,
-  
-  // 원인별 분류 (2023년)
-  byCause: [
-    { name: "이용자 과실", count: 19, percent: 45.2, color: "#ef4444" },
-    { name: "기타 (기계·부품 결함 등)", count: 11, percent: 26.2, color: "#64748b" },
-    { name: "작업자 과실", count: 5, percent: 11.9, color: "#f97316" },
-    { name: "유지관리업체 과실", count: 4, percent: 9.5, color: "#eab308" },
-    { name: "관리주체 과실", count: 3, percent: 7.1, color: "#8b5cf6" },
-    { name: "제조업체 과실", count: 0, percent: 0.0, color: "#06b6d4" }
+  "year": 2023,
+  "totalAccidents2023": 42,
+  "totalCasualties2023": 43,
+  "fatalities2023": 6,
+  "severeInjuries2023": 37,
+  "elevatorFleet": 840049,
+  "accidentRatePer10k": 0.5,
+  "cumulativeAccidents": 1751,
+  "cumulativeFatalities": 290,
+  "byCause": [
+    {
+      "name": "이용자 과실",
+      "count": 19,
+      "percent": 45.2,
+      "color": "#ef4444"
+    },
+    {
+      "name": "기타 (기계·부품 결함 등)",
+      "count": 11,
+      "percent": 26.2,
+      "color": "#64748b"
+    },
+    {
+      "name": "작업자 과실",
+      "count": 5,
+      "percent": 11.9,
+      "color": "#f97316"
+    },
+    {
+      "name": "유지관리업체 과실",
+      "count": 4,
+      "percent": 9.5,
+      "color": "#eab308"
+    },
+    {
+      "name": "관리주체 과실",
+      "count": 3,
+      "percent": 7.1,
+      "color": "#8b5cf6"
+    },
+    {
+      "name": "제조업체 과실",
+      "count": 0,
+      "percent": 0,
+      "color": "#06b6d4"
+    }
   ],
-  
-  // 승강기 종류별 (2023년)
-  byElevatorType: [
-    { name: "승객용 엘리베이터", count: 13, percent: 31.0, icon: "lift" },
-    { name: "에스컬레이터", count: 12, percent: 28.6, icon: "escalator" },
-    { name: "장애인용 엘리베이터", count: 8, percent: 19.0, icon: "accessible" },
-    { name: "소방구조용 엘리베이터", count: 4, percent: 9.5, icon: "fire" },
-    { name: "수평보행기 (무빙워크)", count: 2, percent: 4.8, icon: "walk" },
-    { name: "화물/기타 엘리베이터", count: 3, percent: 7.1, icon: "cargo" }
+  "byElevatorType": [
+    {
+      "name": "승객용 엘리베이터",
+      "count": 13,
+      "percent": 31,
+      "icon": "lift"
+    },
+    {
+      "name": "에스컬레이터",
+      "count": 12,
+      "percent": 28.6,
+      "icon": "escalator"
+    },
+    {
+      "name": "장애인용 엘리베이터",
+      "count": 8,
+      "percent": 19,
+      "icon": "accessible"
+    },
+    {
+      "name": "소방구조용 엘리베이터",
+      "count": 4,
+      "percent": 9.5,
+      "icon": "fire"
+    },
+    {
+      "name": "수평보행기 (무빙워크)",
+      "count": 2,
+      "percent": 4.8,
+      "icon": "walk"
+    },
+    {
+      "name": "화물/기타 엘리베이터",
+      "count": 3,
+      "percent": 7.1,
+      "icon": "cargo"
+    }
   ],
-
-  // 사고 유형별 (2023년)
-  byAccidentType: [
-    { name: "전도 (넘어짐)", count: 18, percent: 42.9, icon: "fall" },
-    { name: "끼임 / 협착", count: 10, percent: 23.8, icon: "pinch" },
-    { name: "추락", count: 8, percent: 19.0, icon: "drop" },
-    { name: "충돌", count: 6, percent: 14.3, icon: "crash" }
+  "byAccidentType": [
+    {
+      "name": "전도 (넘어짐)",
+      "count": 18,
+      "percent": 42.9,
+      "icon": "fall"
+    },
+    {
+      "name": "끼임 / 협착",
+      "count": 10,
+      "percent": 23.8,
+      "icon": "pinch"
+    },
+    {
+      "name": "추락",
+      "count": 8,
+      "percent": 19,
+      "icon": "drop"
+    },
+    {
+      "name": "충돌",
+      "count": 6,
+      "percent": 14.3,
+      "icon": "crash"
+    }
   ],
-
-  // 연령대별 (2023년 피해자 43명)
-  byAgeGroup: [
-    { name: "15세 이상 ~ 64세", count: 24, percent: 55.8 },
-    { name: "65세 이상 고령자", count: 16, percent: 37.2 },
-    { name: "14세 이하 어린이", count: 3, percent: 7.0 }
+  "byAgeGroup": [
+    {
+      "name": "15세 이상 ~ 64세",
+      "count": 24,
+      "percent": 55.8
+    },
+    {
+      "name": "65세 이상 고령자",
+      "count": 16,
+      "percent": 37.2
+    },
+    {
+      "name": "14세 이하 어린이",
+      "count": 3,
+      "percent": 7
+    }
   ],
-
-  // 피해자 구분별
-  byVictimRole: [
-    { name: "승강기 일반 이용자", count: 37, percent: 86.0 },
-    { name: "승강기 설치/보수 기술자", count: 5, percent: 11.6 },
-    { name: "건물 관리자 (경비원 등)", count: 1, percent: 2.4 }
+  "byVictimRole": [
+    {
+      "name": "승강기 일반 이용자",
+      "count": 37,
+      "percent": 86
+    },
+    {
+      "name": "승강기 설치/보수 기술자",
+      "count": 5,
+      "percent": 11.6
+    },
+    {
+      "name": "건물 관리자 (경비원 등)",
+      "count": 1,
+      "percent": 2.4
+    }
   ],
-
-  // 장소별 (건물 용도별)
-  byBuildingType: [
-    { name: "운수시설 (지하철·역사·공항)", count: 10, percent: 23.8 },
-    { name: "공동주택 (아파트 등)", count: 8, percent: 19.0 },
-    { name: "근린생활시설", count: 8, percent: 19.0 },
-    { name: "판매시설 (백화점·마트)", count: 5, percent: 11.9 },
-    { name: "공장 및 산업시설", count: 3, percent: 7.1 },
-    { name: "숙박·업무·기타", count: 8, percent: 19.0 }
+  "byBuildingType": [
+    {
+      "name": "운수시설 (지하철·역사·공항)",
+      "count": 10,
+      "percent": 23.8
+    },
+    {
+      "name": "공동주택 (아파트 등)",
+      "count": 8,
+      "percent": 19
+    },
+    {
+      "name": "근린생활시설",
+      "count": 8,
+      "percent": 19
+    },
+    {
+      "name": "판매시설 (백화점·마트)",
+      "count": 5,
+      "percent": 11.9
+    },
+    {
+      "name": "공장 및 산업시설",
+      "count": 3,
+      "percent": 7.1
+    },
+    {
+      "name": "숙박·업무·기타",
+      "count": 8,
+      "percent": 19
+    }
   ]
 };
 
 // 제5장 예방 안내 포스터 갤러리 데이터
 const POSTERS_DATA = [
-  { id: 1, page: 44, bookPage: 46, image: "images/page_44.png", title: "다중밀집시설 에스컬레이터 안전관리 요령", category: "다중밀집/압사예방" },
-  { id: 2, page: 45, bookPage: 47, image: "images/page_45.png", title: "에스컬레이터 중대사고(역주행 등) 발생 알림", category: "긴급알림" },
-  { id: 3, page: 46, bookPage: 48, image: "images/page_46.png", title: "손끼임·추락사고 예방 안내문", category: "이용자안전" },
-  { id: 4, page: 47, bookPage: 49, image: "images/page_47.png", title: "승강기 철거 작업 중 작업자 사망사고 예방대책", category: "작업자안전" },
-  { id: 5, page: 48, bookPage: 50, image: "images/page_48.png", title: "PLC 적용 엘리베이터 개문출발 안전사고 예방대책", category: "기술/부품안전" },
-  { id: 6, page: 49, bookPage: 51, image: "images/page_49.png", title: "승강기 개구부 추락방지 예방 안내문", category: "현장관리" },
-  { id: 7, page: 50, bookPage: 52, image: "images/page_50.png", title: "비·눈 내리는 날 에스컬레이터·무빙워크 미끄럼 주의보", category: "기상특보안전" },
-  { id: 8, page: 51, bookPage: 53, image: "images/page_51.png", title: "승강기 중대한 고장 예방 안내", category: "유지보수" },
-  { id: 9, page: 52, bookPage: 54, image: "images/page_52.png", title: "승강기 안전사고 예방 및 자체점검 요령", category: "자체점검" },
-  { id: 10, page: 53, bookPage: 55, image: "images/page_53.png", title: "VAC 모델 검사업무 시 제어반 변압기 점검 철저 안내", category: "전문검사" },
-  { id: 11, page: 54, bookPage: 56, image: "images/page_54.png", title: "출입문 안전회로 단락 위험 경고 안내문", category: "회로안전" },
-  { id: 12, page: 55, bookPage: 57, image: "images/page_55.png", title: "승강기 설치·교체 작업자 안전사고 예방수칙 포스터", category: "작업자안전" }
+  {
+    "id": 1,
+    "page": 44,
+    "bookPage": 46,
+    "image": "images/page_44.png",
+    "title": "다중밀집시설 에스컬레이터 안전관리 요령",
+    "category": "다중밀집/압사예방"
+  },
+  {
+    "id": 2,
+    "page": 45,
+    "bookPage": 47,
+    "image": "images/page_45.png",
+    "title": "에스컬레이터 중대사고(역주행 등) 발생 알림",
+    "category": "긴급알림"
+  },
+  {
+    "id": 3,
+    "page": 46,
+    "bookPage": 48,
+    "image": "images/page_46.png",
+    "title": "손끼임·추락사고 예방 안내문",
+    "category": "이용자안전"
+  },
+  {
+    "id": 4,
+    "page": 47,
+    "bookPage": 49,
+    "image": "images/page_47.png",
+    "title": "승강기 철거 작업 중 작업자 사망사고 예방대책",
+    "category": "작업자안전"
+  },
+  {
+    "id": 5,
+    "page": 48,
+    "bookPage": 50,
+    "image": "images/page_48.png",
+    "title": "PLC 적용 엘리베이터 개문출발 안전사고 예방대책",
+    "category": "기술/부품안전"
+  },
+  {
+    "id": 6,
+    "page": 49,
+    "bookPage": 51,
+    "image": "images/page_49.png",
+    "title": "승강기 개구부 추락방지 예방 안내문",
+    "category": "현장관리"
+  },
+  {
+    "id": 7,
+    "page": 50,
+    "bookPage": 52,
+    "image": "images/page_50.png",
+    "title": "비·눈 내리는 날 에스컬레이터·무빙워크 미끄럼 주의보",
+    "category": "기상특보안전"
+  },
+  {
+    "id": 8,
+    "page": 51,
+    "bookPage": 53,
+    "image": "images/page_51.png",
+    "title": "승강기 중대한 고장 예방 안내",
+    "category": "유지보수"
+  },
+  {
+    "id": 9,
+    "page": 52,
+    "bookPage": 54,
+    "image": "images/page_52.png",
+    "title": "승강기 안전사고 예방 및 자체점검 요령",
+    "category": "자체점검"
+  },
+  {
+    "id": 10,
+    "page": 53,
+    "bookPage": 55,
+    "image": "images/page_53.png",
+    "title": "VAC 모델 검사업무 시 제어반 변압기 점검 철저 안내",
+    "category": "전문검사"
+  },
+  {
+    "id": 11,
+    "page": 54,
+    "bookPage": 56,
+    "image": "images/page_54.png",
+    "title": "출입문 안전회로 단락 위험 경고 안내문",
+    "category": "회로안전"
+  },
+  {
+    "id": 12,
+    "page": 55,
+    "bookPage": 57,
+    "image": "images/page_55.png",
+    "title": "승강기 설치·교체 작업자 안전사고 예방수칙 포스터",
+    "category": "작업자안전"
+  }
 ];
 
 // 제6장 침수 상황 대응 요령 매뉴얼 데이터
 const FLOOD_GUIDELINES = [
   {
-    step: "01. 침수 대비",
-    title: "일상점검 및 사전 예방조치",
-    page: 58,
-    bookPage: 60,
-    image: "images/page_58.png",
-    points: [
+    "step": "01. 침수 대비",
+    "title": "일상점검 및 사전 예방조치",
+    "page": 58,
+    "bookPage": 60,
+    "image": "images/page_58.png",
+    "points": [
       "기상청 호우경보 및 태풍 예보 시 배수펌프 및 승강로 피트 집수정 작동 상태 점검",
       "외부 빗물이 기계실 및 승강장 문턱으로 유입되지 않도록 차수판 및 모래주머니 비치",
       "승강로 누수 여부 수시 점검 및 배수로 이물질 제거"
     ]
   },
   {
-    step: "02. 침수 예상 시",
-    title: "선제적 엘리베이터 대피 운행",
-    page: 59,
-    bookPage: 61,
-    image: "images/page_59.png",
-    points: [
+    "step": "02. 침수 예상 시",
+    "title": "선제적 엘리베이터 대피 운행",
+    "page": 59,
+    "bookPage": 61,
+    "image": "images/page_59.png",
+    "points": [
       "침수 위험 감지 시 즉시 카 내부 승객의 잔류 여부를 확인하고 전원 하차 유도",
       "카를 최상층(또는 침수 영향이 없는 고층부)으로 이동시켜 주차",
       "주전원 스위치를 차단(OFF)하고 운행 중지 안내 표지판 부착"
     ]
   },
   {
-    step: "03. 침수 발생 시",
-    title: "긴급 비상조치 및 감전 예방",
-    page: 60,
-    bookPage: 62,
-    image: "images/page_60.png",
-    points: [
+    "step": "03. 침수 발생 시",
+    "title": "긴급 비상조치 및 감전 예방",
+    "page": 60,
+    "bookPage": 62,
+    "image": "images/page_60.png",
+    "points": [
       "피트에 물이 차기 시작하면 즉시 기계실 주전원을 차단하여 감전 및 누전 화재 예방",
       "절대 침수된 승강기에 탑승하거나 운행을 재개하지 말 것",
       "피트 배수펌프를 가동하여 배수 작업을 실시하고 승강장 주변 접근 통제"
     ]
   },
   {
-    step: "04. 침수 피해 후",
-    title: "사후관리 및 정밀 안전진단",
-    page: 62,
-    bookPage: 64,
-    image: "images/page_62.png",
-    points: [
+    "step": "04. 침수 피해 후",
+    "title": "사후관리 및 정밀 안전진단",
+    "page": 62,
+    "bookPage": 64,
+    "image": "images/page_62.png",
+    "points": [
       "배수 완료 후 자연 건조 및 열풍 건조 실시 (임의 통전 절대 금지)",
       "유지관리업체 및 한국승강기안전공단의 정밀안전진단 및 절연저항 측정 완료 후 운행 재개",
       "침수된 주요 부품(완충기, 리미트스위치, 조속기 텐션풀리, 전선류) 교체 조치"
@@ -816,6 +2997,280 @@ const FLOOD_GUIDELINES = [
   }
 ];
 
+// 5대 핵심 카테고리 및 세부 분류 설정
+const CATEGORIES_CONFIG = [
+  {
+    "id": "hoistway",
+    "name": "승강로",
+    "subtitle": "승강로 피트, 승강장 도어 및 승강로 내 구조 설비",
+    "icon": "🏗️",
+    "badge": "승강로",
+    "color": "#0284c7",
+    "items": [
+      {
+        "id": "hoistway-door",
+        "num": 1,
+        "name": "도어시스템",
+        "desc": "승강장 도어 충돌 이탈, 도어 인터록, 도어슈 파손, 문턱 이탈 등",
+        "caseIds": [
+          7,
+          15,
+          18,
+          27,
+          28,
+          29,
+          30
+        ]
+      },
+      {
+        "id": "hoistway-clearance",
+        "num": 2,
+        "name": "작업자안전거리",
+        "desc": "피트 내 카 하강 협착, 균형추 간격, 카 상부 점검, 사다리 추락 등",
+        "caseIds": [
+          12,
+          14,
+          31,
+          32,
+          34
+        ]
+      },
+      {
+        "id": "hoistway-buffer",
+        "num": 3,
+        "name": "완충기",
+        "desc": "피트 완충기 영역 추락 충격, 유압호스 파열, 하중초과 완충기 격돌",
+        "caseIds": [
+          13,
+          24,
+          35,
+          36,
+          37
+        ]
+      },
+      {
+        "id": "hoistway-etc",
+        "num": 4,
+        "name": "기타",
+        "desc": "승강로 벽체 시공 협착, 카 상부 접속함 덮개 간섭, 이동케이블 걸림",
+        "caseIds": [
+          22,
+          8,
+          38,
+          40
+        ]
+      }
+    ]
+  },
+  {
+    "id": "car",
+    "name": "카내",
+    "subtitle": "카 출입문 감지 센서, 비상통화, 착상 바닥면 레벨 및 문틀 틈새",
+    "icon": "🛗",
+    "badge": "카내",
+    "color": "#10b981",
+    "items": [
+      {
+        "id": "car-doorsafety",
+        "num": 1,
+        "name": "문닫힘안전장치",
+        "desc": "도어 멀티빔 센서 사각지대 충돌, 반려견 목줄·가방끈 끼임, 엔코더 고장",
+        "caseIds": [
+          10,
+          26,
+          23,
+          41,
+          42,
+          43
+        ]
+      },
+      {
+        "id": "car-intercom",
+        "num": 2,
+        "name": "비상통화장치",
+        "desc": "갇힘 시 인터폰 구조 요청 절차, 카 내 보양재 가림, 통신선 단선",
+        "caseIds": [
+          11,
+          45,
+          46
+        ]
+      },
+      {
+        "id": "car-level",
+        "num": 3,
+        "name": "단차",
+        "desc": "착상 오차로 인한 바닥 턱 걸림, 층고 데이터 오류 단차, 실 틈새 끼임",
+        "caseIds": [
+          21,
+          47,
+          48
+        ]
+      },
+      {
+        "id": "car-doorgap",
+        "num": 4,
+        "name": "문틀틈새",
+        "desc": "카문 열림 시 문짝과 문틀(도어포켓) 사이 틈새 손가락·손등 협착 및 유격 불량",
+        "caseIds": [
+          44,
+          64,
+          65
+        ]
+      }
+    ]
+  },
+  {
+    "id": "machineroom",
+    "name": "기계실",
+    "subtitle": "권상기 브레이크 제동 장치, 주도르래(시브)·로프 및 과속조절기",
+    "icon": "⚙️",
+    "badge": "기계실",
+    "color": "#f59e0b",
+    "items": [
+      {
+        "id": "mr-brake",
+        "num": 1,
+        "name": "브레이크 시스템",
+        "desc": "전자브레이크 릴레이 융착, 접촉기 저항 증가 과열, 플런저 고착 급상승",
+        "caseIds": [
+          49,
+          50,
+          51
+        ]
+      },
+      {
+        "id": "mr-rope",
+        "num": 2,
+        "name": "주도르래로프",
+        "desc": "권상 로프 킹크 파단, 주도르래 회전체 손가락 협착, 로프 매듭 풀림",
+        "caseIds": [
+          52,
+          53,
+          54
+        ]
+      },
+      {
+        "id": "mr-governor",
+        "num": 3,
+        "name": "과속조절기",
+        "desc": "기계실 과속조절기 이물질 유입 캣치 작동, 노후 도르래 기울어짐 오작동, 인장풀리 스위치 탈락",
+        "caseIds": [
+          39,
+          75,
+          76
+        ]
+      }
+    ]
+  },
+  {
+    "id": "escalator",
+    "name": "에스컬레이터",
+    "subtitle": "디딤판(스텝)·콤, 핸드레일, 구동체인·브레이크, 스커트가드 및 전도·손잡이",
+    "icon": "🪜",
+    "badge": "에스컬레이터",
+    "color": "#8b5cf6",
+    "items": [
+      {
+        "id": "es-step-comb",
+        "num": 1,
+        "name": "디딤판(스텝)·콤",
+        "desc": "하부 콤 볼트 풀림·빗살 파손, 신발끈·카트 콤 끼임, 스텝 롤러 파손 함몰",
+        "caseIds": [
+          2,
+          6,
+          25,
+          59,
+          66,
+          67
+        ]
+      },
+      {
+        "id": "es-handrail",
+        "num": 2,
+        "name": "핸드레일·인입구",
+        "desc": "정지된 손잡이 전도, 핸드레일 구동롤러 슬립 속도 불일치, 인입구 손끼임",
+        "caseIds": [
+          17,
+          60,
+          68
+        ]
+      },
+      {
+        "id": "es-drive-brake",
+        "num": 3,
+        "name": "구동체인·브레이크",
+        "desc": "구동체인 파단 역주행, 보조브레이크 미작동, 주브레이크 라이닝 마모 밀림",
+        "caseIds": [
+          69,
+          70
+        ]
+      },
+      {
+        "id": "es-truss-etc",
+        "num": 4,
+        "name": "점검덮개·스커트가드",
+        "desc": "스커트가드 신발·옷자락 끼임, 점검용 덮개 개방 추락, 트러스 회전체 협착",
+        "caseIds": [
+          3,
+          20,
+          58,
+          71,
+          72
+        ]
+      },
+      {
+        "id": "user-escalator",
+        "num": 5,
+        "name": "에스컬레이터 전도·손잡이",
+        "desc": "손잡이 미착용, 뒤돌아보기 연쇄 전도, 노약자 지팡이 전도, 난간 매달리기",
+        "caseIds": [
+          1,
+          5,
+          55,
+          56,
+          57
+        ]
+      }
+    ]
+  },
+  {
+    "id": "user",
+    "name": "이용자부주의",
+    "subtitle": "무리한 탑승·도어 충돌 및 작업자 안전수칙 부주의",
+    "icon": "🚶",
+    "badge": "이용자부주의",
+    "color": "#ef4444",
+    "items": [
+      {
+        "id": "user-entry",
+        "num": 1,
+        "name": "무리한 탑승 및 도어 충돌",
+        "desc": "전동휠체어·유모차 진입 전복, 삼각부 머리 충돌, 비상열쇠 임의 개방 추락",
+        "caseIds": [
+          4,
+          9,
+          61,
+          62,
+          63
+        ]
+      },
+      {
+        "id": "user-worker",
+        "num": 2,
+        "name": "작업자 부주의",
+        "desc": "안전대 미착용 추락, 비전문가 무단 진입, 회전체 면장갑 접촉, 점퍼선 임의 단락",
+        "caseIds": [
+          16,
+          19,
+          33,
+          73,
+          74
+        ]
+      }
+    ]
+  }
+];
+
 if (typeof module !== 'undefined') {
-  module.exports = { CASES_DATA, STATS_SUMMARY, POSTERS_DATA, FLOOD_GUIDELINES };
+  module.exports = { CASES_DATA, STATS_SUMMARY, POSTERS_DATA, FLOOD_GUIDELINES, CATEGORIES_CONFIG };
 }

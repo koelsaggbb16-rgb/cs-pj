@@ -1,573 +1,999 @@
 /**
- * 2024 승강기 사고 사례 분석 & 안전 포털 App Controller
+ * 2024 승강기 사고 사례 분석 포털 - 핵심 컨트롤러
+ * - 항목별 사고사례 이동 (카테고리 간 재배치 및 순서 변경)
+ * - 사고사례 제목 실시간 수정 및 영구 보존
+ * - 로컬 스토리지 & 서버 API 자동 동기화
  */
 
 // Application State
-const state = {
-  activeElevatorFilter: "ALL",
-  activeAccidentFilter: "ALL",
-  activeCauseFilter: "ALL",
-  searchQuery: "",
-  currentCaseIndex: 0,
-  filteredCases: [],
+const appState = {
+  view: "home", // "home" | "case"
+  currentCategoryId: null,
+  currentSubitemId: null,
+  currentCaseIndexInSubitem: 0,
+  currentCase: null,
   zoomLevel: 1.0,
-  currentModalType: "case", // 'case' | 'poster' | 'flood'
-  theme: localStorage.getItem("theme") || "light"
+  theme: localStorage.getItem("theme") || "light",
+  
+  // Custom Overrides (Saved to server & localStorage)
+  customTitles: {},
+  activeCategoriesConfig: [],
+  selectedMoveTargetId: null
 };
 
-// Initialize DOM elements
-document.addEventListener("DOMContentLoaded", () => {
+// Initialize on DOM load
+document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
-  renderDashboard();
-  renderFilters();
-  applyFilters();
-  renderPosters();
-  renderFloodManual();
-  setupEventListeners();
+  await loadCustomData();
+  renderCategoryGrid();
+  setupGlobalEvents();
 });
 
-/* ---------------- THEME TOGGLE ---------------- */
+/* ---------------- THEME CONTROLLER ---------------- */
 function initTheme() {
-  document.documentElement.setAttribute("data-theme", state.theme);
+  document.documentElement.setAttribute("data-theme", appState.theme);
   updateThemeIcon();
 }
 
 function toggleTheme() {
-  state.theme = state.theme === "light" ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", state.theme);
-  localStorage.setItem("theme", state.theme);
+  appState.theme = appState.theme === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", appState.theme);
+  localStorage.setItem("theme", appState.theme);
   updateThemeIcon();
 }
 
 function updateThemeIcon() {
   const btn = document.getElementById("themeToggleBtn");
   if (btn) {
-    btn.innerHTML = state.theme === "light" ? "🌙" : "☀️";
-    btn.title = state.theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환";
+    btn.innerHTML = appState.theme === "light" ? "🌙" : "☀️";
+    btn.title = appState.theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환";
   }
 }
 
-/* ---------------- DASHBOARD CHARTS ---------------- */
-function renderDashboard() {
-  // 1. By Cause
-  const causeContainer = document.getElementById("statsByCause");
-  if (causeContainer) {
-    causeContainer.innerHTML = STATS_SUMMARY.byCause.map(item => `
-      <div class="bar-item">
-        <div class="bar-info">
-          <span class="bar-name">
-            <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${item.color};"></span>
-            ${item.name}
-          </span>
-          <span class="bar-val">${item.count}건 (${item.percent}%)</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width: ${item.percent}%; background-color: ${item.color};"></div>
-        </div>
-      </div>
-    `).join("");
-  }
+const CURRENT_DATA_VERSION = "2024_all_5_books_v10";
+const COMPATIBLE_VERSIONS = [
+  "2024_all_5_books_v3",
+  "2024_all_5_books_v4",
+  "2024_all_5_books_v5",
+  "2024_all_5_books_v6",
+  "2024_all_5_books_v7",
+  "2024_all_5_books_v8",
+  "2024_all_5_books_v9",
+  "2024_all_5_books_v10"
+];
 
-  // 2. By Elevator Type
-  const elevContainer = document.getElementById("statsByElevator");
-  if (elevContainer) {
-    elevContainer.innerHTML = STATS_SUMMARY.byElevatorType.map(item => `
-      <div class="bar-item">
-        <div class="bar-info">
-          <span class="bar-name">${item.name}</span>
-          <span class="bar-val">${item.count}건 (${item.percent}%)</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width: ${item.percent}%; background-color: var(--primary);"></div>
-        </div>
-      </div>
-    `).join("");
-  }
+function mergeCategoriesConfig(baseConfig, savedConfig) {
+  if (!Array.isArray(savedConfig)) return JSON.parse(JSON.stringify(baseConfig));
+  const merged = JSON.parse(JSON.stringify(savedConfig));
 
-  // 3. By Accident Type
-  const accidentContainer = document.getElementById("statsByAccidentType");
-  if (accidentContainer) {
-    accidentContainer.innerHTML = STATS_SUMMARY.byAccidentType.map(item => `
-      <div class="bar-item">
-        <div class="bar-info">
-          <span class="bar-name">${item.name}</span>
-          <span class="bar-val">${item.count}건 (${item.percent}%)</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width: ${item.percent}%; background-color: var(--accent);"></div>
-        </div>
-      </div>
-    `).join("");
-  }
+  baseConfig.forEach((baseCat, catIdx) => {
+    let targetCat = merged.find(c => c.id === baseCat.id);
+    if (!targetCat) {
+      // Remove default escalator equipment cases (17, 25, 60) from 'user' category if 'escalator' is newly added
+      if (baseCat.id === "escalator") {
+        const userCat = merged.find(c => c.id === "user");
+        if (userCat && Array.isArray(userCat.items)) {
+          userCat.items.forEach(item => {
+            if (Array.isArray(item.caseIds)) {
+              item.caseIds = item.caseIds.filter(id => ![17, 25, 60].includes(id));
+            }
+          });
+        }
+      }
+      // Insert at matching index position
+      merged.splice(Math.min(catIdx, merged.length), 0, JSON.parse(JSON.stringify(baseCat)));
+      return;
+    }
+    targetCat.subtitle = baseCat.subtitle;
+    baseCat.items.forEach(baseItem => {
+      const existingItem = targetCat.items.find(i => i.id === baseItem.id);
+      if (!existingItem) {
+        if (baseItem.id === "car-doorgap") {
+          const doorSafety = targetCat.items.find(i => i.id === "car-doorsafety");
+          if (doorSafety && Array.isArray(doorSafety.caseIds)) {
+            doorSafety.caseIds = doorSafety.caseIds.filter(id => id !== 44);
+          }
+        }
+        if (baseItem.id === "user-worker") {
+          const hoistwayCat = merged.find(c => c.id === "hoistway");
+          const clearanceItem = hoistwayCat && hoistwayCat.items ? hoistwayCat.items.find(i => i.id === "hoistway-clearance") : null;
+          if (clearanceItem && Array.isArray(clearanceItem.caseIds)) {
+            clearanceItem.caseIds = clearanceItem.caseIds.filter(id => ![16, 19, 33].includes(id));
+          }
+        }
+        if (baseItem.id === "mr-governor") {
+          const hoistwayCat = merged.find(c => c.id === "hoistway");
+          const etcItem = hoistwayCat && hoistwayCat.items ? hoistwayCat.items.find(i => i.id === "hoistway-etc") : null;
+          if (etcItem && Array.isArray(etcItem.caseIds)) {
+            etcItem.caseIds = etcItem.caseIds.filter(id => id !== 39);
+          }
+        }
+        targetCat.items.push(JSON.parse(JSON.stringify(baseItem)));
+      }
+    });
+  });
 
-  // 4. By Age Group
-  const ageContainer = document.getElementById("statsByAge");
-  if (ageContainer) {
-    ageContainer.innerHTML = STATS_SUMMARY.byAgeGroup.map(item => `
-      <div class="bar-item">
-        <div class="bar-info">
-          <span class="bar-name">${item.name}</span>
-          <span class="bar-val">${item.count}명 (${item.percent}%)</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width: ${item.percent}%; background-color: var(--purple);"></div>
-        </div>
-      </div>
-    `).join("");
-  }
-}
-
-/* ---------------- FILTERING & SEARCH ---------------- */
-function renderFilters() {
-  // Elevators
-  const elevFilters = [
-    { label: "전체 기종", value: "ALL" },
-    { label: "엘리베이터", value: "EL" },
-    { label: "에스컬레이터", value: "ES" },
-    { label: "수평보행기 (무빙워크)", value: "MW" }
-  ];
-  const elevWrap = document.getElementById("filterElevatorChips");
-  if (elevWrap) {
-    elevWrap.innerHTML = elevFilters.map(f => `
-      <button class="filter-chip ${state.activeElevatorFilter === f.value ? 'active' : ''}" 
-              onclick="setFilter('elevator', '${f.value}')">${f.label}</button>
-    `).join("");
-  }
-
-  // Accident Types
-  const accidentFilters = [
-    { label: "전체 유형", value: "ALL" },
-    { label: "전도 (넘어짐)", value: "전도" },
-    { label: "추락", value: "추락" },
-    { label: "끼임 / 협착", value: "끼임" },
-    { label: "충돌", value: "충돌" }
-  ];
-  const accWrap = document.getElementById("filterAccidentChips");
-  if (accWrap) {
-    accWrap.innerHTML = accidentFilters.map(f => `
-      <button class="filter-chip ${state.activeAccidentFilter === f.value ? 'active' : ''}" 
-              onclick="setFilter('accident', '${f.value}')">${f.label}</button>
-    `).join("");
-  }
-
-  // Cause
-  const causeFilters = [
-    { label: "전체 원인", value: "ALL" },
-    { label: "이용자 과실", value: "이용자" },
-    { label: "작업자 과실", value: "작업자" },
-    { label: "관리주체 과실", value: "관리주체" },
-    { label: "유지관리업체 과실", value: "유지관리" },
-    { label: "기계 / 기타", value: "기타" }
-  ];
-  const causeWrap = document.getElementById("filterCauseChips");
-  if (causeWrap) {
-    causeWrap.innerHTML = causeFilters.map(f => `
-      <button class="filter-chip ${state.activeCauseFilter === f.value ? 'active' : ''}" 
-              onclick="setFilter('cause', '${f.value}')">${f.label}</button>
-    `).join("");
-  }
-}
-
-function setFilter(type, value) {
-  if (type === "elevator") state.activeElevatorFilter = value;
-  if (type === "accident") state.activeAccidentFilter = value;
-  if (type === "cause") state.activeCauseFilter = value;
-  renderFilters();
-  applyFilters();
-}
-
-function resetAllFilters() {
-  state.activeElevatorFilter = "ALL";
-  state.activeAccidentFilter = "ALL";
-  state.activeCauseFilter = "ALL";
-  state.searchQuery = "";
-  const input = document.getElementById("caseSearchInput");
-  if (input) input.value = "";
-  renderFilters();
-  applyFilters();
-}
-
-function applyFilters() {
-  state.filteredCases = CASES_DATA.filter(c => {
-    // Elevator category filter
-    if (state.activeElevatorFilter !== "ALL") {
-      if (c.elevatorCategory !== state.activeElevatorFilter) return false;
+  // Remove deprecated 'user-pinch' and moved 'user-escalator' from 'user' category and migrate to 'escalator'
+  const userCat = merged.find(c => c.id === "user");
+  const escCat = merged.find(c => c.id === "escalator");
+  if (userCat && Array.isArray(userCat.items)) {
+    const pinchItem = userCat.items.find(i => i.id === "user-pinch");
+    if (pinchItem && escCat && Array.isArray(escCat.items)) {
+      const stepComb = escCat.items.find(i => i.id === "es-step-comb");
+      const trussEtc = escCat.items.find(i => i.id === "es-truss-etc");
+      (pinchItem.caseIds || []).forEach(cId => {
+        if ([2, 6, 59].includes(cId) && stepComb && !stepComb.caseIds.includes(cId)) {
+          stepComb.caseIds.push(cId);
+        } else if (trussEtc && !trussEtc.caseIds.includes(cId)) {
+          trussEtc.caseIds.push(cId);
+        }
+      });
     }
 
-    // Accident type filter
-    if (state.activeAccidentFilter !== "ALL") {
-      if (!c.accidentType.includes(state.activeAccidentFilter)) return false;
-    }
-
-    // Cause filter
-    if (state.activeCauseFilter !== "ALL") {
-      if (!c.causeType.includes(state.activeCauseFilter)) return false;
-    }
-
-    // Search Query
-    if (state.searchQuery.trim() !== "") {
-      const q = state.searchQuery.toLowerCase().trim();
-      const matchTitle = c.title.toLowerCase().includes(q);
-      const matchSummary = c.summary.toLowerCase().includes(q);
-      const matchElev = c.elevatorType.toLowerCase().includes(q);
-      const matchAcc = c.accidentType.toLowerCase().includes(q);
-      const matchCause = c.causeType.toLowerCase().includes(q);
-      const matchTags = c.tags.some(t => t.toLowerCase().includes(q));
-      if (!matchTitle && !matchSummary && !matchElev && !matchAcc && !matchCause && !matchTags) {
-        return false;
+    const userEscItem = userCat.items.find(i => i.id === "user-escalator");
+    if (userEscItem && escCat && Array.isArray(escCat.items)) {
+      const targetEscItem = escCat.items.find(i => i.id === "user-escalator");
+      if (targetEscItem) {
+        (userEscItem.caseIds || []).forEach(cId => {
+          if (!targetEscItem.caseIds.includes(cId)) {
+            targetEscItem.caseIds.push(cId);
+          }
+        });
+      } else {
+        escCat.items.push(JSON.parse(JSON.stringify(userEscItem)));
       }
     }
 
-    return true;
-  });
+    userCat.items = userCat.items.filter(i => i.id !== "user-pinch" && i.id !== "user-escalator");
+    userCat.items.forEach((item, idx) => {
+      item.num = idx + 1;
+    });
+  }
 
-  renderCasesGrid();
-  updateFilterMeta();
+  if (escCat && Array.isArray(escCat.items)) {
+    escCat.items.forEach((item, idx) => {
+      item.num = idx + 1;
+    });
+  }
+
+  return merged;
 }
 
-function updateFilterMeta() {
-  const countEl = document.getElementById("caseResultCount");
-  if (countEl) {
-    countEl.innerHTML = `총 <span>${state.filteredCases.length}</span>건의 사고 사례`;
+/* ---------------- DATA PERSISTENCE & SYNC ---------------- */
+async function loadCustomData() {
+  // 1. Deep clone base categories config
+  appState.activeCategoriesConfig = JSON.parse(JSON.stringify(CATEGORIES_CONFIG));
+  appState.customTitles = {};
+
+  // 2. Try fetching from local storage first (instant)
+  try {
+    const localSaved = localStorage.getItem("elevator_portal_custom_data");
+    if (localSaved) {
+      const parsed = JSON.parse(localSaved);
+      if (parsed.customTitles) appState.customTitles = parsed.customTitles;
+      if (COMPATIBLE_VERSIONS.includes(parsed.dataVersion) && parsed.categoriesConfig) {
+        appState.activeCategoriesConfig = mergeCategoriesConfig(CATEGORIES_CONFIG, parsed.categoriesConfig);
+      }
+    }
+  } catch (e) {
+    console.warn("Failed to read localStorage:", e);
+  }
+
+  // 3. Try fetching from server API (sync across devices/browsers)
+  try {
+    const res = await fetch("/api/data");
+    if (res.ok) {
+      const serverData = await res.json();
+      if (serverData.customTitles && Object.keys(serverData.customTitles).length > 0) {
+        appState.customTitles = Object.assign({}, appState.customTitles, serverData.customTitles);
+      }
+      if (
+        COMPATIBLE_VERSIONS.includes(serverData.dataVersion) &&
+        serverData.categoriesConfig &&
+        Array.isArray(serverData.categoriesConfig)
+      ) {
+        appState.activeCategoriesConfig = mergeCategoriesConfig(CATEGORIES_CONFIG, serverData.categoriesConfig);
+      }
+    }
+  } catch (err) {
+    console.log("Server API not available or static mode, relying on localStorage.");
   }
 }
 
-/* ---------------- CASES GRID ---------------- */
-function renderCasesGrid() {
-  const container = document.getElementById("casesGrid");
-  if (!container) return;
+async function saveCustomData() {
+  const payload = {
+    dataVersion: CURRENT_DATA_VERSION,
+    customTitles: appState.customTitles,
+    categoriesConfig: appState.activeCategoriesConfig
+  };
 
-  if (state.filteredCases.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">🔍</div>
-        <div class="empty-title">일치하는 사고 사례가 없습니다</div>
-        <div class="empty-desc">필터 조건을 재설정하거나 다른 검색어를 입력해 보세요.</div>
-        <button class="filter-chip active" style="margin-top: 1rem;" onclick="resetAllFilters()">전체 필터 초기화</button>
-      </div>
-    `;
-    return;
+  // 1. Save to localStorage
+  try {
+    localStorage.setItem("elevator_portal_custom_data", JSON.stringify(payload));
+  } catch (e) {
+    console.warn("Failed to write localStorage:", e);
   }
 
-  container.innerHTML = state.filteredCases.map((c, index) => {
-    const isFatal = c.severity === "사망";
+  // 2. Save to server API
+  try {
+    await fetch("/api/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.log("Could not post to server save API:", err);
+  }
+}
+
+function getCaseTitle(caseData) {
+  if (!caseData) return "";
+  return appState.customTitles[caseData.id] || caseData.title;
+}
+
+/* ---------------- HOME: CATEGORY GRID ---------------- */
+function renderCategoryGrid() {
+  const container = document.getElementById("categoryGrid");
+  if (!container || !appState.activeCategoriesConfig) return;
+
+  container.innerHTML = appState.activeCategoriesConfig.map(cat => {
+    const totalCasesInCat = cat.items.reduce((sum, item) => sum + (item.caseIds ? item.caseIds.length : 0), 0);
+
+    const itemsHtml = cat.items.map(item => {
+      const caseCount = item.caseIds ? item.caseIds.length : 0;
+      return `
+        <button class="cat-item-btn" onclick="selectSubitem('${cat.id}', '${item.id}')">
+          <div class="item-btn-left">
+            <span class="item-num">${item.num}</span>
+            <div class="item-texts">
+              <span class="item-name">${item.name}</span>
+              <span class="item-desc">${item.desc}</span>
+            </div>
+          </div>
+          <div class="item-btn-right">
+            <span class="item-count-badge">${caseCount}건</span>
+            <svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+        </button>
+      `;
+    }).join("");
+
     return `
-      <article class="case-card" onclick="openCaseModal(${c.id})">
-        <div class="case-thumb-wrap">
-          <img class="case-thumb-img" src="${c.image}" alt="${c.title}" loading="lazy" />
-          <div class="thumb-tag-top">
-            <span class="badge-case-id">사례 #${String(c.id).padStart(2, '0')}</span>
-            <span class="badge-severity ${c.severity}">${c.severity}</span>
+      <div class="category-card" style="--cat-color: ${cat.color};">
+        <div class="category-card-header">
+          <div class="cat-header-left">
+            <div class="cat-icon-wrap">${cat.icon}</div>
+            <div>
+              <div class="cat-title-row">
+                <h2 class="cat-title">${cat.name}</h2>
+                <span class="cat-badge">${cat.badge}</span>
+              </div>
+            </div>
           </div>
-          <div class="thumb-overlay">
-            <span class="thumb-page-num">원문 도서 p.${c.bookPage}</span>
-            <span class="click-hint">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg>
-              상세 분석 보기
-            </span>
-          </div>
+          <span class="cat-total-count">총 ${totalCasesInCat}개 사례</span>
         </div>
 
-        <div class="case-body">
-          <div class="case-pills">
-            <span class="pill pill-type">${c.elevatorType}</span>
-            <span class="pill pill-accident">${c.accidentType}</span>
-            <span class="pill pill-cause">${c.causeType}</span>
-          </div>
-
-          <h3 class="case-title">${c.title}</h3>
-          <p class="case-summary-text">${c.summary}</p>
-
-          <div class="case-footer">
-            <span>유사 건수: <strong>${c.similarCount}</strong></span>
-            <span class="case-action-btn">
-              사고 내용·원인·대책
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
+        <div class="category-items-list">
+          ${itemsHtml}
         </div>
-      </article>
+      </div>
     `;
   }).join("");
 }
 
-/* ---------------- MODAL LIGHTBOX ---------------- */
-function openCaseModal(caseId) {
-  const caseObj = CASES_DATA.find(c => c.id === caseId);
-  if (!caseObj) return;
+/* ---------------- NAVIGATION CONTROLLER ---------------- */
+function selectSubitem(categoryId, subitemId, caseIndex = 0) {
+  const category = appState.activeCategoriesConfig.find(c => c.id === categoryId);
+  if (!category) return;
+  const subitem = category.items.find(i => i.id === subitemId);
+  if (!subitem || !subitem.caseIds) return;
 
-  state.currentCaseIndex = CASES_DATA.findIndex(c => c.id === caseId);
-  state.currentModalType = "case";
-  state.zoomLevel = 1.0;
+  // Handle empty item case
+  if (subitem.caseIds.length === 0) {
+    showToast(`'${subitem.name}' 항목에 등록된 사고 사례가 없습니다. 다른 항목에서 사례를 이동해 올 수 있습니다.`, "info");
+  }
 
-  renderCaseModalContent(caseObj);
-  showModal();
+  appState.view = "case";
+  appState.currentCategoryId = categoryId;
+  appState.currentSubitemId = subitemId;
+  appState.currentCaseIndexInSubitem = subitem.caseIds.length > 0 ? Math.max(0, Math.min(caseIndex, subitem.caseIds.length - 1)) : 0;
+
+  // Toggle DOM views
+  const homeView = document.getElementById("homeView");
+  const caseView = document.getElementById("caseView");
+  const navBackHomeBtn = document.getElementById("navBackHomeBtn");
+
+  if (homeView) homeView.style.display = "none";
+  if (caseView) caseView.style.display = "block";
+  if (navBackHomeBtn) navBackHomeBtn.style.display = "inline-flex";
+
+  cancelEditTitle();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  renderViewerTopBar(category, subitem);
+  renderCaseDetail();
 }
 
-function renderCaseModalContent(c) {
-  // Title & Header
-  document.getElementById("modalCategoryBadge").innerHTML = `
-    <span>사례 #${String(c.id).padStart(2, '0')}</span> • 
-    <span>${c.elevatorType}</span> • 
-    <span class="badge-severity ${c.severity}">${c.severity}</span>
-  `;
-  document.getElementById("modalTitle").innerText = c.title;
+function goHome() {
+  appState.view = "home";
+  appState.currentCategoryId = null;
+  appState.currentSubitemId = null;
+  appState.currentCase = null;
+  appState.zoomLevel = 1.0;
 
-  // Image side
-  const imgEl = document.getElementById("modalDetailImg");
-  imgEl.src = c.image;
-  imgEl.alt = c.title;
-  imgEl.style.transform = `scale(1)`;
-  document.getElementById("modalPageIndicator").innerText = `도서 p.${c.bookPage} (원문 이미지)`;
+  const homeView = document.getElementById("homeView");
+  const caseView = document.getElementById("caseView");
+  const navBackHomeBtn = document.getElementById("navBackHomeBtn");
 
-  // Info side: Table
-  document.getElementById("modalInfoTable").innerHTML = `
-    <div class="info-item">
-      <span class="info-item-label">승강기 종류</span>
-      <span class="info-item-value">${c.elevatorType} (${c.elevatorCategory})</span>
-    </div>
-    <div class="info-item">
-      <span class="info-item-label">사고 유형 / 피해</span>
-      <span class="info-item-value">${c.accidentType} (${c.casualty})</span>
-    </div>
-    <div class="info-item">
-      <span class="info-item-label">사고 대표 원인</span>
-      <span class="info-item-value">${c.causeType}</span>
-    </div>
-    <div class="info-item">
-      <span class="info-item-label">동일 유사 사고 건수</span>
-      <span class="info-item-value">${c.similarCount}</span>
-    </div>
-  `;
+  if (homeView) homeView.style.display = "block";
+  if (caseView) caseView.style.display = "none";
+  if (navBackHomeBtn) navBackHomeBtn.style.display = "none";
 
-  // Info side: 가. 사고 내용
-  document.getElementById("modalCaseDescription").innerHTML = c.description.map(d => `<li>${d}</li>`).join("");
-
-  // Info side: 나. 발생 원인
-  document.getElementById("modalCaseCause").innerHTML = c.cause.map(cause => `<li>${cause}</li>`).join("");
-
-  // Info side: 다. 재발 방지 대책
-  document.getElementById("modalCasePrevention").innerHTML = c.prevention.map(p => `<li>${p}</li>`).join("");
-
-  // Navigation buttons
-  const prevBtn = document.getElementById("modalPrevBtn");
-  const nextBtn = document.getElementById("modalNextBtn");
-  if (prevBtn) prevBtn.disabled = state.currentCaseIndex <= 0;
-  if (nextBtn) nextBtn.disabled = state.currentCaseIndex >= CASES_DATA.length - 1;
+  cancelEditTitle();
+  renderCategoryGrid();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function prevCase() {
-  if (state.currentCaseIndex > 0) {
-    state.currentCaseIndex--;
-    state.zoomLevel = 1.0;
-    renderCaseModalContent(CASES_DATA[state.currentCaseIndex]);
+/* ---------------- CASE VIEWER RENDERING ---------------- */
+function renderViewerTopBar(category, subitem) {
+  // 1. Breadcrumb
+  const breadcrumbEl = document.getElementById("viewerBreadcrumb");
+  if (breadcrumbEl) {
+    breadcrumbEl.innerHTML = `
+      <span class="crumb-link" onclick="goHome()">전체 카테고리</span>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-cat" style="color:${category.color};">${category.name}</span>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">${subitem.num}. ${subitem.name}</span>
+    `;
+  }
+
+  // 2. Sibling Subcategory Quick Switch Pills
+  const siblingPillsEl = document.getElementById("siblingPills");
+  if (siblingPillsEl) {
+    siblingPillsEl.innerHTML = category.items.map(item => `
+      <button class="sibling-pill ${item.id === subitem.id ? 'active' : ''}" 
+              onclick="selectSubitem('${category.id}', '${item.id}', 0)">
+        ${item.num}. ${item.name} (${item.caseIds ? item.caseIds.length : 0})
+      </button>
+    `).join("");
   }
 }
 
-function nextCase() {
-  if (state.currentCaseIndex < CASES_DATA.length - 1) {
-    state.currentCaseIndex++;
-    state.zoomLevel = 1.0;
-    renderCaseModalContent(CASES_DATA[state.currentCaseIndex]);
+function renderCaseDetail() {
+  const category = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
+  if (!category) return;
+  const subitem = category.items.find(i => i.id === appState.currentSubitemId);
+  if (!subitem) return;
+
+  const prevBtn = document.getElementById("btnPrevCase");
+  const nextBtn = document.getElementById("btnNextCase");
+  const counterBadge = document.getElementById("caseCounterBadge");
+  const mPrevBtn = document.getElementById("mBtnPrevCase");
+  const mNextBtn = document.getElementById("mBtnNextCase");
+  const mCounter = document.getElementById("mCaseCounter");
+  const jumpTabsEl = document.getElementById("caseJumpTabs");
+
+  // Empty state handling
+  if (!subitem.caseIds || subitem.caseIds.length === 0) {
+    if (jumpTabsEl) jumpTabsEl.innerHTML = `<span style="font-size:0.85rem;color:var(--text-dim);padding:0.4rem;">등록된 사례 없음</span>`;
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+    if (counterBadge) counterBadge.textContent = "0 / 0";
+    if (mPrevBtn) mPrevBtn.disabled = true;
+    if (mNextBtn) mNextBtn.disabled = true;
+    if (mCounter) mCounter.textContent = "0 / 0";
+    
+    const titleEl = document.getElementById("caseDetailTitle");
+    if (titleEl) titleEl.textContent = "현재 항목에 등록된 사고 사례가 없습니다.";
+    const badgesRow = document.getElementById("caseBadgesRow");
+    if (badgesRow) badgesRow.innerHTML = "";
+    const metaBox = document.getElementById("metaQuickBox");
+    if (metaBox) metaBox.innerHTML = `<p style="color:var(--text-muted);font-size:0.88rem;">다른 항목에서 '항목 이동' 버튼을 통해 이 항목으로 사고 사례를 추가할 수 있습니다.</p>`;
+    document.getElementById("caseDescList").innerHTML = "<li>등록된 내용이 없습니다.</li>";
+    document.getElementById("caseCauseList").innerHTML = "<li>등록된 내용이 없습니다.</li>";
+    document.getElementById("casePrevList").innerHTML = "<li>등록된 내용이 없습니다.</li>";
+    document.getElementById("caseDetailImg").src = "";
+    return;
   }
-}
 
-function showModal() {
-  const modal = document.getElementById("caseModal");
-  if (modal) {
-    modal.classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
-}
+  const caseId = subitem.caseIds[appState.currentCaseIndexInSubitem];
+  const caseData = CASES_DATA.find(c => c.id === caseId);
+  if (!caseData) return;
 
-function closeModal() {
-  const modal = document.getElementById("caseModal");
-  if (modal) {
-    modal.classList.remove("open");
-    document.body.style.overflow = "";
-  }
-}
+  appState.currentCase = caseData;
+  resetImgZoom();
 
-// Image Zoom Controls
-function zoomInModalImg() {
-  state.zoomLevel = Math.min(state.zoomLevel + 0.25, 2.5);
-  updateModalImgZoom();
-}
+  // 1. Render Case Jump Selector Tabs
+  if (jumpTabsEl) {
+    jumpTabsEl.innerHTML = subitem.caseIds.map((cId, idx) => {
+      const c = CASES_DATA.find(x => x.id === cId);
+      const fullTitle = c ? getCaseTitle(c) : `사례 ${idx + 1}`;
+      const titleShort = fullTitle.length > 20 ? fullTitle.substring(0, 20) + "..." : fullTitle;
+      return `
+        <button class="case-jump-tab ${idx === appState.currentCaseIndexInSubitem ? 'active' : ''}" 
+                onclick="jumpToCaseIndex(${idx})" title="${fullTitle}">
+          <span class="tab-index">${idx + 1}</span>
+          <span class="tab-title">${titleShort}</span>
+        </button>
+      `;
+    }).join("");
 
-function zoomOutModalImg() {
-  state.zoomLevel = Math.max(state.zoomLevel - 0.25, 0.75);
-  updateModalImgZoom();
-}
-
-function resetModalImgZoom() {
-  state.zoomLevel = 1.0;
-  updateModalImgZoom();
-}
-
-function updateModalImgZoom() {
-  const imgEl = document.getElementById("modalDetailImg");
-  if (imgEl) {
-    imgEl.style.transform = `scale(${state.zoomLevel})`;
-  }
-}
-
-function openImgNewTab() {
-  const imgEl = document.getElementById("modalDetailImg");
-  if (imgEl && imgEl.src) {
-    window.open(imgEl.src, "_blank");
-  }
-}
-
-/* ---------------- POSTERS (CHAPTER 5) ---------------- */
-function renderPosters() {
-  const container = document.getElementById("postersGrid");
-  if (!container) return;
-
-  container.innerHTML = POSTERS_DATA.map(p => `
-    <article class="poster-card" onclick="openPosterModal(${p.id})">
-      <div class="poster-thumb-wrap">
-        <img class="poster-thumb-img" src="${p.image}" alt="${p.title}" loading="lazy" />
-      </div>
-      <div class="poster-info">
-        <div class="poster-cat">${p.category}</div>
-        <h4 class="poster-title">${p.title}</h4>
-      </div>
-    </article>
-  `).join("");
-}
-
-function openPosterModal(posterId) {
-  const poster = POSTERS_DATA.find(p => p.id === posterId);
-  if (!poster) return;
-
-  // Re-use modal container
-  document.getElementById("modalCategoryBadge").innerHTML = `
-    <span>제5장 사고·고장 예방 안내문</span> • 
-    <span class="pill pill-type">${poster.category}</span>
-  `;
-  document.getElementById("modalTitle").innerText = poster.title;
-
-  const imgEl = document.getElementById("modalDetailImg");
-  imgEl.src = poster.image;
-  imgEl.alt = poster.title;
-  imgEl.style.transform = "scale(1)";
-  document.getElementById("modalPageIndicator").innerText = `도서 p.${poster.bookPage} (안내문 전문)`;
-
-  document.getElementById("modalInfoTable").innerHTML = `
-    <div class="info-item" style="grid-column: 1 / -1;">
-      <span class="info-item-label">구분</span>
-      <span class="info-item-value">한국승강기안전공단 공식 예방 포스터 및 기술 기준 안내문</span>
-    </div>
-  `;
-
-  document.getElementById("modalCaseDescription").innerHTML = `
-    <li>본 자료는 현장 관리주체 및 승강기 유지관리 기술자를 위한 핵심 재해예방 안전 지침 포스터입니다.</li>
-    <li>좌측 원본 이미지를 확대하여 세부 수칙 및 기술 권고사항을 확인하실 수 있습니다.</li>
-  `;
-  document.getElementById("modalCaseCause").innerHTML = `<li>동일 유형의 중대사고 및 고장 예방을 위한 핵심 체크포인트 안내</li>`;
-  document.getElementById("modalCasePrevention").innerHTML = `<li>사업장 및 시설 내 승강장 주변 게시 또는 작업 전 안전점검 TBM 자료로 활용</li>`;
-
-  document.getElementById("modalPrevBtn").disabled = true;
-  document.getElementById("modalNextBtn").disabled = true;
-
-  showModal();
-}
-
-/* ---------------- FLOOD GUIDELINES (CHAPTER 6) ---------------- */
-function renderFloodManual() {
-  const container = document.getElementById("floodStepsList");
-  if (!container) return;
-
-  container.innerHTML = FLOOD_GUIDELINES.map(item => `
-    <div class="flood-step-row">
-      <div class="flood-img-wrap" onclick="viewFloodImage('${item.image}', '${item.title}', ${item.bookPage})">
-        <img src="${item.image}" alt="${item.title}" loading="lazy" />
-        <div class="thumb-overlay">
-          <span class="click-hint">매뉴얼 도서 p.${item.bookPage} 보기</span>
-        </div>
-      </div>
-      <div class="flood-content">
-        <div class="flood-step-badge">${item.step}</div>
-        <h3 class="flood-title">${item.title}</h3>
-        <ul class="flood-points">
-          ${item.points.map(pt => `<li>${pt}</li>`).join("")}
-        </ul>
-      </div>
-    </div>
-  `).join("");
-}
-
-function viewFloodImage(imgSrc, title, bookPage) {
-  document.getElementById("modalCategoryBadge").innerHTML = `
-    <span>제6장 엘리베이터 침수상황 대응요령</span>
-  `;
-  document.getElementById("modalTitle").innerText = title;
-
-  const imgEl = document.getElementById("modalDetailImg");
-  imgEl.src = imgSrc;
-  imgEl.alt = title;
-  imgEl.style.transform = "scale(1)";
-  document.getElementById("modalPageIndicator").innerText = `도서 p.${bookPage} (침수 대응 매뉴얼)`;
-
-  document.getElementById("modalInfoTable").innerHTML = `
-    <div class="info-item" style="grid-column: 1 / -1;">
-      <span class="info-item-label">적용 대상</span>
-      <span class="info-item-value">관리주체, 안전관리자, 입주민 및 시설 유지관리팀</span>
-    </div>
-  `;
-
-  document.getElementById("modalCaseDescription").innerHTML = `<li>태풍, 집중호우 시 승강로 피트 침수 및 전기 단락 사고 예방 가이드라인</li>`;
-  document.getElementById("modalCaseCause").innerHTML = `<li>지하층 빗물 유입으로 인한 카 하부 완충기, 조속기 풀리 부식 및 모터 단락 위험</li>`;
-  document.getElementById("modalCasePrevention").innerHTML = `<li>침수 위험 시 즉시 승객 대피 후 카를 최상층으로 이동 주차 및 주전원 차단</li>`;
-
-  document.getElementById("modalPrevBtn").disabled = true;
-  document.getElementById("modalNextBtn").disabled = true;
-
-  showModal();
-}
-
-/* ---------------- EVENT LISTENERS & SHORTCUTS ---------------- */
-function setupEventListeners() {
-  // Search input
-  const searchInput = document.getElementById("caseSearchInput");
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      state.searchQuery = e.target.value;
-      applyFilters();
+    // Scroll active tab into view smoothly on mobile/horizontal scroll
+    requestAnimationFrame(() => {
+      const activeTab = jumpTabsEl.querySelector(".case-jump-tab.active");
+      if (activeTab && typeof activeTab.scrollIntoView === "function") {
+        activeTab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
     });
   }
 
-  // Keyboard shortcuts
-  document.addEventListener("keydown", (e) => {
-    // Focus search with '/'
-    if (e.key === "/" && document.activeElement !== searchInput) {
-      e.preventDefault();
-      if (searchInput) {
-        searchInput.focus();
-        window.scrollTo({ top: searchInput.offsetTop - 100, behavior: "smooth" });
+  // 2. Update Nav Prev/Next Buttons & Counter
+  const isFirst = appState.currentCaseIndexInSubitem === 0;
+  const isLast = appState.currentCaseIndexInSubitem === subitem.caseIds.length - 1;
+  const counterText = `${appState.currentCaseIndexInSubitem + 1} / ${subitem.caseIds.length}`;
+
+  if (prevBtn) prevBtn.disabled = isFirst;
+  if (nextBtn) nextBtn.disabled = isLast;
+  if (counterBadge) counterBadge.textContent = counterText;
+  if (mPrevBtn) mPrevBtn.disabled = isFirst;
+  if (mNextBtn) mNextBtn.disabled = isLast;
+  if (mCounter) mCounter.textContent = counterText;
+
+  // 3. Render Image & Page Indicator
+  const imgEl = document.getElementById("caseDetailImg");
+  const pageLabel = document.getElementById("mediaPageLabel");
+  if (imgEl) {
+    imgEl.src = caseData.image;
+    imgEl.alt = getCaseTitle(caseData);
+  }
+  if (pageLabel) {
+    pageLabel.textContent = `도서 원문 p.${caseData.bookPage || caseData.page} (사례 #${caseData.id})`;
+  }
+
+  // 4. Render Badges & Title
+  const badgesRow = document.getElementById("caseBadgesRow");
+  const titleEl = document.getElementById("caseDetailTitle");
+
+  if (badgesRow) {
+    const isFatal = caseData.severity.includes("사망") || (caseData.casualty && caseData.casualty.includes("사망"));
+    badgesRow.innerHTML = `
+      <span class="c-badge source">${caseData.source || '공단 발간 사례집'}</span>
+      <span class="c-badge type">${caseData.elevatorType}</span>
+      <span class="c-badge accident">${caseData.accidentType}</span>
+      <span class="c-badge ${isFatal ? 'fatal' : 'injury'}">${caseData.casualty || caseData.severity}</span>
+      <span class="c-badge cause">${caseData.causeType}</span>
+      ${caseData.similarCount && caseData.similarCount !== '-' ? `<span class="c-badge similar">유사사고 ${caseData.similarCount}</span>` : ''}
+    `;
+  }
+  if (titleEl) {
+    titleEl.textContent = getCaseTitle(caseData);
+  }
+
+  // 5. Render Meta Quick Info
+  const metaBox = document.getElementById("metaQuickBox");
+  if (metaBox) {
+    metaBox.innerHTML = `
+      <div class="meta-item">
+        <span class="m-label">핵심 요약</span>
+        <span class="m-val">${caseData.summary}</span>
+      </div>
+    `;
+  }
+
+  // 6. Section 1: 가. 사고 내용
+  const descList = document.getElementById("caseDescList");
+  if (descList) {
+    descList.innerHTML = caseData.description.map(text => `
+      <li>${text}</li>
+    `).join("");
+  }
+
+  // 7. Section 2: 나. 발생 원인
+  const causeList = document.getElementById("caseCauseList");
+  if (causeList) {
+    causeList.innerHTML = caseData.cause.map(text => `
+      <li>${text}</li>
+    `).join("");
+  }
+
+  // 8. Section 3: 다. 재발 방지 대책
+  const prevList = document.getElementById("casePrevList");
+  if (prevList) {
+    prevList.innerHTML = caseData.prevention.map(text => `
+      <li>${text}</li>
+    `).join("");
+  }
+}
+
+/* ---------------- CASE STEPPING ---------------- */
+function jumpToCaseIndex(index) {
+  const category = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
+  if (!category) return;
+  const subitem = category.items.find(i => i.id === appState.currentSubitemId);
+  if (!subitem || !subitem.caseIds) return;
+
+  if (index >= 0 && index < subitem.caseIds.length) {
+    appState.currentCaseIndexInSubitem = index;
+    cancelEditTitle();
+    renderCaseDetail();
+  }
+}
+
+function navigateCase(direction) {
+  const category = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
+  if (!category) return;
+  const subitem = category.items.find(i => i.id === appState.currentSubitemId);
+  if (!subitem || !subitem.caseIds) return;
+
+  const newIndex = appState.currentCaseIndexInSubitem + direction;
+  if (newIndex >= 0 && newIndex < subitem.caseIds.length) {
+    appState.currentCaseIndexInSubitem = newIndex;
+    cancelEditTitle();
+    renderCaseDetail();
+  }
+}
+
+/* ---------------- TITLE EDITING CONTROLLER ---------------- */
+function startEditTitle() {
+  if (!appState.currentCase) return;
+
+  const viewWrap = document.getElementById("titleViewWrap");
+  const editWrap = document.getElementById("titleEditWrap");
+  const inputEl = document.getElementById("caseTitleInput");
+
+  if (viewWrap && editWrap && inputEl) {
+    viewWrap.style.display = "none";
+    editWrap.style.display = "flex";
+    inputEl.value = getCaseTitle(appState.currentCase);
+    inputEl.focus();
+    inputEl.select();
+
+    // Key handlers for Enter / ESC
+    inputEl.onkeydown = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        saveEditTitle();
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        cancelEditTitle();
+      }
+    };
+  }
+}
+
+function saveEditTitle() {
+  if (!appState.currentCase) return;
+
+  const inputEl = document.getElementById("caseTitleInput");
+  if (!inputEl) return;
+
+  const newTitle = inputEl.value.trim();
+  if (!newTitle) {
+    showToast("사고 제목을 입력해 주세요.", "error");
+    return;
+  }
+
+  // Update in state
+  appState.customTitles[appState.currentCase.id] = newTitle;
+  saveCustomData();
+
+  // Re-render
+  cancelEditTitle();
+  renderCaseDetail();
+  showToast("사고사례 제목이 성공적으로 수정되었습니다.");
+}
+
+function cancelEditTitle() {
+  const viewWrap = document.getElementById("titleViewWrap");
+  const editWrap = document.getElementById("titleEditWrap");
+
+  if (viewWrap && editWrap) {
+    viewWrap.style.display = "block";
+    editWrap.style.display = "none";
+  }
+}
+
+/* ---------------- MOVE CASE MODAL CONTROLLER ---------------- */
+function openMoveCaseModal() {
+  if (!appState.currentCase) return;
+
+  const modal = document.getElementById("moveCaseModal");
+  const titleEl = document.getElementById("moveModalCaseTitle");
+  const sourceEl = document.getElementById("moveModalCurrentSubitem");
+  const treeContainer = document.getElementById("moveOptionsTree");
+  const btnConfirm = document.getElementById("btnExecuteMove");
+
+  if (!modal || !treeContainer) return;
+
+  // Find current category & subitem
+  const currentCat = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
+  const currentSub = currentCat ? currentCat.items.find(i => i.id === appState.currentSubitemId) : null;
+
+  if (titleEl) titleEl.textContent = getCaseTitle(appState.currentCase);
+  if (sourceEl && currentCat && currentSub) {
+    sourceEl.textContent = `${currentCat.name} > ${currentSub.num}. ${currentSub.name}`;
+  }
+
+  appState.selectedMoveTargetId = null;
+  if (btnConfirm) btnConfirm.disabled = true;
+
+  // Build radio tree
+  treeContainer.innerHTML = appState.activeCategoriesConfig.map(cat => {
+    const itemsHtml = cat.items.map(item => {
+      const isCurrent = item.id === appState.currentSubitemId;
+      const count = item.caseIds ? item.caseIds.length : 0;
+      return `
+        <label class="move-tree-item ${isCurrent ? 'current-item' : ''}">
+          <input type="radio" name="moveTargetRadio" value="${item.id}" 
+                 ${isCurrent ? 'disabled' : ''} 
+                 onchange="onSelectMoveTarget('${item.id}')" />
+          <div class="move-item-info">
+            <span class="m-item-title">${item.num}. ${item.name}</span>
+            <span class="m-item-desc">${item.desc}</span>
+          </div>
+          <span class="m-item-tag ${isCurrent ? 'tag-current' : 'tag-count'}">
+            ${isCurrent ? '현재 소속' : `${count}건`}
+          </span>
+        </label>
+      `;
+    }).join("");
+
+    return `
+      <div class="move-tree-group">
+        <div class="move-group-header" style="color: ${cat.color};">
+          <span class="m-group-icon">${cat.icon}</span>
+          <span class="m-group-name">${cat.name}</span>
+        </div>
+        <div class="move-group-items">
+          ${itemsHtml}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  modal.style.display = "flex";
+}
+
+function onSelectMoveTarget(subitemId) {
+  appState.selectedMoveTargetId = subitemId;
+  const btnConfirm = document.getElementById("btnExecuteMove");
+  if (btnConfirm) btnConfirm.disabled = false;
+}
+
+function closeMoveCaseModal() {
+  const modal = document.getElementById("moveCaseModal");
+  if (modal) modal.style.display = "none";
+  appState.selectedMoveTargetId = null;
+}
+
+function executeMoveCase() {
+  if (!appState.currentCase || !appState.selectedMoveTargetId) return;
+
+  const targetSubitemId = appState.selectedMoveTargetId;
+  const caseId = appState.currentCase.id;
+
+  // 1. Find source subitem and remove caseId
+  let sourceFound = false;
+  let targetCat = null;
+  let targetSub = null;
+
+  appState.activeCategoriesConfig.forEach(cat => {
+    cat.items.forEach(item => {
+      if (item.id === appState.currentSubitemId) {
+        const idx = item.caseIds.indexOf(caseId);
+        if (idx !== -1) {
+          item.caseIds.splice(idx, 1);
+          sourceFound = true;
+        }
+      }
+      if (item.id === targetSubitemId) {
+        targetCat = cat;
+        targetSub = item;
+      }
+    });
+  });
+
+  if (!targetSub) {
+    showToast("대상 항목을 찾을 수 없습니다.", "error");
+    return;
+  }
+
+  // 2. Add caseId to target subitem (avoid duplicate)
+  if (!targetSub.caseIds.includes(caseId)) {
+    targetSub.caseIds.push(caseId);
+  }
+
+  // 3. Save state
+  saveCustomData();
+  closeMoveCaseModal();
+
+  // 4. Navigate directly to the moved case in the new target category
+  const newIndex = targetSub.caseIds.indexOf(caseId);
+  showToast(`사례가 [${targetCat.name} > ${targetSub.name}] 항목으로 이동되었습니다.`);
+  selectSubitem(targetCat.id, targetSub.id, newIndex);
+}
+
+/* ---------------- RE-ORDER CASES WITHIN ITEM ---------------- */
+function moveCaseOrder(direction) {
+  const category = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
+  if (!category) return;
+  const subitem = category.items.find(i => i.id === appState.currentSubitemId);
+  if (!subitem || !subitem.caseIds || subitem.caseIds.length <= 1) return;
+
+  const curIdx = appState.currentCaseIndexInSubitem;
+  const targetIdx = curIdx + direction;
+
+  if (targetIdx < 0 || targetIdx >= subitem.caseIds.length) {
+    showToast(direction < 0 ? "이미 첫 번째 순서입니다." : "이미 마지막 순서입니다.", "info");
+    return;
+  }
+
+  // Swap elements
+  const temp = subitem.caseIds[curIdx];
+  subitem.caseIds[curIdx] = subitem.caseIds[targetIdx];
+  subitem.caseIds[targetIdx] = temp;
+
+  appState.currentCaseIndexInSubitem = targetIdx;
+  saveCustomData();
+  renderCaseDetail();
+  showToast("사례 순서가 변경되었습니다.");
+}
+
+/* ---------------- RESET DATA TO DEFAULTS ---------------- */
+async function confirmResetData() {
+  const confirmed = confirm("모든 사용자 수정 사항(사례 제목, 항목 이동 및 순서 변경)을 초기 기본값으로 복원하시겠습니까?");
+  if (!confirmed) return;
+
+  // Clear in-memory
+  appState.customTitles = {};
+  appState.activeCategoriesConfig = JSON.parse(JSON.stringify(CATEGORIES_CONFIG));
+
+  // Clear localStorage
+  try {
+    localStorage.removeItem("elevator_portal_custom_data");
+  } catch (e) {}
+
+  // Clear server
+  try {
+    await fetch("/api/reset", { method: "POST" });
+  } catch (e) {}
+
+  showToast("초기 기본값으로 복원되었습니다.");
+
+  if (appState.view === "case" && appState.currentCategoryId && appState.currentSubitemId) {
+    selectSubitem(appState.currentCategoryId, appState.currentSubitemId, 0);
+  } else {
+    goHome();
+  }
+}
+
+/* ---------------- TOAST NOTIFICATION ---------------- */
+function showToast(message, type = "success") {
+  const container = document.getElementById("toastContainer");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `
+    <span class="toast-icon">${type === 'error' ? '⚠️' : type === 'info' ? 'ℹ️' : '✓'}</span>
+    <span class="toast-msg">${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  // Trigger animation
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+
+  // Auto remove after 3.2s
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 300);
+  }, 3200);
+}
+
+/* ---------------- IMAGE ZOOM CONTROLLER ---------------- */
+function zoomImg(factor) {
+  appState.zoomLevel = Math.max(0.6, Math.min(3.0, appState.zoomLevel * factor));
+  applyImgTransform();
+}
+
+function resetImgZoom() {
+  appState.zoomLevel = 1.0;
+  applyImgTransform();
+}
+
+function applyImgTransform() {
+  const img = document.getElementById("caseDetailImg");
+  if (img) {
+    img.style.transform = `scale(${appState.zoomLevel})`;
+    img.style.transformOrigin = "top center";
+    img.style.transition = "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
+  }
+}
+
+function openOriginalImage() {
+  if (appState.currentCase && appState.currentCase.image) {
+    window.open(appState.currentCase.image, "_blank");
+  }
+}
+
+/* ---------------- MOBILE ACCESS & QR MODAL ---------------- */
+const PERMANENT_WEB_URL = "https://koelsaggbb16-rgb.github.io/cs-pj/";
+
+async function openMobileModal() {
+  const modal = document.getElementById("mobileAccessModal");
+  if (!modal) return;
+  modal.style.display = "flex";
+
+  let targetUrl = PERMANENT_WEB_URL;
+  let allUrls = [PERMANENT_WEB_URL];
+  let publicTunnel = null;
+
+  try {
+    const res = await fetch("/api/network-info");
+    if (res.ok) {
+      const info = await res.json();
+      publicTunnel = info.publicUrl || null;
+      if (info.urls && info.urls.length > 0) {
+        info.urls.forEach(u => {
+          if (!allUrls.includes(u)) allUrls.push(u);
+        });
       }
     }
+  } catch (e) {
+    // Static hosting (GitHub Pages) or offline mode
+  }
 
-    // Modal navigation
-    const modal = document.getElementById("caseModal");
-    if (modal && modal.classList.contains("open")) {
+  renderNetworkUrlPills(allUrls, targetUrl, publicTunnel);
+  setMobileAccessUrl(targetUrl);
+}
+
+function renderNetworkUrlPills(urls, activeUrl, publicUrl) {
+  const wrap = document.getElementById("networkUrlSelectorWrap");
+  const pillsEl = document.getElementById("networkUrlPills");
+  if (!wrap || !pillsEl) return;
+
+  if (!urls || urls.length <= 1) {
+    wrap.style.display = "none";
+    return;
+  }
+
+  wrap.style.display = "flex";
+  pillsEl.innerHTML = urls.map(url => {
+    let label = url;
+    if (url === PERMANENT_WEB_URL) {
+      label = `☁️ 영구 웹 주소 (언제나 접속 가능)`;
+    } else if (publicUrl && url === publicUrl) {
+      label = `🌐 실시간 PC 연동 터널 (${url.replace('https://', '')})`;
+    } else {
+      label = `🏠 내부망 Wi-Fi (${url.replace('http://', '')})`;
+    }
+    return `
+      <button class="net-pill ${url === activeUrl ? 'active' : ''}" data-url="${url}" onclick="setMobileAccessUrl('${url}')">
+        ${label}
+      </button>
+    `;
+  }).join("");
+}
+
+function setMobileAccessUrl(url) {
+  const inputEl = document.getElementById("mobileUrlInput");
+  const qrImg = document.getElementById("mobileQrImg");
+  if (inputEl) inputEl.value = url;
+  if (qrImg) {
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=${encodeURIComponent(url)}`;
+  }
+
+  const pillsEl = document.getElementById("networkUrlPills");
+  if (pillsEl) {
+    Array.from(pillsEl.querySelectorAll(".net-pill")).forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("data-url") === url);
+    });
+  }
+}
+
+function copyMobileUrl() {
+  const inputEl = document.getElementById("mobileUrlInput");
+  if (!inputEl) return;
+  inputEl.select();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(inputEl.value).then(() => {
+      showToast("모바일 접속 주소가 복사되었습니다.");
+    }).catch(() => {
+      document.execCommand("copy");
+      showToast("모바일 접속 주소가 복사되었습니다.");
+    });
+  } else {
+    document.execCommand("copy");
+    showToast("모바일 접속 주소가 복사되었습니다.");
+  }
+}
+
+function closeMobileModal() {
+  const modal = document.getElementById("mobileAccessModal");
+  if (modal) modal.style.display = "none";
+}
+
+/* ---------------- KEYBOARD & TOUCH SWIPE EVENTS ---------------- */
+function setupGlobalEvents() {
+  window.addEventListener("keydown", (e) => {
+    // If modal is open, ESC closes modal
+    const moveModal = document.getElementById("moveCaseModal");
+    if (moveModal && moveModal.style.display === "flex") {
       if (e.key === "Escape") {
-        closeModal();
-      } else if (e.key === "ArrowLeft") {
-        prevCase();
-      } else if (e.key === "ArrowRight") {
-        nextCase();
+        e.preventDefault();
+        closeMoveCaseModal();
       }
+      return;
+    }
+
+    const mobileModal = document.getElementById("mobileAccessModal");
+    if (mobileModal && mobileModal.style.display === "flex") {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeMobileModal();
+      }
+      return;
+    }
+
+    // If inline editing title, don't trigger slide keys
+    const editWrap = document.getElementById("titleEditWrap");
+    if (editWrap && editWrap.style.display === "flex") {
+      return;
+    }
+
+    if (appState.view !== "case") return;
+
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      navigateCase(-1);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      navigateCase(1);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      goHome();
     }
   });
 
-  // Modal backdrop click
-  const modalBackdrop = document.getElementById("caseModal");
-  if (modalBackdrop) {
-    modalBackdrop.addEventListener("click", (e) => {
-      if (e.target === modalBackdrop) {
-        closeModal();
+  // Touch Swipe Navigation for Mobile on Case Detail Card
+  const detailCard = document.getElementById("caseDetailCard");
+  if (detailCard) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    detailCard.addEventListener("touchstart", (e) => {
+      if (e.touches.length !== 1) return;
+      // Ignore if zoomed in on image
+      if (appState.zoomLevel > 1.05 && e.target.closest("#mediaContainer")) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    detailCard.addEventListener("touchend", (e) => {
+      if (!touchStartX || e.changedTouches.length !== 1) return;
+      if (appState.zoomLevel > 1.05 && e.target.closest("#mediaContainer")) return;
+
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+
+      // Trigger horizontal swipe if dx > 65px and horizontal movement dominates vertical movement
+      if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.8) {
+        if (dx < 0) {
+          navigateCase(1); // Swipe left -> Next case
+        } else {
+          navigateCase(-1); // Swipe right -> Prev case
+        }
       }
-    });
+      touchStartX = 0;
+      touchStartY = 0;
+    }, { passive: true });
   }
 }
