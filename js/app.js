@@ -7,7 +7,7 @@
 
 // Application State
 const appState = {
-  view: "home", // "home" | "case"
+  view: "home", // "home" | "part" | "case"
   currentCategoryId: null,
   currentSubitemId: null,
   currentCaseIndexInSubitem: 0,
@@ -17,6 +17,8 @@ const appState = {
   
   // Custom Overrides (Saved to server & localStorage)
   customTitles: {},
+  partPhotos: {},
+  currentPartPhotoIndex: 0,
   activeCategoriesConfig: [],
   selectedMoveTargetId: null
 };
@@ -50,7 +52,7 @@ function updateThemeIcon() {
   }
 }
 
-const CURRENT_DATA_VERSION = "2024_all_5_books_v14";
+const CURRENT_DATA_VERSION = "2024_all_5_books_v16";
 const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v3",
   "2024_all_5_books_v4",
@@ -63,7 +65,9 @@ const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v11",
   "2024_all_5_books_v12",
   "2024_all_5_books_v13",
-  "2024_all_5_books_v14"
+  "2024_all_5_books_v14",
+  "2024_all_5_books_v15",
+  "2024_all_5_books_v16"
 ];
 
 function mergeCategoriesConfig(baseConfig, savedConfig) {
@@ -98,7 +102,7 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
         if (t) t.caseIds = oldDoor.caseIds.slice();
       }
       if (oldOverload) {
-        const t = newCartop.items.find(i => i.id === "hoistway-overload");
+        const t = newPit.items.find(i => i.id === "hoistway-overload");
         if (t) t.caseIds = oldOverload.caseIds.slice();
       }
       if (oldInterlock) {
@@ -153,6 +157,27 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
           cartopCat.items.splice(insertIdx, 0, retItem);
         } else {
           cartopCat.items.push(retItem);
+        }
+      }
+      pitCat.items.forEach((item, idx) => { item.num = idx + 1; });
+      cartopCat.items.forEach((item, idx) => { item.num = idx + 1; });
+    }
+
+    // If 'hoistway-overload' was in 'cartop' (from v13/v14), move it to 'pit'
+    const cartopOverloadIdx = cartopCat.items.findIndex(i => i.id === "hoistway-overload");
+    if (cartopOverloadIdx !== -1) {
+      const [ovItem] = cartopCat.items.splice(cartopOverloadIdx, 1);
+      const existingInPit = pitCat.items.find(i => i.id === "hoistway-overload");
+      if (existingInPit) {
+        (ovItem.caseIds || []).forEach(cId => {
+          if (!existingInPit.caseIds.includes(cId)) existingInPit.caseIds.push(cId);
+        });
+      } else {
+        const bufferIdx = pitCat.items.findIndex(i => i.id === "hoistway-buffer");
+        if (bufferIdx !== -1) {
+          pitCat.items.splice(bufferIdx + 1, 0, ovItem);
+        } else {
+          pitCat.items.push(ovItem);
         }
       }
       pitCat.items.forEach((item, idx) => { item.num = idx + 1; });
@@ -320,6 +345,7 @@ async function loadCustomData() {
   // 1. Deep clone base categories config
   appState.activeCategoriesConfig = JSON.parse(JSON.stringify(CATEGORIES_CONFIG));
   appState.customTitles = {};
+  appState.partPhotos = {};
 
   // 2. Try fetching from local storage first (instant)
   try {
@@ -327,6 +353,7 @@ async function loadCustomData() {
     if (localSaved) {
       const parsed = JSON.parse(localSaved);
       if (parsed.customTitles) appState.customTitles = parsed.customTitles;
+      if (parsed.partPhotos) appState.partPhotos = normalizePartPhotos(parsed.partPhotos);
       if (COMPATIBLE_VERSIONS.includes(parsed.dataVersion) && parsed.categoriesConfig) {
         appState.activeCategoriesConfig = mergeCategoriesConfig(CATEGORIES_CONFIG, parsed.categoriesConfig);
       }
@@ -343,6 +370,9 @@ async function loadCustomData() {
       if (serverData.customTitles && Object.keys(serverData.customTitles).length > 0) {
         appState.customTitles = Object.assign({}, appState.customTitles, serverData.customTitles);
       }
+      if (serverData.partPhotos && typeof serverData.partPhotos === "object") {
+        appState.partPhotos = mergePartPhotoMaps(appState.partPhotos, normalizePartPhotos(serverData.partPhotos));
+      }
       if (
         COMPATIBLE_VERSIONS.includes(serverData.dataVersion) &&
         serverData.categoriesConfig &&
@@ -354,12 +384,15 @@ async function loadCustomData() {
   } catch (err) {
     console.log("Server API not available or static mode, relying on localStorage.");
   }
+
+  await hydratePartPhotosFromIdb();
 }
 
 async function saveCustomData() {
   const payload = {
     dataVersion: CURRENT_DATA_VERSION,
     customTitles: appState.customTitles,
+    partPhotos: sanitizePartPhotosForSave(appState.partPhotos),
     categoriesConfig: appState.activeCategoriesConfig
   };
 
@@ -440,31 +473,58 @@ function renderCategoryGrid() {
 }
 
 /* ---------------- NAVIGATION CONTROLLER ---------------- */
-function selectSubitem(categoryId, subitemId, caseIndex = 0) {
+function setActiveView(viewName) {
+  appState.view = viewName;
+  const homeView = document.getElementById("homeView");
+  const partView = document.getElementById("partView");
+  const caseView = document.getElementById("caseView");
+  const navBackHomeBtn = document.getElementById("navBackHomeBtn");
+
+  if (homeView) homeView.style.display = viewName === "home" ? "block" : "none";
+  if (partView) partView.style.display = viewName === "part" ? "block" : "none";
+  if (caseView) caseView.style.display = viewName === "case" ? "block" : "none";
+  if (navBackHomeBtn) navBackHomeBtn.style.display = viewName === "home" ? "none" : "inline-flex";
+}
+
+function selectSubitem(categoryId, subitemId) {
+  openPartView(categoryId, subitemId);
+}
+
+function openPartView(categoryId, subitemId) {
+  const category = appState.activeCategoriesConfig.find(c => c.id === categoryId);
+  if (!category) return;
+  const subitem = category.items.find(i => i.id === subitemId);
+  if (!subitem) return;
+
+  appState.currentCategoryId = categoryId;
+  appState.currentSubitemId = subitemId;
+  appState.currentCase = null;
+  appState.currentPartPhotoIndex = 0;
+  appState.zoomLevel = 1.0;
+
+  setActiveView("part");
+  cancelEditTitle();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  renderPartView();
+}
+
+function openCaseView(categoryId, subitemId, caseIndex = 0) {
   const category = appState.activeCategoriesConfig.find(c => c.id === categoryId);
   if (!category) return;
   const subitem = category.items.find(i => i.id === subitemId);
   if (!subitem || !subitem.caseIds) return;
 
-  // Handle empty item case
   if (subitem.caseIds.length === 0) {
     showToast(`'${subitem.name}' 항목에 등록된 사고 사례가 없습니다. 다른 항목에서 사례를 이동해 올 수 있습니다.`, "info");
+    openPartView(categoryId, subitemId);
+    return;
   }
 
-  appState.view = "case";
   appState.currentCategoryId = categoryId;
   appState.currentSubitemId = subitemId;
-  appState.currentCaseIndexInSubitem = subitem.caseIds.length > 0 ? Math.max(0, Math.min(caseIndex, subitem.caseIds.length - 1)) : 0;
+  appState.currentCaseIndexInSubitem = Math.max(0, Math.min(caseIndex, subitem.caseIds.length - 1));
 
-  // Toggle DOM views
-  const homeView = document.getElementById("homeView");
-  const caseView = document.getElementById("caseView");
-  const navBackHomeBtn = document.getElementById("navBackHomeBtn");
-
-  if (homeView) homeView.style.display = "none";
-  if (caseView) caseView.style.display = "block";
-  if (navBackHomeBtn) navBackHomeBtn.style.display = "inline-flex";
-
+  setActiveView("case");
   cancelEditTitle();
   window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -472,24 +532,373 @@ function selectSubitem(categoryId, subitemId, caseIndex = 0) {
   renderCaseDetail();
 }
 
+function goBackToPart() {
+  if (appState.currentCategoryId && appState.currentSubitemId) {
+    openPartView(appState.currentCategoryId, appState.currentSubitemId);
+    return;
+  }
+  goHome();
+}
+
 function goHome() {
-  appState.view = "home";
   appState.currentCategoryId = null;
   appState.currentSubitemId = null;
   appState.currentCase = null;
   appState.zoomLevel = 1.0;
 
-  const homeView = document.getElementById("homeView");
-  const caseView = document.getElementById("caseView");
-  const navBackHomeBtn = document.getElementById("navBackHomeBtn");
-
-  if (homeView) homeView.style.display = "block";
-  if (caseView) caseView.style.display = "none";
-  if (navBackHomeBtn) navBackHomeBtn.style.display = "none";
-
+  setActiveView("home");
   cancelEditTitle();
   renderCategoryGrid();
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderPartView() {
+  const category = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
+  const subitem = category ? category.items.find(i => i.id === appState.currentSubitemId) : null;
+  if (!category || !subitem) return;
+
+  const crumb = document.getElementById("partBreadcrumb");
+  if (crumb) {
+    crumb.innerHTML = `
+      <span class="crumb-link" onclick="goHome()">전체 카테고리</span>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-cat" style="color:${category.color};">${category.name}</span>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">${subitem.num}. ${subitem.name}</span>
+    `;
+  }
+
+  const kicker = document.getElementById("partViewKicker");
+  const title = document.getElementById("partViewTitle");
+  const desc = document.getElementById("partViewDesc");
+  if (kicker) kicker.textContent = `${category.name} · 부품`;
+  if (title) title.textContent = subitem.name;
+  if (desc) desc.textContent = subitem.desc || "";
+
+  renderPartPhoto();
+  renderPartCaseList(subitem);
+}
+
+function renderPartCaseList(subitem) {
+  const listEl = document.getElementById("partCaseList");
+  if (!listEl) return;
+
+  const caseIds = Array.isArray(subitem.caseIds) ? subitem.caseIds : [];
+  if (caseIds.length === 0) {
+    listEl.innerHTML = `<div class="part-case-empty">이 부품에 등록된 사고 사례가 없습니다. 다른 항목에서 사례를 이동해 올 수 있습니다.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = caseIds.map((caseId, idx) => {
+    const caseData = CASES_DATA.find(c => c.id === caseId);
+    const caseTitle = caseData ? getCaseTitle(caseData) : `사례 ${caseId}`;
+    return `
+      <button class="part-case-btn" onclick="openCaseView('${appState.currentCategoryId}', '${subitem.id}', ${idx})">
+        <span class="part-case-num">${idx + 1}</span>
+        <span class="part-case-title">${escapeHtml(caseTitle)}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function escapeHtml(text) {
+  return String(text || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function normalizePhotoEntry(entry) {
+  if (!entry) return null;
+  if (typeof entry === "string" && entry) {
+    const id = entry.replace(/^.*\//, "").replace(/\?.*$/, "").replace(/\.[a-zA-Z]+$/, "") || entry;
+    return { id, url: entry };
+  }
+  if (typeof entry === "object" && entry.url) {
+    return {
+      id: String(entry.id || entry.url).replace(/^.*\//, "").replace(/\?.*$/, "").replace(/\.[a-zA-Z]+$/, ""),
+      url: entry.url
+    };
+  }
+  return null;
+}
+
+function normalizePartPhotos(raw) {
+  const out = {};
+  Object.keys(raw || {}).forEach((key) => {
+    const value = raw[key];
+    const list = Array.isArray(value) ? value : (value ? [value] : []);
+    const normalized = list.map(normalizePhotoEntry).filter(Boolean);
+    if (normalized.length) out[key] = uniquePartPhotos(normalized);
+  });
+  return out;
+}
+
+function uniquePartPhotos(list) {
+  const seen = new Set();
+  return (list || []).filter((item) => {
+    const key = item.id || item.url;
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function mergePartPhotoMaps(baseMap, extraMap) {
+  const merged = normalizePartPhotos(baseMap);
+  const extra = normalizePartPhotos(extraMap);
+  Object.keys(extra).forEach((key) => {
+    merged[key] = uniquePartPhotos([...(merged[key] || []), ...extra[key]]);
+  });
+  return merged;
+}
+
+function getPartPhotos(subitemId) {
+  const list = appState.partPhotos[subitemId];
+  return Array.isArray(list) ? list : [];
+}
+
+function renderPartPhoto() {
+  const frame = document.getElementById("partPhotoFrame");
+  const thumbs = document.getElementById("partPhotoThumbs");
+  const removeBtn = document.getElementById("btnRemovePartPhoto");
+  const attachLabel = document.getElementById("partPhotoAttachLabel");
+  if (!frame) return;
+
+  const photos = getPartPhotos(appState.currentSubitemId);
+  if (appState.currentPartPhotoIndex >= photos.length) {
+    appState.currentPartPhotoIndex = Math.max(0, photos.length - 1);
+  }
+
+  if (attachLabel) attachLabel.textContent = "사진 추가";
+
+  if (!photos.length) {
+    frame.classList.remove("has-photo");
+    frame.innerHTML = `
+      <div class="part-photo-empty">
+        <span class="part-photo-empty-icon">📷</span>
+        <strong>부품 사진이 없습니다</strong>
+        <span>아래에서 바로 첨부하세요. 여러 장 넣을 수 있습니다.</span>
+      </div>
+    `;
+    if (thumbs) thumbs.innerHTML = "";
+    if (removeBtn) removeBtn.style.display = "none";
+    return;
+  }
+
+  const current = photos[appState.currentPartPhotoIndex] || photos[0];
+  frame.classList.add("has-photo");
+  frame.innerHTML = `<img src="${current.url}" alt="${escapeHtml(appState.currentSubitemId)} 부품 사진 ${appState.currentPartPhotoIndex + 1}" />`;
+  if (removeBtn) removeBtn.style.display = "inline-flex";
+
+  if (thumbs) {
+    thumbs.innerHTML = photos.map((photo, idx) => `
+      <button type="button" class="part-photo-thumb ${idx === appState.currentPartPhotoIndex ? "active" : ""}" onclick="selectPartPhoto(${idx})" title="${idx + 1}번째 사진">
+        <img src="${photo.url}" alt="${idx + 1}번째 부품 사진" />
+        <span class="part-photo-thumb-num">${idx + 1}</span>
+      </button>
+    `).join("");
+  }
+}
+
+function selectPartPhoto(index) {
+  appState.currentPartPhotoIndex = index;
+  renderPartPhoto();
+}
+
+async function onPartPhotoSelected(event) {
+  const input = event.target;
+  const files = input && input.files ? Array.from(input.files) : [];
+  if (!files.length || !appState.currentSubitemId) return;
+
+  const imageFiles = files.filter((file) => file.type.startsWith("image/"));
+  if (!imageFiles.length) {
+    showToast("이미지 파일만 첨부할 수 있습니다.", "error");
+    input.value = "";
+    return;
+  }
+
+  try {
+    showToast(`${imageFiles.length}장을 첨부하는 중입니다...`, "info");
+    const subitemId = appState.currentSubitemId;
+    if (!Array.isArray(appState.partPhotos[subitemId])) appState.partPhotos[subitemId] = [];
+
+    for (const file of imageFiles) {
+      const dataUrl = await compressImageFile(file);
+      const saved = await persistPartPhoto(subitemId, dataUrl);
+      if (saved) appState.partPhotos[subitemId].push(saved);
+    }
+
+    appState.partPhotos[subitemId] = uniquePartPhotos(appState.partPhotos[subitemId]);
+    appState.currentPartPhotoIndex = appState.partPhotos[subitemId].length - 1;
+    await saveCustomData();
+    renderPartPhoto();
+    showToast(`부품 사진 ${imageFiles.length}장을 추가했습니다.`);
+  } catch (err) {
+    console.warn(err);
+    showToast("사진 첨부 중 오류가 발생했습니다.", "error");
+  } finally {
+    input.value = "";
+  }
+}
+
+async function removeCurrentPartPhoto() {
+  const photos = getPartPhotos(appState.currentSubitemId);
+  const current = photos[appState.currentPartPhotoIndex];
+  if (!current) return;
+
+  const ok = confirm("지금 보고 있는 사진을 삭제할까요? 다른 사진은 그대로 남습니다.");
+  if (!ok) return;
+
+  const subitemId = appState.currentSubitemId;
+  await deleteStoredPartPhoto(current.id);
+  appState.partPhotos[subitemId] = photos.filter((photo) => photo.id !== current.id);
+  if (!appState.partPhotos[subitemId].length) delete appState.partPhotos[subitemId];
+  await saveCustomData();
+  renderPartPhoto();
+  showToast("선택한 사진을 삭제했습니다.", "info");
+}
+
+function compressImageFile(file, maxW = 1400, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(img.width * scale));
+      canvas.height = Math.max(1, Math.round(img.height * scale));
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(objectUrl);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error("image load failed"));
+    };
+    img.src = objectUrl;
+  });
+}
+
+function sanitizePartPhotosForSave(photos) {
+  const clean = {};
+  Object.keys(photos || {}).forEach((key) => {
+    const list = getPartPhotos(key).filter((item) => item.url && !String(item.url).startsWith("data:"));
+    if (list.length) clean[key] = list;
+  });
+  return clean;
+}
+
+function openPartPhotoDb() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open("elevator_part_photos", 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains("photos")) {
+        db.createObjectStore("photos");
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function idbPutPartPhoto(subitemId, dataUrl) {
+  const db = await openPartPhotoDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("photos", "readwrite");
+    tx.objectStore("photos").put(dataUrl, subitemId);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function idbGetPartPhoto(subitemId) {
+  const db = await openPartPhotoDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("photos", "readonly");
+    const req = tx.objectStore("photos").get(subitemId);
+    req.onsuccess = () => resolve(req.result || "");
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function idbDeletePartPhoto(subitemId) {
+  const db = await openPartPhotoDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("photos", "readwrite");
+    tx.objectStore("photos").delete(subitemId);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function makePhotoId(subitemId) {
+  return `${subitemId}__${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function subitemIdFromPhotoId(photoId) {
+  const text = String(photoId || "");
+  const idx = text.indexOf("__");
+  return idx === -1 ? text : text.slice(0, idx);
+}
+
+async function hydratePartPhotosFromIdb() {
+  try {
+    const db = await openPartPhotoDb();
+    await new Promise((resolve) => {
+      const tx = db.transaction("photos", "readonly");
+      const req = tx.objectStore("photos").getAllKeys();
+      req.onsuccess = async () => {
+        const idbKeys = req.result || [];
+        for (const key of idbKeys) {
+          const dataUrl = await idbGetPartPhoto(key);
+          if (!dataUrl) continue;
+          const subitemId = subitemIdFromPhotoId(key);
+          if (!Array.isArray(appState.partPhotos[subitemId])) appState.partPhotos[subitemId] = [];
+          const exists = appState.partPhotos[subitemId].some((item) => item.id === key || item.url === dataUrl);
+          if (!exists) appState.partPhotos[subitemId].push({ id: key, url: dataUrl });
+        }
+        resolve();
+      };
+      req.onerror = () => resolve();
+    });
+  } catch (e) {}
+}
+
+async function persistPartPhoto(subitemId, dataUrl) {
+  try {
+    const res = await fetch("/api/part-photo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subitemId, dataUrl })
+    });
+    if (res.ok) {
+      const result = await res.json();
+      if (result && result.url) {
+        return {
+          id: result.id || makePhotoId(subitemId),
+          url: `${result.url}?t=${Date.now()}`
+        };
+      }
+    }
+  } catch (e) {}
+
+  const photoId = makePhotoId(subitemId);
+  await idbPutPartPhoto(photoId, dataUrl);
+  return { id: photoId, url: dataUrl };
+}
+
+async function deleteStoredPartPhoto(photoId) {
+  if (!photoId) return;
+  try {
+    await fetch(`/api/part-photo?id=${encodeURIComponent(photoId)}`, { method: "DELETE" });
+  } catch (e) {}
+  try {
+    await idbDeletePartPhoto(photoId);
+  } catch (e) {}
 }
 
 /* ---------------- CASE VIEWER RENDERING ---------------- */
@@ -511,7 +920,7 @@ function renderViewerTopBar(category, subitem) {
   if (siblingPillsEl) {
     siblingPillsEl.innerHTML = category.items.map(item => `
       <button class="sibling-pill ${item.id === subitem.id ? 'active' : ''}" 
-              onclick="selectSubitem('${category.id}', '${item.id}', 0)">
+              onclick="openPartView('${category.id}', '${item.id}')">
         ${item.num}. ${item.name} (${item.caseIds ? item.caseIds.length : 0})
       </button>
     `).join("");
@@ -869,7 +1278,7 @@ function executeMoveCase() {
   // 4. Navigate directly to the moved case in the new target category
   const newIndex = targetSub.caseIds.indexOf(caseId);
   showToast(`사례가 [${targetCat.name} > ${targetSub.name}] 항목으로 이동되었습니다.`);
-  selectSubitem(targetCat.id, targetSub.id, newIndex);
+  openCaseView(targetCat.id, targetSub.id, newIndex);
 }
 
 /* ---------------- RE-ORDER CASES WITHIN ITEM ---------------- */
@@ -919,8 +1328,8 @@ async function confirmResetData() {
 
   showToast("초기 기본값으로 복원되었습니다.");
 
-  if (appState.view === "case" && appState.currentCategoryId && appState.currentSubitemId) {
-    selectSubitem(appState.currentCategoryId, appState.currentSubitemId, 0);
+  if ((appState.view === "case" || appState.view === "part") && appState.currentCategoryId && appState.currentSubitemId) {
+    openPartView(appState.currentCategoryId, appState.currentSubitemId);
   } else {
     goHome();
   }
@@ -1105,6 +1514,12 @@ function setupGlobalEvents() {
       return;
     }
 
+    if (appState.view === "part" && e.key === "Escape") {
+      e.preventDefault();
+      goHome();
+      return;
+    }
+
     if (appState.view !== "case") return;
 
     if (e.key === "ArrowLeft") {
@@ -1115,7 +1530,7 @@ function setupGlobalEvents() {
       navigateCase(1);
     } else if (e.key === "Escape") {
       e.preventDefault();
-      goHome();
+      goBackToPart();
     }
   });
 

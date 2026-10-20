@@ -4056,7 +4056,7 @@ const CASES_DATA = [
     "page": 23,
     "bookPage": 25,
     "image": "images/2022/page_23.png",
-    "title": "2022년 승강기 사고 사례 7 (엘리베이터 추락)",
+    "title": "휠체어리프트 이용차 승강장문 부딪혀 추락",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "추락",
@@ -4216,7 +4216,7 @@ const CASES_DATA = [
     "page": 29,
     "bookPage": 31,
     "image": "images/2022/page_29.png",
-    "title": "2022년 승강기 사고 사례 13 (엘리베이터 추락)",
+    "title": "비상구출교육 받지 않고 구출하다 추락한 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "추락",
@@ -4248,7 +4248,7 @@ const CASES_DATA = [
     "page": 30,
     "bookPage": 32,
     "image": "images/2022/page_30.png",
-    "title": "2022년 승강기 사고 사례 14 (엘리베이터 끼임)",
+    "title": "카문 개폐장치 이물질 끼임으로 ucmp",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -4280,7 +4280,7 @@ const CASES_DATA = [
     "page": 33,
     "bookPage": 35,
     "image": "images/2022/page_33.png",
-    "title": "2022년 승강기 사고 사례 17 (엘리베이터 끼임)",
+    "title": "비접촉식 문닫힘안전장치 미작동으로 끼인사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -4344,7 +4344,7 @@ const CASES_DATA = [
     "page": 36,
     "bookPage": 38,
     "image": "images/2022/page_36.png",
-    "title": "2022년 승강기 사고 사례 20 (엘리베이터 기타)",
+    "title": "덤웨이터 승강장문 연동로프 끊어지며 도어가 발등으로 떨어짐",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -4536,7 +4536,7 @@ const CASES_DATA = [
     "page": 47,
     "bookPage": 49,
     "image": "images/2022/page_47.png",
-    "title": "2022년 승강기 사고 사례 31 (엘리베이터 끼임)",
+    "title": "피트사다리 전기안전장치 작동 안되어 호출된카에 끼인사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -4568,7 +4568,7 @@ const CASES_DATA = [
     "page": 48,
     "bookPage": 50,
     "image": "images/2022/page_48.png",
-    "title": "2022년 승강기 사고 사례 32 (엘리베이터 추락)",
+    "title": "비전문가의 승강장문 개방으로 추락",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "추락",
@@ -4632,7 +4632,7 @@ const CASES_DATA = [
     "page": 50,
     "bookPage": 52,
     "image": "images/2022/page_50.png",
-    "title": "2022년 승강기 사고 사례 34 (엘리베이터 충돌)",
+    "title": "카천장이 떨어진 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "충돌",
@@ -4696,7 +4696,7 @@ const CASES_DATA = [
     "page": 53,
     "bookPage": 55,
     "image": "images/2022/page_53.png",
-    "title": "2022년 승강기 사고 사례 37 (엘리베이터 전도)",
+    "title": "단차로 넘어진 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "전도",
@@ -4728,7 +4728,7 @@ const CASES_DATA = [
     "page": 54,
     "bookPage": 56,
     "image": "images/2022/page_54.png",
-    "title": "2022년 승강기 사고 사례 38 (엘리베이터 운행이상)",
+    "title": "브레이크 제동력 불량으로 최상층지나 급정지",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "운행이상",
@@ -4824,7 +4824,7 @@ const CASES_DATA = [
     "page": 58,
     "bookPage": 60,
     "image": "images/2022/page_58.png",
-    "title": "2022년 승강기 사고 사례 41 (엘리베이터 끼임)",
+    "title": "도어인터록에 이물질 끼임으로 급정지후 갇힘",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -4888,7 +4888,7 @@ const CASES_DATA = [
     "page": 21,
     "bookPage": 14,
     "image": "images/2020/page_21.png",
-    "title": "2. 경남 김해시 엘리베이터 사고",
+    "title": "도어엔코더 불량으로 닫히는 문에 부딪혀 넘어진사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "전도",
@@ -4920,7 +4920,7 @@ const CASES_DATA = [
     "page": 22,
     "bookPage": 15,
     "image": "images/2020/page_22.png",
-    "title": "3. 경기 의왕시 엘리베이터 사고",
+    "title": "열리는 문의 문틀에 손이끼인 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -4952,7 +4952,7 @@ const CASES_DATA = [
     "page": 23,
     "bookPage": 16,
     "image": "images/2020/page_23.png",
-    "title": "4. 물산 남구 엘리베이터 사고",
+    "title": "단차발생으로 넘어진 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -4984,7 +4984,7 @@ const CASES_DATA = [
     "page": 27,
     "bookPage": 20,
     "image": "images/2020/page_27.png",
-    "title": "8. 강원 원주시 엘리베이터 사고",
+    "title": "강아지목줄 문에 끼인 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -5176,7 +5176,7 @@ const CASES_DATA = [
     "page": 34,
     "bookPage": 27,
     "image": "images/2020/page_34.png",
-    "title": "15. 경기 용인시 엘리베이터 사고",
+    "title": "피트사다리 용접불량으로 떨어져 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "추락",
@@ -5272,7 +5272,7 @@ const CASES_DATA = [
     "page": 37,
     "bookPage": 30,
     "image": "images/2020/page_37.png",
-    "title": "18. 경남 양산시 엘리베이터 사고",
+    "title": "감속이 정상적으로 되지 않아 단차에 넘어진 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -5336,7 +5336,7 @@ const CASES_DATA = [
     "page": 40,
     "bookPage": 33,
     "image": "images/2020/page_40.png",
-    "title": "20. 경기 시흥시 엘리베이터 사고",
+    "title": "도르래와 주로프 사이에 손가락이 끼인 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -5496,7 +5496,7 @@ const CASES_DATA = [
     "page": 47,
     "bookPage": 40,
     "image": "images/2020/page_47.png",
-    "title": "26. 경남 창원시 엘리베이터 사고",
+    "title": "승강장문 접점이 떨어져 급정지해 발생한 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -5560,7 +5560,7 @@ const CASES_DATA = [
     "page": 50,
     "bookPage": 43,
     "image": "images/2020/page_50.png",
-    "title": "29. 전북 군산시 엘리베이터 사고",
+    "title": "비전문가의 개방으로 추락사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -5592,7 +5592,7 @@ const CASES_DATA = [
     "page": 51,
     "bookPage": 44,
     "image": "images/2020/page_51.png",
-    "title": "30. 충남 논산시 엘리베이터 사고",
+    "title": "비접촉식 문닫힘안전장치 미작동으로 부딪힌 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "충돌",
@@ -5624,7 +5624,7 @@ const CASES_DATA = [
     "page": 52,
     "bookPage": 45,
     "image": "images/2020/page_52.png",
-    "title": "31. 강원 속초시 엘리베이터 사고",
+    "title": "승강장문 문틀에 끼인 이물질로 도어가 안열려 갇힌사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -5720,7 +5720,7 @@ const CASES_DATA = [
     "page": 56,
     "bookPage": 49,
     "image": "images/2020/page_56.png",
-    "title": "34. 인천 서구 엘리베이터 사고",
+    "title": "갇힘사고시 비상통화장치 연결안되 구출지연된 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "갇힘",
@@ -5784,7 +5784,7 @@ const CASES_DATA = [
     "page": 62,
     "bookPage": 55,
     "image": "images/2020/page_62.png",
-    "title": "39. 경기 의정부시 엘리베이터 사고",
+    "title": "브레이크불완전 개방으로 단차발생해 넘어진 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "전도",
@@ -5848,7 +5848,7 @@ const CASES_DATA = [
     "page": 65,
     "bookPage": 58,
     "image": "images/2020/page_65.png",
-    "title": "42. 경남 창원시 엘리베이터 사고",
+    "title": "브레이크 끼임(추측)으로 도어개방상승한 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -6072,7 +6072,7 @@ const CASES_DATA = [
     "page": 73,
     "bookPage": 66,
     "image": "images/2020/page_73.png",
-    "title": "49. 경기 화성시 엘리베이터 사고",
+    "title": "에이프런과 승강장문 인터록이 간섭되어 멈춘사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "운행이상",
@@ -6104,7 +6104,7 @@ const CASES_DATA = [
     "page": 74,
     "bookPage": 67,
     "image": "images/2020/page_74.png",
-    "title": "50. 경기 파주시 ㈎ 엘리베이터 사고",
+    "title": "비전문가의 개방으로 추락한사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -6200,7 +6200,7 @@ const CASES_DATA = [
     "page": 77,
     "bookPage": 70,
     "image": "images/2020/page_77.png",
-    "title": "53. 광주 북구 엘리베이터 사고",
+    "title": "카와 승강장문 인터록롤러가 간섭되어 멈춘사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "운행이상",
@@ -6264,7 +6264,7 @@ const CASES_DATA = [
     "page": 79,
     "bookPage": 72,
     "image": "images/2020/page_79.png",
-    "title": "55. 서울 용산구 엘리베이터 사고",
+    "title": "카문개폐장치 이물질로 카가 멈춘사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "운행이상",
@@ -6488,7 +6488,7 @@ const CASES_DATA = [
     "page": 86,
     "bookPage": 79,
     "image": "images/2020/page_86.png",
-    "title": "62. 서울 용산구 엘리베이터 사고",
+    "title": "승강장문 닫힘 스프링 파손으로 갇힌사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "갇힘",
@@ -6520,7 +6520,7 @@ const CASES_DATA = [
     "page": 88,
     "bookPage": 81,
     "image": "images/2020/page_88.png",
-    "title": "64. 충남 공주시 엘리베이터 사고",
+    "title": "조속기인장추스위치 작동으로 운행중정지한사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "운행이상",
@@ -6616,7 +6616,7 @@ const CASES_DATA = [
     "page": 95,
     "bookPage": 88,
     "image": "images/2020/page_95.png",
-    "title": "70. 부산 남구 엘리베이터 사고",
+    "title": "브레이크가 이물질에 끼여 개문발차한사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "운행이상",
@@ -6744,7 +6744,7 @@ const CASES_DATA = [
     "page": 104,
     "bookPage": 97,
     "image": "images/2020/page_104.png",
-    "title": "76. 경기 고양시 엘리베이터 사고",
+    "title": "비전문가의 승강장문개방으로 추락한사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -6776,7 +6776,7 @@ const CASES_DATA = [
     "page": 105,
     "bookPage": 98,
     "image": "images/2020/page_105.png",
-    "title": "77. 서울 서대문구 엘리베이터 사고",
+    "title": "인버터 불량으로 상승하다 리미트스위치로 멈춘사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "갇힘",
@@ -6808,7 +6808,7 @@ const CASES_DATA = [
     "page": 107,
     "bookPage": 100,
     "image": "images/2020/page_107.png",
-    "title": "79. 경기 파주시 엘리베이터 사고",
+    "title": "브레이크마그네트 노후로 개문발차한 사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "기타",
@@ -6840,7 +6840,7 @@ const CASES_DATA = [
     "page": 109,
     "bookPage": 102,
     "image": "images/2020/page_109.png",
-    "title": "80. 경북 포항시 엘리베이터 사고",
+    "title": "카문 벤과 승강장문 개폐롤러간섭으로 멈춘사고",
     "elevatorType": "엘리베이터",
     "elevatorCategory": "EL",
     "accidentType": "끼임",
@@ -7367,7 +7367,7 @@ const CATEGORIES_CONFIG = [
   {
     "id": "cartop",
     "name": "카상부",
-    "subtitle": "도어컨트롤러, 과부하감지장치, 도어인터록·행거, 승강장문이탈방지장치 및 카 상부 안전설비",
+    "subtitle": "도어컨트롤러, 도어인터록·행거, 승강장문이탈방지장치 및 카 상부 안전설비",
     "icon": "🏗️",
     "badge": "카상부",
     "color": "#0284c7",
@@ -7378,8 +7378,80 @@ const CATEGORIES_CONFIG = [
         "name": "도어컨트롤러",
         "desc": "도어 개폐 제어장치, 승강장·카 도어 제어 및 도어 일반 사고",
         "caseIds": [
-          18
+          43,
+          42,
+          137
         ]
+      },
+      {
+        "id": "hoistway-interlock-hanger",
+        "num": 2,
+        "name": "도어인터록 및 행거",
+        "desc": "도어 인터록 잠금 불량 개방 추락, 스위치 접촉·연동로프 파단 및 행거 이탈",
+        "caseIds": [
+          15,
+          29,
+          30,
+          117,
+          120,
+          135,
+          156,
+          174,
+          178,
+          187,
+          180,
+          198
+        ]
+      },
+      {
+        "id": "hoistway-door-retention",
+        "num": 3,
+        "name": "승강장문이탈방지장치",
+        "desc": "전동스쿠터·견인차 충돌 및 외력 충격 시 승강장문 하부 가이드슈·문턱 이탈 추락",
+        "caseIds": [
+          7,
+          27,
+          28,
+          111,
+          160
+        ]
+      },
+      {
+        "id": "cartop-clearance",
+        "num": 4,
+        "name": "작업자안전거리(카상부)",
+        "desc": "카 상부 점검 중 균형추·레일 브래킷 간격 협착 및 상부 안전공간 확보",
+        "caseIds": [
+          14
+        ]
+      },
+      {
+        "id": "hoistway-etc",
+        "num": 5,
+        "name": "기타(카상부)",
+        "desc": "승강로 벽체 시공 협착, 카 상부 접속함 덮개 간섭, 이동케이블 걸림",
+        "caseIds": [
+          22,
+          8,
+          40
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pit",
+    "name": "피트",
+    "subtitle": "피트 완충기, 과부하감지장치, 피트사다리 및 피트 내 작업자 안전공간",
+    "icon": "🕳️",
+    "badge": "피트",
+    "color": "#0ea5e9",
+    "items": [
+      {
+        "id": "hoistway-buffer",
+        "num": 1,
+        "name": "완충기",
+        "desc": "피트 완충기 영역 추락 충격, 유압호스 파열, 최하층 완충기 격돌",
+        "caseIds": []
       },
       {
         "id": "hoistway-overload",
@@ -7391,83 +7463,20 @@ const CATEGORIES_CONFIG = [
         ]
       },
       {
-        "id": "hoistway-interlock-hanger",
-        "num": 3,
-        "name": "도어인터록 및 행거",
-        "desc": "도어 인터록 잠금 불량 개방 추락, 스위치 접촉·연동로프 파단 및 행거 이탈",
-        "caseIds": [
-          15,
-          29,
-          30
-        ]
-      },
-      {
-        "id": "hoistway-door-retention",
-        "num": 4,
-        "name": "승강장문이탈방지장치",
-        "desc": "전동스쿠터·견인차 충돌 및 외력 충격 시 승강장문 하부 가이드슈·문턱 이탈 추락",
-        "caseIds": [
-          7,
-          27,
-          28
-        ]
-      },
-      {
-        "id": "cartop-clearance",
-        "num": 5,
-        "name": "작업자안전거리(카상부)",
-        "desc": "카 상부 점검 중 균형추·레일 브래킷 간격 협착 및 상부 안전공간 확보",
-        "caseIds": [
-          14
-        ]
-      },
-      {
-        "id": "hoistway-etc",
-        "num": 6,
-        "name": "기타(카상부)",
-        "desc": "승강로 벽체 시공 협착, 카 상부 접속함 덮개 간섭, 이동케이블 걸림",
-        "caseIds": [
-          22,
-          8,
-          38,
-          40
-        ]
-      }
-    ]
-  },
-  {
-    "id": "pit",
-    "name": "피트",
-    "subtitle": "피트 완충기, 피트사다리 및 피트 내 작업자 안전공간",
-    "icon": "🕳️",
-    "badge": "피트",
-    "color": "#0ea5e9",
-    "items": [
-      {
-        "id": "hoistway-buffer",
-        "num": 1,
-        "name": "완충기",
-        "desc": "피트 완충기 영역 추락 충격, 유압호스 파열, 최하층 완충기 격돌",
-        "caseIds": [
-          13,
-          24,
-          35,
-          36
-        ]
-      },
-      {
         "id": "hoistway-pit-ladder",
-        "num": 2,
+        "num": 3,
         "name": "피트사다리",
         "desc": "피트 점검용 수직 사다리 용접부 파손 추락 및 승강로 사다리 이동 중 협착",
         "caseIds": [
+          32,
+          146,
           31,
-          32
+          126
         ]
       },
       {
         "id": "pit-clearance",
-        "num": 3,
+        "num": 4,
         "name": "작업자안전거리(피트)",
         "desc": "피트 내 카 하강 협착, 피트 바닥 집수정 점검 실족 및 피트 안전공간 확보",
         "caseIds": [
@@ -7480,7 +7489,7 @@ const CATEGORIES_CONFIG = [
   {
     "id": "car",
     "name": "카내",
-    "subtitle": "카 출입문 감지 센서, 비상통화, 착상 바닥면 레벨 및 문틀 틈새",
+    "subtitle": "카 출입문 감지 센서, 비상통화, 착상 바닥면 레벨, 문틀 틈새, 이용자 안전수칙 안내문구 및 기타",
     "icon": "🛗",
     "badge": "카내",
     "color": "#10b981",
@@ -7493,10 +7502,11 @@ const CATEGORIES_CONFIG = [
         "caseIds": [
           10,
           26,
-          23,
           41,
-          42,
-          43
+          85,
+          87,
+          118,
+          159
         ]
       },
       {
@@ -7505,9 +7515,9 @@ const CATEGORIES_CONFIG = [
         "name": "비상통화장치",
         "desc": "갇힘 시 인터폰 구조 요청 절차, 카 내 보양재 가림, 통신선 단선",
         "caseIds": [
-          11,
           45,
-          46
+          46,
+          163
         ]
       },
       {
@@ -7516,9 +7526,13 @@ const CATEGORIES_CONFIG = [
         "name": "단차",
         "desc": "착상 오차로 인한 바닥 턱 걸림, 층고 데이터 오류 단차, 실 틈새 끼임",
         "caseIds": [
-          21,
           47,
-          48
+          48,
+          21,
+          98,
+          131,
+          139,
+          149
         ]
       },
       {
@@ -7529,7 +7543,27 @@ const CATEGORIES_CONFIG = [
         "caseIds": [
           44,
           64,
-          65
+          65,
+          138
+        ]
+      },
+      {
+        "id": "car-safety-notice",
+        "num": 5,
+        "name": "이용자안전수칙 등 안내문구",
+        "desc": "카 내 이용자 준수사항, 갇힘 시 행동요령, 정원·적재하중 안내 및 안전 표지 미부착",
+        "caseIds": [
+          88
+        ]
+      },
+      {
+        "id": "car-etc",
+        "num": 6,
+        "name": "카내 기타",
+        "desc": "카 내부 조명, 환기, 벽체·천장 마감, 조작반 등 위 항목에 해당하지 않는 카내 사고",
+        "caseIds": [
+          106,
+          129
         ]
       }
     ]
@@ -7537,7 +7571,7 @@ const CATEGORIES_CONFIG = [
   {
     "id": "machineroom",
     "name": "기계실",
-    "subtitle": "권상기 브레이크 제동 장치, 주도르래(시브)·로프 및 과속조절기",
+    "subtitle": "권상기 브레이크 제동 장치, 주도르래(시브)·로프, 과속조절기 및 유압실린더·호스",
     "icon": "⚙️",
     "badge": "기계실",
     "color": "#f59e0b",
@@ -7550,7 +7584,17 @@ const CATEGORIES_CONFIG = [
         "caseIds": [
           49,
           50,
-          51
+          51,
+          23,
+          24,
+          36,
+          105,
+          132,
+          165,
+          167,
+          191,
+          196,
+          197
         ]
       },
       {
@@ -7561,7 +7605,9 @@ const CATEGORIES_CONFIG = [
         "caseIds": [
           52,
           53,
-          54
+          54,
+          91,
+          151
         ]
       },
       {
@@ -7572,7 +7618,18 @@ const CATEGORIES_CONFIG = [
         "caseIds": [
           39,
           75,
-          76
+          76,
+          92,
+          188
+        ]
+      },
+      {
+        "id": "mr-hydraulic",
+        "num": 4,
+        "name": "유압실린더 및 유압호스",
+        "desc": "유압식 승강기 실린더 누유, 고압 유압호스 파열, 럽처밸브 미작동으로 인한 급하강",
+        "caseIds": [
+          35
         ]
       }
     ]
@@ -7666,7 +7723,9 @@ const CATEGORIES_CONFIG = [
           9,
           61,
           62,
-          63
+          63,
+          18,
+          11
         ]
       },
       {
@@ -7679,7 +7738,9 @@ const CATEGORIES_CONFIG = [
           19,
           33,
           73,
-          74
+          74,
+          38,
+          13
         ]
       }
     ]
@@ -7706,28 +7767,20 @@ const CATEGORIES_CONFIG = [
           82,
           83,
           84,
-          85,
           86,
-          87,
-          88,
           89,
           90,
-          91,
-          92,
           93,
           94,
           95,
           96,
           97,
-          98,
           99,
           100,
           101,
           102,
           103,
-          104,
-          105,
-          106
+          104
         ]
       },
       {
@@ -7740,31 +7793,22 @@ const CATEGORIES_CONFIG = [
           108,
           109,
           110,
-          111,
           112,
           113,
           114,
           115,
           116,
-          117,
-          118,
           119,
-          120,
           121,
           122,
           123,
           124,
           125,
-          126,
           127,
           128,
-          129,
           130,
-          131,
-          132,
           133,
-          134,
-          135
+          134
         ]
       },
       {
@@ -7774,68 +7818,47 @@ const CATEGORIES_CONFIG = [
         "desc": "2020년도 발생 승강기 중대한 사고사례집 추출 미분류 사례",
         "caseIds": [
           136,
-          137,
-          138,
-          139,
           140,
           141,
           142,
           143,
           144,
           145,
-          146,
           147,
           148,
-          149,
           150,
-          151,
           152,
           153,
           154,
           155,
-          156,
           157,
           158,
-          159,
-          160,
           161,
           162,
-          163,
           164,
-          165,
           166,
-          167,
           168,
           169,
           170,
           171,
           172,
           173,
-          174,
           175,
           176,
           177,
-          178,
           179,
-          180,
           181,
           182,
           183,
           184,
           185,
           186,
-          187,
-          188,
           189,
           190,
-          191,
           192,
           193,
           194,
           195,
-          196,
-          197,
-          198,
           199,
           200,
           201,
@@ -7846,6 +7869,7 @@ const CATEGORIES_CONFIG = [
     ]
   }
 ];
+
 
 if (typeof module !== 'undefined') {
   module.exports = { CASES_DATA, STATS_SUMMARY, POSTERS_DATA, FLOOD_GUIDELINES, CATEGORIES_CONFIG };
