@@ -50,7 +50,7 @@ function updateThemeIcon() {
   }
 }
 
-const CURRENT_DATA_VERSION = "2024_all_5_books_v13";
+const CURRENT_DATA_VERSION = "2024_all_5_books_v14";
 const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v3",
   "2024_all_5_books_v4",
@@ -62,7 +62,8 @@ const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v10",
   "2024_all_5_books_v11",
   "2024_all_5_books_v12",
-  "2024_all_5_books_v13"
+  "2024_all_5_books_v13",
+  "2024_all_5_books_v14"
 ];
 
 function mergeCategoriesConfig(baseConfig, savedConfig) {
@@ -104,6 +105,10 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
         const t = newCartop.items.find(i => i.id === "hoistway-interlock-hanger");
         if (t) t.caseIds = oldInterlock.caseIds.slice();
       }
+      if (oldRetention) {
+        const t = newCartop.items.find(i => i.id === "hoistway-door-retention");
+        if (t) t.caseIds = oldRetention.caseIds.slice();
+      }
       if (oldEtc) {
         const t = newCartop.items.find(i => i.id === "hoistway-etc");
         if (t) t.caseIds = oldEtc.caseIds.filter(id => id !== 39);
@@ -111,10 +116,6 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
       if (oldBuffer) {
         const t = newPit.items.find(i => i.id === "hoistway-buffer");
         if (t) t.caseIds = oldBuffer.caseIds.filter(id => id !== 37);
-      }
-      if (oldRetention) {
-        const t = newPit.items.find(i => i.id === "hoistway-door-retention");
-        if (t) t.caseIds = oldRetention.caseIds.slice();
       }
       if (oldLadder) {
         const t = newPit.items.find(i => i.id === "hoistway-pit-ladder");
@@ -132,6 +133,31 @@ function mergeCategoriesConfig(baseConfig, savedConfig) {
     }
 
     merged.splice(oldHoistwayIdx, 1, newCartop, newPit);
+  }
+
+  // If 'hoistway-door-retention' was in 'pit' (from v13), move it to 'cartop'
+  const pitCat = merged.find(c => c.id === "pit");
+  const cartopCat = merged.find(c => c.id === "cartop");
+  if (pitCat && cartopCat && Array.isArray(pitCat.items) && Array.isArray(cartopCat.items)) {
+    const pitRetentionIdx = pitCat.items.findIndex(i => i.id === "hoistway-door-retention");
+    if (pitRetentionIdx !== -1) {
+      const [retItem] = pitCat.items.splice(pitRetentionIdx, 1);
+      const existingInCartop = cartopCat.items.find(i => i.id === "hoistway-door-retention");
+      if (existingInCartop) {
+        (retItem.caseIds || []).forEach(cId => {
+          if (!existingInCartop.caseIds.includes(cId)) existingInCartop.caseIds.push(cId);
+        });
+      } else {
+        const insertIdx = cartopCat.items.findIndex(i => i.id === "cartop-clearance");
+        if (insertIdx !== -1) {
+          cartopCat.items.splice(insertIdx, 0, retItem);
+        } else {
+          cartopCat.items.push(retItem);
+        }
+      }
+      pitCat.items.forEach((item, idx) => { item.num = idx + 1; });
+      cartopCat.items.forEach((item, idx) => { item.num = idx + 1; });
+    }
   }
 
   baseConfig.forEach((baseCat, catIdx) => {

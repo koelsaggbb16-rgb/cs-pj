@@ -7367,7 +7367,7 @@ const CATEGORIES_CONFIG = [
   {
     "id": "cartop",
     "name": "카상부",
-    "subtitle": "도어컨트롤러, 과부하감지장치, 도어인터록·행거 및 카 상부 안전설비",
+    "subtitle": "도어컨트롤러, 과부하감지장치, 도어인터록·행거, 승강장문이탈방지장치 및 카 상부 안전설비",
     "icon": "🏗️",
     "badge": "카상부",
     "color": "#0284c7",
@@ -7402,8 +7402,19 @@ const CATEGORIES_CONFIG = [
         ]
       },
       {
-        "id": "cartop-clearance",
+        "id": "hoistway-door-retention",
         "num": 4,
+        "name": "승강장문이탈방지장치",
+        "desc": "전동스쿠터·견인차 충돌 및 외력 충격 시 승강장문 하부 가이드슈·문턱 이탈 추락",
+        "caseIds": [
+          7,
+          27,
+          28
+        ]
+      },
+      {
+        "id": "cartop-clearance",
+        "num": 5,
         "name": "작업자안전거리(카상부)",
         "desc": "카 상부 점검 중 균형추·레일 브래킷 간격 협착 및 상부 안전공간 확보",
         "caseIds": [
@@ -7412,7 +7423,7 @@ const CATEGORIES_CONFIG = [
       },
       {
         "id": "hoistway-etc",
-        "num": 5,
+        "num": 6,
         "name": "기타(카상부)",
         "desc": "승강로 벽체 시공 협착, 카 상부 접속함 덮개 간섭, 이동케이블 걸림",
         "caseIds": [
@@ -7427,7 +7438,7 @@ const CATEGORIES_CONFIG = [
   {
     "id": "pit",
     "name": "피트",
-    "subtitle": "피트 완충기, 승강장문이탈방지장치, 피트사다리 및 피트 내 안전공간",
+    "subtitle": "피트 완충기, 피트사다리 및 피트 내 작업자 안전공간",
     "icon": "🕳️",
     "badge": "피트",
     "color": "#0ea5e9",
@@ -7445,19 +7456,8 @@ const CATEGORIES_CONFIG = [
         ]
       },
       {
-        "id": "hoistway-door-retention",
-        "num": 2,
-        "name": "승강장문이탈방지장치",
-        "desc": "전동스쿠터·견인차 충돌 및 외력 충격 시 승강장문 하부 가이드슈·문턱 이탈 추락",
-        "caseIds": [
-          7,
-          27,
-          28
-        ]
-      },
-      {
         "id": "hoistway-pit-ladder",
-        "num": 3,
+        "num": 2,
         "name": "피트사다리",
         "desc": "피트 점검용 수직 사다리 용접부 파손 추락 및 승강로 사다리 이동 중 협착",
         "caseIds": [
@@ -7467,7 +7467,7 @@ const CATEGORIES_CONFIG = [
       },
       {
         "id": "pit-clearance",
-        "num": 4,
+        "num": 3,
         "name": "작업자안전거리(피트)",
         "desc": "피트 내 카 하강 협착, 피트 바닥 집수정 점검 실족 및 피트 안전공간 확보",
         "caseIds": [
