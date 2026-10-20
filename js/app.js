@@ -50,7 +50,7 @@ function updateThemeIcon() {
   }
 }
 
-const CURRENT_DATA_VERSION = "2024_all_5_books_v12";
+const CURRENT_DATA_VERSION = "2024_all_5_books_v13";
 const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v3",
   "2024_all_5_books_v4",
@@ -61,12 +61,78 @@ const COMPATIBLE_VERSIONS = [
   "2024_all_5_books_v9",
   "2024_all_5_books_v10",
   "2024_all_5_books_v11",
-  "2024_all_5_books_v12"
+  "2024_all_5_books_v12",
+  "2024_all_5_books_v13"
 ];
 
 function mergeCategoriesConfig(baseConfig, savedConfig) {
   if (!Array.isArray(savedConfig)) return JSON.parse(JSON.stringify(baseConfig));
-  const merged = JSON.parse(JSON.stringify(savedConfig));
+  let merged = JSON.parse(JSON.stringify(savedConfig));
+
+  // Migrate legacy 'hoistway' category into 'cartop' and 'pit'
+  const oldHoistwayIdx = merged.findIndex(c => c.id === "hoistway");
+  if (oldHoistwayIdx !== -1) {
+    const oldHoistway = merged[oldHoistwayIdx];
+    const baseCartop = baseConfig.find(c => c.id === "cartop");
+    const basePit = baseConfig.find(c => c.id === "pit");
+
+    const newCartop = JSON.parse(JSON.stringify(baseCartop));
+    const newPit = JSON.parse(JSON.stringify(basePit));
+
+    // Preserve custom case placements from oldHoistway where applicable
+    if (Array.isArray(oldHoistway.items)) {
+      const findOldItem = (id) => oldHoistway.items.find(i => i.id === id);
+
+      const oldDoor = findOldItem("hoistway-door");
+      const oldOverload = findOldItem("hoistway-overload");
+      const oldInterlock = findOldItem("hoistway-interlock-hanger");
+      const oldEtc = findOldItem("hoistway-etc");
+      const oldBuffer = findOldItem("hoistway-buffer");
+      const oldRetention = findOldItem("hoistway-door-retention");
+      const oldLadder = findOldItem("hoistway-pit-ladder");
+      const oldClearance = findOldItem("hoistway-clearance");
+
+      if (oldDoor && oldInterlock && oldRetention) {
+        const t = newCartop.items.find(i => i.id === "hoistway-door");
+        if (t) t.caseIds = oldDoor.caseIds.slice();
+      }
+      if (oldOverload) {
+        const t = newCartop.items.find(i => i.id === "hoistway-overload");
+        if (t) t.caseIds = oldOverload.caseIds.slice();
+      }
+      if (oldInterlock) {
+        const t = newCartop.items.find(i => i.id === "hoistway-interlock-hanger");
+        if (t) t.caseIds = oldInterlock.caseIds.slice();
+      }
+      if (oldEtc) {
+        const t = newCartop.items.find(i => i.id === "hoistway-etc");
+        if (t) t.caseIds = oldEtc.caseIds.filter(id => id !== 39);
+      }
+      if (oldBuffer) {
+        const t = newPit.items.find(i => i.id === "hoistway-buffer");
+        if (t) t.caseIds = oldBuffer.caseIds.filter(id => id !== 37);
+      }
+      if (oldRetention) {
+        const t = newPit.items.find(i => i.id === "hoistway-door-retention");
+        if (t) t.caseIds = oldRetention.caseIds.slice();
+      }
+      if (oldLadder) {
+        const t = newPit.items.find(i => i.id === "hoistway-pit-ladder");
+        if (t) t.caseIds = oldLadder.caseIds.slice();
+      }
+      if (oldClearance) {
+        const cleanClearance = oldClearance.caseIds.filter(id => ![16, 19, 31, 32, 33].includes(id));
+        const cartopCl = newCartop.items.find(i => i.id === "cartop-clearance");
+        const pitCl = newPit.items.find(i => i.id === "pit-clearance");
+        if (cartopCl && pitCl) {
+          cartopCl.caseIds = cleanClearance.filter(id => id === 14);
+          pitCl.caseIds = cleanClearance.filter(id => id !== 14);
+        }
+      }
+    }
+
+    merged.splice(oldHoistwayIdx, 1, newCartop, newPit);
+  }
 
   baseConfig.forEach((baseCat, catIdx) => {
     let targetCat = merged.find(c => c.id === baseCat.id);
