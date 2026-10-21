@@ -431,12 +431,17 @@ function isCompactHome() {
   return window.matchMedia("(max-width: 900px)").matches;
 }
 
+function setCompactHomeClass(enabled) {
+  document.documentElement.classList.toggle("compact-home", enabled);
+  document.body.classList.toggle("compact-home", enabled);
+}
+
 function renderCategoryGrid() {
   const container = document.getElementById("categoryGrid");
   if (!container || !appState.activeCategoriesConfig) return;
 
   const compact = isCompactHome();
-  document.body.classList.toggle("compact-home", compact && appState.view === "home");
+  setCompactHomeClass(compact && appState.view === "home");
 
   if (compact) {
     renderCompactHome(container);
@@ -586,7 +591,7 @@ function setActiveView(viewName) {
   if (partView) partView.style.display = viewName === "part" ? "block" : "none";
   if (caseView) caseView.style.display = viewName === "case" ? "block" : "none";
   if (navBackHomeBtn) navBackHomeBtn.style.display = viewName === "home" ? "none" : "inline-flex";
-  document.body.classList.toggle("compact-home", viewName === "home" && isCompactHome());
+  setCompactHomeClass(viewName === "home" && isCompactHome());
 }
 
 function selectSubitem(categoryId, subitemId) {

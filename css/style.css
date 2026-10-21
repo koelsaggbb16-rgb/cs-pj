@@ -256,15 +256,29 @@ body {
 }
 
 /* Compact mobile home: 2x2 of 4 main categories with visible sub-items */
+html.compact-home,
+body.compact-home {
+  height: 100svh;
+  max-height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+}
+
 body.compact-home .footer {
   display: none;
+}
+
+body.compact-home .navbar {
+  flex-shrink: 0;
 }
 
 body.compact-home .main-content {
   display: flex;
   flex-direction: column;
-  padding: 8px 10px 10px;
-  height: calc(100svh - var(--header-height));
+  flex: 1;
+  min-height: 0;
+  height: auto;
+  padding: 6px 8px 8px;
   overflow: hidden;
 }
 
@@ -286,7 +300,7 @@ body.compact-home .category-grid {
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  gap: 10px;
+  gap: 8px;
 }
 
 .compact-home-grid {
@@ -294,9 +308,9 @@ body.compact-home .category-grid {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   align-items: stretch;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
-  gap: 10px;
+  gap: 8px;
 }
 
 .compact-cat-card {
@@ -396,9 +410,9 @@ body.compact-home .category-grid {
 .compact-home-more {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   padding: 0;
-  flex-shrink: 0;
+  flex: 0 0 auto;
 }
 
 .compact-home-chip {
@@ -406,9 +420,9 @@ body.compact-home .category-grid {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  flex: 1 1 calc(50% - 8px);
-  min-height: 40px;
-  padding: 6px 10px;
+  flex: 1 1 calc(50% - 6px);
+  min-height: 36px;
+  padding: 5px 8px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);
