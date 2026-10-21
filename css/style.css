@@ -261,15 +261,19 @@ body.compact-home .footer {
 }
 
 body.compact-home .main-content {
-  display: block;
-  padding: 6px 8px 10px;
-  height: auto;
-  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px 10px;
+  height: calc(100svh - var(--header-height));
+  overflow: hidden;
 }
 
 body.compact-home .home-section,
 body.compact-home .home-container {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   max-width: none;
 }
 
@@ -280,36 +284,39 @@ body.compact-home .home-header {
 body.compact-home .category-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  gap: 10px;
 }
 
 .compact-home-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  align-items: start;
-  height: auto;
+  grid-template-rows: 1fr 1fr;
+  align-items: stretch;
+  flex: 1;
   min-height: 0;
-  gap: 6px;
+  gap: 10px;
 }
 
 .compact-cat-card {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  height: 100%;
   overflow: hidden;
-  padding: 5px 5px 4px;
+  padding: 8px 8px 7px;
   border: 1px solid var(--border);
   border-top: 3px solid var(--cat-color, var(--primary));
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--bg-card);
 }
 
 .compact-cat-head {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 4px;
+  gap: 5px;
+  margin-bottom: 6px;
   flex-shrink: 0;
 }
 
@@ -336,19 +343,21 @@ body.compact-home .category-grid {
 .compact-cat-items {
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
+  flex: 1;
   min-height: 0;
-  gap: 2px;
-  overflow: visible;
+  justify-content: space-evenly;
+  gap: 4px;
+  overflow: hidden;
 }
 
 .compact-item-btn {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   width: 100%;
-  min-height: 24px;
-  padding: 3px 5px;
+  flex: 1 1 auto;
+  min-height: 28px;
+  padding: 5px 7px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--bg-subtle);
@@ -387,8 +396,9 @@ body.compact-home .category-grid {
 .compact-home-more {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 8px;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .compact-home-chip {
@@ -396,9 +406,9 @@ body.compact-home .category-grid {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  flex: 1 1 calc(50% - 5px);
-  min-height: 34px;
-  padding: 5px 8px;
+  flex: 1 1 calc(50% - 8px);
+  min-height: 40px;
+  padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);
