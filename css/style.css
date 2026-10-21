@@ -256,28 +256,20 @@ body {
 }
 
 /* Compact mobile home: 2x2 of 4 main categories with visible sub-items */
-body.compact-home {
-  overflow: hidden;
-}
-
 body.compact-home .footer {
   display: none;
 }
 
 body.compact-home .main-content {
-  display: flex;
-  flex-direction: column;
-  padding: 6px 8px 8px;
-  height: calc(100dvh - var(--header-height));
-  overflow: hidden;
+  display: block;
+  padding: 6px 8px 28px;
+  height: auto;
+  overflow: visible;
 }
 
 body.compact-home .home-section,
 body.compact-home .home-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
+  display: block;
   max-width: none;
 }
 
@@ -288,17 +280,15 @@ body.compact-home .home-header {
 body.compact-home .category-grid {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  gap: 6px;
+  gap: 8px;
 }
 
 .compact-home-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  flex: 1;
-  min-height: 0;
+  height: calc(100svh - var(--header-height) - 12px);
+  min-height: 420px;
   gap: 6px;
 }
 
@@ -397,8 +387,8 @@ body.compact-home .category-grid {
 .compact-home-more {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  flex-shrink: 0;
+  gap: 6px;
+  padding: 2px 0 8px;
 }
 
 .compact-home-chip {
@@ -406,14 +396,14 @@ body.compact-home .category-grid {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  flex: 1 1 calc(50% - 5px);
-  min-height: 28px;
-  padding: 4px 8px;
+  flex: 1 1 calc(50% - 6px);
+  min-height: 36px;
+  padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);
   color: var(--text-main);
-  font-size: 0.68rem;
+  font-size: 0.74rem;
   font-weight: 700;
   cursor: pointer;
 }
