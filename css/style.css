@@ -973,7 +973,7 @@ body.photo-lightbox-open {
   font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--text-main);
+  color: var(--primary);
 }
 
 .part-cases-desc {
