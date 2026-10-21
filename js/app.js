@@ -675,9 +675,12 @@ function renderPartView() {
   const kicker = document.getElementById("partViewKicker");
   const title = document.getElementById("partViewTitle");
   const desc = document.getElementById("partViewDesc");
-  if (kicker) kicker.textContent = `${category.name} · 부품`;
-  if (title) title.textContent = subitem.name;
-  if (desc) desc.textContent = subitem.desc || "";
+  if (kicker) kicker.style.display = "none";
+  if (title) title.textContent = `${subitem.name} 관련 사고사례`;
+  if (desc) {
+    desc.textContent = "";
+    desc.style.display = "none";
+  }
 
   renderPartPhoto();
   renderPartCaseList(subitem);
