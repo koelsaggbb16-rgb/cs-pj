@@ -262,7 +262,7 @@ body.compact-home .footer {
 
 body.compact-home .main-content {
   display: block;
-  padding: 6px 8px 28px;
+  padding: 6px 8px 10px;
   height: auto;
   overflow: visible;
 }
@@ -286,9 +286,10 @@ body.compact-home .category-grid {
 .compact-home-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  height: calc(100svh - var(--header-height) - 12px);
-  min-height: 420px;
+  grid-template-rows: auto auto;
+  align-items: start;
+  height: auto;
+  min-height: 0;
   gap: 6px;
 }
 
@@ -297,7 +298,7 @@ body.compact-home .category-grid {
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
-  padding: 6px 6px 5px;
+  padding: 5px 5px 4px;
   border: 1px solid var(--border);
   border-top: 3px solid var(--cat-color, var(--primary));
   border-radius: 10px;
@@ -335,11 +336,10 @@ body.compact-home .category-grid {
 .compact-cat-items {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 0 0 auto;
   min-height: 0;
-  gap: 3px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  gap: 2px;
+  overflow: visible;
 }
 
 .compact-item-btn {
@@ -347,7 +347,7 @@ body.compact-home .category-grid {
   align-items: center;
   gap: 4px;
   width: 100%;
-  min-height: 22px;
+  min-height: 20px;
   padding: 2px 5px;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -387,8 +387,8 @@ body.compact-home .category-grid {
 .compact-home-more {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  padding: 2px 0 8px;
+  gap: 5px;
+  padding: 0;
 }
 
 .compact-home-chip {
@@ -396,14 +396,14 @@ body.compact-home .category-grid {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  flex: 1 1 calc(50% - 6px);
-  min-height: 36px;
-  padding: 6px 10px;
+  flex: 1 1 calc(50% - 5px);
+  min-height: 30px;
+  padding: 4px 8px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);
   color: var(--text-main);
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
 }
