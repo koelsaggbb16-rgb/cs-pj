@@ -871,9 +871,9 @@ body.compact-home .category-grid {
 }
 
 .part-photo-hint {
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
-  line-height: 1.5;
+  line-height: 1.45;
   margin: 0;
 }
 
