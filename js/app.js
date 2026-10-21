@@ -793,7 +793,12 @@ function renderPartPhoto() {
 
   const current = photos[appState.currentPartPhotoIndex] || photos[0];
   frame.classList.add("has-photo");
-  frame.innerHTML = `<img src="${current.url}" alt="${escapeHtml(appState.currentSubitemId)} 부품 사진 ${appState.currentPartPhotoIndex + 1}" />`;
+  frame.innerHTML = `
+    <button type="button" class="part-photo-open" onclick="openPartPhotoLightbox()" title="사진 전체화면으로 보기">
+      <img src="${current.url}" alt="${escapeHtml(appState.currentSubitemId)} 부품 사진 ${appState.currentPartPhotoIndex + 1}" />
+      <span class="part-photo-zoom-hint">눌러서 전체화면</span>
+    </button>
+  `;
   if (removeBtn) removeBtn.style.display = "inline-flex";
 
   if (thumbs) {
@@ -809,6 +814,56 @@ function renderPartPhoto() {
 function selectPartPhoto(index) {
   appState.currentPartPhotoIndex = index;
   renderPartPhoto();
+}
+
+function isPhotoLightboxOpen() {
+  const overlay = document.getElementById("photoLightbox");
+  return !!(overlay && overlay.classList.contains("is-open"));
+}
+
+function openPartPhotoLightbox(index) {
+  const photos = getPartPhotos(appState.currentSubitemId);
+  if (!photos.length) return;
+  if (typeof index === "number") appState.currentPartPhotoIndex = index;
+
+  const overlay = document.getElementById("photoLightbox");
+  const img = document.getElementById("photoLightboxImg");
+  const count = document.getElementById("photoLightboxCount");
+  const prevBtn = document.getElementById("photoLightboxPrev");
+  const nextBtn = document.getElementById("photoLightboxNext");
+  const current = photos[appState.currentPartPhotoIndex] || photos[0];
+  if (!overlay || !img || !current) return;
+
+  img.src = current.url;
+  if (count) count.textContent = `${appState.currentPartPhotoIndex + 1} / ${photos.length}`;
+  if (prevBtn) prevBtn.style.display = photos.length > 1 ? "flex" : "none";
+  if (nextBtn) nextBtn.style.display = photos.length > 1 ? "flex" : "none";
+  overlay.hidden = false;
+  overlay.classList.add("is-open");
+  document.body.classList.add("photo-lightbox-open");
+}
+
+function closePartPhotoLightbox() {
+  const overlay = document.getElementById("photoLightbox");
+  if (overlay) {
+    overlay.hidden = true;
+    overlay.classList.remove("is-open");
+  }
+  document.body.classList.remove("photo-lightbox-open");
+}
+
+function navigatePartPhotoLightbox(delta) {
+  const photos = getPartPhotos(appState.currentSubitemId);
+  if (photos.length < 2) return;
+  appState.currentPartPhotoIndex = (appState.currentPartPhotoIndex + delta + photos.length) % photos.length;
+  renderPartPhoto();
+  openPartPhotoLightbox();
+}
+
+function onPhotoLightboxBackdrop(event) {
+  if (event.target && event.target.id === "photoLightbox") {
+    closePartPhotoLightbox();
+  }
 }
 
 async function onPartPhotoSelected(event) {
@@ -1593,6 +1648,20 @@ function closeMobileModal() {
 /* ---------------- KEYBOARD & TOUCH SWIPE EVENTS ---------------- */
 function setupGlobalEvents() {
   window.addEventListener("keydown", (e) => {
+    if (isPhotoLightboxOpen()) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closePartPhotoLightbox();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        navigatePartPhotoLightbox(-1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        navigatePartPhotoLightbox(1);
+      }
+      return;
+    }
+
     // If modal is open, ESC closes modal
     const moveModal = document.getElementById("moveCaseModal");
     if (moveModal && moveModal.style.display === "flex") {
@@ -1669,6 +1738,27 @@ function setupGlobalEvents() {
       }
       touchStartX = 0;
       touchStartY = 0;
+    }, { passive: true });
+  }
+
+  const lightbox = document.getElementById("photoLightbox");
+  if (lightbox) {
+    let lightStartX = 0;
+    let lightStartY = 0;
+    lightbox.addEventListener("touchstart", (e) => {
+      if (e.touches.length !== 1) return;
+      lightStartX = e.touches[0].clientX;
+      lightStartY = e.touches[0].clientY;
+    }, { passive: true });
+    lightbox.addEventListener("touchend", (e) => {
+      if (!lightStartX || e.changedTouches.length !== 1) return;
+      const dx = e.changedTouches[0].clientX - lightStartX;
+      const dy = e.changedTouches[0].clientY - lightStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        navigatePartPhotoLightbox(dx < 0 ? 1 : -1);
+      }
+      lightStartX = 0;
+      lightStartY = 0;
     }, { passive: true });
   }
 }

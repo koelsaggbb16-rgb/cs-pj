@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=m7">
+  <link rel="stylesheet" href="css/style.css?v=m8">
 </head>
 <body>
 
@@ -385,6 +385,15 @@
     </div>
   </div>
 
+  <!-- Part photo fullscreen viewer -->
+  <div id="photoLightbox" class="photo-lightbox" hidden onclick="onPhotoLightboxBackdrop(event)">
+    <span class="photo-lightbox-count" id="photoLightboxCount"></span>
+    <button type="button" class="photo-lightbox-close" onclick="closePartPhotoLightbox()">닫기</button>
+    <button type="button" class="photo-lightbox-nav prev" id="photoLightboxPrev" onclick="event.stopPropagation(); navigatePartPhotoLightbox(-1)">‹</button>
+    <img id="photoLightboxImg" alt="부품 사진 전체화면" onclick="event.stopPropagation()" />
+    <button type="button" class="photo-lightbox-nav next" id="photoLightboxNext" onclick="event.stopPropagation(); navigatePartPhotoLightbox(1)">›</button>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container"></div>
 
@@ -396,7 +405,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/cases_data.js?v=m7"></script>
-  <script src="js/app.js?v=m7"></script>
+  <script src="js/cases_data.js?v=m8"></script>
+  <script src="js/app.js?v=m8"></script>
 </body>
 </html>
