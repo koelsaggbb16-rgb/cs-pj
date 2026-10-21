@@ -19,6 +19,7 @@ const appState = {
   customTitles: {},
   partPhotos: {},
   currentPartPhotoIndex: 0,
+  openHomeCategoryId: null,
   activeCategoriesConfig: [],
   selectedMoveTargetId: null
 };
@@ -29,6 +30,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadCustomData();
   renderCategoryGrid();
   setupGlobalEvents();
+  window.addEventListener("resize", () => {
+    if (appState.view === "home") renderCategoryGrid();
+  });
 });
 
 /* ---------------- THEME CONTROLLER ---------------- */
@@ -421,55 +425,153 @@ function getCaseTitle(caseData) {
 }
 
 /* ---------------- HOME: CATEGORY GRID ---------------- */
+const PRIMARY_CATEGORY_IDS = ["cartop", "pit", "car", "machineroom"];
+
+function isCompactHome() {
+  return window.matchMedia("(max-width: 900px)").matches;
+}
+
 function renderCategoryGrid() {
   const container = document.getElementById("categoryGrid");
   if (!container || !appState.activeCategoriesConfig) return;
 
-  container.innerHTML = appState.activeCategoriesConfig.map(cat => {
-    const totalCasesInCat = cat.items.reduce((sum, item) => sum + (item.caseIds ? item.caseIds.length : 0), 0);
+  const compact = isCompactHome();
+  document.body.classList.toggle("compact-home", compact && appState.view === "home");
 
-    const itemsHtml = cat.items.map(item => {
-      const caseCount = item.caseIds ? item.caseIds.length : 0;
-      return `
-        <button class="cat-item-btn" onclick="selectSubitem('${cat.id}', '${item.id}')">
-          <div class="item-btn-left">
-            <span class="item-num">${item.num}</span>
-            <div class="item-texts">
-              <span class="item-name">${item.name}</span>
-              <span class="item-desc">${item.desc}</span>
-            </div>
-          </div>
-          <div class="item-btn-right">
-            <span class="item-count-badge">${caseCount}건</span>
-            <svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </div>
-        </button>
-      `;
-    }).join("");
+  if (compact) {
+    renderCompactHome(container);
+    return;
+  }
 
+  container.innerHTML = appState.activeCategoriesConfig.map(cat => renderDesktopCategoryCard(cat)).join("");
+}
+
+function countCategoryCases(cat) {
+  return cat.items.reduce((sum, item) => sum + (item.caseIds ? item.caseIds.length : 0), 0);
+}
+
+function renderPartButtons(cat) {
+  return cat.items.map(item => {
+    const caseCount = item.caseIds ? item.caseIds.length : 0;
     return `
-      <div class="category-card" style="--cat-color: ${cat.color};">
-        <div class="category-card-header">
-          <div class="cat-header-left">
-            <div class="cat-icon-wrap">${cat.icon}</div>
-            <div>
-              <div class="cat-title-row">
-                <h2 class="cat-title">${cat.name}</h2>
-                <span class="cat-badge">${cat.badge}</span>
-              </div>
+      <button class="cat-item-btn" onclick="selectSubitem('${cat.id}', '${item.id}')">
+        <div class="item-btn-left">
+          <span class="item-num">${item.num}</span>
+          <div class="item-texts">
+            <span class="item-name">${item.name}</span>
+            <span class="item-desc">${item.desc}</span>
+          </div>
+        </div>
+        <div class="item-btn-right">
+          <span class="item-count-badge">${caseCount}건</span>
+          <svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </div>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderDesktopCategoryCard(cat) {
+  const totalCasesInCat = countCategoryCases(cat);
+  return `
+    <div class="category-card" data-cat-id="${cat.id}" style="--cat-color: ${cat.color};">
+      <div class="category-card-header">
+        <div class="cat-header-left">
+          <div class="cat-icon-wrap">${cat.icon}</div>
+          <div>
+            <div class="cat-title-row">
+              <span class="cat-title">${cat.name}</span>
+              <span class="cat-badge">${cat.badge}</span>
             </div>
           </div>
-          <span class="cat-total-count">총 ${totalCasesInCat}개 사례</span>
         </div>
+        <span class="cat-total-count">총 ${totalCasesInCat}개 사례</span>
+      </div>
+      <div class="category-items-list">
+        ${renderPartButtons(cat)}
+      </div>
+    </div>
+  `;
+}
 
-        <div class="category-items-list">
-          ${itemsHtml}
+function renderCompactPartButtons(cat) {
+  return cat.items.map(item => {
+    const caseCount = item.caseIds ? item.caseIds.length : 0;
+    return `
+      <button class="compact-item-btn" onclick="selectSubitem('${cat.id}', '${item.id}')">
+        <span class="compact-item-num">${item.num}</span>
+        <span class="compact-item-name">${item.name}</span>
+        <span class="compact-item-count">${caseCount}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderCompactHome(container) {
+  const cats = appState.activeCategoriesConfig;
+  const openId = appState.openHomeCategoryId;
+  const openCat = openId ? cats.find(c => c.id === openId) : null;
+
+  if (openCat && !PRIMARY_CATEGORY_IDS.includes(openCat.id)) {
+    container.innerHTML = `
+      <div class="compact-parts-panel" style="--cat-color: ${openCat.color};">
+        <button type="button" class="compact-back-btn" onclick="closeHomeCategory()">← 전체 항목</button>
+        <div class="compact-parts-head">
+          <span class="compact-parts-icon">${openCat.icon}</span>
+          <div>
+            <strong class="compact-parts-title">${openCat.name}</strong>
+            <span class="compact-parts-count">총 ${countCategoryCases(openCat)}개 사례</span>
+          </div>
+        </div>
+        <div class="compact-cat-items">
+          ${renderCompactPartButtons(openCat)}
         </div>
       </div>
     `;
-  }).join("");
+    return;
+  }
+
+  const primary = PRIMARY_CATEGORY_IDS.map(id => cats.find(c => c.id === id)).filter(Boolean);
+  const secondary = cats.filter(c => !PRIMARY_CATEGORY_IDS.includes(c.id));
+
+  container.innerHTML = `
+    <div class="compact-home-grid">
+      ${primary.map(cat => `
+        <section class="compact-cat-card" style="--cat-color: ${cat.color};">
+          <div class="compact-cat-head">
+            <span class="compact-home-icon">${cat.icon}</span>
+            <span class="compact-home-name">${cat.name}</span>
+            <span class="compact-home-count">${countCategoryCases(cat)}</span>
+          </div>
+          <div class="compact-cat-items">
+            ${renderCompactPartButtons(cat)}
+          </div>
+        </section>
+      `).join("")}
+    </div>
+    <div class="compact-home-more">
+      ${secondary.map(cat => `
+        <button type="button" class="compact-home-chip" style="--cat-color: ${cat.color};" onclick="openHomeCategory('${cat.id}')">
+          <span>${cat.icon} ${cat.name}</span>
+          <span>${countCategoryCases(cat)}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function openHomeCategory(catId) {
+  appState.openHomeCategoryId = catId;
+  renderCategoryGrid();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function closeHomeCategory() {
+  appState.openHomeCategoryId = null;
+  renderCategoryGrid();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 /* ---------------- NAVIGATION CONTROLLER ---------------- */
@@ -484,6 +586,7 @@ function setActiveView(viewName) {
   if (partView) partView.style.display = viewName === "part" ? "block" : "none";
   if (caseView) caseView.style.display = viewName === "case" ? "block" : "none";
   if (navBackHomeBtn) navBackHomeBtn.style.display = viewName === "home" ? "none" : "inline-flex";
+  document.body.classList.toggle("compact-home", viewName === "home" && isCompactHome());
 }
 
 function selectSubitem(categoryId, subitemId) {
@@ -544,6 +647,7 @@ function goHome() {
   appState.currentCategoryId = null;
   appState.currentSubitemId = null;
   appState.currentCase = null;
+  appState.openHomeCategoryId = null;
   appState.zoomLevel = 1.0;
 
   setActiveView("home");
