@@ -39,6 +39,12 @@
     "198": "카문 벤과 승강장문 개폐롤러간섭으로 멈춘사고"
   },
   "partPhotos": {
+    "car-intercom": [
+      {
+        "id": "car-intercom__1792658217873_06hweh",
+        "url": "data/part_photos/car-intercom__1792658217873_06hweh.jpg"
+      }
+    ],
     "hoistway-door": [
       {
         "id": "hoistway-door__1792656825735_qczw6i",
@@ -47,6 +53,22 @@
       {
         "id": "hoistway-door__1792658217449_8ika1t",
         "url": "data/part_photos/hoistway-door__1792658217449_8ika1t.jpg"
+      }
+    ],
+    "hoistway-interlock-hanger": [
+      {
+        "id": "hoistway-interlock-hanger__1792658218304_i67ktq",
+        "url": "data/part_photos/hoistway-interlock-hanger__1792658218304_i67ktq.jpg"
+      },
+      {
+        "id": "hoistway-interlock-hanger__1792658218621_w7jz17",
+        "url": "data/part_photos/hoistway-interlock-hanger__1792658218621_w7jz17.jpg"
+      }
+    ],
+    "mr-rope": [
+      {
+        "id": "mr-rope__1792658218999_5coxik",
+        "url": "data/part_photos/mr-rope__1792658218999_5coxik.jpg"
       }
     ]
   },
