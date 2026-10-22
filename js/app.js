@@ -946,26 +946,50 @@ async function removeCurrentPartPhoto() {
   showToast("선택한 사진을 삭제했습니다.", "info");
 }
 
-function compressImageFile(file, maxW = 1400, quality = 0.82) {
+function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
-    const img = new Image();
-    const objectUrl = URL.createObjectURL(file);
-    img.onload = () => {
-      const scale = Math.min(1, maxW / img.width);
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.max(1, Math.round(img.width * scale));
-      canvas.height = Math.max(1, Math.round(img.height * scale));
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      URL.revokeObjectURL(objectUrl);
-      resolve(canvas.toDataURL("image/jpeg", quality));
-    };
-    img.onerror = () => {
-      URL.revokeObjectURL(objectUrl);
-      reject(new Error("image load failed"));
-    };
-    img.src = objectUrl;
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(reader.error || new Error("file read failed"));
+    reader.readAsDataURL(file);
   });
+}
+
+async function compressImageFile(file, maxW = 1400, quality = 0.82) {
+  const original = await readFileAsDataUrl(file);
+
+  const drawn = await new Promise((resolve) => {
+    const img = new Image();
+    img.onload = async () => {
+      try {
+        if (typeof img.decode === "function") {
+          try { await img.decode(); } catch (e) {}
+        }
+        const w = img.naturalWidth || img.width;
+        const h = img.naturalHeight || img.height;
+        if (!w || !h || w < 8 || h < 8) {
+          resolve("");
+          return;
+        }
+        const scale = Math.min(1, maxW / w);
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(w * scale));
+        canvas.height = Math.max(1, Math.round(h * scale));
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      } catch (e) {
+        resolve("");
+      }
+    };
+    img.onerror = () => resolve("");
+    img.src = original;
+  });
+
+  // A real photo is never this small; fall back to the untouched file.
+  if (drawn && drawn.length > 2000) return drawn;
+  if (original && original.length > 2000 && /^data:image\//.test(original)) return original;
+  throw new Error("image could not be read");
 }
 
 function sanitizePartPhotosForSave(photos) {

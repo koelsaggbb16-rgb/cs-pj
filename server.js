@@ -326,10 +326,15 @@ const server = http.createServer((req, res) => {
           return;
         }
 
-        const match = String(data.dataUrl).match(/^data:image\/\w+;base64,(.+)$/);
+        const match = String(data.dataUrl).match(/^data:image\/[\w+.-]+;base64,(.+)$/);
         if (!match) {
           res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(JSON.stringify({ success: false, error: 'Invalid data URL' }));
+          return;
+        }
+        if (match[1].length < 1500) {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ success: false, error: 'Image is empty' }));
           return;
         }
 
