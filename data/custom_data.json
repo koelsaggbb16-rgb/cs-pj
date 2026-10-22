@@ -38,7 +38,14 @@
     "197": "브레이크마그네트 노후로 개문발차한 사고",
     "198": "카문 벤과 승강장문 개폐롤러간섭으로 멈춘사고"
   },
-  "partPhotos": {},
+  "partPhotos": {
+    "hoistway-door": [
+      {
+        "id": "hoistway-door__1792654502209_vs83c0",
+        "url": "data/part_photos/hoistway-door__1792654502209_vs83c0.jpg"
+      }
+    ]
+  },
   "categoriesConfig": [
     {
       "id": "cartop",
