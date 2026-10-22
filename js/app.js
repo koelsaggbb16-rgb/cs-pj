@@ -377,7 +377,13 @@ async function loadCustomData() {
         appState.customTitles = Object.assign({}, appState.customTitles, serverData.customTitles);
       }
       if (serverData.partPhotos && typeof serverData.partPhotos === "object") {
-        appState.partPhotos = mergePartPhotoMaps(appState.partPhotos, normalizePartPhotos(serverData.partPhotos));
+        const remotePhotos = normalizePartPhotos(serverData.partPhotos);
+        const localDataPhotos = {};
+        Object.keys(appState.partPhotos || {}).forEach((k) => {
+          const onlyData = (appState.partPhotos[k] || []).filter((p) => p && String(p.url || "").startsWith("data:"));
+          if (onlyData.length) localDataPhotos[k] = onlyData;
+        });
+        appState.partPhotos = mergePartPhotoMaps(remotePhotos, localDataPhotos);
       }
       if (
         COMPATIBLE_VERSIONS.includes(serverData.dataVersion) &&
@@ -391,27 +397,34 @@ async function loadCustomData() {
     console.log("Server API not available or static mode, relying on localStorage.");
   }
 
-  if (!apiLoaded) await loadStaticSharedPhotos();
+  if (apiLoaded) {
+    saveCustomDataLocally();
+  } else {
+    await loadStaticSharedPhotos();
+  }
   await hydratePartPhotosFromIdb();
   publishLocalOnlyPhotos();
 }
 
-async function saveCustomData() {
+function saveCustomDataLocally() {
   const payload = {
     dataVersion: CURRENT_DATA_VERSION,
     customTitles: appState.customTitles,
     partPhotos: sanitizePartPhotosForSave(appState.partPhotos),
     categoriesConfig: appState.activeCategoriesConfig
   };
-
-  // 1. Save to localStorage
   try {
     localStorage.setItem("elevator_portal_custom_data", JSON.stringify(payload));
   } catch (e) {
     console.warn("Failed to write localStorage:", e);
   }
+  return payload;
+}
 
-  // 2. Save to server API
+async function saveCustomData() {
+  const payload = saveCustomDataLocally();
+
+  // Save to server API
   try {
     await fetch("/api/save", {
       method: "POST",
@@ -817,7 +830,7 @@ function renderPartPhoto() {
   frame.classList.add("has-photo");
   frame.innerHTML = `
     <button type="button" class="part-photo-open" onclick="openPartPhotoLightbox()" title="사진 전체화면으로 보기">
-      <img src="${current.url}" alt="${escapeHtml(appState.currentSubitemId)} 부품 사진 ${appState.currentPartPhotoIndex + 1}" />
+      <img src="${current.url}" alt="${escapeHtml(appState.currentSubitemId)} 부품 사진 ${appState.currentPartPhotoIndex + 1}" onerror="onPartPhotoImgError(this, '${escapeHtml(current.url)}')" />
       <span class="part-photo-zoom-hint">눌러서 전체화면</span>
     </button>
   `;
@@ -826,11 +839,29 @@ function renderPartPhoto() {
   if (thumbs) {
     thumbs.innerHTML = photos.map((photo, idx) => `
       <button type="button" class="part-photo-thumb ${idx === appState.currentPartPhotoIndex ? "active" : ""}" onclick="selectPartPhoto(${idx})" title="${idx + 1}번째 사진">
-        <img src="${photo.url}" alt="${idx + 1}번째 부품 사진" />
+        <img src="${photo.url}" alt="${idx + 1}번째 부품 사진" onerror="onPartPhotoImgError(this, '${escapeHtml(photo.url)}')" />
         <span class="part-photo-thumb-num">${idx + 1}</span>
       </button>
     `).join("");
   }
+}
+
+async function onPartPhotoImgError(imgEl, rawUrl) {
+  if (!imgEl || imgEl.dataset.fallbackTried === "1") return;
+  imgEl.dataset.fallbackTried = "1";
+  const url = String(rawUrl || "");
+  if (!url || url.startsWith("data:") || /^https?:\/\//i.test(url)) return;
+  try {
+    const res = await fetch("data/sync_url.txt", { cache: "no-store" });
+    if (res.ok) {
+      const base = (await res.text()).trim().replace(/\/$/, "");
+      if (/^https:\/\/[a-z0-9.-]+\.(?:lhr\.life|localhost\.run|trycloudflare\.com)$/i.test(base)) {
+        imgEl.src = `${base}/${url.replace(/^\/+/, "")}?t=${Date.now()}`;
+        return;
+      }
+    }
+  } catch (e) {}
+  imgEl.src = `${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`;
 }
 
 function selectPartPhoto(index) {
@@ -856,6 +887,8 @@ function openPartPhotoLightbox(index) {
   const current = photos[appState.currentPartPhotoIndex] || photos[0];
   if (!overlay || !img || !current) return;
 
+  delete img.dataset.fallbackTried;
+  img.onerror = () => onPartPhotoImgError(img, current.url);
   img.src = current.url;
   if (count) count.textContent = `${appState.currentPartPhotoIndex + 1} / ${photos.length}`;
   if (prevBtn) prevBtn.style.display = photos.length > 1 ? "flex" : "none";
@@ -1121,7 +1154,14 @@ async function loadStaticSharedPhotos() {
     if (!res.ok) return;
     const shared = await res.json();
     if (shared.partPhotos && typeof shared.partPhotos === "object") {
-      appState.partPhotos = mergePartPhotoMaps(appState.partPhotos, normalizePartPhotos(shared.partPhotos));
+      const remotePhotos = normalizePartPhotos(shared.partPhotos);
+      const localDataPhotos = {};
+      Object.keys(appState.partPhotos || {}).forEach((k) => {
+        const onlyData = (appState.partPhotos[k] || []).filter((p) => p && String(p.url || "").startsWith("data:"));
+        if (onlyData.length) localDataPhotos[k] = onlyData;
+      });
+      appState.partPhotos = mergePartPhotoMaps(remotePhotos, localDataPhotos);
+      saveCustomDataLocally();
     }
   } catch (e) {}
 }

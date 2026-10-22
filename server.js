@@ -126,16 +126,35 @@ function isTunnelHost(req) {
   return host.includes('lhr.life') || host.includes('localhost.run') || host.includes('trycloudflare.com');
 }
 
+const crypto = require('crypto');
+
 function collectSavedPartPhotos() {
   const photosDir = path.join(BASE_DIR, 'data', 'part_photos');
   const map = {};
+  const seenHashes = new Set();
   if (fs.existsSync(photosDir)) {
-    fs.readdirSync(photosDir).forEach((name) => {
+    fs.readdirSync(photosDir).sort().forEach((name) => {
       const match = name.match(/^([a-zA-Z0-9_-]+(?:__[a-zA-Z0-9_-]+)?)\.jpe?g$/i);
       if (!match) return;
+      const fullPath = path.join(photosDir, name);
       const photoId = match[1];
       const split = photoId.indexOf('__');
       const subitemId = split === -1 ? photoId : photoId.slice(0, split);
+      try {
+        const buf = fs.readFileSync(fullPath);
+        if (buf.length < 1000) {
+          fs.unlinkSync(fullPath);
+          return;
+        }
+        const hashKey = `${subitemId}:${crypto.createHash('sha1').update(buf).digest('hex')}`;
+        if (seenHashes.has(hashKey)) {
+          fs.unlinkSync(fullPath);
+          return;
+        }
+        seenHashes.add(hashKey);
+      } catch (e) {
+        return;
+      }
       if (!map[subitemId]) map[subitemId] = [];
       map[subitemId].push({
         id: photoId,
@@ -367,10 +386,31 @@ const server = http.createServer((req, res) => {
           if (!fs.existsSync(photosDir)) {
             fs.mkdirSync(photosDir, { recursive: true });
           }
+          const rawBuf = Buffer.from(match[1], 'base64');
+          const newHash = crypto.createHash('sha1').update(rawBuf).digest('hex');
+          const existingFiles = fs.readdirSync(photosDir).sort();
+          for (const existingName of existingFiles) {
+            if (!existingName.startsWith(`${id}__`) || !/\.jpe?g$/i.test(existingName)) continue;
+            try {
+              const existingBuf = fs.readFileSync(path.join(photosDir, existingName));
+              if (crypto.createHash('sha1').update(existingBuf).digest('hex') === newHash) {
+                const existingId = existingName.replace(/\.jpe?g$/i, '');
+                rememberPartPhotosInDataFile();
+                res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+                res.end(JSON.stringify({
+                  success: true,
+                  id: existingId,
+                  url: `data/part_photos/${existingName}`
+                }));
+                return;
+              }
+            } catch (e) {}
+          }
+
           const photoId = `${id}__${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
           const fileName = `${photoId}.jpg`;
           const filePath = path.join(photosDir, fileName);
-          fs.writeFileSync(filePath, Buffer.from(match[1], 'base64'));
+          fs.writeFileSync(filePath, rawBuf);
           rememberPartPhotosInDataFile();
           publishSharedFiles();
           res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
