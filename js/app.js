@@ -367,9 +367,11 @@ async function loadCustomData() {
   }
 
   // 3. Try fetching from server API (sync across devices/browsers)
+  let apiLoaded = false;
   try {
-    const res = await fetch("/api/data");
+    const res = await fetch("/api/data", { cache: "no-store" });
     if (res.ok) {
+      apiLoaded = true;
       const serverData = await res.json();
       if (serverData.customTitles && Object.keys(serverData.customTitles).length > 0) {
         appState.customTitles = Object.assign({}, appState.customTitles, serverData.customTitles);
@@ -389,7 +391,9 @@ async function loadCustomData() {
     console.log("Server API not available or static mode, relying on localStorage.");
   }
 
+  if (!apiLoaded) await loadStaticSharedPhotos();
   await hydratePartPhotosFromIdb();
+  publishLocalOnlyPhotos();
 }
 
 async function saveCustomData() {
@@ -721,16 +725,26 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;");
 }
 
+function normalizePhotoUrl(url) {
+  const text = String(url || "");
+  if (text.startsWith("data:")) return text;
+  const noQuery = text.replace(/\?.*$/, "");
+  if (noQuery.startsWith("/data/part_photos/")) return noQuery.slice(1);
+  return noQuery;
+}
+
 function normalizePhotoEntry(entry) {
   if (!entry) return null;
   if (typeof entry === "string" && entry) {
-    const id = entry.replace(/^.*\//, "").replace(/\?.*$/, "").replace(/\.[a-zA-Z]+$/, "") || entry;
-    return { id, url: entry };
+    const url = normalizePhotoUrl(entry);
+    const id = url.replace(/^.*\//, "").replace(/\.[a-zA-Z]+$/, "") || url;
+    return { id, url };
   }
   if (typeof entry === "object" && entry.url) {
+    const url = normalizePhotoUrl(entry.url);
     return {
-      id: String(entry.id || entry.url).replace(/^.*\//, "").replace(/\?.*$/, "").replace(/\.[a-zA-Z]+$/, ""),
-      url: entry.url
+      id: String(entry.id || url).replace(/^.*\//, "").replace(/\.[a-zA-Z]+$/, ""),
+      url
     };
   }
   return null;
@@ -901,7 +915,12 @@ async function onPartPhotoSelected(event) {
     appState.currentPartPhotoIndex = appState.partPhotos[subitemId].length - 1;
     await saveCustomData();
     renderPartPhoto();
-    showToast(`부품 사진 ${imageFiles.length}장을 추가했습니다.`);
+    const savedLocally = (appState.partPhotos[subitemId] || []).some((photo) => String(photo.url || "").startsWith("data:"));
+    if (savedLocally) {
+      showToast("이 휴대폰에만 저장됐습니다. 다른 기기에는 아직 보이지 않습니다.", "info");
+    } else {
+      showToast(`부품 사진 ${imageFiles.length}장을 추가했습니다. 다른 기기는 잠시 후 새로고침하면 보입니다.`);
+    }
   } catch (err) {
     console.warn(err);
     showToast("사진 첨부 중 오류가 발생했습니다.", "error");
@@ -1035,23 +1054,78 @@ async function hydratePartPhotosFromIdb() {
   } catch (e) {}
 }
 
-async function persistPartPhoto(subitemId, dataUrl) {
+async function photoUploadEndpoints() {
+  const endpoints = ["/api/part-photo"];
   try {
-    const res = await fetch("/api/part-photo", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subitemId, dataUrl })
-    });
+    const res = await fetch("data/sync_url.txt", { cache: "no-store" });
     if (res.ok) {
+      const base = (await res.text()).trim().replace(/\/$/, "");
+      if (/^https:\/\/[a-z0-9.-]+\.(?:lhr\.life|localhost\.run)$/i.test(base)) {
+        endpoints.push(`${base}/api/part-photo`);
+      }
+    }
+  } catch (e) {}
+  return endpoints;
+}
+
+async function postPhotoToEndpoints(subitemId, dataUrl) {
+  const endpoints = await photoUploadEndpoints();
+  for (const endpoint of endpoints) {
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subitemId, dataUrl }),
+        signal: AbortSignal.timeout(20000)
+      });
+      if (!res.ok) continue;
       const result = await res.json();
       if (result && result.url) {
         return {
           id: result.id || makePhotoId(subitemId),
-          url: `${result.url}?t=${Date.now()}`
+          url: normalizePhotoUrl(result.url)
         };
       }
+    } catch (e) {}
+  }
+  return null;
+}
+
+async function loadStaticSharedPhotos() {
+  try {
+    const res = await fetch("data/custom_data.json", { cache: "no-store" });
+    if (!res.ok) return;
+    const shared = await res.json();
+    if (shared.partPhotos && typeof shared.partPhotos === "object") {
+      appState.partPhotos = mergePartPhotoMaps(appState.partPhotos, normalizePartPhotos(shared.partPhotos));
     }
   } catch (e) {}
+}
+
+async function publishLocalOnlyPhotos() {
+  let changed = false;
+  const subitemIds = Object.keys(appState.partPhotos);
+  for (const subitemId of subitemIds) {
+    const list = appState.partPhotos[subitemId] || [];
+    for (let i = 0; i < list.length; i++) {
+      const photo = list[i];
+      if (!photo || !String(photo.url || "").startsWith("data:")) continue;
+      const saved = await postPhotoToEndpoints(subitemId, photo.url);
+      if (!saved) continue;
+      try { await idbDeletePartPhoto(photo.id); } catch (e) {}
+      list[i] = saved;
+      changed = true;
+    }
+    appState.partPhotos[subitemId] = uniquePartPhotos(list);
+  }
+  if (!changed) return;
+  await saveCustomData();
+  if (appState.view === "part") renderPartPhoto();
+}
+
+async function persistPartPhoto(subitemId, dataUrl) {
+  const saved = await postPhotoToEndpoints(subitemId, dataUrl);
+  if (saved) return saved;
 
   const photoId = makePhotoId(subitemId);
   await idbPutPartPhoto(photoId, dataUrl);

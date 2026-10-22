@@ -32,6 +32,7 @@ function startPublicTunnel() {
       if (publicTunnelUrl !== match[0]) {
         publicTunnelUrl = match[0];
         console.log(`Public Mobile URL (LTE/5G/Anywhere): ${publicTunnelUrl}`);
+        writeSyncUrl(publicTunnelUrl);
       }
     }
   };
@@ -95,6 +96,93 @@ function parseJsonBody(req, callback) {
   });
 }
 
+function isTunnelHost(req) {
+  const host = String(req.headers.host || '').toLowerCase();
+  return host.includes('lhr.life') || host.includes('localhost.run');
+}
+
+function collectSavedPartPhotos() {
+  const photosDir = path.join(BASE_DIR, 'data', 'part_photos');
+  const map = {};
+  if (fs.existsSync(photosDir)) {
+    fs.readdirSync(photosDir).forEach((name) => {
+      const match = name.match(/^([a-zA-Z0-9_-]+(?:__[a-zA-Z0-9_-]+)?)\.jpe?g$/i);
+      if (!match) return;
+      const photoId = match[1];
+      const split = photoId.indexOf('__');
+      const subitemId = split === -1 ? photoId : photoId.slice(0, split);
+      if (!map[subitemId]) map[subitemId] = [];
+      map[subitemId].push({
+        id: photoId,
+        url: `data/part_photos/${name}`
+      });
+    });
+  }
+  return map;
+}
+
+function writeSyncUrl(url) {
+  const file = path.join(BASE_DIR, 'data', 'sync_url.txt');
+  const next = String(url || '').trim();
+  const prev = fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim() : '';
+  if (!next || prev === next) return;
+  fs.writeFileSync(file, next + '\n', 'utf8');
+  publishSharedFiles();
+}
+
+function rememberPartPhotosInDataFile() {
+  let parsed = {};
+  if (fs.existsSync(DATA_FILE)) {
+    try {
+      parsed = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    } catch (e) {
+      parsed = {};
+    }
+  }
+  parsed.partPhotos = collectSavedPartPhotos();
+  const dataDir = path.dirname(DATA_FILE);
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+  fs.writeFileSync(DATA_FILE, JSON.stringify(parsed, null, 2), 'utf8');
+}
+
+function runGit(args) {
+  return new Promise((resolve) => {
+    const child = spawn('git', args, {
+      cwd: BASE_DIR,
+      env: Object.assign({}, process.env, { GIT_TERMINAL_PROMPT: '0' })
+    });
+    let out = '';
+    child.stdout.on('data', (d) => { out += d.toString(); });
+    child.stderr.on('data', (d) => { out += d.toString(); });
+    child.on('close', (code) => resolve({ code, out }));
+    child.on('error', (err) => resolve({ code: 1, out: err.message }));
+  });
+}
+
+let publishing = false;
+let publishAgain = false;
+async function publishSharedFiles() {
+  if (publishing) {
+    publishAgain = true;
+    return;
+  }
+  publishing = true;
+  try {
+    await runGit(['add', '--', 'data/custom_data.json', 'data/part_photos', 'data/sync_url.txt']);
+    const commit = await runGit(['commit', '-m', 'Publish shared part photos for other devices.']);
+    if (commit.code === 0) {
+      const pushed = await runGit(['push', 'origin', 'HEAD']);
+      console.log(pushed.out.trim() || 'Shared photos pushed.');
+    }
+  } finally {
+    publishing = false;
+    if (publishAgain) {
+      publishAgain = false;
+      publishSharedFiles();
+    }
+  }
+}
+
 const server = http.createServer((req, res) => {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -105,6 +193,16 @@ const server = http.createServer((req, res) => {
     res.writeHead(204);
     res.end();
     return;
+  }
+
+  const earlyPath = decodeURI((req.url || '/').split('?')[0]);
+  if (isTunnelHost(req) && req.method !== 'GET' && req.method !== 'HEAD') {
+    const photoWrite = earlyPath === '/api/part-photo' && (req.method === 'POST' || req.method === 'DELETE');
+    if (!photoWrite) {
+      res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Forbidden');
+      return;
+    }
   }
 
   const urlParts = req.url.split('?');
@@ -129,26 +227,6 @@ const server = http.createServer((req, res) => {
       urls
     }));
     return;
-  }
-
-  function collectSavedPartPhotos() {
-    const photosDir = path.join(BASE_DIR, 'data', 'part_photos');
-    const map = {};
-    if (fs.existsSync(photosDir)) {
-      fs.readdirSync(photosDir).forEach((name) => {
-        const match = name.match(/^([a-zA-Z0-9_-]+(?:__[a-zA-Z0-9_-]+)?)\.jpe?g$/i);
-        if (!match) return;
-        const photoId = match[1];
-        const split = photoId.indexOf('__');
-        const subitemId = split === -1 ? photoId : photoId.slice(0, split);
-        if (!map[subitemId]) map[subitemId] = [];
-        map[subitemId].push({
-          id: photoId,
-          url: `/data/part_photos/${name}`
-        });
-      });
-    }
-    return map;
   }
 
   function mergePartPhotoMaps(baseMap, extraMap) {
@@ -263,11 +341,13 @@ const server = http.createServer((req, res) => {
           const fileName = `${photoId}.jpg`;
           const filePath = path.join(photosDir, fileName);
           fs.writeFileSync(filePath, Buffer.from(match[1], 'base64'));
+          rememberPartPhotosInDataFile();
+          publishSharedFiles();
           res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(JSON.stringify({
             success: true,
             id: photoId,
-            url: `/data/part_photos/${fileName}`
+            url: `data/part_photos/${fileName}`
           }));
         } catch (writeErr) {
           console.error('Failed to write part photo', writeErr);
@@ -291,6 +371,8 @@ const server = http.createServer((req, res) => {
             if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
           } catch (e) {}
         });
+        rememberPartPhotosInDataFile();
+        publishSharedFiles();
       }
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ success: true }));
