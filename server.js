@@ -11,23 +11,48 @@ const DATA_FILE = path.join(BASE_DIR, 'data', 'custom_data.json');
 let publicTunnelUrl = null;
 let tunnelProcess = null;
 
+const CLOUDFLARED_CANDIDATES = [
+  'cloudflared',
+  path.join(process.env.ProgramFiles || 'C:\\Program Files', 'cloudflared', 'cloudflared.exe'),
+  path.join(process.env['ProgramFiles(x86)'] || 'C:\\Program Files (x86)', 'cloudflared', 'cloudflared.exe')
+];
+
+function findCloudflared() {
+  for (const candidate of CLOUDFLARED_CANDIDATES) {
+    if (candidate === 'cloudflared') continue;
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return null;
+}
+
 function startPublicTunnel() {
   if (tunnelProcess) {
     try { tunnelProcess.kill(); } catch (e) {}
   }
 
-  // Create a reverse SSH tunnel via localhost.run (no installation or account required)
-  tunnelProcess = spawn('ssh', [
-    '-o', 'StrictHostKeyChecking=no',
-    '-o', 'ServerAliveInterval=30',
-    '-o', 'ExitOnForwardFailure=yes',
-    '-R', `80:localhost:${PORT}`,
-    'nokey@localhost.run'
-  ]);
+  const cloudflared = findCloudflared();
+  let urlPattern;
+  if (cloudflared) {
+    // Cloudflare quick tunnel (no account required) - more reliable than localhost.run
+    tunnelProcess = spawn(cloudflared, [
+      'tunnel', '--no-autoupdate', '--url', `http://localhost:${PORT}`
+    ]);
+    urlPattern = /https:\/\/[a-zA-Z0-9-]+\.trycloudflare\.com/;
+  } else {
+    // Fallback: reverse SSH tunnel via localhost.run (no installation or account required)
+    tunnelProcess = spawn('ssh', [
+      '-o', 'StrictHostKeyChecking=no',
+      '-o', 'ServerAliveInterval=30',
+      '-o', 'ExitOnForwardFailure=yes',
+      '-R', `80:localhost:${PORT}`,
+      'nokey@localhost.run'
+    ]);
+    urlPattern = /https:\/\/[a-zA-Z0-9.-]+\.(?:lhr\.life|localhost\.run)/;
+  }
 
   const handleOutput = (data) => {
     const text = data.toString();
-    const match = text.match(/https:\/\/[a-zA-Z0-9.-]+\.(?:lhr\.life|localhost\.run)/);
+    const match = text.match(urlPattern);
     if (match && match[0]) {
       if (publicTunnelUrl !== match[0]) {
         publicTunnelUrl = match[0];
@@ -98,7 +123,7 @@ function parseJsonBody(req, callback) {
 
 function isTunnelHost(req) {
   const host = String(req.headers.host || '').toLowerCase();
-  return host.includes('lhr.life') || host.includes('localhost.run');
+  return host.includes('lhr.life') || host.includes('localhost.run') || host.includes('trycloudflare.com');
 }
 
 function collectSavedPartPhotos() {

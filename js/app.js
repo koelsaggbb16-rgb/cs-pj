@@ -1084,7 +1084,7 @@ async function photoUploadEndpoints() {
     const res = await fetch("data/sync_url.txt", { cache: "no-store" });
     if (res.ok) {
       const base = (await res.text()).trim().replace(/\/$/, "");
-      if (/^https:\/\/[a-z0-9.-]+\.(?:lhr\.life|localhost\.run)$/i.test(base)) {
+      if (/^https:\/\/[a-z0-9.-]+\.(?:lhr\.life|localhost\.run|trycloudflare\.com)$/i.test(base)) {
         endpoints.push(`${base}/api/part-photo`);
       }
     }
