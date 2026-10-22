@@ -1,6 +1,6 @@
 {
-  "name": "승강기 부품별 사고사례",
-  "short_name": "부품별 사고사례",
+  "name": "검사결과 이해도 향상을 위한 사고사례집",
+  "short_name": "사고사례집",
   "description": "2024 한국승강기안전공단(KoELSA) 승강기 사고 사례 분석 포털",
   "start_url": "./",
   "display": "standalone",
