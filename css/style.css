@@ -1539,7 +1539,120 @@ body.photo-lightbox-open {
   color: var(--text-dim);
 }
 
-/* ---------------- NAVBAR RESET BUTTON ---------------- */
+/* ---------------- NAVBAR SETTINGS MENU & RESET ---------------- */
+.nav-settings-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.settings-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settings-toggle-btn:hover,
+.settings-toggle-btn[aria-expanded="true"] {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.settings-toggle-btn[aria-expanded="true"] svg {
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 210px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.4rem;
+  z-index: 250;
+}
+
+.settings-dropdown[hidden] {
+  display: none;
+}
+
+.settings-dropdown-header {
+  padding: 0.35rem 0.65rem 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.3rem;
+}
+
+.settings-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.65rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.settings-menu-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.settings-menu-item.danger:hover {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+.settings-item-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background-color: var(--danger-light);
+  color: var(--danger);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.settings-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.25;
+}
+
+.settings-item-text strong {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.settings-item-text small {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
 .nav-subtle-btn {
   padding: 0.45rem 0.85rem;
   font-size: 0.8rem;
@@ -2259,7 +2372,8 @@ body.photo-lightbox-open {
     font-size: 0.78rem;
   }
 
-  .theme-toggle-btn {
+  .theme-toggle-btn,
+  .settings-toggle-btn {
     width: 34px;
     height: 34px;
     font-size: 0.9rem;

@@ -1572,24 +1572,45 @@ function moveCaseOrder(direction) {
   showToast("사례 순서가 변경되었습니다.");
 }
 
-/* ---------------- RESET DATA TO DEFAULTS ---------------- */
+/* ---------------- SETTINGS MENU & RESET DATA TO DEFAULTS ---------------- */
+function toggleSettingsMenu(event) {
+  if (event) event.stopPropagation();
+  const dropdown = document.getElementById("settingsMenuDropdown");
+  const btn = document.getElementById("settingsMenuBtn");
+  if (!dropdown || !btn) return;
+
+  const willOpen = dropdown.hasAttribute("hidden");
+  if (willOpen) {
+    dropdown.removeAttribute("hidden");
+    btn.setAttribute("aria-expanded", "true");
+  } else {
+    closeSettingsMenu();
+  }
+}
+
+function closeSettingsMenu() {
+  const dropdown = document.getElementById("settingsMenuDropdown");
+  const btn = document.getElementById("settingsMenuBtn");
+  if (dropdown) dropdown.setAttribute("hidden", "");
+  if (btn) btn.setAttribute("aria-expanded", "false");
+}
+
 async function confirmResetData() {
+  closeSettingsMenu();
   const confirmed = confirm("모든 사용자 수정 사항(사례 제목, 항목 이동 및 순서 변경)을 초기 기본값으로 복원하시겠습니까?");
   if (!confirmed) return;
 
-  // Clear in-memory
+  // Clear in-memory (preserve uploaded partPhotos)
   appState.customTitles = {};
   appState.activeCategoriesConfig = JSON.parse(JSON.stringify(CATEGORIES_CONFIG));
-
-  // Clear localStorage
-  try {
-    localStorage.removeItem("elevator_portal_custom_data");
-  } catch (e) {}
 
   // Clear server
   try {
     await fetch("/api/reset", { method: "POST" });
   } catch (e) {}
+
+  // Save current state (keeps partPhotos intact)
+  saveCustomData();
 
   showToast("초기 기본값으로 복원되었습니다.");
 
@@ -1753,7 +1774,21 @@ function closeMobileModal() {
 
 /* ---------------- KEYBOARD & TOUCH SWIPE EVENTS ---------------- */
 function setupGlobalEvents() {
+  document.addEventListener("click", (e) => {
+    const wrap = document.getElementById("navSettingsWrap");
+    if (wrap && !wrap.contains(e.target)) {
+      closeSettingsMenu();
+    }
+  });
+
   window.addEventListener("keydown", (e) => {
+    const settingsDropdown = document.getElementById("settingsMenuDropdown");
+    if (settingsDropdown && !settingsDropdown.hasAttribute("hidden") && e.key === "Escape") {
+      e.preventDefault();
+      closeSettingsMenu();
+      return;
+    }
+
     if (isPhotoLightboxOpen()) {
       if (e.key === "Escape") {
         e.preventDefault();
