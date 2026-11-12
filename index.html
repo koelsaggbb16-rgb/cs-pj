@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=m16">
+  <link rel="stylesheet" href="css/style.css?v=m20">
 </head>
 <body>
 
@@ -208,6 +208,11 @@
               <img id="caseDetailImg" src="" alt="사고 상황도 원본" />
             </div>
             
+            <div class="case-video-block" id="caseVideoBlock" hidden>
+              <p class="case-video-label">사고 영상</p>
+              <video id="caseDetailVideo" controls playsinline preload="metadata"></video>
+            </div>
+
             <div class="media-toolbar">
               <span id="mediaPageLabel" class="media-page-label">도서 원문</span>
               <div class="toolbar-btns">
@@ -433,7 +438,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/cases_data.js?v=m19"></script>
-  <script src="js/app.js?v=m19"></script>
+  <script src="js/cases_data.js?v=m20"></script>
+  <script src="js/app.js?v=m20"></script>
 </body>
 </html>

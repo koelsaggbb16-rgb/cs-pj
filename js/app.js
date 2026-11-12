@@ -1232,6 +1232,26 @@ function renderViewerTopBar(category, subitem) {
   }
 }
 
+function renderCaseVideo(caseData) {
+  const block = document.getElementById("caseVideoBlock");
+  const video = document.getElementById("caseDetailVideo");
+  if (!block || !video) return;
+
+  const src = caseData && caseData.video ? caseData.video : "";
+  if (!src) {
+    if (!video.paused) video.pause();
+    video.removeAttribute("src");
+    video.load();
+    block.hidden = true;
+    return;
+  }
+
+  if (video.getAttribute("src") !== src) {
+    video.src = src;
+  }
+  block.hidden = false;
+}
+
 function renderCaseDetail() {
   const category = appState.activeCategoriesConfig.find(c => c.id === appState.currentCategoryId);
   if (!category) return;
@@ -1266,6 +1286,7 @@ function renderCaseDetail() {
     document.getElementById("caseCauseList").innerHTML = "<li>등록된 내용이 없습니다.</li>";
     document.getElementById("casePrevList").innerHTML = "<li>등록된 내용이 없습니다.</li>";
     document.getElementById("caseDetailImg").src = "";
+    renderCaseVideo(null);
     return;
   }
 
@@ -1322,6 +1343,7 @@ function renderCaseDetail() {
   if (pageLabel) {
     pageLabel.textContent = `도서 원문 p.${caseData.bookPage || caseData.page} (사례 #${caseData.id})`;
   }
+  renderCaseVideo(caseData);
 
   // 4. Render Badges & Title
   const badgesRow = document.getElementById("caseBadgesRow");

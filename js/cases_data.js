@@ -1237,6 +1237,7 @@ const CASES_DATA = [
     "source": "승강기사고 사례집 (1993~2018)",
     "bookPage": 15,
     "image": "images/case_37.png",
+    "video": "videos/overload-fall.mp4",
     "title": "정원 초과 만원 상태 주로프 슬립으로 피트 완충기 충돌 사고",
     "elevatorType": "승객용 엘리베이터",
     "elevatorCategory": "EL",
