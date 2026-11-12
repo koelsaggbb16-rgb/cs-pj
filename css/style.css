@@ -1321,7 +1321,7 @@ body.photo-lightbox-open {
 }
 
 .case-video-block {
-  margin-top: 0.85rem;
+  margin: 0 0 0.85rem;
   padding: 0.75rem;
   background-color: var(--bg-card);
   border: 1px solid var(--border);
